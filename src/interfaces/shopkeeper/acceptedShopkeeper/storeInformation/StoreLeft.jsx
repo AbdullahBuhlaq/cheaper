@@ -1,0 +1,64 @@
+import { useEffect, useState } from "react";
+import { defaultStory } from "../../../../constants/story";
+import AutoSlidingImages from "../../../admin/users/profileSection/AutoSlider";
+import StoreHeader from "./StoreHeader";
+import StoreOptions from "./StoreOptions";
+import StorePacks from "./StorePacks";
+import StoreUsers from "./StoreUsers";
+import jsonParse from "../../../../functions/jsonParse";
+import Loading from "../../../general/Loading";
+
+function StoreLeft(props) {
+  const [story, setStory] = useState(-1);
+  async function getStory() {
+    let newStory = [];
+
+    await Promise.all(
+      props.storeInformation.story.map((item) => {
+        newStory = [...newStory, jsonParse(item.path)[3]];
+      })
+    );
+
+    setStory(newStory);
+  }
+  useEffect(() => {
+    getStory();
+  }, [props.storeInformation.story]);
+  try {
+    return (
+      <>
+        {story == -1 ? (
+          <Loading />
+        ) : (
+          <div className="profile-left">
+            <div className="profile-image-wrapper">
+              <AutoSlidingImages images={props.storeInformation.story.length ? story : defaultStory} />
+            </div>
+
+            <StoreOptions setOpenStatus={props.setOpenStatus} setOpenUpdate={props.setOpenUpdate} />
+
+            <StoreHeader setOpenImage={props.setOpenImage} storeInformation={props.storeInformation} setStoreInformation={props.setStoreInformation} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} />
+            <StoreUsers users={props.storeUsers} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} setUsers={props.setStoreUsers} usersPage={props.usersPage} setUsersPage={props.setUsersPage} />
+            <StorePacks
+              setOpenPacks={props.setOpenPacks}
+              storeInformation={props.storeInformation}
+              setStoreInformation={props.setStoreInformation}
+              userInformation={props.userInformation}
+              setUserInformation={props.setUserInformation}
+              refreshStatus={props.refreshStatus}
+              setRefreshStatus={props.setRefreshStatus}
+              toast={props.toast}
+              storeChart={props.storeChart}
+              packsChart={props.packsChart}
+              packs={props.storeInformation.packs}
+            />
+          </div>
+        )}
+      </>
+    );
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export default StoreLeft;

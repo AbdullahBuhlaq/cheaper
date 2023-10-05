@@ -1,0 +1,33 @@
+import requestOptions from "../../../../constants/requestOptions";
+import refreshToken from "../../../../functions/refreshToken";
+
+async function getRoles(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast, setRoles) {
+  try {
+    let response = await fetch(`${import.meta.env.VITE_URL}/admin/role/all`, { ...requestOptions, method: "get", headers: { ...requestOptions.headers, authorization: userInformation.token } });
+    let data = await response.json();
+    if (data.success) {
+      let finalRoles = {};
+      await Promise.all(
+        data.data.map(async (role) => {
+          let data = { id: role.id, name: role.name, ...role.data };
+          finalRoles[role.id] = data;
+        })
+      );
+      setRoles({ ...finalRoles });
+    } else {
+      if (data.error == "jwt expired") {
+        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
+        await getRoles({ ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, toast, setRoles);
+      } else {
+        console.log(data.error);
+        toast.error(data.error, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export default getRoles;

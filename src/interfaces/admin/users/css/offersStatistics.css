@@ -1,0 +1,17 @@
+.offers-statistics {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #ccc;
+    padding: 8px;
+}
+
+.offers-statistics-header {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.offers-statistics-body {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 5px;
+}

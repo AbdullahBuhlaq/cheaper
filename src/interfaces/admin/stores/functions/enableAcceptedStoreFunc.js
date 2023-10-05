@@ -1,0 +1,34 @@
+import requestOptions from "../../../../constants/requestOptions";
+import refreshToken from "../../../../functions/refreshToken";
+
+async function enableAcceptedStoreFunc(id, userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast, acceptedStores, setAcceptedStores, pendingStores, setPendingStores, setCurrentEdit) {
+  try {
+    let response = await fetch(`${import.meta.env.VITE_URL}/admin/stores/enable/${id}`, { ...requestOptions, method: "put", headers: { ...requestOptions.headers, authorization: userInformation.token } });
+    let data = await response.json();
+    // let data = { success: true };
+    if (data.success) {
+      setAcceptedStores({ ...acceptedStores, [id]: { ...acceptedStores[id], deletedAt: false } });
+      setCurrentEdit(false);
+      toast.success("تم إعادة تفعيل المحل", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    } else {
+      if (data.error == "jwt expired") {
+        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
+        await enableAcceptedStoreFunc(id, { ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, toast, acceptedStores, setAcceptedStores, pendingStores, setPendingStores, setCurrentEdit);
+      } else {
+        console.log(data.error);
+        toast.error(data.error, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
+    }
+  } catch (err) {
+    console.log(err);
+    toast.error("عذرا, حدث خطأ ما", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  }
+}
+
+export default enableAcceptedStoreFunc;

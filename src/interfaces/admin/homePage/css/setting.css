@@ -1,0 +1,120 @@
+:root {
+    --app-container: #fff;
+    --profile-before: rgba(215, 215, 215, .5);
+    --main-font-color: #000;
+    --light-font-color: #747474;
+    --main-border-color: #004875;
+    --secondary-border-color: #004875;
+    --button-bg-light: #D8F0FF;
+    --cards-area-bg: linear-gradient(97deg, #f2f7fd 0%, #f2f7fd 90%);
+    --cards-bg: #0298FF;
+    --buttons-color-primary: #0086D9;
+    --buttons-color-secondary: #D8F0FF;
+    --filter-bg: #f5f;
+    --search-bg: #fff;
+    --light-font: #fff;
+    --section-header-link: #0298FF;
+    --right-area: linear-gradient(180deg, #ffffff 10%, #dee6f6 90%);
+    --files-table: #fff;
+    --column-header: #0298FF;
+    --download-area: #abe2ff;
+    --line-header: #ff962c;
+    --more-card-info: #cdeeff;
+
+    --profile-before: rgba(215, 215, 215, .5);
+    --main-font-color: #000;
+    --light-font-color: #666;
+    --main-border-color: #FFA099;
+    --secondary-border-color: #FFA099;
+    --button-bg-light: #f3f3f3;
+
+    --main-profile: rgba(255, 255, 255, 0.52);
+    --profile-right-reports: rgba(255, 255, 255, 0.82);
+    --cards-bg: #fff;
+    --details-profile-card: linear-gradient(117deg, #ffffff, #ffffff);
+    --buttons-color-primary: #d84851;
+    --buttons-color-secondary: #f8e4e5;
+    --profile-info-heade: #76caff;
+
+    --tag-color-one: #ff9a41;
+
+    --tag-color-two: #56a8ff;
+    /* --tag-color-text-two: #8972f3; */
+    --tag-color-three: #89d4ff;
+    /* --tag-color-text-three: #e77f89; */
+    --tag-color-four: #eff7ff;
+    /* --tag-color-text-four: #a0a6b5; */
+}
+
+.dark:root {
+    --app-container: #111317;
+    --main-font-color: #fff;
+    --cards-area-bg: #20222a;
+    --cards-bg: #0298FF;
+    --filter-bg: #111317;
+    --search-bg: #20222a;
+    --profile-before: rgba(0, 0, 0, .8);
+    --light-font-color: #becaca;
+    --dark-font: #F2F2F2;
+    --right-area: linear-gradient(180deg, #3C3E49 0%, #45474F 90%);
+    --section-header-link: #0298FF;
+    --files-table: #0066B9;
+    --column-header: #fff;
+    --download-area: #0089e5;
+    --line-header: #ff810c;
+    --more-card-info: #0181c6;
+
+    --main-profile: rgba(0, 0, 0, 0.23);
+    --profile-right: rgba(0, 87, 142, 0.922);
+    --details-profile-card: linear-gradient(117deg, #8f9297, #454545);
+    --cards-bg: #111317;
+    --filter-bg: #111317;
+    --search-bg: #20222a;
+    --profile-before: rgba(0, 0, 0, 0.8);
+    --light-font-color: #becaca;
+    --profile-info-heade: rgb(13, 118, 189);
+
+    --tag-color-one: #ff9a41;
+
+    --tag-color-two: #005eb0;
+    /* --tag-color-text-two: #8972f3; */
+    --tag-color-three: #01b5f1;
+    /* --tag-color-text-three: #e77f89; */
+    --tag-color-four: #a4a4a4;
+    /* --tag-color-text-four: #a0a6b5; */
+}
+
+
+.setting-values-section {
+    background: var(--right-area);
+    height: auto;
+    padding: 8px;
+}
+
+.setting-values-card {
+    height: auto;
+    background: var(--app-container);
+    box-shadow: 0 3px 12px #5757571a;
+    margin: 10px 0;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    align-content: center;
+    flex-wrap: nowrap;
+}
+
+.setting-values-card h1 {
+    height: auto;
+    font-size: 17px;
+    margin: 3px 0px;
+}
+
+.setting-values-card h2 {
+    height: auto;
+    font-size: 18px;
+    margin: 10px;
+    font-weight: 600;
+}

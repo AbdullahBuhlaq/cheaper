@@ -1,0 +1,145 @@
+.plan-section {
+    height: auto;
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.plan-container {
+    height: auto;
+    width: auto;
+    display: flex;
+    background: var(--app-container);
+    border-radius: 8px;
+    box-shadow: 0 3px 13px #3a3a3a17;
+    margin: 5px 10px;
+    flex-direction: row;
+    border-radius: 8px;
+}
+
+.plan-container-right {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+}
+
+.plan-container-right-header {
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    padding: 0 10px;
+    border-radius: 8px 8px 0 0;
+    background: var(--profile-info-heade);
+    align-items: center;
+    justify-content: space-between;
+}
+
+.plan-container-right-header h1 {
+    height: auto;
+    margin: 3px;
+    font-size: 18px;
+    padding: 10px 2px 10px 20px;
+    color: var(--main-font-color);
+}
+
+.plan-container-right-body {
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid #0f6ee2;
+    border-radius: 5px;
+    justify-content: space-between;
+}
+
+.plan-container-right-body-date {
+    height: auto;
+    display: flex;
+    width: 100%;
+    border-left: 1px solid #ccc;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    padding: 10px 18px;
+    align-items: center;
+    background: var(--app-container);
+    justify-content: center;
+    align-content: center;
+    border-radius: 8px;
+}
+
+
+.plan-container-right-body-date h1 {
+    height: auto;
+    font-size: 17px;
+    margin: 3px;
+    color: var(--main-font-color);
+}
+
+.plan-container-right-body-date h2 {
+    height: auto;
+    padding: 5px 0;
+    color: var(--main-font-color);
+    font-size: 16px;
+}
+
+.plan-container-right-body-price {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px 18px;
+    background: var(--app-container);
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+
+.plan-container-right-body-price h1 {
+    height: auto;
+    font-size: 17px;
+    margin: 3px;
+    color: var(--main-font-color);
+}
+
+
+.plan-container-right-body-price h2 {
+    height: auto;
+    font-size: 16px;
+    color: var(--main-font-color);
+    padding: 5px 0;
+}
+
+
+.plan-container-right-body-details {
+    height: auto;
+    padding: 9px 11px;
+    min-width: auto;
+    background: var(--app-container);
+    border-radius: 0 0 8px 0;
+}
+
+
+.plan-container-right-body-details h1 {
+    height: auto;
+    color: var(--main-font-color);
+    font-size: 17px;
+}
+
+
+.plan-container-left {
+    background-image: url(test.png);
+    background-size: cover;
+    border-radius: 8px 0 0 8px;
+    background-position: center center;
+}
+
+.plan-container-left h1 {
+    height: auto;
+    /* font-size: 12px; */
+}
