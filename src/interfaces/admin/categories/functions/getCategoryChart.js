@@ -19,8 +19,8 @@ async function getCategoryChart(id, userInformation, setUserInformation, refresh
       setCategoryChart({
         ...categoryChart,
         series: [
-          { name: "تم شراء العرض المكتسب", data: ser1 },
-          { name: "لم يتم شراء العرض المكتسب", data: ser2 },
+          { name: "تم الشراء", data: ser1 },
+          { name: "لم يتم الشراء", data: ser2 },
         ],
         categories: finalDate,
         loading: false,
