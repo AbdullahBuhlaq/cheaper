@@ -1,26 +1,35 @@
+import { defaultStory } from "../../../constants/story";
+
 function RightRecentVisited(props) {
   try {
     return (
       <>
+        {console.log(props.item)}
         <div className="received-item-line">
           <div className="progress-line">
-            <span className="time start">25 </span>
-            <span className="time end">27 </span>
+            <span className="time start">{new Date(props.item.dateTake).toLocaleDateString()} </span>
+            <span className="time end">{new Date(new Date(props.item.dateTake).setDate(new Date(props.item.dateTake).getDate() + 2)).toLocaleDateString()} </span>
           </div>
           <div className="received-items-content">
             <div className="received-files">
-              <div className="image-wrapper">
-                <img src="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2250&amp;q=80" />
-              </div>
-              <div className="image-wrapper">
-                <img src="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2250&amp;q=80" />
-              </div>
-              <div className="image-wrapper">
-                <img src="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2250&amp;q=80" />
-              </div>
+              {props.item.story.map((story, index) => {
+                return (
+                  <div className="image-wrapper" key={index}>
+                    <img src={jsonParse(story)[1]} alt="Marco Andrews" title="Marco Andrews" />
+                  </div>
+                );
+              })}
+
+              {Array.from(Array(3 - props.item.story.length).keys()).map((item, index) => {
+                return (
+                  <div className="image-wrapper" key={index}>
+                    <img src={defaultStory[item]} alt="Marco Andrews" title="Marco Andrews" />
+                  </div>
+                );
+              })}
             </div>
             <div className="received-files-info">
-              لقد قمت بزيارة <span className="info-purple">ماستر جيم</span> في تاريخ <span className="info-purple">26 </span>
+              لقد قمت بزيارة <span className="info-purple">{props.item.namStore}</span> في تاريخ <span className="info-purple">{new Date(props.item.dateTake).toLocaleDateString()} </span>
             </div>
           </div>
         </div>
