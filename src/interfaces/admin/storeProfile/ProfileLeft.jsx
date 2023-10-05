@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProfileOptions from "./ProfileOptions";
 import ProfileInfoHeader from "./ProfileInfoHeader";
 import ProfileCardsContainer from "./ProfileCardsContainer";
@@ -6,14 +6,30 @@ import ProfileTable from "./ProfileTable";
 import ProfilePacks from "./ProfilePacks";
 import AutoSlidingImages from "../users/profileSection/AutoSlider";
 import { defaultSecondStory } from "../../../constants/story";
+import jsonParse from "../../../functions/jsonParse";
 
 function StoreProfileLeft(props) {
+  const [story, setStory] = useState([]);
+  async function getStory() {
+    let newStory = [];
+
+    await Promise.all(
+      props.store.storeInfo.story.map((item) => {
+        newStory = [...newStory, jsonParse(item.avatar)[3]];
+      })
+    );
+
+    setStory(newStory);
+  }
+  useEffect(() => {
+    if (props.store != -1) getStory();
+  }, [props.store]);
   try {
     return (
       <>
         <div className="profile-left">
           <div className="profile-image-wrapper">
-            <AutoSlidingImages images={props.store.storeInfo.story.length ? props.store.storeInfo.story : defaultSecondStory} />
+            <AutoSlidingImages images={props.store.storeInfo.story.length ? story : defaultSecondStory} />
           </div>
 
           <ProfileOptions setOpenBlocks={props.setOpenBlocks} name={props.store.storeInfo["nameStore"]} />

@@ -22,7 +22,7 @@ async function updateProfile(user, setDuringAdd, image, userInformation, setUser
     const data = response.data;
 
     if (data.success) {
-      setProfile({ ...profile, ...newData, image: data.data });
+      setProfile({ ...profile, ...newData, avatar: data.data ? data.data : profile.avatar });
       setEdit(false);
       toast.success("تم التعديل بنجاح", {
         position: toast.POSITION.TOP_CENTER,

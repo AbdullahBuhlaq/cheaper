@@ -17,8 +17,9 @@ async function login(user, toast, setDuringAdd, navigate) {
     setDuringAdd(true);
     const response = await fetch(`${import.meta.env.VITE_URL}/auth/login`, infoRequestOptions);
     const data = await response.json();
+    console.log(data);
     if (data.success) {
-      secureLocalStorage.setItem("userInformation", JSON.stringify({ ...data.data }));
+      secureLocalStorage.setItem("userInformation", JSON.stringify({ ...data.data, typeUser: data.data.allPermission.action[0][0] == "u" ? "مستخدم" : data.data.allPermission.action[0][0] == "a" ? "مدير" : data.data.typeUser }));
       toast.success("أهلا وسهلا!", {
         position: toast.POSITION.TOP_CENTER,
       });

@@ -38,15 +38,15 @@ function PopupStore(props) {
 
     await Promise.all(
       information.storeInfo.story.map((item) => {
-        newStory = [...newStory, jsonParse(item.path)[3]];
+        newStory = [...newStory, jsonParse(item.avatar)[3]];
       })
     );
 
     setStory(newStory);
   }
   useEffect(() => {
-    if (!loading) getStory();
-  }, [information?.storeInfo?.story]);
+    if (information != -1) getStory();
+  }, [information]);
 
   useEffect(() => {
     document.addEventListener("click", (e) => {
@@ -67,6 +67,7 @@ function PopupStore(props) {
           <>
             <div className="modal-left">
               <div className="modal-image-wrapper">
+                {console.log(story)}
                 <AutoSlidingImages images={information.storeInfo.story.length ? story : defaultStory} />
               </div>
               <div className="modal-info-header">

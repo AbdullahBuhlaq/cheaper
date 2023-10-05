@@ -8,7 +8,7 @@ function OfferCard(props) {
       <>
         <div className="sales-card">
           <div className="poster">
-            <img src={props.item.storeInfo.avater ? jsonParse(props.item.storeInfo.avater)[3] : "images/user.webp"} alt="Location Unknown" />
+            <img src={props.item.storeInfo.avatar ? jsonParse(props.item.storeInfo.avatar)[3] : "images/user.webp"} alt="Location Unknown" />
           </div>
           <div className="details">
             <div className="sales-card-more-details">
@@ -45,7 +45,7 @@ function OfferCard(props) {
                 {props.item.storeInfo.story.map((story, index) => {
                   return (
                     <li key={index}>
-                      <img src={jsonParse(story)[1]} alt="Marco Andrews" title="Marco Andrews" />
+                      <img src={jsonParse(story.avatar)[1]} alt="Marco Andrews" title="Marco Andrews" />
                     </li>
                   );
                 })}

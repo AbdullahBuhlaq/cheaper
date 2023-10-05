@@ -5,10 +5,10 @@ function UserProfileHeader(props) {
   try {
     return (
       <>
-        <div className="profile-info-header">
-          <div className="fix">
-            <div className="profile-img-upload-section">
-              <img src={props.profile.userInformation.avatar ? jsonParse(props.profile.userInformation.avatar)[3] : "../images/user.webp"} />
+        <div class="profile-info-header">
+          <div class="fix">
+            <div class="profile-img-upload-section">
+              <img src={props.profile.userInformation.avatar ? jsonParse(props.profile.userInformation.avatar)[3] : "../images/user.webp"} style={{ minHeight: "110px", maxHeight: "110px" }} />
             </div>
             <div className="left-side">
               <h1 className="profileHeader-js">{props.profile.userInformation.name}</h1>
@@ -23,11 +23,6 @@ function UserProfileHeader(props) {
                 })}
               </p>
             </div>
-          </div>
-          <div className="right-side">
-            {/* <span className="amount">الهدايا المرسلة : {props.profile.userInformation.countGiftedForOtherUser}</span>
-            <span className="amount">الهدايا المستلمة : {props.profile.userInformation.countYourGift}</span>
-            <span className="amount">العروض المتبقية لاستلام هدية : {props.profile.userInformation.stillToGetGift}</span> */}
           </div>
         </div>
       </>

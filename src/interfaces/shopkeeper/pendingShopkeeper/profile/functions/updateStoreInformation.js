@@ -4,7 +4,7 @@ import refreshToken from "../../../../../functions/refreshToken";
 async function updateStoreInformation(user, setDuringAdd, image, userInformation, setUserInformation, refreshStatus, setRefreshStatus, setProfile, profile, setEdit, toast) {
   try {
     const newData = user;
-    const url = `${import.meta.env.VITE_URL}/account/update`;
+    const url = `${import.meta.env.VITE_URL}/store/update`;
 
     setDuringAdd(true);
     let formData = new FormData();
@@ -12,7 +12,6 @@ async function updateStoreInformation(user, setDuringAdd, image, userInformation
     Object.keys(newData).map((key) => {
       formData.append(key, newData[key]);
     });
-
     const response = await axios.put(url, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -22,7 +21,7 @@ async function updateStoreInformation(user, setDuringAdd, image, userInformation
     const data = response.data;
 
     if (data.success) {
-      setProfile({ ...profile, information: { ...newData, ["category.name"]: newData.category, avatar: data.data } });
+      setProfile({ ...profile, information: { ...newData, ["category.name"]: newData.category, avatar: data.data ? data.data : profile.information.avatar } });
       setEdit(false);
       toast.success("تم التعديل بنجاح", {
         position: toast.POSITION.TOP_CENTER,

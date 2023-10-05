@@ -2,6 +2,7 @@ import "./css/storePopup.css";
 import getIcon from "../../../functions/getIcon";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
+import jsonParse from "../../../functions/jsonParse";
 
 function PopupPendingStore(props) {
   const { isLoaded } = useLoadScript({
@@ -14,15 +15,25 @@ function PopupPendingStore(props) {
   try {
     return (
       <>
+        {console.log(props.store)}
         <div className="modal-left">
           <div className="modal-image-wrapper">
             <img src={props.store.avatar} />
           </div>
           <div className="modal-info-header">
-            <div className="left-side">
-              <h1 className="modalHeader-js">اسم مقدم العرض</h1>
-              <p>العنوان : {props.store.locationText}</p>
+            <div style={{ display: "flex" }}>
+              <img src={props.store["user.avatar"] ? jsonParse(props.store["user.avatar"])[0] : "images/user.webp"} style={{ width: "109px", height: "auto", borderRadius: "11px", margin: "0 8px" }} />
+              <div className="left-side">
+                <div>
+                  <h1 className="modalHeader-js">{props.store["user.name"]}</h1>
+                  <h1 className="modalHeader-js" style={{ fontSize: "15px", opacity: "0.8" }}>
+                    {props.store["user.username"]}@
+                  </h1>
+                </div>
+                <p>العنوان : {props.store.locationText}</p>
+              </div>
             </div>
+
             <div class="right-side">
               <div class="dropdown">
                 <button onClick={() => setOpenOptions(!openOptions)} class="dropbtn">
@@ -61,7 +72,7 @@ function PopupPendingStore(props) {
                   <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
                 </svg>
               </div>
-              <span>الرقم : {"0983758374"}</span>
+              <span>الرقم : {props.store["user.phoneNumber"]}</span>
             </div>
 
             <div className="info-wrapper">

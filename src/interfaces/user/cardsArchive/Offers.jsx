@@ -16,6 +16,7 @@ function Offers(props) {
   const [currentOffer, setCurrentOffer] = useState(false);
 
   useEffect(() => {
+    setCurrentOffer(false);
     if (props.categories == -1) getGeneralCategories(props.setCategories, props.toast);
     if (!offersPage.loadingNow) getOffers(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setOffers, props.offers, props.toast, filter, { ...offersPage, page: 1, loadMore: true }, setOffersPage);
   }, [filter]);

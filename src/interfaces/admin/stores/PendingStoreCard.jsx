@@ -25,7 +25,10 @@ function PendingStoreCard(props) {
             <h2>العنوان : {props.store.locationText}</h2>
             <div className="rating"></div>
             <div className="tags">
-              <span className="tag">{"التصنيف : " + props.store["category.name"] + " " + getIcon(props.store["category.emoji"])}</span>
+              <span className="tag">
+                {"التصنيف : " + props.store["category.name"]}
+                {getIcon(props.store["category.emoji"])}
+              </span>
             </div>
             <p className="desc"></p>
             <div className="cast"></div>

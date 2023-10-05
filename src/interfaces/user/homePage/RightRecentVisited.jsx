@@ -1,4 +1,5 @@
 import { defaultStory } from "../../../constants/story";
+import jsonParse from "../../../functions/jsonParse";
 
 function RightRecentVisited(props) {
   try {
@@ -15,7 +16,7 @@ function RightRecentVisited(props) {
               {props.item.story.map((story, index) => {
                 return (
                   <div className="image-wrapper" key={index}>
-                    <img src={jsonParse(story)[1]} alt="Marco Andrews" title="Marco Andrews" />
+                    <img src={jsonParse(story.avatar)[1]} alt="Marco Andrews" title="Marco Andrews" />
                   </div>
                 );
               })}

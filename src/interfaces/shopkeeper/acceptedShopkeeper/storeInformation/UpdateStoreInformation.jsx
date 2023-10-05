@@ -31,7 +31,7 @@ function UpdateStoreInformation(props) {
         latitude: props.storeInformation.information.latitude,
         fromHour: props.storeInformation.information.fromHour,
         toHour: props.storeInformation.information.toHour,
-        category: props.storeInformation.information.category,
+        category: props.storeInformation.information["category.name"],
         locationText: props.storeInformation.information.locationText,
         city: props.storeInformation.information.city,
       });

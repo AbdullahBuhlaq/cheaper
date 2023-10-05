@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import jsonParse from "../../../functions/jsonParse";
 
 function EmployeeItem(props) {
   const [showOptions, setShowOptions] = useState(false);
@@ -15,7 +16,7 @@ function EmployeeItem(props) {
       <>
         <div className="products-row">
           <div className="product-cell image">
-            <img src={props.employee.avatar ? props.employee.avatar : "images/user.webp"} alt="product" />
+            <img src={props.employee.avatar ? jsonParse(props.employee.avatar)[1] : "images/user.webp"} alt="product" />
             <span>{props.employee.name}</span>
           </div>
           <div className="product-cell category">{props.employee.username}@</div>

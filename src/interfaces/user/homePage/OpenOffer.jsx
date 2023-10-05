@@ -12,6 +12,7 @@ import getOfferEvas from "./functions/getOfferEvas";
 import Eva from "../../admin/stores/Eva";
 import LoadMoreEvas from "./LoadMoreEvas";
 import QRCode from "react-qr-code";
+import jsonParse from "../../../functions/jsonParse";
 
 function OpenOffer(props) {
   const [status, setStatus] = useState("check");
@@ -56,7 +57,7 @@ function OpenOffer(props) {
       setMsg(location.message);
       setStatus("fail");
     } else if (city.status == "success") {
-      getOffer(setOffer, setStatus, props.setOpen, city, location, props.homeInfo, props.setHomeInfo, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast);
+      if (offer != -1) getOffer(setOffer, setStatus, props.setOpen, city, location, props.homeInfo, props.setHomeInfo, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast);
     }
   }, [city]);
 
@@ -70,15 +71,15 @@ function OpenOffer(props) {
 
     await Promise.all(
       offer.story.map((item) => {
-        newStory = [...newStory, jsonParse(item.path)[3]];
+        newStory = [...newStory, jsonParse(item.avatar)[3]];
       })
     );
 
     setStory(newStory);
   }
   useEffect(() => {
-    if (offer.story) getStory();
-  }, [offer.story]);
+    if (offer != -1) getStory();
+  }, [offer]);
 
   try {
     return (
@@ -94,7 +95,7 @@ function OpenOffer(props) {
               <span>{msg}</span>
             </div>
           </>
-        ) : offer != -1 && eva != -1 ? (
+        ) : offer != -1 && "eva != -1" ? (
           <>
             <div className="modal-left">
               <div className="modal-image-wrapper">
@@ -177,14 +178,26 @@ function OpenOffer(props) {
                 امسح ال QR عند المحل لاكتساب العرض
               </div>
               <div style={{ height: "calc(96% - 200px)", overflow: "auto" }}>
-                <div className="app-main-right-header">
-                  <span>{offer.evaluate}</span>
-                  <a href="#">التقييمات</a>
-                </div>
-                {eva.map((item, index) => {
-                  return <Eva key={index} item={item} />;
-                })}
-                <LoadMoreEvas userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} setUsers={setEva} users={eva} toast={props.toast} usersPage={evaPage} setUsersPage={setEvaPage} id={offer.storeId} />
+                {eva == -1 ? (
+                  <>
+                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "100%" }}>
+                      <Loading />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div style={{ height: "calc(96% - 200px)", overflow: "auto" }}>
+                      <div className="app-main-right-header">
+                        <span>{offer.evaluate}</span>
+                        <a href="#">التقييمات</a>
+                      </div>
+                      {eva.map((item, index) => {
+                        return <Eva key={index} item={item} />;
+                      })}
+                      <LoadMoreEvas userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} setUsers={setEva} users={eva} toast={props.toast} usersPage={evaPage} setUsersPage={setEvaPage} id={offer.storeId} />
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </>

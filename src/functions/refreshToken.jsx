@@ -27,7 +27,7 @@ async function refreshToken(userInformation, setUserInformation, refreshStatus, 
 
     if (data.success) {
       setUserInformation({ ...userInformation, ...data.data });
-      secureLocalStorage.setItem("userInformation", JSON.stringify({ ...userInformation, ...data.data }));
+      secureLocalStorage.setItem("userInformation", JSON.stringify({ ...userInformation, ...data.data, typeUser: data.data.allPermission.action[0][0] == "u" ? "مستخدم" : data.data.allPermission.action[0][0] == "a" ? "مدير" : data.data.typeUser }));
       status = "done";
       refPromise = null;
       return data.data;

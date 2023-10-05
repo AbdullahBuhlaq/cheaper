@@ -10,13 +10,14 @@ import getOfferEvas from "../homePage/functions/getOfferEvas";
 import { TfiGift } from "react-icons/tfi";
 import { GiPartyPopper } from "react-icons/gi";
 import { PiMaskSadDuotone } from "react-icons/pi";
+import jsonParse from "../../../functions/jsonParse";
 
 function OpenOldOffer(props) {
   const [eva, setEva] = useState(-1);
   const [evaPage, setEvaPage] = useState({ page: 1, size: 5, loadMore: true, loadingNow: false });
 
   useEffect(() => {
-    getOfferEvas(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setEva, eva, props.toast, evaPage, setEvaPage, props.offer.offerUserId);
+    if (props.offer != -1) getOfferEvas(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setEva, eva, props.toast, evaPage, setEvaPage, props.offer.storeInfo.id);
   }, []);
 
   const [story, setStory] = useState([]);
@@ -25,15 +26,15 @@ function OpenOldOffer(props) {
 
     await Promise.all(
       props.offer.storeInfo.story.map((item) => {
-        newStory = [...newStory, jsonParse(item.path)[3]];
+        newStory = [...newStory, jsonParse(item.avatar)[3]];
       })
     );
 
     setStory(newStory);
   }
   useEffect(() => {
-    if (props.offer.storeInfo.story) getStory();
-  }, [props.offer.storeInfo.story]);
+    if (props.offer != -1) getStory();
+  }, [props.offer]);
 
   try {
     return (

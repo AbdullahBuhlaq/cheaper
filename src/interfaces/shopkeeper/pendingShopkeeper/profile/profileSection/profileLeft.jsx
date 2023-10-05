@@ -1,13 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProfileDetails from "./ProfileDetails";
 import ProfileHeader from "./ProfileHeader";
+import jsonParse from "../../../../../functions/jsonParse";
 
 function ProfileLeft(props) {
   const [open, setOpen] = useState(false);
+  useEffect(() => {
+    document.addEventListener("click", (e) => {
+      if (e.target.className != "dropbtn") {
+        setOpen(false);
+      }
+    });
+  }, []);
+
   try {
     return (
       <>
         <div className="profile-left">
+          <div className="modal-image-wrapper">
+            <img src={props.storeInformation.information.avatar ? jsonParse(props.storeInformation.information.avatar)[3] : "images/user.webp"} />
+          </div>
           <div className="main-header-titel">
             <h1 href="#">الصفحة الشخصية</h1>
             <div className="dropdown">
