@@ -118,13 +118,13 @@ function Navbar(props) {
             ) : null}
           </a>
 
-          {generalTabs.map((tab, tabIndex) => {
+          {props.tabs.map((tab, tabIndex) => {
             if (currentHeight / 100 >= tabIndex + 1) {
               return <Tab key={tabIndex} tab={tab} currentTab={props.currentTab} setCurrentTab={props.setCurrentTab} />;
             }
           })}
-          {props.tabs.map((tab, tabIndex) => {
-            if (currentHeight / 100 >= tabIndex + 1 + generalTabs.length) {
+          {generalTabs.map((tab, tabIndex) => {
+            if (currentHeight / 100 >= tabIndex + 1 + props.tabs.length) {
               return <Tab key={tabIndex} tab={tab} currentTab={props.currentTab} setCurrentTab={props.setCurrentTab} />;
             }
           })}
@@ -133,7 +133,7 @@ function Navbar(props) {
               <div className={"menu-item highlight" + (showMore ? " show" : "")} style={{ zIndex: "30" }}>
                 <div
                   className="menu-text"
-                  style={{ zIndex: "30", cursor: 'pointer' }}
+                  style={{ zIndex: "30", cursor: "pointer" }}
                   onClick={() => {
                     setShowMore(!showMore);
                   }}
@@ -142,13 +142,13 @@ function Navbar(props) {
                 </div>
                 <div className={"sub-menu double" + (showMore ? " show" : "")} style={{ zIndex: "30", height: "220px", overflow: "auto", minWidth: "initial", textAlign: "center" }}>
                   <div className="notifications-last-update">
-                    {generalTabs.map((tab, tabIndex) => {
+                    {props.tabs.map((tab, tabIndex) => {
                       if (currentHeight / 100 < tabIndex + 1) {
                         return <Tab key={tabIndex} tab={tab} currentTab={props.currentTab} setCurrentTab={props.setCurrentTab} />;
                       }
                     })}
-                    {props.tabs.map((tab, tabIndex) => {
-                      if (currentHeight / 100 < tabIndex + 1 + generalTabs.length) {
+                    {generalTabs.map((tab, tabIndex) => {
+                      if (currentHeight / 100 < tabIndex + 1 + props.tabs.length) {
                         return <Tab key={tabIndex} tab={tab} currentTab={props.currentTab} setCurrentTab={props.setCurrentTab} />;
                       }
                     })}

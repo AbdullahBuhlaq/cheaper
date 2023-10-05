@@ -10,8 +10,9 @@ function Tab(props) {
           onClick={() => {
             props.setCurrentTab(props.tab.value);
           }}
+          style={{ fontSize: "25px", marginBottom: "25px" }}
         >
-          {props.tab.name}
+          {props.tab.icon}
         </NavLink>
       </>
     );

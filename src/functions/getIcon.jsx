@@ -1,4 +1,4 @@
-import * as faw from "react-icons/fa";
+import * as faw from "react-icons/fc";
 
 function getIcon(iconName) {
   const Cur = faw[iconName];

@@ -1,5 +1,5 @@
 import { useState, Fragment, useEffect } from "react";
-import * as faw from "react-icons/fa";
+import * as faw from "react-icons/fc";
 import handleSave from "../../../functions/handleSave";
 
 function ChooseIcon(props) {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import deleteCategory from "./functions/deleteCategory";
-import * as faw from "react-icons/fa";
+import * as faw from "react-icons/fc";
 import CategoryChart from "./CategoryChart";
 
 function CategoryItem(props) {

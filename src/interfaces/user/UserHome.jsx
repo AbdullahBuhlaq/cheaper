@@ -10,6 +10,9 @@ import Popup from "../general/Popup";
 import UserProfile from "./profile/UserProfile";
 import HomeOfUser from "./homePage/HomeOfUser";
 import Offers from "./cardsArchive/Offers";
+import Services from "../general/Services";
+import AboutUs from "../general/AboutUs";
+import Contact from "../general/Contact";
 
 function UserHome(props) {
   const [currentTab, setCurrentTab] = useState("profile");
@@ -58,6 +61,9 @@ function UserHome(props) {
             <Routes>
               <Route path="/" exact element={<Main />} />
               <Route path="/main" exact element={<Main />} />
+              <Route path="/services" exact element={<Services />} />
+              <Route path="/aboutUs" exact element={<AboutUs />} />
+              <Route path="/contactUs" exact element={<Contact />} />
               <Route path="/home" exact element={<HomeOfUser homeInfo={homeInfo} setHomeInfo={setHomeInfo} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />} />
               <Route path="/offers" exact element={<Offers offers={offers} setOffers={setOffers} categories={categories} setCategories={setCategories} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />} />
               <Route path="/profile" exact element={<UserProfile categories={categories} setCategories={setCategories} profile={profile} setProfile={setProfile} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />} />

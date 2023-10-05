@@ -29,6 +29,9 @@ import Popup from "../general/Popup";
 import SendNotifications from "./notifications/SendNotifications";
 import "./notifications/css/sendNotifications.css";
 import StoreProfile from "./storeProfile/StoreProfile";
+import AboutUs from "../general/AboutUs";
+import Services from "../general/Services";
+import Contact from "../general/Contact";
 
 function AdminHome(props) {
   const [currentTab, setCurrentTab] = useState("main");
@@ -92,6 +95,9 @@ function AdminHome(props) {
             <Routes>
               <Route path="/" exact element={<Main />} />
               <Route path="/main" exact element={<Main />} />
+              <Route path="/services" exact element={<Services />} />
+              <Route path="/aboutUs" exact element={<AboutUs />} />
+              <Route path="/contactUs" exact element={<Contact />} />
               <Route
                 path="/home"
                 exact

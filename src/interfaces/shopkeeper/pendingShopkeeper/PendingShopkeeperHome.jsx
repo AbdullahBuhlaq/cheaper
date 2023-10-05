@@ -8,6 +8,9 @@ import Main from "../../general/Main";
 import NotificationListener from "../../general/NotificationListener";
 import "./notifications/css/sendNotifications.css";
 import PendingShopkeeperProfile from "./profile/PendingShopkeeperProfile";
+import Services from "../../general/Services";
+import AboutUs from "../../general/AboutUs";
+import Contact from "../../general/Contact";
 
 function PendingShopkeeperHome(props) {
   const [currentTab, setCurrentTab] = useState("profile");
@@ -55,6 +58,9 @@ function PendingShopkeeperHome(props) {
             <Routes>
               <Route path="/" exact element={<Main />} />
               <Route path="/main" exact element={<Main />} />
+              <Route path="/services" exact element={<Services />} />
+              <Route path="/aboutUs" exact element={<AboutUs />} />
+              <Route path="/contactUs" exact element={<Contact />} />
               <Route
                 path="/profile"
                 exact

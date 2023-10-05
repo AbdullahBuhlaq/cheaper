@@ -4,7 +4,7 @@ import refreshToken from "../../../../functions/refreshToken";
 export default async function getOfferEvas(userInformation, setUserInformation, refreshStatus, setRefreshStatus, setUsers, users, toast, usersPage, setUsersPage, id) {
   try {
     setUsersPage({ ...usersPage, loadingNow: true });
-    let url = `${import.meta.env.VITE_URL}/user/evaluation?packsStoreId=${id}`;
+    let url = `${import.meta.env.VITE_URL}/user/evaluation?storeId=${id}`;
 
     url += `&`;
     url += `page=${usersPage.page}`;

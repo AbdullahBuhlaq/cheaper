@@ -14,6 +14,7 @@ import searchOptions from "../../../constants/searchOptions";
 import compare from "../../../functions/compare";
 import HeaderButton from "../../../components/mainArea";
 import "./css/packs.css";
+import EmptyChart from "../../../components/EmptyChart";
 
 function Packs(props) {
   const [loading, setLoading] = useState(true);
@@ -98,6 +99,10 @@ function Packs(props) {
                     <div>
                       {props.packsChart.loading ? (
                         <LoadingChart width={"230%"} height={400} />
+                      ) : props.packsChart.series[0].data.length + props.packsChart.series[0].data.length == 0 ? (
+                        <>
+                          <EmptyChart width={"230%"} height={400} />
+                        </>
                       ) : (
                         <>
                           <Chart options={props.packsChart.options} series={props.packsChart.series} type="area" width={"230%"} height={400} />

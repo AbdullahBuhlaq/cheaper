@@ -12,6 +12,9 @@ import PendingShopkeeperProfile from "./profile/PendingShopkeeperProfile";
 import StoreInformation from "./storeInformation/storeInformation";
 import packsStoreInformationChart from "./storeInformation/data/packsChart";
 import { acceptedStoreChart } from "./storeInformation/data/acceptedStoreChart";
+import Services from "../../general/Services";
+import AboutUs from "../../general/AboutUs";
+import Contact from "../../general/Contact";
 
 function ShopkeeperHome(props) {
   const [currentTab, setCurrentTab] = useState("profile");
@@ -64,6 +67,9 @@ function ShopkeeperHome(props) {
             <Routes>
               <Route path="/" exact element={<Main />} />
               <Route path="/main" exact element={<Main />} />
+              <Route path="/services" exact element={<Services />} />
+              <Route path="/aboutUs" exact element={<AboutUs />} />
+              <Route path="/contactUs" exact element={<Contact />} />
               <Route path="/profile" exact element={<PendingShopkeeperProfile profile={profile} setProfile={setProfile} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />} />
               <Route
                 path="/storeInformation"

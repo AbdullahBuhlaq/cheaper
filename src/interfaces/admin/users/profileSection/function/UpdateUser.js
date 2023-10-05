@@ -30,6 +30,7 @@ async function updateUser(user, currentEdit, setDuringAdd, image, userInformatio
     const data = response.data;
     // const data = { success: true };
     if (data.success) {
+      console.log(data);
       let finalCats = [];
       await Promise.all(
         newData.category.map((cat) => {
