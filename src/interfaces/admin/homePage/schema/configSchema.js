@@ -34,9 +34,11 @@ let errorMessages = {
 
 export const configSchema = {
   discountFreeAtLeast: Joi.number().required().messages(errorMessages.discountFreeMessages),
-  discountFreeAtMost: Joi.number().greater(Joi.ref("discountFreeAtLeast")).required().messages(errorMessages.discountPaidMessages),
+  discountFreeAtMost: Joi.number().required().messages(errorMessages.discountPaidMessages),
+
   discountPaidATleast: Joi.number().required().messages(errorMessages.discountFreeMessages),
-  discountPaidAtMost: Joi.number().greater(Joi.ref("discountPaidATleast")).required().messages(errorMessages.discountPaidMessages),
+  discountPaidAtMost: Joi.number().required().messages(errorMessages.discountPaidMessages),
+
   GiftCard: Joi.number().required().messages(errorMessages.GiftCardMessages),
   GiftPack: Joi.number().required().messages(errorMessages.GiftPackMessages),
   spam: Joi.number().required().messages(errorMessages.spamMessages),

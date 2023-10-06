@@ -12,7 +12,9 @@ function Tab(props) {
           }}
           style={{ fontSize: "25px", marginBottom: "25px" }}
         >
-          {props.tab.icon}
+          <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+            {props.tab.icon} <h1 style={{ fontSize: "15px" }}>{props.tab.name}</h1>
+          </div>
         </NavLink>
       </>
     );

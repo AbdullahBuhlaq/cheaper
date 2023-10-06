@@ -44,7 +44,7 @@ function ProfilePacks(props) {
                   </div>
                   <div style={{ width: "100%", textAlign: "center" }}>
                     <span>بيانات الباقات</span>
-                    {props.packsChart.loading ? <SecondLoadingChart width={"400"} height={200} /> : props.storeChart.series[0].data.length + props.storeChart.series[1].data.length == 0 ? <EmptyChart width={"400"} height={200} /> : <ReactApexChart options={props.packsChart.options} series={props.packsChart.series} type="bar" width={"400"} height={200} />}
+                    {props.packsChart.loading ? <SecondLoadingChart width={"400"} height={200} /> : props.packsChart.series[0].data.length + props.packsChart.series[1].data.length == 0 ? <EmptyChart width={"400"} height={200} /> : <ReactApexChart options={props.packsChart.options} series={props.packsChart.series} type="bar" width={"400"} height={200} />}
                   </div>
                 </div>
               </div>

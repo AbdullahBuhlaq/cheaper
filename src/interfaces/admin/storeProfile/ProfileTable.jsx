@@ -5,7 +5,7 @@ function ProfileTable(props) {
   try {
     return (
       <>
-        <div className="table-wrapper" style={{ maxHeight: "500px" }}>
+        <div className="table-wrapper">
           <table>
             <thead>
               <tr>

@@ -17,7 +17,7 @@ function ProfileStoreBlocks(props) {
   try {
     return (
       <>
-        {props.blocks ? (
+        {props.blocks != -1 ? (
           <>
             <div className="categories-main-modal-body">
               <BlocksHeaderStore count={props.blocks.count} blocked={props.blocks.blocked} />
@@ -26,7 +26,7 @@ function ProfileStoreBlocks(props) {
 
               <div className="categories-main-modal-body-block-history">
                 {props.blocks.rows.map((block, index) => {
-                  return <BlockCardStore key={index} block={block} />;
+                  return <BlockCardStore key={index} block={block} deleteStoreBlock={props.deleteStoreBlock} />;
                 })}
                 {props.blocks.count == 0 ? "لا يوجد" : null}
               </div>

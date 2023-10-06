@@ -9,7 +9,7 @@ import OpenOldOffer from "./OpenOldOffer";
 import SendGift from "./SendGift";
 
 function Offers(props) {
-  const [offersPage, setOffersPage] = useState({ page: 1, size: 5, loadMore: true, loadingNow: false });
+  const [offersPage, setOffersPage] = useState({ page: 1, size: 6, loadMore: true, loadingNow: false });
   const [filter, setFilter] = useState({ search: "", state: -1, typeOffer: -1, categoryIds: [] });
   const [openOffer, setOpenOffer] = useState(false);
   const [openSendGift, setOpenSendGift] = useState(false);

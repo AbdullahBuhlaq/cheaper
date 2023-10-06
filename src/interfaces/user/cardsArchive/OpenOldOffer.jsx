@@ -162,7 +162,7 @@ function OpenOldOffer(props) {
               {eva != -1 ? (
                 <>
                   <div className="app-main-right-header">
-                    <span>{props.offer.storeInfo.evaluateAverage}</span>
+                    <span>{props.offer.evaluate}</span>
                     <a href="#">التقييمات</a>
                   </div>
                   {eva.map((item, index) => {

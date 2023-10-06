@@ -44,7 +44,7 @@ function LoadMoreNotifications(props) {
             if (props.notificationsPage.loadMore && !props.notificationsPage.loadingNow) getNotifications(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setNotifications, props.notifications, props.toast, props.notificationsPage, props.setNotificationsPage);
           }}
         >
-          {props.notificationsPage.loadingNow ? "loading ..." : props.notificationsPage.loadMore ? "more notifications" : "no more notifications"}
+          {props.notificationsPage.loadingNow ? "يتم التحميل ..." : props.notificationsPage.loadMore ? "المزيد" : "لا مزيد من الإشعارات"}
         </div>
       </>
     );

@@ -46,7 +46,7 @@ function LoadMoreEvas(props) {
             if ((props.usersPage.loadMore && !props.usersPage.loadingNow) || props.usersPage.OnlyClick) getEva(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setUsers, props.users, props.toast, props.usersPage, props.setUsersPage, props.id);
           }}
         >
-          {props.usersPage.loadingNow ? "loading ..." : props.usersPage.loadMore ? "more evaluations" : "no more evaluations"}
+          {props.usersPage.loadingNow ? "يتم التحميل ..." : props.usersPage.loadMore ? "المزيد" : "لا مزيد من التقييمات"}
         </div>
       </>
     );

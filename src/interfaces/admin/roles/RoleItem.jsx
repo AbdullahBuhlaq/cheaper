@@ -36,7 +36,7 @@ function RoleItem(props) {
 
         <div className="header upcoming">صلاحيات القراءة</div>
         {props.show.map((showItem, showIndex) => {
-          return <ShowItem key={showIndex} disabled={props.currentEdit.id <=5 } id={props.currentEdit.id} index={showIndex} showItem={showItem} role={role} setRole={setRole} roleErrors={roleErrors} setRoleErrors={setRoleErrors} roleSchema={roleSchema} name={"show"} />;
+          return <ShowItem key={showIndex} disabled={props.currentEdit.id <= 5} id={props.currentEdit.id} index={showIndex} showItem={showItem} role={role} setRole={setRole} roleErrors={roleErrors} setRoleErrors={setRoleErrors} roleSchema={roleSchema} name={"show"} />;
         })}
         {roleErrors["show"]}
         {props.currentEdit.id > 5 ? (

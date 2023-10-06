@@ -1,5 +1,6 @@
 import requestOptions from "../constants/requestOptions";
 import secureLocalStorage from "react-secure-storage";
+import jsonParse from "./jsonParse";
 
 let status = "done";
 let refPromise = null;
@@ -27,7 +28,7 @@ async function refreshToken(userInformation, setUserInformation, refreshStatus, 
 
     if (data.success) {
       setUserInformation({ ...userInformation, ...data.data });
-      secureLocalStorage.setItem("userInformation", JSON.stringify({ ...userInformation, ...data.data, typeUser: data.data.allPermission.action[0][0] == "u" ? "مستخدم" : data.data.allPermission.action[0][0] == "a" ? "مدير" : data.data.typeUser }));
+      secureLocalStorage.setItem("userInformation", JSON.stringify({ ...userInformation, ...data.data, typeUser: jsonParse(data.data.allPermission)["action"][0][0] == "u" ? "مستخدم" : jsonParse(data.data.allPermission)["action"][0][0] == "a" ? "مدير" : data.data.typeUser }));
       status = "done";
       refPromise = null;
       return data.data;

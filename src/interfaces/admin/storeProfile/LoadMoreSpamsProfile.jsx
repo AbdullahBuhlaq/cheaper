@@ -44,7 +44,7 @@ function LoadMoreSpamsProfile(props) {
             if ((props.usersPage.loadMore && !props.usersPage.loadingNow) || props.usersPage.OnlyClick) getStoreSpam(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setUsers, props.users, props.toast, props.usersPage, props.setUsersPage, props.id);
           }}
         >
-          {props.usersPage.loadingNow ? "loading ..." : props.usersPage.loadMore ? "more spams" : "no more spams"}
+          {props.usersPage.loadingNow ? "يتم التحميل ..." : props.usersPage.loadMore ? "المزيد" : "لا مزيد من الإبلاغات"}
         </div>
       </>
     );

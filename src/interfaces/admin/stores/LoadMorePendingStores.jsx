@@ -44,7 +44,7 @@ function LoadMorePendingStores(props) {
             if ((props.pendingStoresPage.loadMore && !props.pendingStoresPage.loadingNow) || props.pendingStoresPage.OnlyClick) getPendingStores(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setPendingStores, props.pendingStores, props.toast, props.filter, props.pendingStoresPage, props.setPendingStoresPage);
           }}
         >
-          {props.pendingStoresPage.loadingNow ? "loading ..." : props.pendingStoresPage.loadMore ? "more users" : "no more stores"}
+          {props.pendingStoresPage.loadingNow ? "يتم التحميل ..." : props.pendingStoresPage.loadMore ? "المزيد" : "لا مزيد من المحلات"}
         </div>
       </>
     );

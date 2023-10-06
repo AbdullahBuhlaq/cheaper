@@ -1,15 +1,16 @@
 import requestOptions from "../../../../constants/requestOptions";
 import refreshToken from "../../../../functions/refreshToken";
-
+import jsonParse from "../../../../functions/jsonParse";
 async function getRoles(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast, setRoles) {
   try {
     let response = await fetch(`${import.meta.env.VITE_URL}/admin/role/all`, { ...requestOptions, method: "get", headers: { ...requestOptions.headers, authorization: userInformation.token } });
     let data = await response.json();
+    console.log(data);
     if (data.success) {
       let finalRoles = {};
       await Promise.all(
         data.data.map(async (role) => {
-          let data = { id: role.id, name: role.name, ...role.data };
+          let data = { id: role.id, name: role.name, ...jsonParse(role.data) };
           finalRoles[role.id] = data;
         })
       );

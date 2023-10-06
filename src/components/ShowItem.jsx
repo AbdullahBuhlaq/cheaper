@@ -20,7 +20,10 @@ function ShowItem(props) {
           disabled={props.disabled}
         />
         <label htmlFor={"item" + props.showItem.value}>
-          <span className="label-text">{props.showItem.name}</span>
+          <span className="label-text">
+            {props.showItem.name}
+            {props.showItem.icon}
+          </span>
         </label>
       </div>
     );

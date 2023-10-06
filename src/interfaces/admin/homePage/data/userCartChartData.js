@@ -1,4 +1,4 @@
-import { FaUser } from "react-icons/fa";
+import { TbCards } from "react-icons/tb";
 
 export const userCartChartData = {
   unit: " باقة ",
@@ -9,7 +9,7 @@ export const userCartChartData = {
   },
   barValue: 100,
   value: "18/9",
-  png: FaUser,
+  png: TbCards,
   series: [
     {
       name: "عدد المستخدمين الذين فتحوا كروت",

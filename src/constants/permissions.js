@@ -34,7 +34,7 @@ export const adminPermission = {
   المستخدمين: {
     "حظر مستخدم ما في الموقع": "admin.users.block.blockUser",
     "فك الحظر عن مستخدم ما في الموقع": "admin.users.block.multiUnBlock",
-    "حذف حظر من سجل الحظورات للمستخدم ": "admin.users.block.deleteEveryBlock",
+    "حذف حظر من سجل الحظورات للمستخدم ": "admin.users.block.deleteBlock",
     "كل الصلاحيات الخاصة بحظر المستخدمين": "admin.users.block.allBlockForUser",
     "رؤية الرسم الإحصائي الخاص بالمستخدم": "admin.users.block.chartUser",
     "رؤية معلومات المستخدمين في الموقع": "admin.users.block.information",
@@ -59,10 +59,11 @@ export const adminPermission = {
     "رؤية معلومات المحلات": "admin.store.accepted.info",
     "حظر الحسابات الخاصة بالمحلات": "admin.store.accepted.block",
     "فك الحظر عن المحلات المحظورة": "admin.store.accepted.unblock",
-    "كل الصلاحيات الخاصة بحظر المحلات": "admin.store.accepted.unblock",
+    "حذف حظر من سجل حظورات المحل": "admin.store.accepted.deleteBlock",
+    "كل الصلاحيات الخاصة بحظر المحلات": "admin.store.accepted.all",
     "رؤية التقييمات والإبلاغات عن محل ما في الموقع": "admin.store.accepted.evaluationAndSpam",
     "رؤية سجل الاشتراكات في الباقات لمحل ما": "admin.store.accepted.packs",
-    "رؤية المستخدمين الئين قاموا بالشراء من محل ما": "admin.store.accepted.users",
+    "رؤية المستخدمين الذين قاموا بالشراء من محل ما": "admin.store.accepted.users",
     "كل الصلاحيات الخاصة بقسم المحلات": "admin.store.all",
     "قبول طلب انضمام محل جديد": "admin.store.accept",
     "إيقاف حساب خاص بمحل في الموقع": "admin.store.disable",
@@ -73,21 +74,33 @@ export const adminPermission = {
 };
 
 export const userPermission = {
-  everything: { myOffer: "user.myOffer", spamAndEvaluation: "user.spamAndEvaluation", gift: "user.gift", moreEvaluation: "user.moreEvaluation", home: "user.home", openBox: "user.openBox" },
+  العروض: {
+    "رؤية سجل العروض التي ربحها": "user.myOffer",
+    "إهداء العرض إلى مستخدم آخر": "user.gift",
+    "بيانات إحصائية حول آخر العروض التي ربحها": "user.home",
+    "فتح كرت لربح عرض جديد": "user.openBox",
+  },
+  "تقييم المحلات": {
+    "رؤية تقييمات المحل الذي ربح منه عروض": "user.moreEvaluation",
+    "إمكانية تقييم المحل والإبلاغ عنه": "user.spamAndEvaluation",
+  },
 };
 
 export const shopkeeperPermission = {
-  everything: {
-    verifyQr: "manager.verifyQr",
-    updateStore: "manager.updateStore",
-    allPack: "manager.allPack",
-    deletePack: "manager.deletePack",
-    choosePack: "manager.choosePack",
-    updateDiscount: "manager.updateDiscount",
-    uploadStory: "manager.uploadStory",
-    deleteStory: "manager.deleteStory",
-    uploadAvatar: "manager.uploadAvatar",
-    deleteAvatar: "manager.deleteAvatar",
-    getStoreInfo: "manager.getStoreInfo",
+  "معلومات المحل": {
+    "مسح رمز ال QR عند المستخدم": "manager.verifyQr",
+    "تحديث المعلومات الخاصة بالمحل": "manager.updateStore",
+    "طلب المعلومات الخاصة بالمحل": "manager.getStoreInfo",
+  },
+  الباقات: {
+    "إلغاء تفعيل باقة": "manager.deletePack",
+    "الاشتراك بباقة جديدة": "manager.choosePack",
+    "تعديل قيمة الخصم الخاصة بالباقة": "manager.updateDiscount",
+  },
+  الصور: {
+    "رفع صور حالات": "manager.uploadStory",
+    "حذف صور حالات": "manager.deleteStory",
+    "رفع صورة المحل": "manager.uploadAvatar",
+    "حذف صورة المحل": "manager.deleteAvatar",
   },
 };

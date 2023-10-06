@@ -25,7 +25,7 @@ function Categories(props) {
       const populateArray = async () => {
         const newArr = await Promise.all(
           Object.keys(props.categories).map(async (categoryId, categoryIndex) => {
-            const isTrue = await compare(filter, { name: props.categories[categoryId].name, offerTaken: props.categories[categoryId].count.offerTaken, user: props.categories[categoryId].count.user, store: props.categories[categoryId].count.store });
+            const isTrue = await compare(filter, { name: props.categories[categoryId].name, offerTaken: props.categories[categoryId].count?.offerTaken, user: props.categories[categoryId].count?.user, store: props.categories[categoryId].count?.store });
             if (isTrue) {
               return (
                 <CategoryItem

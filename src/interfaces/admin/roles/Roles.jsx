@@ -12,6 +12,7 @@ import RoleHeader from "./RoleHeader";
 import getRoles from "./functions/getRoles";
 import deleteRoleFunc from "./functions/deleteRoleFunc";
 import HeaderButton from "../../../components/mainArea";
+import jsonParse from "../../../functions/jsonParse";
 
 function Roles(props) {
   const cardRef = useRef();
@@ -122,7 +123,7 @@ function Roles(props) {
               {currentEdit && (
                 <RoleItem
                   toast={props.toast}
-                  currentEdit={currentEdit}
+                  currentEdit={jsonParse(currentEdit)}
                   deleteRole={deleteRole}
                   roles={props.roles}
                   setRoles={props.setRoles}

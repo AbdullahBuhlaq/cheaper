@@ -9,7 +9,7 @@ function EmptyChart(props) {
       <>
         <div className="chart-loading-container">
           <div className="chart-loading-logo" style={{ width: "150%", height: "50%", display: "flex", justifyContent: "center", alignItems: "center" }}>
-            لا يوجد بيانات{" "}
+            لا توجد بيانات{" "}
             <span style={{ marginRight: "5px" }}>
               <FcDeleteDatabase />
             </span>

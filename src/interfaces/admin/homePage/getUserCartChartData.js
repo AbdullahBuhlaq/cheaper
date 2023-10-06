@@ -6,7 +6,6 @@ export default async function getUserCartChart(userInformation, setUserInformati
     let response = await fetch(`${import.meta.env.VITE_URL}/admin/home/cartChartUser`, { ...requestOptions, method: "get", headers: { ...requestOptions.headers, authorization: userInformation.token } });
     let data = await response.json();
     if (data.success) {
-      console.log(data);
       let ser1 = [],
         ser2 = [],
         finalDate = [],

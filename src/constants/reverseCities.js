@@ -1,0 +1,16 @@
+export const reverseCities = {
+  "Aleppo Governorate": "حلب",
+  "Damascus Governorate": "دمشق",
+  "Daraa Governorate": "درعا",
+  "Deir Ezzor Governorate": "ديرالزور",
+  "Hama Governorate": "حماة",
+  "Idlib Governorate": "إدلب",
+  "Latakia Governorate": "اللاذقية",
+  "Al-Qunaitra Governorate": "القنيطرة",
+  "Ar-Raqqah Governorate": "الرقة",
+  "Homs Governorate": "حمص",
+  "Al-Hasaka Governorate": "الحسكة",
+  "Rif Dimashq Governorate": "ريف دمشق",
+  "Tartus Governorate": "طرطوس",
+  "As-Suwayda Governorate": "السويداء",
+};

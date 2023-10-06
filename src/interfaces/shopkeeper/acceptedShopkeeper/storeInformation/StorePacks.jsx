@@ -3,6 +3,8 @@ import Loading from "../../../general/Loading";
 import Chart from "react-apexcharts";
 import ReactApexChart from "react-apexcharts";
 import StorePackItem from "./StorePackItem";
+import LoadingChart from "../../../../components/LoadingChart";
+import EmptyChart from "../../../../components/EmptyChart";
 
 function StorePacks(props) {
   const [openPacks, setOpenPakcs] = useState(false);
@@ -49,11 +51,11 @@ function StorePacks(props) {
                 <div style={{ display: "flex", flexDirection: "column", paddingTop: "35px", justifyContent: "space-evenly", alignItems: "center", marginRight: "5%" }}>
                   <div style={{ width: "100%", textAlign: "center" }}>
                     <span>سجل الظهور في الكروت</span>
-                    {props.storeChart.loading ? <Loading /> : <Chart options={props.storeChart.options} series={props.storeChart.series} type="area" width={"400"} height={200} />}
+                    {props.storeChart.loading ? <LoadingChart width={"400"} height={200} /> : props.storeChart.series[0].data.length + props.storeChart.series[1].data.length == 0 ? <EmptyChart width={"400"} height={200} /> : <Chart options={props.storeChart.options} series={props.storeChart.series} type="area" width={"400"} height={200} />}
                   </div>
                   <div style={{ width: "100%", textAlign: "center" }}>
                     <span>بيانات الباقات</span>
-                    {props.packsChart.loading ? <Loading /> : <ReactApexChart options={props.packsChart.options} series={props.packsChart.series} type="bar" width={"400"} height={200} />}
+                    {props.packsChart.loading ? <LoadingChart width={"400"} height={200} /> : props.packsChart.series[0].data.length + props.packsChart.series[1].data.length == 0 ? <EmptyChart width={"400"} height={200} /> : <ReactApexChart options={props.packsChart.options} series={props.packsChart.series} type="bar" width={"400"} height={200} />}
                   </div>
                 </div>
               </div>

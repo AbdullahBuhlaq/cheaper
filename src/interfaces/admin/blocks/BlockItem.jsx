@@ -32,8 +32,8 @@ function BlockItem(props) {
       <>
         <form>
           <div className="row">
-            <Input placeholder={"سبب الحظر الجديد"} label={"سبب الحظر"} type={"text"} name={"reason"} onChange={handleSave} state={block} setState={setBlock} errors={blockErrors} setErrors={setBlockErrors} schema={blockSchema} />
-            <Input placeholder={"كم يوما سيستمر الحظر؟"} label={"المدة"} type={"number"} name={"duration"} onChange={handleSave} state={block} setState={setBlock} errors={blockErrors} setErrors={setBlockErrors} schema={blockSchema} />
+            <Input placeholder={"سبب الحظر الجديد"} label={"سبب الحظر"} type={"text"} name={"reason"} onChange={handleSave} state={block} setState={setBlock} errors={blockErrors} setErrors={setBlockErrors} schema={blockSchema} disabled={props.currentEdit.id == 1} />
+            <Input placeholder={"كم يوما سيستمر الحظر؟"} label={"المدة"} type={"number"} name={"duration"} onChange={handleSave} state={block} setState={setBlock} errors={blockErrors} setErrors={setBlockErrors} schema={blockSchema} disabled={props.currentEdit.id == 1} />
           </div>
         </form>
 

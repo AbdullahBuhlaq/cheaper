@@ -44,7 +44,7 @@ function LoadMoreOffers(props) {
             if ((props.usersPage.loadMore && !props.usersPage.loadingNow) || props.usersPage.OnlyClick) getUserOffer(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.id, props.setUsers, props.users, props.toast, props.filter, props.usersPage, props.setUsersPage);
           }}
         >
-          {props.usersPage.loadingNow ? "loading ..." : props.usersPage.loadMore ? "more offers" : "no more offers"}
+          {props.usersPage.loadingNow ? "يتم التحميل ..." : props.usersPage.loadMore ? "المزيد" : "لا مزيد من العروض"}
         </div>
       </>
     );

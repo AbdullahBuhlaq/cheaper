@@ -1,6 +1,7 @@
 import requestOptions from "../../../constants/requestOptions";
 import getDeviceToken from "../../../functions/getDeviceToken";
 import secureLocalStorage from "react-secure-storage";
+import jsonParse from "../../../functions/jsonParse";
 
 async function login(user, toast, setDuringAdd, navigate) {
   try {
@@ -17,9 +18,8 @@ async function login(user, toast, setDuringAdd, navigate) {
     setDuringAdd(true);
     const response = await fetch(`${import.meta.env.VITE_URL}/auth/login`, infoRequestOptions);
     const data = await response.json();
-    console.log(data);
     if (data.success) {
-      secureLocalStorage.setItem("userInformation", JSON.stringify({ ...data.data, typeUser: data.data.allPermission.action[0][0] == "u" ? "مستخدم" : data.data.allPermission.action[0][0] == "a" ? "مدير" : data.data.typeUser }));
+      secureLocalStorage.setItem("userInformation", JSON.stringify({ ...data.data, typeUser: jsonParse(data.data.allPermission)["action"][0][0] == "u" ? "مستخدم" : jsonParse(data.data.allPermission)["action"][0][0] == "a" ? "مدير" : data.data.typeUser }));
       toast.success("أهلا وسهلا!", {
         position: toast.POSITION.TOP_CENTER,
       });

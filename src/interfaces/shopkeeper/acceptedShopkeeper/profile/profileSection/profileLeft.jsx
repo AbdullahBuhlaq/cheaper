@@ -1,9 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProfileDetails from "./ProfileDetails";
 import ProfileHeader from "./ProfileHeader";
 
 function ProfileLeft(props) {
   const [open, setOpen] = useState(false);
+  useEffect(() => {
+    document.addEventListener("click", (e) => {
+      if (e.target.className != "dropbtn") {
+        setOpen(false);
+      }
+    });
+  }, []);
   try {
     return (
       <>
@@ -46,7 +53,7 @@ function ProfileLeft(props) {
             </div>
           </div>
 
-          <ProfileHeader avatar={props.profile.userInformation.avatar} name={props.profile.userInformation.name} />
+          <ProfileHeader profile={props.profile} />
 
           <ProfileDetails details={props.profile.userInformation} />
         </div>

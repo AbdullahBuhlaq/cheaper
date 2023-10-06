@@ -76,7 +76,7 @@ function Navbar(props) {
             </button>
           </a>
 
-          <a href="#" className="item-link" style={{ color: "#FFD700", fontSize: "25px", zIndex: "30" }}>
+          <a href="#" className="item-link" style={{ color: "#FFD700", fontSize: "25px", zIndex: "30", marginBottom: "25px" }}>
             {props.tabs.length ? (
               <>
                 <div className={"menu-item highlight" + (showNotifications ? " show" : "")} style={{ zIndex: "30" }}>
@@ -140,7 +140,7 @@ function Navbar(props) {
                 >
                   <BiSolidLeftArrow />
                 </div>
-                <div className={"sub-menu double" + (showMore ? " show" : "")} style={{ zIndex: "30", height: "220px", overflow: "auto", minWidth: "initial", textAlign: "center" }}>
+                <div className={"sub-menu double" + (showMore ? " show" : "")} style={{ zIndex: "30", height: "320px", top: "-242px", overflow: "auto", minWidth: "initial", textAlign: "center" }}>
                   <div className="notifications-last-update">
                     {props.tabs.map((tab, tabIndex) => {
                       if (currentHeight / 100 < tabIndex + 1) {

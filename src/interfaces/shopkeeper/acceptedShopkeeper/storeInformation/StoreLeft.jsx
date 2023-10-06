@@ -28,7 +28,11 @@ function StoreLeft(props) {
     return (
       <>
         {story == -1 ? (
-          <Loading />
+          <div className="profile-left">
+            <div style={{ display: "flex", width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }}>
+              <Loading />
+            </div>
+          </div>
         ) : (
           <div className="profile-left">
             <div className="profile-image-wrapper">

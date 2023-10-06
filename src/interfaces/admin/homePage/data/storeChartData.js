@@ -1,4 +1,4 @@
-import { FaUser } from "react-icons/fa";
+import { FaStore } from "react-icons/fa";
 
 export const storeChartData = {
   unit: " محل ",
@@ -10,7 +10,7 @@ export const storeChartData = {
   barValue: 100,
   value: "7",
   loadingValue: true,
-  png: FaUser,
+  png: FaStore,
   series: [
     {
       name: "عدد المحلات المجانية",

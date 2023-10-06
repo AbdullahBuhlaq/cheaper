@@ -9,10 +9,14 @@ function ProfileHeader(props) {
             <div className="profile-img-upload-section">
               <img src={props.profile.userInformation.avatar ? jsonParse(props.profile.userInformation.avatar)[0] : "images/user.webp"} />
             </div>
-
-            <h1 className="profileHeader-js" style={{ fontSize: "25px", marginTop: "37px" }}>
-              {props.profile.userInformation.name}
-            </h1>
+            <div style={{ display: "flex", flexDirection: "column", justifyContent: "end" }}>
+              <h1 className="profileHeader-js" style={{ fontSize: "25px" }}>
+                {props.profile.userInformation.name}
+              </h1>
+              <h1 className="profileHeader-js" style={{ fontSize: "20px", opacity: ".8" }}>
+                {props.profile.userInformation.username}@
+              </h1>
+            </div>
           </div>
         </div>
       </>

@@ -1,6 +1,10 @@
 import Joi from "joi";
-let message = "بعض الحقول تحتوي على كلمات نابية، الرجاء التقيد باداب النص";
+import Filter from "bad-word-ar";
+import moment from "moment";
 
+const filterAr = new Filter("ar");
+const filterEn = new Filter("en");
+let message = "بعض الحقول تحتوي على كلمات نابية، الرجاء التقيد باداب النص";
 const errorMessages = {
   name: {
     "string.empty": 'حقل "الاسم" لا يجب أن يكون فارغًا.',
@@ -38,11 +42,11 @@ const errorMessages = {
     "any.required": 'حقل "كلمة المرور" مطلوب.',
   },
   birthday: {
-    "date.base": 'حقل "birthday" يجب أن يكون تاريخًا.',
-    "date.format": 'حقل "birthday" يجب أن يكون بتنسيق تاريخ صالح.',
-    "date.max": 'حقل "birthday" يجب أن يكون تاريخًا قبل اليوم.',
-    "date.min": 'حقل "birthday" يجب أن يكون تاريخًا بعد "1970-01-01".',
-    "any.required": 'حقل "birthday" مطلوب.',
+    "date.base": 'حقل "تاريخ الميلاد" يجب أن يكون تاريخًا.',
+    "date.format": 'حقل "تاريخ الميلاد" يجب أن يكون بتنسيق تاريخ صالح.',
+    "date.max": 'حقل "تاريخ الميلاد" يجب أن يكون تاريخًا قبل اليوم.',
+    "date.min": 'حقل "تاريخ الميلاد" يجب أن يكون تاريخًا بعد "1930-01-01".',
+    "any.required": 'حقل "تاريخ الميلاد" مطلوب.',
   },
   size: {
     "number.base": 'حقل "الحجم" يجب أن يكون رقمًا.',
@@ -86,9 +90,18 @@ const errorMessages = {
 };
 
 const userSchema = {
-  name: Joi.string().required().min(2).max(50).trim().messages(errorMessages.name),
+  name: Joi.string()
+    .required()
+    .min(2)
+    .max(50)
+    .trim()
+    .custom((value, helpers) => {
+      if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
+      else return value;
+    })
+    .messages(errorMessages.name),
   gender: Joi.string().required().messages(errorMessages.gender),
-  birthday: Joi.date().required().messages(errorMessages.birthday),
+  birthday: Joi.date().required().max(moment()).min(moment("1930-01-01")).messages(errorMessages.birthday),
   username: Joi.string()
     .trim()
     .pattern(/^[A-Za-z]+[a-zA-Z0-9\_\.]*$/)
@@ -96,7 +109,6 @@ const userSchema = {
     .max(30)
     .required()
     .messages(errorMessages.username),
-  avatar: Joi.string().empty(Joi.allow(null)),
 };
 
 export default userSchema;

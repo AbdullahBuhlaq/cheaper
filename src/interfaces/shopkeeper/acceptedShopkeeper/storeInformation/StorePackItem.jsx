@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import { MdOutlineKeyboardDoubleArrowUp, MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
 import "./css/dropp.css";
@@ -8,6 +8,14 @@ function StorePackItem(props) {
   const [open, setOpen] = useState(false);
   const [newDiscount, setNewDiscount] = useState(0);
   const [duringAdd, setDuringAdd] = useState(false);
+  useEffect(() => {
+    document.addEventListener("click", (e) => {
+      if (e.target.className != "dropbtn") {
+        setOpen(false);
+      }
+    });
+  }, []);
+
   try {
     return (
       <>

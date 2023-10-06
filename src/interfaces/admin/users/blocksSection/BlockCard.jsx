@@ -1,7 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { reversePermissions, reverseShow } from "../../../../constants/reversePermissions";
 
 function BlockCard(props) {
   const [show, setShow] = useState(false);
+  useEffect(() => {
+    document.addEventListener("click", (e) => {
+      if (e.target.className != "dropbtn") {
+        setShow(false);
+      }
+    });
+  }, []);
+
   try {
     return (
       <>
@@ -46,10 +55,10 @@ function BlockCard(props) {
             <div className="categories-main-modal-body-block-history-card-body-details">
               <div>محظور عن:</div>
               {props.block["block.restrictions"].action.map((action, index) => {
-                return <h1 key={index}>{action}</h1>;
+                return <h1 key={index}>{reversePermissions[action]}</h1>;
               })}
               {props.block["block.restrictions"].show.map((show, index) => {
-                return <h1 key={index}>{show}</h1>;
+                return <h1 key={index}>{reverseShow[show]}</h1>;
               })}
             </div>
           </div>

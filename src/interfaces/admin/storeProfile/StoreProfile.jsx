@@ -16,6 +16,7 @@ import "./css/storeProfile.css";
 import packsStoreChart from "./data/packsStoreChart";
 import ProfileStoreBlocks from "./ProfileStoreBlocks";
 import Popup from "../../general/Popup";
+import deleteStoreBlockFunc from "./functions/deleteStoreBlockFunc";
 
 function StoreProfile(props) {
   const params = useParams();
@@ -45,6 +46,10 @@ function StoreProfile(props) {
   useEffect(() => {
     if (storeInformation != -1 && packs != -1 && spam != -1 && eva != -1 && users != -1) setLoading(false);
   }, [storeInformation, packs, spam, eva, users]);
+
+  function deleteStoreBlock(id) {
+    deleteStoreBlockFunc(id, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, blocks, setBlocks, storeInformation, setStoreInformation);
+  }
 
   try {
     return (
@@ -97,7 +102,7 @@ function StoreProfile(props) {
               <Popup
                 setOpen={setOpenBlocks}
                 classes={"categories-main-modal"}
-                component={<ProfileStoreBlocks store={storeInformation} setStore={setStoreInformation} id={params.id} blocks={blocks} setBlocks={setBlocks} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} />}
+                component={<ProfileStoreBlocks deleteStoreBlock={deleteStoreBlock} store={storeInformation} setStore={setStoreInformation} id={params.id} blocks={blocks} setBlocks={setBlocks} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} />}
               />
             ) : null}
           </>

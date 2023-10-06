@@ -45,7 +45,7 @@ function LoadMoreUsers(props) {
             if ((props.usersPage.loadMore && !props.usersPage.loadingNow) || props.usersPage.OnlyClick) getUsers(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setUsers, props.users, props.toast, props.filter, props.usersPage, props.setUsersPage);
           }}
         >
-          {props.usersPage.loadingNow ? "loading ..." : props.usersPage.loadMore ? "more users" : "no more users"}
+          {props.usersPage.loadingNow ? "يتم التحميل ..." : props.usersPage.loadMore ? "المزيد" : "لا مزيد من المستخدمين"}
         </div>
       </>
     );

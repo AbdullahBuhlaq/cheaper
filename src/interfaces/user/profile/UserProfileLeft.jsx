@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UserProfileHeader from "./UserProfileHeader";
 import UserProfileDetails from "./UserProfileDetails";
 
 function UserProfileLeft(props) {
   const [openCollapse, setOpenCollapse] = useState(false);
   const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    document.addEventListener("click", (e) => {
+      if (e.target.className != "dropbtn") {
+        setShow(false);
+      }
+    });
+  }, []);
 
   try {
     return (

@@ -44,7 +44,7 @@ function LoadMoreAcceptedStores(props) {
             if ((props.acceptedStoresPage.loadMore && !props.acceptedStoresPage.loadingNow) || props.acceptedStoresPage.OnlyClick) getAcceptedStores(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setAcceptedStores, props.acceptedStores, props.toast, props.filter, props.acceptedStoresPage, props.setAcceptedStoresPage);
           }}
         >
-          {props.acceptedStoresPage.loadingNow ? "loading ..." : props.acceptedStoresPage.loadMore ? "more users" : "no more stores"}
+          {props.acceptedStoresPage.loadingNow ? "يتم التحميل ..." : props.acceptedStoresPage.loadMore ? "المزيد" : "لا مزيد من المحلات"}
         </div>
       </>
     );

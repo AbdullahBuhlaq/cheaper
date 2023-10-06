@@ -1,7 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function StoreOptions(props) {
   const [openOptions, setOpenOptions] = useState(false);
+  useEffect(() => {
+    document.addEventListener("click", (e) => {
+      if (e.target.className != "dropbtn") {
+        setOpenOptions(false);
+      }
+    });
+  }, []);
 
   try {
     return (
@@ -20,7 +27,7 @@ function StoreOptions(props) {
             <ul id="myDropdown" className={"dropdown-content" + (openOptions ? " show" : "")}>
               <li>
                 <a href="#" onClick={() => props.setOpenUpdate(true)}>
-                  تعديل معلمومات المحل
+                  تعديل معلومات المحل
                 </a>
               </li>
               <li>

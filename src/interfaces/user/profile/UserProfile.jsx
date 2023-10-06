@@ -31,7 +31,9 @@ function UserProfile(props) {
       <>
         {loading ? (
           <div className="profile-main-area">
-            <Loading />
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "100%" }}>
+              <Loading />
+            </div>
           </div>
         ) : (
           <>
