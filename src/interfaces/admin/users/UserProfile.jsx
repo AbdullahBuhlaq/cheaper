@@ -17,6 +17,8 @@ import SecondLoading from "../../general/SecondLoading";
 import deleteUserFunc2 from "./function/deleteUser";
 import { profileChart } from "./data/profleChart";
 import StorePopup from "./profileSection/StorePopup";
+import checkPermissions from "../../../functions/checkPermission";
+import { FcCancel } from "react-icons/fc";
 
 function UserProfile(props) {
   const params = useParams();
@@ -25,7 +27,6 @@ function UserProfile(props) {
   const [userOffer, setUserOffer] = useState(-1);
   const [showBlocks, setShowBlocks] = useState(false);
   const [currentEdit, setCurrentEdit] = useState(false);
-  const [userBlocks, setUserBlocks] = useState(-1);
   const [loading, setLoading] = useState(true);
   const [openStore, setOpenStore] = useState(false);
   // const [userStores, setUserSto res] = useState(-1);
@@ -33,19 +34,19 @@ function UserProfile(props) {
   const [filter, setFilter] = useState({ search: "", statePaid: -1, type: -1 });
 
   useEffect(() => {
-    if (userProfile == -1) getUserProfile(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, params.id, setUserProfile, userProfile, props.toast);
-    if (userChart.loading) getUserChartFunction(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, params.id, setUserChart, userChart, props.toast);
+    if (userProfile == -1 && checkPermissions(props.userInformation, ["admin.users.block.information"])) getUserProfile(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, params.id, setUserProfile, userProfile, props.toast);
+    if (userChart.loading && checkPermissions(props.userInformation, ["admin.users.block.chartUser"])) getUserChartFunction(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, params.id, setUserChart, userChart, props.toast);
     if (props.categories == -1) getGeneralCategories(props.setCategories, props.toast);
     // if (userStores == -1) getUserStores(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, params.id, setUserStores, userStores, props.toast);
   }, []);
 
   useEffect(() => {
-    if (userOffer == -1) getUserOffer(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, params.id, setUserOffer, userOffer, props.toast, filter, { ...usersPage, page: 1, loadMore: true }, setUsersPage);
+    if (userOffer == -1 && checkPermissions(props.userInformation, ["admin.users.block.offerUser"])) getUserOffer(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, params.id, setUserOffer, userOffer, props.toast, filter, { ...usersPage, page: 1, loadMore: true }, setUsersPage);
   }, [filter]);
 
   useEffect(() => {
-    if (props.categories != -1 && userProfile != -1 && !userChart.loading && userOffer != -1) setLoading(false);
-  }, [props.categories, userProfile, userChart, userOffer]);
+    if (props.categories != -1 && userProfile != -1) setLoading(false);
+  }, [props.categories, userProfile]);
 
   async function deleteUser(id) {
     deleteUserFunc2(id, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast);
@@ -54,80 +55,94 @@ function UserProfile(props) {
   try {
     return (
       <>
-        {!loading ? (
-          <>
-            <div className="profile-main-area">
-              <HeaderButton />
+        {checkPermissions(props.userInformation, ["admin.users.block.information"]) ? (
+          !loading ? (
+            <>
+              <div className="profile-main-area">
+                <HeaderButton />
 
-              <div className="main-profile">
-                <ProfileLeft
-                  setOpenStore={setOpenStore}
-                  userChart={userChart}
-                  offers={userOffer}
-                  setUserOffer={setUserOffer}
-                  deleteUser={deleteUser}
-                  setCurrentEdit={setCurrentEdit}
-                  setShowBlocks={setShowBlocks}
-                  userProfile={userProfile}
-                  setUserProfile={setUserProfile}
-                  filter={filter}
-                  setFilter={setFilter}
-                  usersPage={usersPage}
-                  setUsersPage={setUsersPage}
-                  userInformation={props.userInformation}
-                  setUserInformation={props.setUserInformation}
-                  refreshStatus={props.refreshStatus}
-                  setRefreshStatus={props.setRefreshStatus}
-                  navigate={props.navigate}
-                  toast={props.toast}
-                  id={params.id}
-                />
+                <div className="main-profile">
+                  <ProfileLeft
+                    setOpenStore={setOpenStore}
+                    userChart={userChart}
+                    offers={userOffer}
+                    setUserOffer={setUserOffer}
+                    deleteUser={deleteUser}
+                    setCurrentEdit={setCurrentEdit}
+                    setShowBlocks={setShowBlocks}
+                    userProfile={userProfile}
+                    setUserProfile={setUserProfile}
+                    filter={filter}
+                    setFilter={setFilter}
+                    usersPage={usersPage}
+                    setUsersPage={setUsersPage}
+                    userInformation={props.userInformation}
+                    setUserInformation={props.setUserInformation}
+                    refreshStatus={props.refreshStatus}
+                    setRefreshStatus={props.setRefreshStatus}
+                    navigate={props.navigate}
+                    toast={props.toast}
+                    id={params.id}
+                  />
 
-                <ProfileBody userProfile={userProfile} />
+                  <ProfileBody userProfile={userProfile} />
+                </div>
               </div>
-            </div>
 
-            {showBlocks ? (
-              <>
-                <Popup
-                  setOpen={setShowBlocks}
-                  classes={"categories-main-modal"}
-                  component={<ProfileUserBlocks blocks={props.blocks} setBlocks={props.setBlocks} setShowBlocks={setShowBlocks} currentShowBlocks={userProfile.infoUser} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} navigate={props.navigate} toast={props.toast} />}
-                />
-              </>
-            ) : null}
-            {currentEdit ? (
-              <>
-                <Popup
-                  setOpen={setCurrentEdit}
-                  classes={"categories-main-modal"}
-                  component={
-                    <UpdateUserProfile
-                      categories={props.categories}
-                      userProfile={userProfile}
-                      setUserProfile={setUserProfile}
-                      currentEdit={userProfile.infoUser}
-                      setCurrentEdit={setCurrentEdit}
-                      userInformation={props.userInformation}
-                      setUserInformation={props.setUserInformation}
-                      refreshStatus={props.refreshStatus}
-                      setRefreshStatus={props.setRefreshStatus}
-                      navigate={props.navigate}
-                      toast={props.toast}
-                    />
-                  }
-                />
-              </>
-            ) : null}
-            {openStore ? (
-              <>
-                <Popup setOpen={setOpenStore} component={<StorePopup userName={userProfile.infoUser.name} userAvatar={userProfile.infoUser.avatar} id={openStore} userId={userProfile.infoUser.id} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} />} />
-              </>
-            ) : null}
-          </>
+              {showBlocks ? (
+                <>
+                  <Popup
+                    setOpen={setShowBlocks}
+                    classes={"categories-main-modal"}
+                    component={<ProfileUserBlocks blocks={props.blocks} setBlocks={props.setBlocks} setShowBlocks={setShowBlocks} currentShowBlocks={userProfile.information} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} navigate={props.navigate} toast={props.toast} />}
+                  />
+                </>
+              ) : null}
+              {currentEdit ? (
+                <>
+                  <Popup
+                    setOpen={setCurrentEdit}
+                    classes={"categories-main-modal"}
+                    component={
+                      <UpdateUserProfile
+                        categories={props.categories}
+                        userProfile={userProfile}
+                        setUserProfile={setUserProfile}
+                        currentEdit={userProfile.information}
+                        setCurrentEdit={setCurrentEdit}
+                        userInformation={props.userInformation}
+                        setUserInformation={props.setUserInformation}
+                        refreshStatus={props.refreshStatus}
+                        setRefreshStatus={props.setRefreshStatus}
+                        navigate={props.navigate}
+                        toast={props.toast}
+                      />
+                    }
+                  />
+                </>
+              ) : null}
+              {openStore ? (
+                <>
+                  <Popup
+                    setOpen={setOpenStore}
+                    component={
+                      <StorePopup name={userProfile.information.name} username={userProfile.information.username} userAvatar={userProfile.information.avatar} id={openStore} userId={userProfile.information.id} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} />
+                    }
+                  />
+                </>
+              ) : null}
+            </>
+          ) : (
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "100%" }}>
+              <SecondLoading />
+            </div>
+          )
         ) : (
-          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "100%" }}>
-            <SecondLoading />
+          <div style={{ display: "flex", flexDirection: "column", width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }}>
+            <span style={{ fontSize: "80px" }}>
+              <FcCancel />
+            </span>
+            <span>لا تملك صلاحية لعرض الصفحة الشخصية للمستخدم</span>
           </div>
         )}
       </>

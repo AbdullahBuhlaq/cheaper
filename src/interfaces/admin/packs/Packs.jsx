@@ -15,6 +15,9 @@ import compare from "../../../functions/compare";
 import HeaderButton from "../../../components/mainArea";
 import "./css/packs.css";
 import EmptyChart from "../../../components/EmptyChart";
+import checkPermissions from "../../../functions/checkPermission";
+import SuspendChart from "../../../components/SuspendChart";
+import NotAllowdPage from "../../general/NotAllowedPage";
 
 function Packs(props) {
   const [loading, setLoading] = useState(true);
@@ -44,14 +47,14 @@ function Packs(props) {
   }, [props.packs, currentEdit, filter]);
 
   useEffect(() => {
-    if (props.packs == -1) getPacks(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setPacks);
+    if (props.packs == -1 && checkPermissions(props.userInformation, ["admin.packs.all"])) getPacks(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setPacks);
   }, []);
   useEffect(() => {
     if (props.packs != -1) setLoading(false);
   }, [props.packs]);
 
   useEffect(() => {
-    if (props.packsChart.loading) getPackChart(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setPacksChart, props.packsChart);
+    if (props.packsChart.loading && checkPermissions(props.userInformation, ["admin.packs.chart", "admin.packs.all"])) getPackChart(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setPacksChart, props.packsChart);
   }, []);
 
   async function deletePack(id) {
@@ -59,7 +62,7 @@ function Packs(props) {
   }
 
   try {
-    return (
+    return checkPermissions(props.userInformation, ["admin.packs.all"]) ? (
       <>
         {loading ? (
           <div className="profile-main-area">
@@ -72,7 +75,7 @@ function Packs(props) {
 
               <div className="main-categories">
                 <section className="categories-left">
-                  <PacksHeader setAddNew={setAddNew} filter={filter} setFilter={setFilter} />
+                  <PacksHeader userInformation={props.userInformation} setAddNew={setAddNew} filter={filter} setFilter={setFilter} />
                   <div style={{ display: "flex", justifyContent: "space-between", padding: "10px 30px" }}>
                     <div>
                       <section className="plan-section">
@@ -97,7 +100,9 @@ function Packs(props) {
                       ) : null}
                     </div>
                     <div>
-                      {props.packsChart.loading ? (
+                      {!checkPermissions(props.userInformation, ["admin.packs.chart", "admin.packs.all"]) ? (
+                        <SuspendChart width={"230%"} height={400} />
+                      ) : props.packsChart.loading ? (
                         <LoadingChart width={"230%"} height={400} />
                       ) : props.packsChart.series[0].data.length + props.packsChart.series[0].data.length == 0 ? (
                         <>
@@ -115,6 +120,10 @@ function Packs(props) {
             </div>
           </>
         )}
+      </>
+    ) : (
+      <>
+        <NotAllowdPage />
       </>
     );
   } catch (error) {

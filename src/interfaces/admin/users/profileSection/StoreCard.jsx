@@ -2,6 +2,8 @@ import { defaultSecondStory } from "../../../../constants/story";
 import getIcon from "../../../../functions/getIcon";
 import "./css/storePopup.css";
 import AutoSlidingImages from "./AutoSlider";
+import jsonParse from "../../../../functions/jsonParse";
+import { useEffect, useState } from "react";
 
 const style = {
   "::-webkit-slider-runnable-track": {
@@ -10,23 +12,43 @@ const style = {
 };
 
 function StoreCard(props) {
+  const [story, setStory] = useState([]);
+  async function getStory() {
+    let newStory = [];
+
+    await Promise.all(
+      props.store.story.map((item) => {
+        newStory = [...newStory, jsonParse(item.avatar)[3]];
+      })
+    );
+
+    setStory(newStory);
+  }
+  useEffect(() => {
+    console.log(props.store);
+
+    if (props.store != -1) getStory();
+  }, [props.store]);
   try {
     return (
       <>
         <div className="modal-left">
           <div className="modal-image-wrapper">
-            <AutoSlidingImages images={props.store.story.length ? props.store.story : defaultSecondStory} />
+            <AutoSlidingImages images={props.store.story.length ? story : defaultSecondStory} />
           </div>
           <div className="modal-info-header">
             <div style={{ display: "flex" }}>
-              <img src={props.store.avatar ? props.store.avatar : "../images/user.webp"} style={{ width: "109px", height: "auto", borderRadius: "11px", margin: "0 8px" }} />
+              <img src={props.store.avatar ? jsonParse(props.store.avatar)[2] : "../images/user.webp"} style={{ maxHeight: "110px", minHeight: "110px", aspectRatio: "1 / 1", borderRadius: "11px", margin: "0 8px" }} />
               <div className="left-side" style={{ justifyContent: "space-evenly" }}>
                 <h1 className="modalHeader-js">{props.store.name}</h1>
                 <p>{props.store.locationText}</p>
               </div>
             </div>
             <div className="right-side">
-              <span className="amount">التصنيف : {props.store.category.name + " " + getIcon(props.store.category.emoji)}</span>
+              <span className="amount">
+                التصنيف : {props.store.category.name}
+                {getIcon(props.store.category.emoji)}
+              </span>
             </div>
           </div>
           <div className="info-bar">
@@ -80,16 +102,19 @@ function StoreCard(props) {
 
         <div className="modal-right">
           <div className="app-main-right-header">
-            <a href="#">التعليق</a>
+            <a href="#">الإبلاغ</a>
           </div>
           <div className="card-wrapper">
             <div className="card">
               <div className="profile-info-wrapper">
                 <div className="profile-img-wrapper">
-                  <img src={props.userAvatar ? props.userAvatar : "../images/user.webp"} alt="Review" />
+                  <img src={props.userAvatar ? jsonParse(props.userAvatar)[0] : "../images/user.webp"} alt="Review" />
                 </div>
 
-                <p>{props.userName}</p>
+                <div class="profile-info-wrapper-name" style={{ marginRight: "10px" }}>
+                  <p>{props.name}</p>
+                  <p style={{ opacity: ".8" }}>{props.userName}@</p>
+                </div>
               </div>
               <p>{props.store.reasonSpam}</p>
             </div>
@@ -102,11 +127,11 @@ function StoreCard(props) {
               <div class="profile-info-wrapper">
                 <div class="fix-profile-image-wrapper">
                   <div class="profile-img-wrapper">
-                    <img src={props.userAvatar ? props.userAvatar : "../images/user.webp"} alt="Review" />
+                    <img src={props.userAvatar ? jsonParse(props.userAvatar)[0] : "../images/user.webp"} alt="Review" />
                   </div>
-                  <div class="profile-info-wrapper-name">
-                    <h1></h1>
-                    <p>{props.userName}</p>
+                  <div class="profile-info-wrapper-name" style={{ marginRight: "10px" }}>
+                    <p>{props.name}</p>
+                    <p style={{ opacity: ".8" }}>{props.userName}@</p>
                   </div>
                 </div>
                 <div class="profile-info-wrapper-date" style={{ marginRight: "auto" }}>
@@ -116,7 +141,7 @@ function StoreCard(props) {
               <div class="profile-rates-area">
                 <input className="range" type="range" min="0" max="100" value={props.store.evaluate} onmousemove="rangevalue1.value=value" style={style} />
                 <div style={{ marginRight: props.store.evaluate - props.store.evaluate / 20 + "%" }}>
-                  <span>{props.store.evaluate}</span>
+                  <span style={{ fontWeight: "bold", color: `rgba(${255 - (255 * props.store.evaluate) / 100.0} ,${0 + (255 * props.store.evaluate) / 100.0}, 0)` }}>{props.store.evaluate}</span>
                 </div>
               </div>
             </div>

@@ -13,6 +13,8 @@ import Eva from "../../admin/stores/Eva";
 import LoadMoreEvas from "./LoadMoreEvas";
 import QRCode from "react-qr-code";
 import jsonParse from "../../../functions/jsonParse";
+import NotAllowdPage from "../../general/NotAllowedPage";
+import checkPermissions from "../../../functions/checkPermission";
 
 function OpenOffer(props) {
   const [status, setStatus] = useState("check");
@@ -62,7 +64,7 @@ function OpenOffer(props) {
   }, [city]);
 
   useEffect(() => {
-    if (offer != -1) getOfferEvas(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setEva, eva, props.toast, evaPage, setEvaPage, offer.storeId);
+    if (offer != -1 && checkPermissions(props.userInformation, ["user.moreEvaluation"])) getOfferEvas(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setEva, eva, props.toast, evaPage, setEvaPage, offer.storeId);
   }, [offer]);
 
   const [story, setStory] = useState([]);
@@ -92,7 +94,7 @@ function OpenOffer(props) {
           <>
             <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
               <FailVideo />
-              <span>{msg}</span>
+              <span>{msg ? msg : "يبدو أن هناك مشكلة في الاتصال الرجاء التحقق من الشبكة وإعادة المحاولة"}</span>
             </div>
           </>
         ) : offer != -1 && "eva != -1" ? (
@@ -177,26 +179,31 @@ function OpenOffer(props) {
                 <QRCode fgColor="#0086d9" bgColor="rgba(0,0,0,0)" size={512} style={{ height: "auto", maxWidth: "130px", width: "130px" }} value={offer.QR} viewBox={`0 0 256 256`} />
                 امسح ال QR عند المحل لاكتساب العرض
               </div>
+
               <div style={{ height: "calc(96% - 200px)", overflow: "auto" }}>
-                {eva == -1 ? (
-                  <>
-                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "100%" }}>
-                      <Loading />
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    <div style={{ height: "calc(96% - 200px)", overflow: "auto" }}>
-                      <div className="app-main-right-header">
-                        <span>{offer.evaluate}</span>
-                        <a href="#">التقييمات</a>
+                {!checkPermissions(props.userInformation, ["user.moreEvaluation"]) ? (
+                  eva == -1 ? (
+                    <>
+                      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "100%" }}>
+                        <Loading />
                       </div>
-                      {eva.map((item, index) => {
-                        return <Eva key={index} item={item} />;
-                      })}
-                      <LoadMoreEvas userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} setUsers={setEva} users={eva} toast={props.toast} usersPage={evaPage} setUsersPage={setEvaPage} id={offer.storeId} />
-                    </div>
-                  </>
+                    </>
+                  ) : (
+                    <>
+                      <div style={{ height: "calc(96% - 200px)", overflow: "auto" }}>
+                        <div className="app-main-right-header">
+                          <span>{offer.evaluate}</span>
+                          <a href="#">التقييمات</a>
+                        </div>
+                        {eva.map((item, index) => {
+                          return <Eva key={index} item={item} />;
+                        })}
+                        <LoadMoreEvas userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} setUsers={setEva} users={eva} toast={props.toast} usersPage={evaPage} setUsersPage={setEvaPage} id={offer.storeId} />
+                      </div>
+                    </>
+                  )
+                ) : (
+                  <NotAllowdPage message={"لا تملك الصلاحية لعرض التقييمات"} />
                 )}
               </div>
             </div>

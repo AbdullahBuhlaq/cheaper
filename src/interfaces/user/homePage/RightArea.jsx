@@ -1,5 +1,7 @@
+import checkPermissions from "../../../functions/checkPermission";
 import RightOfferItem from "./RightOffersItem";
 import RightRecentVisited from "./RightRecentVisited";
+import NotAllowdPage from "../../general/NotAllowedPage";
 
 function RightArea(props) {
   try {
@@ -15,21 +17,34 @@ function RightArea(props) {
           </button>
 
           <div style={{ height: "48%", overflow: "auto", marginBottom: "2%" }}>
-            <div className="right-area-header-wrapper">
-              <p className="right-area-header">الأوقات المتبقية للعروض</p>
-            </div>
+            {checkPermissions(props.userInformation, ["user.home"]) ? (
+              <>
+                <div className="right-area-header-wrapper">
+                  <p className="right-area-header">الأوقات المتبقية للعروض</p>
+                </div>
 
-            {props.homeInfo.offerNotTakeYet.map((item, index) => {
-              return <RightOfferItem key={index} item={item} />;
-            })}
+                {props.homeInfo.offerNotTakeYet.map((item, index) => {
+                  return <RightOfferItem key={index} item={item} />;
+                })}
+              </>
+            ) : (
+              <NotAllowdPage />
+            )}
           </div>
+
           <div style={{ height: "48%" }}>
-            <div className="right-area-header-wrapper">
-              <p className="right-area-header">المتاجر التي قمت بزيارتها</p>
-            </div>
-            {props.homeInfo.recentVisited.map((item, index) => {
-              return <RightRecentVisited key={index} item={item} />;
-            })}
+            {checkPermissions(props.userInformation, ["user.home"]) ? (
+              <>
+                <div className="right-area-header-wrapper">
+                  <p className="right-area-header">المتاجر التي قمت بزيارتها</p>
+                </div>
+                {props.homeInfo.recentVisited.map((item, index) => {
+                  return <RightRecentVisited key={index} item={item} />;
+                })}
+              </>
+            ) : (
+              <NotAllowdPage />
+            )}
           </div>
         </div>
       </>

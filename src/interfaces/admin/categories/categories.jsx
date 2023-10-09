@@ -12,6 +12,8 @@ import CategoryHeader from "./CategorySearch";
 import searchOptions from "../../../constants/searchOptions";
 import compare from "../../../functions/compare";
 import HeaderButton from "../../../components/mainArea";
+import checkPermissions from "../../../functions/checkPermission";
+import NotAllowdPage from "../../general/NotAllowedPage";
 
 function Categories(props) {
   const [loading, setLoading] = useState(true);
@@ -25,7 +27,7 @@ function Categories(props) {
       const populateArray = async () => {
         const newArr = await Promise.all(
           Object.keys(props.categories).map(async (categoryId, categoryIndex) => {
-            const isTrue = await compare(filter, { name: props.categories[categoryId].name, offerTaken: props.categories[categoryId].count?.offerTaken, user: props.categories[categoryId].count?.user, store: props.categories[categoryId].count?.store });
+            const isTrue = await compare(filter, { name: props.categories[categoryId].name, offerTaken: props.categories[categoryId]?.count?.offerTaken, user: props.categories[categoryId]?.count?.user, store: props.categories[categoryId]?.count?.store });
             if (isTrue) {
               return (
                 <CategoryItem
@@ -56,14 +58,14 @@ function Categories(props) {
   }, [props.categories, currentEdit, filter]);
 
   useEffect(() => {
-    if (props.categories == -1) getCategories(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setCategories, props.toast);
+    if (props.categories == -1 && checkPermissions(props.userInformation, ["admin.category.all"])) getCategories(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setCategories, props.toast);
   }, []);
   useEffect(() => {
     if (props.categories != -1) setLoading(false);
   }, [props.categories]);
 
   try {
-    return (
+    return checkPermissions(props.userInformation, ["admin.category.all"]) ? (
       <>
         {loading ? (
           <div className="profile-main-area">
@@ -76,7 +78,7 @@ function Categories(props) {
 
               <div className="main-categories">
                 <section className="categories-left">
-                  <CategoryHeader setAddNew={setAddNew} filter={filter} setFilter={setFilter} />
+                  <CategoryHeader userInformation={props.userInformation} setAddNew={setAddNew} filter={filter} setFilter={setFilter} />
 
                   {items.map((item) => {
                     return item;
@@ -101,6 +103,10 @@ function Categories(props) {
             ) : null}
           </>
         )}
+      </>
+    ) : (
+      <>
+        <NotAllowdPage />
       </>
     );
   } catch (error) {

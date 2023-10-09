@@ -6,6 +6,7 @@ function OfferCard(props) {
   try {
     return (
       <>
+        {console.log(props.item)}
         <div className="sales-card">
           <div className="poster">
             <img src={props.item.storeInfo.avatar ? jsonParse(props.item.storeInfo.avatar)[3] : "images/user.webp"} alt="Location Unknown" />

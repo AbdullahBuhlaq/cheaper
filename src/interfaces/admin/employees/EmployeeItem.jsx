@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import jsonParse from "../../../functions/jsonParse";
+import checkPermissions from "../../../functions/checkPermission";
 
 function EmployeeItem(props) {
   const [showOptions, setShowOptions] = useState(false);
@@ -23,34 +24,40 @@ function EmployeeItem(props) {
           <div className="product-cell price">{props.employee.phoneNumber}</div>
           <div className="product-cell sales">{props.employee.gender}</div>
           <div className="product-cell stock">{props.employee.email}</div>
-          <div className="product-cell stock">{props.roles[props.employee.roleId].name}</div>
+          {props.roles != -1 ? <div className="product-cell stock">{props.roles[props.employee.roleId].name}</div> : null}
           <div className="product-cell option">
             <span className="cell-label">خيارات :</span>
 
             <div className="dropdown">
-              <button
-                onClick={() => {
-                  setShowOptions(!showOptions);
-                }}
-                className="dropbtn"
-              >
-                •••
-              </button>
+              {checkPermissions(props.userInformation, ["admin.employee.update", "admin.employee.delete", "admin.employee.all"]) ? (
+                <button
+                  onClick={() => {
+                    setShowOptions(!showOptions);
+                  }}
+                  className="dropbtn"
+                >
+                  •••
+                </button>
+              ) : null}
               <ul className={"dropdown-content" + (showOptions ? " show" : "")}>
-                <li
-                  onClick={() => {
-                    props.setCurrentEdit(props.employee.id);
-                  }}
-                >
-                  <div>تعديل</div>
-                </li>
-                <li
-                  onClick={() => {
-                    props.deleteEmployee(props.employee.id);
-                  }}
-                >
-                  <div>حذف</div>
-                </li>
+                {checkPermissions(props.userInformation, ["admin.employee.update", "admin.employee.all"]) ? (
+                  <li
+                    onClick={() => {
+                      props.setCurrentEdit(props.employee.id);
+                    }}
+                  >
+                    <div>تعديل</div>
+                  </li>
+                ) : null}
+                {checkPermissions(props.userInformation, ["admin.employee.delete", "admin.employee.all"]) ? (
+                  <li
+                    onClick={() => {
+                      props.deleteEmployee(props.employee.id);
+                    }}
+                  >
+                    <div>حذف</div>
+                  </li>
+                ) : null}
               </ul>
             </div>
           </div>

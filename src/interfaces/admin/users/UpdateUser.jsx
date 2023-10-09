@@ -10,7 +10,7 @@ import Button from "../../../components/Button";
 import CheckPasswordInput from "../../../components/CheckPasswordInput";
 import ImageInput from "../../../components/ImageInput";
 import SelectMultipleFromDB from "../../../components/SelectMultipleFromDB";
-import updateUser from "./profileSection/function/UpdateUser";
+import updateUserTop from "./function/updateUserTop";
 
 function UpdateUser(props) {
   const [duringAdd, setDuringAdd] = useState(false);
@@ -80,7 +80,7 @@ function UpdateUser(props) {
             <SelectMultipleFromDB label={"صنف المحل"} placeholder={"اختر تصنيف المحل..."} list={props.categories} showKey={"name"} valueKey={"name"} name={"category"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={userSchema} />
             <ImageInput setImage={setImage} />
           </div>
-          <Button action={() => updateUser(user, props.currentEdit, setDuringAdd, image, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.userProfile, props.setUserProfile, props.toast, props.setCurrentEdit)} text={"إرسال"} disabled={duringAdd} joiObject={joiUser} state={user} setStateErrors={setUserErrors} toast={props.toast} />
+          <Button action={() => updateUserTop(user, props.currentEdit, setDuringAdd, image, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.users, props.setUsers, props.toast, props.setCurrentEdit)} text={"إرسال"} disabled={duringAdd} joiObject={joiUser} state={user} setStateErrors={setUserErrors} toast={props.toast} />
         </form>
       </>
     );

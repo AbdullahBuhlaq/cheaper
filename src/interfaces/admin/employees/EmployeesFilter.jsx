@@ -8,8 +8,10 @@ function EmployeesFilter(props) {
         <div className="filter-menu active">
           {Object.keys(props.tempFilter).map((filterKey) => {
             let list = {};
-            if (filterKey == "roleId") list = props.roles;
-            if (filterKey != "name") return <FilterItem list={list} filterKey={filterKey} item={props.tempFilter[filterKey]} filter={props.tempFilter} setFilter={props.setTempFilter} />;
+            if (filterKey == "roleId") {
+              list = props.roles;
+              if (list != -1) return <FilterItem list={list} filterKey={filterKey} item={props.tempFilter[filterKey]} filter={props.tempFilter} setFilter={props.setTempFilter} />;
+            } else if (filterKey != "name") return <FilterItem list={list} filterKey={filterKey} item={props.tempFilter[filterKey]} filter={props.tempFilter} setFilter={props.setTempFilter} />;
           })}
 
           <div className="filter-menu-buttons">

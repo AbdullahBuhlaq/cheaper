@@ -3,6 +3,7 @@ import getIcon from "../../../functions/getIcon";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
 import jsonParse from "../../../functions/jsonParse";
+import checkPermissions from "../../../functions/checkPermission";
 
 function PopupPendingStore(props) {
   const { isLoaded } = useLoadScript({
@@ -36,30 +37,36 @@ function PopupPendingStore(props) {
 
             <div class="right-side">
               <div class="dropdown">
-                <button onClick={() => setOpenOptions(!openOptions)} class="dropbtn">
-                  •••
-                </button>
+                {checkPermissions(props.userInformation, ["admin.store.accept", "admin.store.disable"]) ? (
+                  <button onClick={() => setOpenOptions(!openOptions)} class="dropbtn">
+                    •••
+                  </button>
+                ) : null}
                 <ul id="myDropdown" class={"dropdown-content" + (openOptions ? " show" : "")}>
-                  <li>
-                    <a
-                      href="#"
-                      onClick={() => {
-                        props.acceptNewStore(props.store.id);
-                      }}
-                    >
-                      قبول
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      onClick={() => {
-                        props.deleteNewStore(props.store.id);
-                      }}
-                    >
-                      حذف
-                    </a>
-                  </li>
+                  {checkPermissions(props.userInformation, ["admin.store.accept"]) ? (
+                    <li>
+                      <a
+                        href="#"
+                        onClick={() => {
+                          props.acceptNewStore(props.store.id);
+                        }}
+                      >
+                        قبول
+                      </a>
+                    </li>
+                  ) : null}
+                  {checkPermissions(props.userInformation, ["admin.store.disable"]) ? (
+                    <li>
+                      <a
+                        href="#"
+                        onClick={() => {
+                          props.deleteNewStore(props.store.id);
+                        }}
+                      >
+                        حذف
+                      </a>
+                    </li>
+                  ) : null}
                 </ul>
               </div>
             </div>

@@ -39,7 +39,7 @@ function StoreLeft(props) {
               <AutoSlidingImages images={props.storeInformation.story.length ? story : defaultStory} />
             </div>
 
-            <StoreOptions setOpenStatus={props.setOpenStatus} setOpenUpdate={props.setOpenUpdate} />
+            <StoreOptions userInformation={props.userInformation} setOpenStatus={props.setOpenStatus} setOpenUpdate={props.setOpenUpdate} />
 
             <StoreHeader setOpenImage={props.setOpenImage} storeInformation={props.storeInformation} setStoreInformation={props.setStoreInformation} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} />
             <StoreUsers users={props.storeUsers} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} setUsers={props.setStoreUsers} usersPage={props.usersPage} setUsersPage={props.setUsersPage} />

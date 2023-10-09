@@ -7,6 +7,9 @@ import { UilTimes } from "@iconscout/react-unicons";
 import Chart from "react-apexcharts";
 import LoadingChart from "./LoadingChart";
 import Loading from "../interfaces/general/Loading";
+import { FcCancel } from "react-icons/fc";
+import checkPermissions from "../functions/checkPermission";
+import SuspendChart from "./SuspendChart";
 
 const Card = (props) => {
   try {
@@ -36,7 +39,20 @@ function CompactCard({ param }) {
         {/* <div className="chartIcon">
           
         </div> */}
-        {param.loading ? <Loading /> : <CircularProgressbar value={param.barValue} text={param.value.toString()} />}
+        {!checkPermissions(param.userInformation, ["admin.home.getCount"]) ? (
+          <>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+              <span style={{ fontSize: "30px" }}>
+                <FcCancel />
+              </span>
+              <span style={{ fontSize: "15px" }}>لا تملك صلاحية</span>
+            </div>
+          </>
+        ) : param.loading ? (
+          <Loading />
+        ) : (
+          <CircularProgressbar value={param.barValue} text={param.value.toString()} />
+        )}
         {/* <CircleChart percentage={param.barValue} color={"blue"} /> */}
         <span>
           {param.title} <Png />
@@ -75,7 +91,7 @@ function ExpandedCard({ param }) {
           <UilTimes onClick={() => param.setExpanded(false)} />
         </div>
         <span>{param.title}</span>
-        <div className="chartContainer">{param.loading ? <LoadingChart /> : <Chart options={param.options} series={param.series} categories={param.categories} type="area" />}</div>
+        <div className="chartContainer">{!checkPermissions(param.userInformation, [param.index == 1 ? "admin.home.chartUsers" : param.index == 2 ? "admin.home.chartStores" : "admin.home.cartChart"]) ? <SuspendChart /> : param.loading ? <LoadingChart /> : <Chart options={param.options} series={param.series} categories={param.categories} type="area" />}</div>
         <span>كل الأشهر</span>
       </motion.div>
     );

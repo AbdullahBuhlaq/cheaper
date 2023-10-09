@@ -7,6 +7,7 @@ import PermissionGroup from "./PermissionGroup";
 import roleSchema from "./schema/roleSchema";
 import addRole from "./functions/addRole";
 import Button from "../../../components/Button";
+import checkPermissions from "../../../functions/checkPermission";
 
 function AddRoleForm(props) {
   const [index, setIndex] = useState(1);
@@ -43,11 +44,13 @@ function AddRoleForm(props) {
         })}
         {roleErrors["show"] && <div className="validating-error">{roleErrors["show"]}</div>}
 
-        <form className="role-footer">
-          <div className="button-container">
-            <Button classes={"action-button filter jsFilter"} action={() => addRole(role, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setDuringAdd, props.setRoles, props.roles, props.setCurrentEdit, props.toast)} text={"إضافة"} disabled={duringAdd} joiObject={joiRole} state={role} setStateErrors={setRoleErrors} toast={props.toast} />
-          </div>
-        </form>
+        {checkPermissions(props.userInformation, ["admin.role.create", "admin.role.all"]) ? (
+          <form className="role-footer">
+            <div className="button-container">
+              <Button classes={"action-button filter jsFilter"} action={() => addRole(role, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setDuringAdd, props.setRoles, props.roles, props.setCurrentEdit, props.toast)} text={"إضافة"} disabled={duringAdd} joiObject={joiRole} state={role} setStateErrors={setRoleErrors} toast={props.toast} />
+            </div>
+          </form>
+        ) : null}
       </>
     );
   } catch (err) {

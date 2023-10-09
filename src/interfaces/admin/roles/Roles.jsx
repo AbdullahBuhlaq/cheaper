@@ -13,6 +13,8 @@ import getRoles from "./functions/getRoles";
 import deleteRoleFunc from "./functions/deleteRoleFunc";
 import HeaderButton from "../../../components/mainArea";
 import jsonParse from "../../../functions/jsonParse";
+import checkPermissions from "../../../functions/checkPermission";
+import NotAllowdPage from "../../general/NotAllowedPage";
 
 function Roles(props) {
   const cardRef = useRef();
@@ -56,7 +58,7 @@ function Roles(props) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (props.roles == -1) getRoles(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setRoles);
+    if (props.roles == -1 && checkPermissions(props.userInformation, ["admin.role.all"])) getRoles(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setRoles);
   }, []);
   useEffect(() => {
     if (props.roles != -1) setLoading(false);
@@ -78,7 +80,7 @@ function Roles(props) {
   }, [cardRef.current]);
 
   try {
-    return (
+    return checkPermissions(props.userInformation, ["admin.role.all"]) ? (
       <>
         {loading ? (
           <div className="profile-main-area">
@@ -139,6 +141,10 @@ function Roles(props) {
             </div>
           </>
         )}
+      </>
+    ) : (
+      <>
+        <NotAllowdPage />{" "}
       </>
     );
   } catch (err) {

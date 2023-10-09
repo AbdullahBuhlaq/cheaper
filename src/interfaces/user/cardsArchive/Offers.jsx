@@ -7,6 +7,8 @@ import OffersRightArea from "./OffersRightArea";
 import Popup from "../../general/Popup";
 import OpenOldOffer from "./OpenOldOffer";
 import SendGift from "./SendGift";
+import checkPermissions from "../../../functions/checkPermission";
+import NotAllowdPage from "../../general/NotAllowedPage";
 
 function Offers(props) {
   const [offersPage, setOffersPage] = useState({ page: 1, size: 6, loadMore: true, loadingNow: false });
@@ -18,11 +20,11 @@ function Offers(props) {
   useEffect(() => {
     setCurrentOffer(false);
     if (props.categories == -1) getGeneralCategories(props.setCategories, props.toast);
-    if (!offersPage.loadingNow) getOffers(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setOffers, props.offers, props.toast, filter, { ...offersPage, page: 1, loadMore: true }, setOffersPage);
+    if (!offersPage.loadingNow && checkPermissions(props.userInformation, ["user.myOffer"])) getOffers(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setOffers, props.offers, props.toast, filter, { ...offersPage, page: 1, loadMore: true }, setOffersPage);
   }, [filter]);
 
   try {
-    return (
+    return checkPermissions(props.userInformation, ["user.myOffer"]) ? (
       <>
         {props.offers == -1 || props.categories == -1 ? (
           <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "100%" }}>
@@ -66,6 +68,8 @@ function Offers(props) {
           </>
         ) : null}
       </>
+    ) : (
+      <NotAllowdPage />
     );
   } catch (err) {
     console.log(err);

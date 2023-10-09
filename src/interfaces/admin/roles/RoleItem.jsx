@@ -5,6 +5,7 @@ import PermissionGroup from "./PermissionGroup";
 import roleSchema from "./schema/roleSchema";
 import editRole from "./functions/editRole";
 import Button from "../../../components/Button";
+import checkPermissions from "../../../functions/checkPermission";
 
 function RoleItem(props) {
   const [index, setIndex] = useState(1);
@@ -40,24 +41,30 @@ function RoleItem(props) {
         })}
         {roleErrors["show"]}
         {props.currentEdit.id > 5 ? (
-          <form className="role-footer">
-            <div className="button-container">
-              <Button classes={"action-button filter jsFilter"} action={() => editRole(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, role, setDuringAdd, props.setRoles, props.roles, props.currentEdit, props.toast)} text={"حفظ التعديل"} disabled={duringAdd} joiObject={joiRole} state={role} setStateErrors={setRoleErrors} toast={props.toast} />
-              <Button
-                classes={"action-button filter jsFilter"}
-                action={(event) => {
-                  event.preventDefault();
-                  props.deleteRole(props.currentEdit.id);
-                }}
-                text={"حذف"}
-                disabled={duringAdd}
-                joiObject={joiRole}
-                state={role}
-                setStateErrors={setRoleErrors}
-                toast={props.toast}
-              />
-            </div>
-          </form>
+          checkPermissions(props.userInformation, ["admin.role.update", "admin.role.delete", "admin.role.all"]) ? (
+            <form className="role-footer">
+              <div className="button-container">
+                {checkPermissions(props.userInformation, ["admin.role.update", "admin.role.all"]) ? (
+                  <Button classes={"action-button filter jsFilter"} action={() => editRole(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, role, setDuringAdd, props.setRoles, props.roles, props.currentEdit, props.toast)} text={"حفظ التعديل"} disabled={duringAdd} joiObject={joiRole} state={role} setStateErrors={setRoleErrors} toast={props.toast} />
+                ) : null}
+                {checkPermissions(props.userInformation, ["admin.role.delete", "admin.role.all"]) ? (
+                  <Button
+                    classes={"action-button filter jsFilter"}
+                    action={(event) => {
+                      event.preventDefault();
+                      props.deleteRole(props.currentEdit.id);
+                    }}
+                    text={"حذف"}
+                    disabled={duringAdd}
+                    joiObject={joiRole}
+                    state={role}
+                    setStateErrors={setRoleErrors}
+                    toast={props.toast}
+                  />
+                ) : null}
+              </div>
+            </form>
+          ) : null
         ) : null}
       </>
     );

@@ -10,6 +10,8 @@ import selectOptions from "../../../constants/selectOptions";
 import sendSpam from "./functions/sendSpam";
 import sendEva from "./functions/sendEva";
 import getRemainingTime from "../../../functions/getRemainingTime";
+import checkPermissions from "../../../functions/checkPermission";
+import { FcCancel } from "react-icons/fc";
 
 function OffersRightArea(props) {
   const [rate, setRate] = useState(50);
@@ -83,7 +85,7 @@ function OffersRightArea(props) {
                   </div>
                 </div>
 
-                {props.currentOffer.state !== false || !props.currentOffer.QR ? null : (
+                {(props.currentOffer.state !== false || !props.currentOffer.QR) && checkPermissions(props.userInformation, ["user.gift"]) ? null : (
                   <button className="modal-image-wrapper-btn" onClick={() => props.setOpenSendGift(props.currentOffer)}>
                     انقر لاهداء العرض لشخص اخر
                   </button>
@@ -132,11 +134,6 @@ function OffersRightArea(props) {
 
               {props.currentOffer.state !== false ? null : (
                 <div className="rates-box">
-                  {/* <div className="rates-box-header">
-                  <p>تانبلعنغ لاات </p>
-                  <i className="material-icons">cloud</i>
-                </div> */}
-
                   <div className="rates-box-rate">
                     <input
                       className="range"
@@ -157,8 +154,18 @@ function OffersRightArea(props) {
                         لقد قمت بتقييم المحل ب {props.currentOffer.evaluate} <span style={{ color: "green" }}>✔</span>
                       </p>
                     ) : (
-                      <button onClick={() => sendEva(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setDuringAddEva, props.toast, rate, props.setOffers, props.offers, props.currentOffer)} disabled={duringAddEva}>
-                        إرسال التقييم
+                      <button
+                        onClick={() => sendEva(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setDuringAddEva, props.toast, rate, props.setOffers, props.offers, props.currentOffer)}
+                        disabled={duringAddEva || !checkPermissions(props.userInformation, ["user.spamAndEvaluation"])}
+                        style={!checkPermissions(props.userInformation, ["user.spamAndEvaluation"]) ? { cursor: "not-allowed" } : {}}
+                      >
+                        {checkPermissions(props.userInformation, ["user.spamAndEvaluation"]) ? (
+                          "إرسال التقييم"
+                        ) : (
+                          <>
+                            تم حظرك عن التقييم <FcCancel />
+                          </>
+                        )}
                       </button>
                     )}
                   </div>
@@ -191,9 +198,16 @@ function OffersRightArea(props) {
                             });
                           }
                         }}
-                        disabled={duringAddSpam}
+                        disabled={duringAddSpam || !checkPermissions(props.userInformation, ["user.spamAndEvaluation"])}
+                        style={!checkPermissions(props.userInformation, ["user.spamAndEvaluation"]) ? { cursor: "not-allowed" } : {}}
                       >
-                        إرسال الإبلاغ
+                        {checkPermissions(props.userInformation, ["user.spamAndEvaluation"]) ? (
+                          "إرسال الإبلاغ"
+                        ) : (
+                          <>
+                            تم حظرك عن الإبلاغ <FcCancel />
+                          </>
+                        )}
                       </button>
                     )}
                   </div>
@@ -211,7 +225,7 @@ function OffersRightArea(props) {
                   <path d="M15 9l-6 6M9 9l6 6"></path>
                 </svg>
               </button>
-              قم باختيار عرض لتتمكن من التقييم والإبلاغ.
+              قم باختيار عرض لعرض المعلومات والتقييم والإبلاغ.
             </div>
           </>
         )}

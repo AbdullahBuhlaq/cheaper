@@ -16,7 +16,7 @@ function StorePopup(props) {
           <SecondLoading />
         ) : (
           <>
-            <StoreCard store={storeInfo} userName={props.userName} userAvatar={props.userAvatar} />
+            <StoreCard store={storeInfo} userName={props.username} name={props.name} userAvatar={props.userAvatar} />
           </>
         )}
       </>

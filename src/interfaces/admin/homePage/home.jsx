@@ -11,21 +11,23 @@ import Loading from "../../general/Loading";
 import getConfig from "./functions/getConfig";
 import Config from "./configs";
 import getUserCartChart from "./getUserCartChartData";
+import checkPermissions from "../../../functions/checkPermission";
+import { FcCancel } from "react-icons/fc";
 
 function Home(props) {
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
-    if (props.configs == -1) getConfig(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setConfigs);
+    if (props.configs == -1 && checkPermissions(props.userInformation, ["admin.config.all"])) getConfig(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setConfigs);
   }, []);
 
   useEffect(() => {
-    if (props.homeCount.loading) getCount(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setHomeCount, props.setHomeUserChart, props.homeUserChart, props.setHomeStoreChart, props.homeStoreChart);
-    if (props.homeCartChart.loading) getCartChart(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setHomeCartChart, props.homeCartChart);
-    if (props.homeUserCartChart.loading) getUserCartChart(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setHomeUserCartChart, props.homeUserCartChart);
-    if (props.homeCityChart.loading) getCityChart(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setHomeCityChart, props.homeCityChart);
-    if (props.homeStoreChart.loading) getStoreChart(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setHomeStoreChart, props.homeStoreChart);
-    if (props.homeUserChart.loading) getUserChart(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setHomeUserChart, props.homeUserChart);
+    if (props.homeCount.loading && checkPermissions(props.userInformation, ["admin.home.getCount"])) getCount(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setHomeCount, props.setHomeUserChart, props.homeUserChart, props.setHomeStoreChart, props.homeStoreChart);
+    if (props.homeCartChart.loading && checkPermissions(props.userInformation, ["admin.home.cartChart"])) getCartChart(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setHomeCartChart, props.homeCartChart);
+    if (props.homeUserCartChart.loading && checkPermissions(props.userInformation, ["admin.home.cartChart"])) getUserCartChart(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setHomeUserCartChart, props.homeUserCartChart);
+    if (props.homeCityChart.loading && checkPermissions(props.userInformation, ["admin.home.cityChart"])) getCityChart(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setHomeCityChart, props.homeCityChart);
+    if (props.homeStoreChart.loading && checkPermissions(props.userInformation, ["admin.home.chartStores"])) getStoreChart(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setHomeStoreChart, props.homeStoreChart);
+    if (props.homeUserChart.loading && checkPermissions(props.userInformation, ["admin.home.chartUsers"])) getUserChart(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setHomeUserChart, props.homeUserChart);
   }, []);
 
   try {
@@ -38,6 +40,7 @@ function Home(props) {
               <Card
                 index={1}
                 setExpanded={setExpanded}
+                userInformation={props.userInformation}
                 expanded={expanded}
                 unit={props.homeUserChart.unit}
                 title={props.homeUserChart.title}
@@ -53,6 +56,7 @@ function Home(props) {
               <Card
                 index={2}
                 setExpanded={setExpanded}
+                userInformation={props.userInformation}
                 expanded={expanded}
                 unit={props.homeStoreChart.unit}
                 title={props.homeStoreChart.title}
@@ -70,6 +74,7 @@ function Home(props) {
               <Card
                 index={3}
                 setExpanded={setExpanded}
+                userInformation={props.userInformation}
                 expanded={expanded}
                 unit={props.homeCartChart.unit}
                 title={props.homeCartChart.title}
@@ -85,6 +90,7 @@ function Home(props) {
               <Card
                 index={4}
                 setExpanded={setExpanded}
+                userInformation={props.userInformation}
                 expanded={expanded}
                 unit={props.homeUserCartChart.unit}
                 title={props.homeUserCartChart.title}
@@ -110,13 +116,31 @@ function Home(props) {
             }
           >
             <span>{"توزع المحلات على المدن"}</span>
-            <div className="chartContainer" style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
-              {props.homeCityChart.loading ? <Loading /> : <Chart options={props.homeCityChart.options} series={props.homeCityChart.options.series} type="bar" width={"280%"} height={"225%"} />}
-            </div>
+            {!checkPermissions(props.userInformation, ["admin.home.cityChart"]) ? (
+              <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+                <span style={{ fontSize: "100px" }}>
+                  <FcCancel />
+                </span>
+                <span>ليست لديك الصلاحية لطلب هذا الرسم البياني</span>
+              </div>
+            ) : (
+              <div className="chartContainer" style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
+                {props.homeCityChart.loading ? <Loading /> : <Chart options={props.homeCityChart.options} series={props.homeCityChart.options.series} type="bar" width={"280%"} height={"225%"} />}
+              </div>
+            )}
           </div>
         </div>
         <div style={{ width: "25%" }}>
-          {props.configs == -1 ? (
+          {!checkPermissions(props.userInformation, ["admin.config.all"]) ? (
+            <>
+              <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", width: "100%", height: "100%" }}>
+                <span style={{ fontSize: "100px" }}>
+                  <FcCancel />
+                </span>
+                <span>لا تملك صلاحية عرض القيم الأساسية للموقع</span>
+              </div>
+            </>
+          ) : props.configs == -1 ? (
             <div style={{ width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
               <Loading />
             </div>

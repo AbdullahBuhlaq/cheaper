@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import checkPermissions from "../../../functions/checkPermission";
 
 function PackItem(props) {
   const [show, setShow] = useState(false);
@@ -18,36 +19,42 @@ function PackItem(props) {
               <h1>{props.pack.name}</h1>
 
               <div className="dropdown">
-                <button
-                  className="dropbtn"
-                  onClick={() => {
-                    setShow(!show);
-                  }}
-                >
-                  •••
-                </button>
+                {checkPermissions(props.userInformation, ["admin.packs.update", "admin.packs.delete", "admin.packs.all"]) ? (
+                  <button
+                    className="dropbtn"
+                    onClick={() => {
+                      setShow(!show);
+                    }}
+                  >
+                    •••
+                  </button>
+                ) : null}
                 <ul id="myDropdown" className={"dropdown-content" + (show ? " show" : "")}>
-                  <li>
-                    <a
-                      href="#"
-                      onClick={() => {
-                        props.setAddNew(false);
-                        props.setCurrentEdit(props.pack.id);
-                      }}
-                    >
-                      تعديل
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      onClick={() => {
-                        props.deletePack(props.pack.id);
-                      }}
-                    >
-                      حذف
-                    </a>
-                  </li>
+                  {checkPermissions(props.userInformation, ["admin.packs.update", "admin.packs.all"]) ? (
+                    <li>
+                      <a
+                        href="#"
+                        onClick={() => {
+                          props.setAddNew(false);
+                          props.setCurrentEdit(props.pack.id);
+                        }}
+                      >
+                        تعديل
+                      </a>
+                    </li>
+                  ) : null}
+                  {checkPermissions(props.userInformation, ["admin.packs.delete", "admin.packs.all"]) ? (
+                    <li>
+                      <a
+                        href="#"
+                        onClick={() => {
+                          props.deletePack(props.pack.id);
+                        }}
+                      >
+                        حذف
+                      </a>
+                    </li>
+                  ) : null}
                 </ul>
               </div>
             </div>

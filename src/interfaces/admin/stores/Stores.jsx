@@ -15,6 +15,8 @@ import acceptStore from "./functions/acceptStore";
 import deleteStore from "./functions/deleteStore";
 import deleteAcceptedStoreFunc from "./functions/deleteAcceptedStoreFunc";
 import enableAcceptedStoreFunc from "./functions/enableAcceptedStoreFunc";
+import checkPermissions from "../../../functions/checkPermission";
+import NotAllowdPage from "../../general/NotAllowedPage";
 
 function Stores(props) {
   const [currentEdit, setCurrentEdit] = useState(false);
@@ -29,17 +31,17 @@ function Stores(props) {
     if (!currentEdit) setCurrentEditType(false);
   }, [currentEdit]);
   useEffect(() => {
-    if (props.acceptedStores == -1) getAcceptedStores(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setAcceptedStores, props.acceptedStores, props.toast, acceptedStoresFilter, acceptedStoresPage, setAcceptedStoresPage);
-    if (props.pendingStores == -1) getPendingStores(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setPendingStores, props.pendingStores, props.toast, pendingStoresFilter, pendingStoresPage, setPendingStoresPage);
+    if (props.acceptedStores == -1 && checkPermissions(props.userInformation, ["admin.store.all"])) getAcceptedStores(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setAcceptedStores, props.acceptedStores, props.toast, acceptedStoresFilter, acceptedStoresPage, setAcceptedStoresPage);
+    if (props.pendingStores == -1 && checkPermissions(props.userInformation, ["admin.store.all"])) getPendingStores(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setPendingStores, props.pendingStores, props.toast, pendingStoresFilter, pendingStoresPage, setPendingStoresPage);
     if (props.categories == -1) getCategories(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setCategories, props.toast);
   }, []);
 
   useEffect(() => {
-    if (!acceptedStoresPage.loadingNow) getAcceptedStores(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setAcceptedStores, props.acceptedStores, props.toast, acceptedStoresFilter, { ...acceptedStoresPage, page: 1, loadMore: true }, setAcceptedStoresPage);
+    if (!acceptedStoresPage.loadingNow && checkPermissions(props.userInformation, ["admin.store.all"])) getAcceptedStores(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setAcceptedStores, props.acceptedStores, props.toast, acceptedStoresFilter, { ...acceptedStoresPage, page: 1, loadMore: true }, setAcceptedStoresPage);
   }, [acceptedStoresFilter]);
 
   useEffect(() => {
-    if (!acceptedStoresPage.loadingNow) getPendingStores(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setPendingStores, props.pendingStores, props.toast, pendingStoresFilter, { ...pendingStoresPage, page: 1, loadMore: true }, setPendingStoresPage);
+    if (!acceptedStoresPage.loadingNow && checkPermissions(props.userInformation, ["admin.store.all"])) getPendingStores(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setPendingStores, props.pendingStores, props.toast, pendingStoresFilter, { ...pendingStoresPage, page: 1, loadMore: true }, setPendingStoresPage);
   }, [pendingStoresFilter]);
 
   function acceptNewStore(id) {
@@ -57,7 +59,7 @@ function Stores(props) {
   }
 
   try {
-    return (
+    return checkPermissions(props.userInformation, ["admin.store.all"]) ? (
       <>
         <div className="main-area" style={{ width: "100%" }}>
           <HeaderButton />
@@ -127,6 +129,10 @@ function Stores(props) {
           ) : null}
           {currentEdit && currentEditType == 2 ? <Popup setOpen={setCurrentEdit} component={<PopupPendingStore acceptNewStore={acceptNewStore} deleteNewStore={deleteNewStore} store={currentEdit} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} />} /> : null}
         </div>
+      </>
+    ) : (
+      <>
+        <NotAllowdPage />
       </>
     );
   } catch (err) {

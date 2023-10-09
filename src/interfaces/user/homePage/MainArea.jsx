@@ -12,10 +12,9 @@ function MainArea(props) {
           <div className="main-area-header">
             <img className="wrapper" src="images/bg.png" />
           </div>
+          {props.homeInfo == -1 ? null : <StatisticsArea homeInfo={props.homeInfo} />}
 
-          <StatisticsArea homeInfo={props.homeInfo} />
-
-          <CardsArea setOpenOffer={props.setOpenOffer} canOpen={props.homeInfo.freeBoxToday} toast={props.toast} />
+          <CardsArea setOpenOffer={props.setOpenOffer} userInformation={props.userInformation} canOpen={props.homeInfo.freeBoxToday} toast={props.toast} />
         </div>
       </>
     );

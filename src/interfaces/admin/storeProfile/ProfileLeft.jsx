@@ -7,6 +7,7 @@ import ProfilePacks from "./ProfilePacks";
 import AutoSlidingImages from "../users/profileSection/AutoSlider";
 import { defaultSecondStory } from "../../../constants/story";
 import jsonParse from "../../../functions/jsonParse";
+import checkPermissions from "../../../functions/checkPermission";
 
 function StoreProfileLeft(props) {
   const [story, setStory] = useState([]);
@@ -32,11 +33,13 @@ function StoreProfileLeft(props) {
             <AutoSlidingImages images={props.store.storeInfo.story.length ? story : defaultSecondStory} />
           </div>
 
-          <ProfileOptions setOpenBlocks={props.setOpenBlocks} name={props.store.storeInfo["nameStore"]} />
+          <ProfileOptions userInformation={props.userInformation} setOpenBlocks={props.setOpenBlocks} name={props.store.storeInfo["nameStore"]} />
           <ProfileInfoHeader store={props.store} />
           <ProfileCardsContainer store={props.store} />
-          <ProfileTable users={props.users} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} setUsers={props.setUsers} usersPage={props.usersPage} setUsersPage={props.setUsersPage} id={props.id} />
-          <ProfilePacks packsChart={props.packsChart} storeChart={props.storeChart} packs={props.packs} />
+          {checkPermissions(props.userInformation, ["admin.store.accepted.evaluationAndSpam"]) && props.users != -1 ? (
+            <ProfileTable users={props.users} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} setUsers={props.setUsers} usersPage={props.usersPage} setUsersPage={props.setUsersPage} id={props.id} />
+          ) : null}
+          <ProfilePacks packsChart={props.packsChart} userInformation={props.userInformation} storeChart={props.storeChart} packs={props.packs} />
         </div>
       </>
     );

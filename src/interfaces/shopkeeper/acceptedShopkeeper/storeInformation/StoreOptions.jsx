@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { FcCancel } from "react-icons/fc";
 
 function StoreOptions(props) {
   const [openOptions, setOpenOptions] = useState(false);
@@ -14,7 +15,18 @@ function StoreOptions(props) {
     return (
       <>
         <div className="main-header-titel">
-          <h1 href="#">الواجهة الرئيسية للمحل</h1>
+          <h1 href="#" style={{ display: "flex" }}>
+            الواجهة الرئيسية للمحل
+            {props.userInformation.allRestrictions.action ? (
+              <h1 style={{ color: "red", display: "flex" }}>
+                {" (لقد تم حظرك لتجاوزك الحد الأدنى من الإبلاغات "}
+                <h1 style={{ marginTop: "4px" }}>
+                  <FcCancel />
+                </h1>
+                {" )"}
+              </h1>
+            ) : null}
+          </h1>
           <div className="dropdown">
             <button
               className="dropbtn"

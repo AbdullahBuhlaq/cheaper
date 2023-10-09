@@ -2,6 +2,7 @@ import { SlSizeFullscreen } from "react-icons/sl";
 import getIcon from "../../../functions/getIcon";
 import jsonParse from "../../../functions/jsonParse";
 import { defaultStory } from "../../../constants/story";
+import checkPermissions from "../../../functions/checkPermission";
 
 function AcceptedStoreCard(props) {
   try {
@@ -14,15 +15,17 @@ function AcceptedStoreCard(props) {
           <div className="details">
             <div className="sales-card-more-details">
               <h1>اسم المحل : {props.store.nameStore}</h1>
-              <span
-                style={{ cursor: "pointer" }}
-                onClick={() => {
-                  props.setCurrentEdit(props.store);
-                  props.setCurrentEditType(1);
-                }}
-              >
-                <SlSizeFullscreen />
-              </span>
+              {checkPermissions(props.userInformation, ["admin.store.accepted.info"]) ? (
+                <span
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    props.setCurrentEdit(props.store);
+                    props.setCurrentEditType(1);
+                  }}
+                >
+                  <SlSizeFullscreen />
+                </span>
+              ) : null}
             </div>
             <h2>العنوان : {props.store.locationText}</h2>
 

@@ -12,6 +12,8 @@ import LoadMoreUsers from "./LoadMoreUsers";
 import UserChart from "./UserChart";
 import deleteUserFunc from "./function/deleteUser";
 import getGeneralCategories from "../../../functions/getGeneralCategories";
+import checkPermissions from "../../../functions/checkPermission";
+import NotAllowdPage from "../../general/NotAllowedPage";
 
 function Users(props) {
   const [loading, setLoading] = useState(true);
@@ -44,20 +46,21 @@ function Users(props) {
   }, [props.users, currentEdit, currentShowBlocks, filter]);
 
   useEffect(() => {
-    if (!usersPage.loadingNow) getUsers(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setUsers, props.users, props.toast, filter, { ...usersPage, page: 1, loadMore: true }, setUsersPage);
+    if (!usersPage.loadingNow && checkPermissions(props.userInformation, ["admin.users.filterAndSearch"])) getUsers(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setUsers, props.users, props.toast, filter, { ...usersPage, page: 1, loadMore: true }, setUsersPage);
   }, [filter]);
   useEffect(() => {
-    if (props.blocks == -1) getBlocks(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setBlocks, props.toast);
+    if (props.blocks == -1 && checkPermissions(props.userInformation, ["admin.block.all"])) getBlocks(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setBlocks, props.toast);
   }, []);
   useEffect(() => {
     if (props.categories == -1) getGeneralCategories(props.setCategories, props.toast);
   }, []);
   useEffect(() => {
-    if (props.users != -1 && props.blocks != -1 && props.categories != -1) setLoading(false);
-  }, [props.users, props.blocks, props.categories]);
+    if (props.users != -1 && props.categories != -1) setLoading(false);
+  }, [props.users, props.categories]);
 
   useEffect(() => {
-    if (props.usersBlockedChart.loading || props.usersGenderChart.loading || props.usersAgeChart.loading) getUserStatistics(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setUsersBlockedChart, props.usersBlockedChart, props.setUsersGenderChart, props.usersGenderChart, props.setUsersAgeChart, props.usersAgeChart, props.toast);
+    if ((props.usersBlockedChart.loading || props.usersGenderChart.loading || props.usersAgeChart.loading) && checkPermissions(props.userInformation, ["admin.users.statisticsInfo"]))
+      getUserStatistics(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setUsersBlockedChart, props.usersBlockedChart, props.setUsersGenderChart, props.usersGenderChart, props.setUsersAgeChart, props.usersAgeChart, props.toast);
   }, []);
   useEffect(() => {
     if (!props.usersBlockedChart.loading && !props.usersGenderChart.loading && !props.usersAgeChart.loading) setLoadingUsersStatisticsInfo(false);
@@ -68,7 +71,7 @@ function Users(props) {
   }
 
   try {
-    return (
+    return checkPermissions(props.userInformation, ["admin.users.filterAndSearch"]) ? (
       <>
         {loading ? (
           <div className="profile-main-area">
@@ -89,7 +92,7 @@ function Users(props) {
                       <div className="product-cell sales">الجنس</div>
                       <div className="product-cell stock">تاريخ الميلاد</div>
                       <div className="product-cell status-cell">حالة النشاط</div>
-                      <div className="product-cell option">خيارات</div>
+                      {checkPermissions(props.userInformation, ["admin.users.block.information", "admin.users.update", "admin.users.delete", "admin.users.block.allBlockForUser", "admin.users.block.deleteBlock", "admin.users.block.multiUnBlock", "admin.users.block.blockUser"]) ? <div className="product-cell option">خيارات</div> : null}
                     </div>
 
                     {items.map((item) => {
@@ -151,15 +154,19 @@ function Users(props) {
                   ) : null}
                 </div>
               </div>
-              <div className="users-chart-container">
-                <UserChart chartData={props.usersAgeChart} />
-                <UserChart chartData={props.usersGenderChart} />
-                <UserChart chartData={props.usersBlockedChart} />
-              </div>
+              {checkPermissions(props.userInformation, ["admin.users.statisticsInfo"]) ? (
+                <div className="users-chart-container">
+                  <UserChart chartData={props.usersAgeChart} />
+                  <UserChart chartData={props.usersGenderChart} />
+                  <UserChart chartData={props.usersBlockedChart} />
+                </div>
+              ) : null}
             </div>
           </>
         )}
       </>
+    ) : (
+      <NotAllowdPage />
     );
   } catch (error) {
     console.log(error);

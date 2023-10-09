@@ -1,4 +1,5 @@
 import getIcon from "../../../../functions/getIcon";
+import jsonParse from "../../../../functions/jsonParse";
 
 function ProfileHeader(props) {
   try {
@@ -7,10 +8,10 @@ function ProfileHeader(props) {
         <div className="profile-info-header">
           <div className="fix">
             <div className="profile-img-upload-section">
-              <img src={props.userProfile.infoUser.avatar ? props.userProfile.avatar : "../images/user.webp"} />
+              <img src={props.userProfile.information.avatar ? jsonParse(props.userProfile.information.avatar)[3] : "../images/user.webp"} style={{ minHeight: "110px", maxHeight: "110px" }} />
             </div>
             <div className="left-side">
-              <h1 className="profileHeader-js">{props.userProfile.infoUser.name}</h1>
+              <h1 className="profileHeader-js">{props.userProfile.information.name}</h1>
               <p>
                 الأصناف :
                 {props.userProfile.category.map((cat, index) => {

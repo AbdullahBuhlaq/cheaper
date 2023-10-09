@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { reversePermissions, reverseShow } from "../../../../constants/reversePermissions";
+import checkPermissions from "../../../../functions/checkPermission";
 
 function BlockCard(props) {
   const [show, setShow] = useState(false);
@@ -18,25 +19,31 @@ function BlockCard(props) {
           <div className="categories-main-modal-body-block-history-card-header">
             <h1>{props.block["block.reason"]}</h1>
             <div className="dropdown">
-              <button
-                onClick={() => {
-                  setShow(!show);
-                }}
-                className="dropbtn"
-              >
-                •••
-              </button>
+              {checkPermissions(props.userInformation, ["admin.users.block.deleteBlock", "admin.users.block.multiUnBlock"]) ? (
+                <button
+                  onClick={() => {
+                    setShow(!show);
+                  }}
+                  className="dropbtn"
+                >
+                  •••
+                </button>
+              ) : null}
               <ul id="myDropdown" className={"dropdown-content" + (show ? " show" : "")}>
-                <li>
-                  <a href="#" onClick={() => props.stopBlock(props.block.id)}>
-                    إيقاف الحظر
-                  </a>
-                </li>
-                <li>
-                  <a href="#" onClick={() => props.deleteUserBlock(props.block.id)}>
-                    حذف الحظر
-                  </a>
-                </li>
+                {checkPermissions(props.userInformation, ["admin.users.block.multiUnBlock"]) ? (
+                  <li>
+                    <a href="#" onClick={() => props.stopBlock(props.block.id)}>
+                      إيقاف الحظر
+                    </a>
+                  </li>
+                ) : null}
+                {checkPermissions(props.userInformation, ["admin.users.block.deleteBlock"]) ? (
+                  <li>
+                    <a href="#" onClick={() => props.deleteUserBlock(props.block.id)}>
+                      حذف الحظر
+                    </a>
+                  </li>
+                ) : null}
               </ul>
             </div>
           </div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import searchOptions from "../../../constants/searchOptions";
 import EmployeesFilter from "./EmployeesFilter";
+import checkPermissions from "../../../functions/checkPermission";
 
 function EmployeesHeader(props) {
   const [tempFilter, setTempFilter] = useState(searchOptions.employees);
@@ -21,14 +22,16 @@ function EmployeesHeader(props) {
             }}
           />
 
-          <button
-            className="action-button filter jsFilter"
-            onClick={() => {
-              props.setAddNew(true);
-            }}
-          >
-            موظف جديد
-          </button>
+          {checkPermissions(props.userInformation, ["admin.employee.create"] && props.roles != -1) ? (
+            <button
+              className="action-button filter jsFilter"
+              onClick={() => {
+                props.setAddNew(true);
+              }}
+            >
+              موظف جديد
+            </button>
+          ) : null}
 
           <div className="app-content-actions-wrapper">
             <div className="filter-button-wrapper">

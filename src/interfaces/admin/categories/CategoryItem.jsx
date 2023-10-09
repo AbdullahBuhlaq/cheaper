@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import deleteCategory from "./functions/deleteCategory";
 import * as faw from "react-icons/fc";
 import CategoryChart from "./CategoryChart";
+import checkPermissions from "../../../functions/checkPermission";
 
 function CategoryItem(props) {
   const [openDropDown, setOpenDropDown] = useState(false);
@@ -31,34 +32,41 @@ function CategoryItem(props) {
             <div className="categories-card-header">
               <h1>{props.category.name}</h1>
               <div className="dropdown">
-                <button
-                  className="cat-dropbtn"
-                  onClick={() => {
-                    setOpenDropDown(!openDropDown);
-                  }}
-                >
-                  •••
-                </button>
+                {checkPermissions(props.userInformation, ["admin.category.update", "admin.category.all", "admin.category.delete"]) ? (
+                  <button
+                    className="cat-dropbtn"
+                    onClick={() => {
+                      setOpenDropDown(!openDropDown);
+                    }}
+                  >
+                    •••
+                  </button>
+                ) : null}
+
                 <ul id="myDropdown" className={"dropdown-content" + (openDropDown ? " show" : "")}>
-                  <li>
-                    <div
-                      onClick={() => {
-                        props.setAddNew(false);
-                        props.setCurrentEdit(props.category.id);
-                      }}
-                    >
-                      تعديل
-                    </div>
-                  </li>
-                  <li>
-                    <div
-                      onClick={() => {
-                        deleteCategory(props.category.id, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.categories, props.setCategories, props.toast);
-                      }}
-                    >
-                      حذف
-                    </div>
-                  </li>
+                  {checkPermissions(props.userInformation, ["admin.category.update", "admin.category.all"]) ? (
+                    <li>
+                      <div
+                        onClick={() => {
+                          props.setAddNew(false);
+                          props.setCurrentEdit(props.category.id);
+                        }}
+                      >
+                        تعديل
+                      </div>
+                    </li>
+                  ) : null}
+                  {checkPermissions(props.userInformation, ["admin.category.delete", "admin.category.all"]) ? (
+                    <li>
+                      <div
+                        onClick={() => {
+                          deleteCategory(props.category.id, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.categories, props.setCategories, props.toast);
+                        }}
+                      >
+                        حذف
+                      </div>
+                    </li>
+                  ) : null}
                 </ul>
               </div>
             </div>

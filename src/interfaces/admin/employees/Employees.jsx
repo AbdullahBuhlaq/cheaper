@@ -10,6 +10,8 @@ import compare from "../../../functions/compare";
 import getEmployees from "./functions/getEmployees";
 import getRoles from "../roles/functions/getRoles";
 import deleteEmployeeFunc from "./functions/deleteEmployee";
+import NotAllowdPage from "../../general/NotAllowedPage";
+import checkPermissions from "../../../functions/checkPermission";
 
 function Employees(props) {
   const [loading, setLoading] = useState(true);
@@ -54,19 +56,19 @@ function Employees(props) {
   }, [props.employees, currentEdit, props.roles, loading, filter]);
 
   useEffect(() => {
-    if (props.employees == -1) getEmployees(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setEmployees);
-    if (props.roles == -1) getRoles(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setRoles);
+    if (props.employees == -1 && checkPermissions(props.userInformation, ["admin.employee.all"])) getEmployees(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setEmployees);
+    if (props.roles == -1 && checkPermissions(props.userInformation, ["admin.role.all"])) getRoles(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setRoles);
   }, []);
   useEffect(() => {
-    if (props.employees != -1 && props.roles != -1) setLoading(false);
-  }, [props.employees, props.roles]);
+    if (props.employees != -1) setLoading(false);
+  }, [props.employees]);
 
   async function deleteEmployee(id) {
     deleteEmployeeFunc(id, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.employees, props.setEmployees, props.toast);
   }
 
   try {
-    return (
+    return checkPermissions(props.userInformation, ["admin.employee.all"]) ? (
       <>
         {loading ? (
           <div className="profile-main-area">
@@ -76,7 +78,7 @@ function Employees(props) {
           <>
             <div className="users-main-area">
               <div className="app-content">
-                <EmployeesHeader setAddNew={setAddNew} filter={filter} setFilter={setFilter} roles={props.roles} />
+                <EmployeesHeader userInformation={props.userInformation} setAddNew={setAddNew} filter={filter} setFilter={setFilter} roles={props.roles} />
 
                 <div className="products-area-wrapper tableView">
                   <div className="products-header">
@@ -85,7 +87,7 @@ function Employees(props) {
                     <div className="product-cell price">الهاتف</div>
                     <div className="product-cell sales">الجنس</div>
                     <div className="product-cell stock">البريد الإلكتروني</div>
-                    <div className="product-cell status-cell">الدور</div>
+                    {props.roles != -1 ? <div className="product-cell status-cell">الدور</div> : null}
                     <div className="product-cell option">خيارات</div>
                   </div>
 
@@ -130,6 +132,10 @@ function Employees(props) {
             </div>
           </>
         )}
+      </>
+    ) : (
+      <>
+        <NotAllowdPage />
       </>
     );
   } catch (error) {

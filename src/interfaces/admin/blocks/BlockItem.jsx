@@ -8,6 +8,7 @@ import editBlock from "./functions/editBlock";
 import deleteBlock from "./functions/deleteBlock";
 import Button from "../../../components/Button";
 import blockSchema from "./schema/blockSchema";
+import checkPermissions from "../../../functions/checkPermission";
 
 function BlockItem(props) {
   const [index, setIndex] = useState(1);
@@ -48,24 +49,28 @@ function BlockItem(props) {
           return <ShowItem key={showIndex} disabled={props.currentEdit.id == 1} id={props.currentEdit.id} index={showIndex} showItem={showItem} role={block} setRole={setBlock} roleErrors={blockErrors} setRoleErrors={setBlockErrors} roleSchema={blockSchema} name={"show"} />;
         })}
         {blockErrors["show"]}
-        {props.currentEdit.id == 1 ? null : (
+        {props.currentEdit.id == 1 ? null : checkPermissions(props.userInformation, ["admin.block.update", "admin.block.delete", "admin.block.all"]) ? (
           <form className="role-footer">
             <div className="button-container">
-              <Button classes={"action-button filter jsFilter"} action={() => editBlock(block, props.currentEdit, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setDuringAdd, props.blocks, props.setBlocks, props.toast)} text={"حفظ"} disabled={duringAdd} joiObject={joiBlock} state={block} setStateErrors={setBlockErrors} toast={props.toast} />
-              <Button
-                classes={"action-button filter jsFilter"}
-                action={() => deleteBlock(props.currentEdit.id, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.blocks, props.setBlocks, props.setCurrentEdit, props.toast)}
-                text={"حذف"}
-                disabled={duringAdd}
-                joiObject={joiBlock}
-                state={block}
-                setStateErrors={setBlockErrors}
-                toast={props.toast}
-                dontValid={true}
-              />
+              {checkPermissions(props.userInformation, ["admin.block.update", "admin.block.all"]) ? (
+                <Button classes={"action-button filter jsFilter"} action={() => editBlock(block, props.currentEdit, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setDuringAdd, props.blocks, props.setBlocks, props.toast)} text={"حفظ"} disabled={duringAdd} joiObject={joiBlock} state={block} setStateErrors={setBlockErrors} toast={props.toast} />
+              ) : null}
+              {checkPermissions(props.userInformation, ["admin.block.delete", "admin.block.all"]) ? (
+                <Button
+                  classes={"action-button filter jsFilter"}
+                  action={() => deleteBlock(props.currentEdit.id, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.blocks, props.setBlocks, props.setCurrentEdit, props.toast)}
+                  text={"حذف"}
+                  disabled={duringAdd}
+                  joiObject={joiBlock}
+                  state={block}
+                  setStateErrors={setBlockErrors}
+                  toast={props.toast}
+                  dontValid={true}
+                />
+              ) : null}
             </div>
           </form>
-        )}
+        ) : null}
       </>
     );
   } catch (err) {

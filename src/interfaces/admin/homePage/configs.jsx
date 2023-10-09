@@ -2,6 +2,7 @@ import UpdateConfigs from "./UpdateConfigs";
 import Popup from "../../general/Popup";
 import { useState } from "react";
 import "./css/setting.css";
+import checkPermissions from "../../../functions/checkPermission";
 
 function Config(props) {
   const [currentEdit, setCurrentEdit] = useState(false);
@@ -18,13 +19,15 @@ function Config(props) {
               </div>
             );
           })}
-          <button
-            onClick={() => {
-              setCurrentEdit(props.configs);
-            }}
-          >
-            تعديل
-          </button>
+          {checkPermissions(props.userInformation, ["admin.config.update"]) ? (
+            <button
+              onClick={() => {
+                setCurrentEdit(props.configs);
+              }}
+            >
+              تعديل
+            </button>
+          ) : null}
         </div>
 
         {currentEdit ? (

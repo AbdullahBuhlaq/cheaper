@@ -17,6 +17,8 @@ import packsStoreChart from "./data/packsStoreChart";
 import ProfileStoreBlocks from "./ProfileStoreBlocks";
 import Popup from "../../general/Popup";
 import deleteStoreBlockFunc from "./functions/deleteStoreBlockFunc";
+import NotAllowdPage from "../../general/NotAllowedPage";
+import checkPermissions from "../../../functions/checkPermission";
 
 function StoreProfile(props) {
   const params = useParams();
@@ -35,24 +37,24 @@ function StoreProfile(props) {
   const [openBlocks, setOpenBlocks] = useState(false);
 
   useEffect(() => {
-    if (storeInformation == -1) getStoreInformationFunc(params.id, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, setStoreInformation);
-    if (packs == -1) getStorePacks(params.id, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, setPacks, setPacksChart, packsChart);
-    if (spam == -1) getStoreSpam(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setSpam, spam, props.toast, spamPage, setSpamPage, params.id);
-    if (eva == -1) getStoreEva(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setEva, eva, props.toast, evaPage, setEvaPage, params.id);
-    if (users == -1) getStoreUsers(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setUsers, users, props.toast, usersPage, setUsersPage, params.id);
-    if (storeChart.loading) getStoreProfileChart(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, params.id, setStoreChart, storeChart, props.toast);
+    if (storeInformation == -1 && checkPermissions(props.userInformation, ["admin.store.accepted.info"])) getStoreInformationFunc(params.id, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, setStoreInformation);
+    if (packs == -1 && checkPermissions(props.userInformation, ["admin.store.accepted.packs"])) getStorePacks(params.id, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, setPacks, setPacksChart, packsChart);
+    if (spam == -1 && checkPermissions(props.userInformation, ["admin.store.accepted.evaluationAndSpam"])) getStoreSpam(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setSpam, spam, props.toast, spamPage, setSpamPage, params.id);
+    if (eva == -1 && checkPermissions(props.userInformation, ["admin.store.accepted.evaluationAndSpam"])) getStoreEva(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setEva, eva, props.toast, evaPage, setEvaPage, params.id);
+    if (users == -1 && checkPermissions(props.userInformation, ["admin.store.accepted.users"])) getStoreUsers(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setUsers, users, props.toast, usersPage, setUsersPage, params.id);
+    if (storeChart.loading && checkPermissions(props.userInformation, ["admin.store.accepted.chart"])) getStoreProfileChart(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, params.id, setStoreChart, storeChart, props.toast);
   }, []);
 
   useEffect(() => {
-    if (storeInformation != -1 && packs != -1 && spam != -1 && eva != -1 && users != -1) setLoading(false);
-  }, [storeInformation, packs, spam, eva, users]);
+    if (storeInformation != -1) setLoading(false);
+  }, [storeInformation]);
 
   function deleteStoreBlock(id) {
     deleteStoreBlockFunc(id, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, blocks, setBlocks, storeInformation, setStoreInformation);
   }
 
   try {
-    return (
+    return checkPermissions(props.userInformation, ["admin.store.accepted.info"]) ? (
       <>
         {!loading ? (
           <>
@@ -112,6 +114,8 @@ function StoreProfile(props) {
           </div>
         )}
       </>
+    ) : (
+      <NotAllowdPage />
     );
   } catch (err) {
     console.log(err);

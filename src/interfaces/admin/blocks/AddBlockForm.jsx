@@ -7,6 +7,7 @@ import PermissionGroup from "./PermissionGroup";
 import Button from "../../../components/Button";
 import addBlock from "./functions/addBlock";
 import blockSchema from "./schema/blockSchema";
+import checkPermissions from "../../../functions/checkPermission";
 
 function AddBlockForm(props) {
   const [index, setIndex] = useState(1);
@@ -44,12 +45,13 @@ function AddBlockForm(props) {
           return <ShowItem key={showIndex} id={-1} index={showIndex} showItem={showItem} role={block} setRole={setBlock} roleErrors={blockErrors} setRoleErrors={setBlockErrors} roleSchema={blockSchema} name={"show"} />;
         })}
         {blockErrors["show"] && <div className="validating-error">{blockErrors["show"]}</div>}
-
-        <form className="role-footer">
-          <div className="button-container">
-            <Button classes={"action-button filter jsFilter"} action={() => addBlock(block, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setDuringAdd, props.blocks, props.setBlocks, props.setCurrentEdit, props.toast)} text={"إرسال"} disabled={duringAdd} joiObject={joiBlock} state={block} setStateErrors={setBlockErrors} toast={props.toast} />
-          </div>
-        </form>
+        {checkPermissions(props.userInformation, ["admin.block.create", "admin.block.all"]) ? (
+          <form className="role-footer">
+            <div className="button-container">
+              <Button classes={"action-button filter jsFilter"} action={() => addBlock(block, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setDuringAdd, props.blocks, props.setBlocks, props.setCurrentEdit, props.toast)} text={"إرسال"} disabled={duringAdd} joiObject={joiBlock} state={block} setStateErrors={setBlockErrors} toast={props.toast} />
+            </div>
+          </form>
+        ) : null}
       </>
     );
   } catch (err) {

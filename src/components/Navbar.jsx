@@ -8,6 +8,8 @@ import NotificationItem from "./NotificationItem";
 import LoadMoreNotifications from "./LoadMoreNotifications";
 import refreshToken from "../functions/refreshToken";
 import { BiSolidLeftArrow } from "react-icons/bi";
+import checkShow from "../functions/checkShow";
+import checkPermissions from "../functions/checkPermission";
 
 function Navbar(props) {
   async function logout(userInformation) {
@@ -100,7 +102,7 @@ function Navbar(props) {
                         setNotificationsPage={props.setNotificationsPage}
                       />
 
-                      {!props.pendingSendNotifications ? (
+                      {!props.pendingSendNotifications && checkPermissions(props.userInformation, ["admin.notification.send"]) ? (
                         <div className="notifications-last-update-bottom-container">
                           <button
                             onClick={() => {
@@ -119,7 +121,7 @@ function Navbar(props) {
           </a>
 
           {props.tabs.map((tab, tabIndex) => {
-            if (currentHeight / 100 >= tabIndex + 1) {
+            if (currentHeight / 100 >= tabIndex + 1 && checkShow(props.userInformation, [tab.value])) {
               return <Tab key={tabIndex} tab={tab} currentTab={props.currentTab} setCurrentTab={props.setCurrentTab} />;
             }
           })}
@@ -143,7 +145,7 @@ function Navbar(props) {
                 <div className={"sub-menu double" + (showMore ? " show" : "")} style={{ zIndex: "30", height: "320px", top: "-242px", overflow: "auto", minWidth: "initial", textAlign: "center" }}>
                   <div className="notifications-last-update">
                     {props.tabs.map((tab, tabIndex) => {
-                      if (currentHeight / 100 < tabIndex + 1) {
+                      if (currentHeight / 100 < tabIndex + 1 && checkShow(props.userInformation, [tab.value])) {
                         return <Tab key={tabIndex} tab={tab} currentTab={props.currentTab} setCurrentTab={props.setCurrentTab} />;
                       }
                     })}

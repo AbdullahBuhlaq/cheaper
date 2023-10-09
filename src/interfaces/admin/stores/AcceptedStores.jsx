@@ -13,7 +13,7 @@ function AcceptedStores(props) {
             const isTrue = true;
             //   const isTrue = await compare(searchOptions["roles"][props.search.field], props.search.operator, props.roles[role][props.search.field], props.search.word);
             if (isTrue) {
-              return <AcceptedStoreCard key={storeIndex} setCurrentEditType={props.setCurrentEditType} store={props.acceptedStores[storeKey]} setCurrentEdit={props.setCurrentEdit} />;
+              return <AcceptedStoreCard key={storeIndex} userInformation={props.userInformation} setCurrentEditType={props.setCurrentEditType} store={props.acceptedStores[storeKey]} setCurrentEdit={props.setCurrentEdit} />;
             }
           })
         );

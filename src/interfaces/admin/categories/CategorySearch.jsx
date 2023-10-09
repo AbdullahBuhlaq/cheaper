@@ -1,6 +1,7 @@
 import { useState } from "react";
 import searchOptions from "../../../constants/searchOptions";
 import CategoryFilter from "./CategoryFilter";
+import checkPermissions from "../../../functions/checkPermission";
 
 function CategoryHeader(props) {
   const [tempFilter, setTempFilter] = useState(searchOptions.categories);
@@ -21,14 +22,16 @@ function CategoryHeader(props) {
             }}
           />
 
-          <button
-            className="action-button filter jsFilter"
-            onClick={() => {
-              props.setAddNew(true);
-            }}
-          >
-            تصنيف جديد
-          </button>
+          {checkPermissions(props.userInformation, ["admin.category.create", "admin.category.all"]) ? (
+            <button
+              className="action-button filter jsFilter"
+              onClick={() => {
+                props.setAddNew(true);
+              }}
+            >
+              تصنيف جديد
+            </button>
+          ) : null}
 
           <div className="app-content-actions-wrapper">
             <div className="filter-button-wrapper">

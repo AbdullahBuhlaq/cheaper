@@ -6,7 +6,6 @@ async function deleteUserFunc2(id, userInformation, setUserInformation, refreshS
     const response = await fetch(`${import.meta.env.VITE_URL}/admin/users/delete/${id}`, { ...requestOptions, headers: { ...requestOptions.headers, authorization: userInformation.token }, method: "delete" });
     const data = await response.json();
     if (data.success) {
-      // delete users[id];
       toast.success("تم حذف المستخدم", {
         position: toast.POSITION.TOP_CENTER,
       });

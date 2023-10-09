@@ -11,13 +11,15 @@ import { TfiGift } from "react-icons/tfi";
 import { GiPartyPopper } from "react-icons/gi";
 import { PiMaskSadDuotone } from "react-icons/pi";
 import jsonParse from "../../../functions/jsonParse";
+import checkPermissions from "../../../functions/checkPermission";
+import NotAllowdPage from "../../general/NotAllowedPage";
 
 function OpenOldOffer(props) {
   const [eva, setEva] = useState(-1);
   const [evaPage, setEvaPage] = useState({ page: 1, size: 5, loadMore: true, loadingNow: false });
 
   useEffect(() => {
-    if (props.offer != -1) getOfferEvas(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setEva, eva, props.toast, evaPage, setEvaPage, props.offer.storeInfo.id);
+    if (props.offer != -1 && checkPermissions(props.userInformation, ["user.moreEvaluation"])) getOfferEvas(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setEva, eva, props.toast, evaPage, setEvaPage, props.offer.storeInfo.id);
   }, []);
 
   const [story, setStory] = useState([]);
@@ -159,21 +161,26 @@ function OpenOldOffer(props) {
             )}
 
             <div style={{ height: "calc(96% - 200px)", overflow: "auto" }}>
-              {eva != -1 ? (
-                <>
-                  <div className="app-main-right-header">
-                    <span>{props.offer.evaluate}</span>
-                    <a href="#">التقييمات</a>
+              {checkPermissions(props.userInformation, ["user.moreEvaluation"]) ? (
+                eva != -1 ? (
+                  <>
+                    <div className="app-main-right-header">
+                      {console.log(props.offer)}
+                      <span>{props.offer.evaluate}</span>
+                      <a href="#">التقييمات</a>
+                    </div>
+                    {eva.map((item, index) => {
+                      return <Eva key={index} item={item} />;
+                    })}
+                    <LoadMoreEvas userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} setUsers={setEva} users={eva} toast={props.toast} usersPage={evaPage} setUsersPage={setEvaPage} id={props.offer.storeInfo.id} />
+                  </>
+                ) : (
+                  <div style={{ display: "flex", width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }}>
+                    <Loading />
                   </div>
-                  {eva.map((item, index) => {
-                    return <Eva key={index} item={item} />;
-                  })}
-                  <LoadMoreEvas userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} setUsers={setEva} users={eva} toast={props.toast} usersPage={evaPage} setUsersPage={setEvaPage} id={props.offer.offerUserId} />
-                </>
+                )
               ) : (
-                <div style={{ display: "flex", width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }}>
-                  <Loading />
-                </div>
+                <NotAllowdPage message={"لا تملك الصلاحية لعرض التقييمات"} />
               )}
             </div>
           </div>

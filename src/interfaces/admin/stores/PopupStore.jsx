@@ -12,6 +12,7 @@ import LoadMoreEvas from "./LoadMoreEvas";
 import Eva from "./Eva";
 import Spam from "./Spam";
 import jsonParse from "../../../functions/jsonParse";
+import checkPermissions from "../../../functions/checkPermission";
 
 function PopupStore(props) {
   const [openOptions, setOpenOptions] = useState(false);
@@ -67,7 +68,6 @@ function PopupStore(props) {
           <>
             <div className="modal-left">
               <div className="modal-image-wrapper">
-                {console.log(story)}
                 <AutoSlidingImages images={information.storeInfo.story.length ? story : defaultStory} />
               </div>
               <div className="modal-info-header">
@@ -98,27 +98,31 @@ function PopupStore(props) {
                           عرض الحساب الشخصي
                         </a>
                       </li>
-                      <li>
-                        {props.store.deletedAt ? (
-                          <a
-                            href="#"
-                            onClick={() => {
-                              props.enableAcceptedStore(props.store.id);
-                            }}
-                          >
-                            إعادة تفعيل
-                          </a>
-                        ) : (
-                          <a
-                            href="#"
-                            onClick={() => {
-                              props.deleteNewStore(props.store.id);
-                            }}
-                          >
-                            حذف
-                          </a>
-                        )}
-                      </li>
+                      {checkPermissions(props.userInformation, ["admin.store.disable", "admin.store.enable"]) ? (
+                        <li>
+                          {props.store.deletedAt ? (
+                            checkPermissions(props.userInformation, ["admin.store.enable"]) ? (
+                              <a
+                                href="#"
+                                onClick={() => {
+                                  props.enableAcceptedStore(props.store.id);
+                                }}
+                              >
+                                إعادة تفعيل
+                              </a>
+                            ) : null
+                          ) : checkPermissions(props.userInformation, ["admin.store.disable"]) ? (
+                            <a
+                              href="#"
+                              onClick={() => {
+                                props.deleteNewStore(props.store.id);
+                              }}
+                            >
+                              حذف
+                            </a>
+                          ) : null}
+                        </li>
+                      ) : null}
                     </ul>
                   </div>
                 </div>

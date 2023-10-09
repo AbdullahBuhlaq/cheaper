@@ -11,6 +11,8 @@ import searchOptions from "../../../constants/searchOptions";
 import BlockHeader from "./BlockHeader";
 import HeaderButton from "../../../components/mainArea";
 import compare from "../../../functions/compare";
+import checkPermissions from "../../../functions/checkPermission";
+import NotAllowdPage from "../../general/NotAllowedPage";
 
 function Blocks(props) {
   const cardRef = useRef();
@@ -46,7 +48,7 @@ function Blocks(props) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getBlocks(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setBlocks, props.toast);
+    if (props.blocks == -1 && checkPermissions(props.userInformation, ["admin.block.all"])) getBlocks(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setBlocks, props.toast);
   }, []);
   useEffect(() => {
     if (props.blocks != -1) setLoading(false);
@@ -68,7 +70,7 @@ function Blocks(props) {
   }, [cardRef.current]);
 
   try {
-    return (
+    return checkPermissions(props.userInformation, ["admin.block.all"]) ? (
       <>
         {loading ? (
           <div className="profile-main-area">
@@ -129,6 +131,10 @@ function Blocks(props) {
             </div>
           </>
         )}
+      </>
+    ) : (
+      <>
+        <NotAllowdPage />
       </>
     );
   } catch (err) {

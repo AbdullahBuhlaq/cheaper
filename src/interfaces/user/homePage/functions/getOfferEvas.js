@@ -5,7 +5,6 @@ export default async function getOfferEvas(userInformation, setUserInformation, 
   try {
     setUsersPage({ ...usersPage, loadingNow: true });
     let url = `${import.meta.env.VITE_URL}/user/evaluation?storeId=${id}`;
-    console.log(url);
 
     url += `&`;
     url += `page=${usersPage.page}`;
