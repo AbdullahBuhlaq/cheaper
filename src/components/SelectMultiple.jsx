@@ -1,12 +1,18 @@
 import handleSave from "../functions/handleSave";
+import { motion } from "framer-motion";
 
 function SelectMultiple(props) {
   try {
     return (
       <>
         <div className="column" style={{ position: "relative" }}>
-          <h3>{props.label}</h3>
-          <select
+          <motion.h3 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: "1.2" }}>
+            {props.label}
+          </motion.h3>
+          <motion.select
+            initial={{ width: 0, opacity: 0 }}
+            animate={{ width: "100%", opacity: 1 }}
+            transition={{ type: "spring", duration: "1.2" }}
             className="my-listbox"
             onChange={() => {}}
             onClick={async (event) => {
@@ -35,7 +41,7 @@ function SelectMultiple(props) {
                 </option>
               );
             })}
-          </select>
+          </motion.select>
           {props.addNew ? (
             <span
               onClick={() => {

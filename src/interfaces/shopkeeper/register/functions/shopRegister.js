@@ -3,7 +3,7 @@ import getDeviceToken from "../../../../functions/getDeviceToken";
 import { shopkeeperInitialPermissions } from "../../../../constants/initialPermissions";
 import secureLocalStorage from "react-secure-storage";
 
-async function shopRegister(shopkeeper, toast, navigate, setDuringAdd) {
+async function shopRegister(shopkeeper, toast, navigate, setDuringAdd, city) {
   try {
     const newData = shopkeeper;
 
@@ -13,6 +13,7 @@ async function shopRegister(shopkeeper, toast, navigate, setDuringAdd) {
       ...requestOptions,
       body: JSON.stringify({
         ...shopkeeper,
+        city: city.city,
         mac: "web",
         tokenDevice,
       }),

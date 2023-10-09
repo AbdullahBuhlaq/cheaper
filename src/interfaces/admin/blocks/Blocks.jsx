@@ -31,7 +31,7 @@ function Blocks(props) {
         Object.keys(props.blocks).map(async (block, blockIndex) => {
           const isTrue = await compare(filter, { reason: props.blocks[block].reason });
           if (isTrue) {
-            return <BlockName key={blockIndex} block={props.blocks[block]} currentEdit={currentEdit} setCurrentEdit={setCurrentEdit} setAddNew={setAddNew} />;
+            return <BlockName key={blockIndex} index={blockIndex} block={props.blocks[block]} currentEdit={currentEdit} setCurrentEdit={setCurrentEdit} setAddNew={setAddNew} />;
           }
         })
       );

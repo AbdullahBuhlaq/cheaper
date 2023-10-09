@@ -1,15 +1,20 @@
 import { useState } from "react";
 import handleSave from "../functions/handleSave";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
-
+import { motion } from "framer-motion";
 function Input(props) {
   const [isText, setIsText] = useState(false);
   try {
     return (
       <>
         <div className="column" style={{ position: "relative" }}>
-          <h3>{props.label}</h3>
-          <input
+          <motion.h3 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: "1.2" }}>
+            {props.label}
+          </motion.h3>
+          <motion.input
+            initial={{ width: 0, opacity: 0 }}
+            animate={{ width: "100%", opacity: 1 }}
+            transition={{ type: "spring", duration: "1.2" }}
             type={isText ? "text" : props.type}
             name={props.name}
             id={props.name}

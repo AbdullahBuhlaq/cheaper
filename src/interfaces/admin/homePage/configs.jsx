@@ -3,6 +3,7 @@ import Popup from "../../general/Popup";
 import { useState } from "react";
 import "./css/setting.css";
 import checkPermissions from "../../../functions/checkPermission";
+import { motion } from "framer-motion";
 
 function Config(props) {
   const [currentEdit, setCurrentEdit] = useState(false);
@@ -13,10 +14,10 @@ function Config(props) {
         <div className="setting-values-section" style={{ height: "100%", overflow: "auto" }}>
           {Object.keys(props.configs).map((config, index) => {
             return (
-              <div class="setting-values-card" key={index}>
+              <motion.div initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", duration: "1.2", delay: 0.1 * index }} class="setting-values-card" key={index}>
                 <h1 style={{ textAlign: "center" }}>{titles[index]}</h1>
                 <h2>{props.configs[config]}</h2>
-              </div>
+              </motion.div>
             );
           })}
           {checkPermissions(props.userInformation, ["admin.config.update"]) ? (

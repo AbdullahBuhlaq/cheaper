@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import PermissionItem from "../../../components/PermissionItem";
+import { motion } from "framer-motion";
 
 function PermissionGroup(props) {
   const [opened, setOpened] = useState(false);
@@ -47,7 +48,11 @@ function PermissionGroup(props) {
             </h4>
           </div>
 
-          {opened ? elements : null}
+          {opened ? (
+            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "max-content", originY: "-30%", opacity: 1 }} exit={{ scaleY: 0, originY: "-30%", opacity: 0 }} transition={{ duration: 0.05 * elements.length }} style={{ overflow: "hidden" }}>
+              {elements}
+            </motion.div>
+          ) : null}
         </div>
       </>
     );

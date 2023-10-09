@@ -11,7 +11,7 @@ function AddNewBlockStore(props) {
       <>
         <div className="categories-main-modal-body-add-blocks">
           <div className="categories-main-modal-body-add-blocks-action-botton">
-            {props.store.block ? (
+            {props.blocks.blocked ? (
               <button
                 onClick={() => {
                   unblockStore(props.id, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.blocks, props.setBlocks, props.store, props.setStore);

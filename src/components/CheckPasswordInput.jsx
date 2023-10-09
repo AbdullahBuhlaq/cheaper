@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
@@ -16,8 +17,13 @@ function CheckPasswordInput(props) {
     return (
       <>
         <div className="column" style={{ position: "relative" }}>
-          <h3>{"تأكيد كلمة المرور"}</h3>
-          <input
+          <motion.h3 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: "1.2" }}>
+            {"تأكيد كلمة المرور"}
+          </motion.h3>
+          <motion.input
+            initial={{ width: 0, opacity: 0 }}
+            animate={{ width: "100%", opacity: 1 }}
+            transition={{ type: "spring", duration: "1.2" }}
             type={isText ? "text" : "password"}
             name={"checkPassword"}
             id={"checkPassword"}

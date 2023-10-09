@@ -1,5 +1,6 @@
 import { SlSizeFullscreen } from "react-icons/sl";
 import getIcon from "../../../functions/getIcon";
+import jsonParse from "../../../functions/jsonParse";
 
 function PendingStoreCard(props) {
   try {
@@ -7,7 +8,7 @@ function PendingStoreCard(props) {
       <>
         <div className="sales-card">
           <div className="poster">
-            <img src={props.store.avatar} />
+            <img src={jsonParse(props.store.avatar)[3] ? jsonParse(props.store.avatar)[3] : jsonParse(props.store.avatar)[0]} />
           </div>
           <div className="details">
             <div className="sales-card-more-details">

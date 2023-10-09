@@ -13,6 +13,7 @@ import Loading from "../../general/Loading";
 import SelectFromDB from "../../../components/SelectFromDB";
 import shopkeeperSchema from "./schema/shopkeeperSchema";
 import shopRegister from "./functions/shopRegister";
+import getCity from "../../user/homePage/functions/getCity";
 
 function ShopkeeperRegisterForm(props) {
   const navigate = useNavigate();
@@ -27,9 +28,8 @@ function ShopkeeperRegisterForm(props) {
     locationText: "",
     password: "",
     nameStore: "",
-    longitude: 36.713696,
-    latitude: 34.732427,
-    city: "",
+    longitude: "",
+    latitude: "",
     fromHour: "",
     birthday: "",
     toHour: "",
@@ -44,6 +44,18 @@ function ShopkeeperRegisterForm(props) {
   useEffect(() => {
     getGeneralCategories(setCategories, props.toast);
   }, []);
+
+  const [city, setCity] = useState({ status: "" });
+  useEffect(() => {
+    if (city.status == "error") {
+      props.toast.error(city.message, {
+        position: props.toast.POSITION.TOP_CENTER,
+      });
+      setDuringAdd(false);
+    } else if (city.status == "success") {
+      shopRegister(shopkeeper, props.toast, navigate, setDuringAdd, city);
+    }
+  }, [city]);
 
   try {
     return (
@@ -94,13 +106,26 @@ function ShopkeeperRegisterForm(props) {
                 <Input placeholder={""} label={"كلمة السر"} type={"password"} name={"password"} onChange={handleSave} state={shopkeeper} setState={setShopkeeper} errors={shopkeeperErrors} setErrors={setShopkeeperErrors} schema={shopkeeperSchema} />
                 <CheckPasswordInput password={shopkeeper.password} errors={shopkeeperErrors} setErrors={setShopkeeperErrors} />
                 <Input placeholder={""} label={"اسم المحل"} type={"text"} name={"nameStore"} onChange={handleSave} state={shopkeeper} setState={setShopkeeper} errors={shopkeeperErrors} setErrors={setShopkeeperErrors} schema={shopkeeperSchema} />
-                <Select label={"المدينة"} placeholder={"اختر المدينة التي يقع فيها المحل..."} list={selectOptions.city} name={"city"} onChange={handleSave} state={shopkeeper} setState={setShopkeeper} errors={shopkeeperErrors} setErrors={setShopkeeperErrors} schema={shopkeeperSchema} />
+                <Input placeholder={""} label={"lon"} type={"text"} name={"longitude"} onChange={handleSave} state={shopkeeper} setState={setShopkeeper} errors={shopkeeperErrors} setErrors={setShopkeeperErrors} schema={shopkeeperSchema} />
+                <Input placeholder={""} label={"lat"} type={"text"} name={"latitude"} onChange={handleSave} state={shopkeeper} setState={setShopkeeper} errors={shopkeeperErrors} setErrors={setShopkeeperErrors} schema={shopkeeperSchema} />
+                {/* <Select label={"المدينة"} placeholder={"اختر المدينة التي يقع فيها المحل..."} list={selectOptions.city} name={"city"} onChange={handleSave} state={shopkeeper} setState={setShopkeeper} errors={shopkeeperErrors} setErrors={setShopkeeperErrors} schema={shopkeeperSchema} /> */}
                 <SelectFromDB label={"صنف المحل"} placeholder={"اختر تصنيف المحل..."} list={categories} showKey={"name"} valueKey={"name"} name={"category"} onChange={handleSave} state={shopkeeper} setState={setShopkeeper} errors={shopkeeperErrors} setErrors={setShopkeeperErrors} schema={shopkeeperSchema} />
                 <Input placeholder={""} label={"ساعة الافتتاح"} type={"time"} name={"fromHour"} onChange={handleSave} state={shopkeeper} setState={setShopkeeper} errors={shopkeeperErrors} setErrors={setShopkeeperErrors} schema={shopkeeperSchema} />
                 <Input placeholder={""} label={"ساعة الإغلاق"} type={"time"} name={"toHour"} onChange={handleSave} state={shopkeeper} setState={setShopkeeper} errors={shopkeeperErrors} setErrors={setShopkeeperErrors} schema={shopkeeperSchema} />
               </div>
             </form>
-            <Button action={() => shopRegister(shopkeeper, props.toast, navigate, setDuringAdd)} text={"إرسال"} disabled={duringAdd} joiObject={joiShopkeeper} state={shopkeeper} setStateErrors={setShopkeeperErrors} toast={props.toast} />
+            <Button
+              action={() => {
+                setDuringAdd(true);
+                getCity(setCity, { location: { coords: { latitude: shopkeeper.latitude, longitude: shopkeeper.longitude } } });
+              }}
+              text={"إرسال"}
+              disabled={duringAdd}
+              joiObject={joiShopkeeper}
+              state={shopkeeper}
+              setStateErrors={setShopkeeperErrors}
+              toast={props.toast}
+            />
           </div>
         )}
       </>

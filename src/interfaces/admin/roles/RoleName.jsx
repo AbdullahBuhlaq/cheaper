@@ -1,13 +1,18 @@
+import { motion } from "framer-motion";
+
 function RoleName(props) {
   try {
     return (
       <>
-        <div
+        <motion.div
           className="role-card"
           onClick={() => {
             props.setCurrentEdit(props.role);
             props.setAddNew(false);
           }}
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ type: "spring", duration: "1.2", delay: props.index * 0.1 }}
         >
           <div className="role-card-content">
             <div className="role-card-info-wrapper">
@@ -19,7 +24,7 @@ function RoleName(props) {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </>
     );
   } catch (err) {

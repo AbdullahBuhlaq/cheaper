@@ -206,7 +206,6 @@ const shopkeeperSchema = {
   longitude: Joi.number().required().messages(errorMessages.longitude),
   latitude: Joi.number().required().messages(errorMessages.latitude),
 
-  city: Joi.string().required(),
   fromHour: Joi.string()
     .pattern(/^(([0-9]{1})|([0-1]{1}[0-9]{1})|([2]{1}[0-3]{1}))(([:]{1})?)(([0-5]{1}[0-9]?)?)$/)
     .required(),

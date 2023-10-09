@@ -22,7 +22,7 @@ function EmployeesHeader(props) {
             }}
           />
 
-          {checkPermissions(props.userInformation, ["admin.employee.create"] && props.roles != -1) ? (
+          {checkPermissions(props.userInformation, ["admin.employee.create"]) && props.roles != -1 ? (
             <button
               className="action-button filter jsFilter"
               onClick={() => {

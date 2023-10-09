@@ -16,14 +16,13 @@ function PopupPendingStore(props) {
   try {
     return (
       <>
-        {console.log(props.store)}
         <div className="modal-left">
           <div className="modal-image-wrapper">
-            <img src={props.store.avatar} />
+            <img src={jsonParse(props.store.avatar)[3] ? jsonParse(props.store.avatar)[3] : jsonParse(props.store.avatar)[0]} />
           </div>
           <div className="modal-info-header">
             <div style={{ display: "flex" }}>
-              <img src={props.store["user.avatar"] ? jsonParse(props.store["user.avatar"])[0] : "images/user.webp"} style={{ width: "109px", height: "auto", borderRadius: "11px", margin: "0 8px" }} />
+              <img src={props.store["user.avatar"] ? jsonParse(props.store["user.avatar"])[2] : "images/user.webp"} style={{ width: "109px", height: "auto", borderRadius: "11px", margin: "0 8px" }} />
               <div className="left-side">
                 <div>
                   <h1 className="modalHeader-js">{props.store["user.name"]}</h1>

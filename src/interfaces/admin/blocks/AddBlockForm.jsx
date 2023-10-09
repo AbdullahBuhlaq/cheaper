@@ -15,7 +15,7 @@ function AddBlockForm(props) {
 
   const [block, setBlock] = useState({
     reason: "",
-    duration: 0,
+    duration: '',
     show: [],
     action: [],
   });

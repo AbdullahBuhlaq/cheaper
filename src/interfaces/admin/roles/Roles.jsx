@@ -34,7 +34,7 @@ function Roles(props) {
           Object.keys(props.roles).map(async (role, roleIndex) => {
             const isTrue = await compare(filter, { name: props.roles[role].name });
             if (isTrue) {
-              return <RoleName key={roleIndex} role={props.roles[role]} currentEdit={currentEdit} setCurrentEdit={setCurrentEdit} setAddNew={setAddNew} />;
+              return <RoleName key={roleIndex} index={roleIndex} role={props.roles[role]} currentEdit={currentEdit} setCurrentEdit={setCurrentEdit} setAddNew={setAddNew} />;
             }
           })
         );

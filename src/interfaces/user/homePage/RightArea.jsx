@@ -2,6 +2,7 @@ import checkPermissions from "../../../functions/checkPermission";
 import RightOfferItem from "./RightOffersItem";
 import RightRecentVisited from "./RightRecentVisited";
 import NotAllowdPage from "../../general/NotAllowedPage";
+import Loading from "../../general/Loading";
 
 function RightArea(props) {
   try {
@@ -18,15 +19,23 @@ function RightArea(props) {
 
           <div style={{ height: "48%", overflow: "auto", marginBottom: "2%" }}>
             {checkPermissions(props.userInformation, ["user.home"]) ? (
-              <>
-                <div className="right-area-header-wrapper">
-                  <p className="right-area-header">الأوقات المتبقية للعروض</p>
-                </div>
+              props.homeInfo != -1 ? (
+                <>
+                  <div className="right-area-header-wrapper">
+                    <p className="right-area-header">الأوقات المتبقية للعروض</p>
+                  </div>
 
-                {props.homeInfo.offerNotTakeYet.map((item, index) => {
-                  return <RightOfferItem key={index} item={item} />;
-                })}
-              </>
+                  {props.homeInfo.offerNotTakeYet.map((item, index) => {
+                    return <RightOfferItem key={index} item={item} />;
+                  })}
+                </>
+              ) : (
+                <>
+                  <div style={{ display: "flex", width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }}>
+                    <Loading />
+                  </div>
+                </>
+              )
             ) : (
               <NotAllowdPage />
             )}
@@ -34,14 +43,22 @@ function RightArea(props) {
 
           <div style={{ height: "48%" }}>
             {checkPermissions(props.userInformation, ["user.home"]) ? (
-              <>
-                <div className="right-area-header-wrapper">
-                  <p className="right-area-header">المتاجر التي قمت بزيارتها</p>
-                </div>
-                {props.homeInfo.recentVisited.map((item, index) => {
-                  return <RightRecentVisited key={index} item={item} />;
-                })}
-              </>
+              props.homeInfo != -1 ? (
+                <>
+                  <div className="right-area-header-wrapper">
+                    <p className="right-area-header">المتاجر التي قمت بزيارتها</p>
+                  </div>
+                  {props.homeInfo.recentVisited.map((item, index) => {
+                    return <RightRecentVisited key={index} item={item} />;
+                  })}
+                </>
+              ) : (
+                <>
+                  <div style={{ display: "flex", width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }}>
+                    <Loading />
+                  </div>
+                </>
+              )
             ) : (
               <NotAllowdPage />
             )}

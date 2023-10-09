@@ -56,10 +56,10 @@ function OpenOffer(props) {
       props.toast.error(city.message, {
         position: props.toast.POSITION.TOP_CENTER,
       });
-      setMsg(location.message);
+      setMsg(city.message);
       setStatus("fail");
     } else if (city.status == "success") {
-      if (offer != -1) getOffer(setOffer, setStatus, props.setOpen, city, location, props.homeInfo, props.setHomeInfo, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast);
+      if (offer == -1) getOffer(setOffer, setStatus, props.setOpen, city, location, props.homeInfo, props.setHomeInfo, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast);
     }
   }, [city]);
 
@@ -97,7 +97,7 @@ function OpenOffer(props) {
               <span>{msg ? msg : "يبدو أن هناك مشكلة في الاتصال الرجاء التحقق من الشبكة وإعادة المحاولة"}</span>
             </div>
           </>
-        ) : offer != -1 && "eva != -1" ? (
+        ) : offer != -1 ? (
           <>
             <div className="modal-left">
               <div className="modal-image-wrapper">
@@ -181,7 +181,7 @@ function OpenOffer(props) {
               </div>
 
               <div style={{ height: "calc(96% - 200px)", overflow: "auto" }}>
-                {!checkPermissions(props.userInformation, ["user.moreEvaluation"]) ? (
+                {checkPermissions(props.userInformation, ["user.moreEvaluation"]) ? (
                   eva == -1 ? (
                     <>
                       <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "100%" }}>
@@ -192,7 +192,7 @@ function OpenOffer(props) {
                     <>
                       <div style={{ height: "calc(96% - 200px)", overflow: "auto" }}>
                         <div className="app-main-right-header">
-                          <span>{offer.evaluate}</span>
+                          <span>{offer.evaluate === null ? "-" : offer.evaluate}</span>
                           <a href="#">التقييمات</a>
                         </div>
                         {eva.map((item, index) => {

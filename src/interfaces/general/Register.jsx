@@ -14,21 +14,21 @@ function Register(props) {
       <>
         {stepNumber == 0 ? (
           <>
-            <div class="form-container">
+            <div className="form-container" style={{ width: "70%" }}>
               <button
-                class="mode-switch"
+                className="mode-switch"
                 onClick={(event) => {
                   event.preventDefault();
                   document.body.classList.toggle("dark");
                   document.documentElement.classList.toggle("dark");
                 }}
               >
-                <svg class="sun" fill="none" stroke="#fbb046" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                <svg className="sun" fill="none" stroke="#fbb046" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
                   <defs></defs>
                   <circle cx="12" cy="12" r="5"></circle>
                   <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
                 </svg>
-                <svg class="moon" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
+                <svg className="moon" fill="none" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
                   <defs></defs>
                   <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
                 </svg>
@@ -46,9 +46,9 @@ function Register(props) {
                   قم بتسجيل الدخول من هنا
                 </span>
               </div>
-              <div class="Choose">
+              <div className="Choose">
                 <button
-                  class="shop-maneger"
+                  className="shop-maneger"
                   onClick={(e) => {
                     e.preventDefault();
                     setUserType(0);
@@ -60,7 +60,7 @@ function Register(props) {
                 </button>
 
                 <button
-                  class="costumer"
+                  className="costumer"
                   onClick={(e) => {
                     e.preventDefault();
                     setUserType(1);

@@ -1,10 +1,23 @@
+import { motion } from "framer-motion";
+
 function ImageInput(props) {
   try {
     return (
       <>
         <div className="column" style={{ position: "relative" }}>
-          {props.imageTitle ? <h3>{props.imageTitle}</h3> : <h3>الصورة الشخصية</h3>}
-          <input
+          {props.imageTitle ? (
+            <motion.h3 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: "1.2" }}>
+              {props.imageTitle}
+            </motion.h3>
+          ) : (
+            <motion.h3 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: "1.2" }}>
+              الصورة الشخصية
+            </motion.h3>
+          )}
+          <motion.input
+            initial={{ width: 0, opacity: 0 }}
+            animate={{ width: "100%", opacity: 1 }}
+            transition={{ type: "spring", duration: "1.2" }}
             type="file"
             name=""
             id=""
