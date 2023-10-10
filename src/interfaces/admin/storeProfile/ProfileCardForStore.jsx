@@ -1,8 +1,10 @@
+import { motion } from "framer-motion";
+
 function ProfileCardForStore(props) {
   try {
     return (
       <>
-        <div className="details-profile-card">
+        <motion.div className="details-profile-card" initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", duration: "1.2" }}>
           <div className="details-profile-card-header">
             <h1>{props.title}</h1>
           </div>
@@ -13,7 +15,7 @@ function ProfileCardForStore(props) {
             </div>
             <input type="text" value={props.value} readOnly />
           </div>
-        </div>
+        </motion.div>
       </>
     );
   } catch (err) {

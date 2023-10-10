@@ -7,6 +7,7 @@ import SecondLoading from "../../general/SecondLoading";
 import EmptyChart from "../../../components/EmptyChart";
 import SuspendChart from "../../../components/SuspendChart";
 import checkPermissions from "../../../functions/checkPermission";
+import { motion } from "framer-motion";
 
 function ProfilePacks(props) {
   const [openPacks, setOpenPakcs] = useState(false);
@@ -32,7 +33,7 @@ function ProfilePacks(props) {
             </div>
             {openPacks ? (
               <>
-                <div style={{ display: "flex", flexDirection: "row" }}>
+                <motion.div style={{ display: "flex", flexDirection: "row" }} initial={{ scaleY: 0, opacity: 0 }} animate={{ scaleY: 1, originY: "-10%", opacity: 1 }} transition={{ duration: 0.5 }}>
                   {checkPermissions(props.userInformation, ["admin.store.accepted.packs"]) && props.packs != -1 ? (
                     <div class="panel-body" style={{ maxHeight: "600px", overflow: "auto" }}>
                       <div class="right-area-header-wrapper">
@@ -73,7 +74,7 @@ function ProfilePacks(props) {
                       )}
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </>
             ) : null}
           </div>

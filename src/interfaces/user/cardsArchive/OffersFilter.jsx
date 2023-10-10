@@ -7,7 +7,7 @@ function OffersFilter(props) {
     return (
       <>
         <div className="filter-menu active">
-          <FilterSelect state={props.tempFilter} setState={props.setTempFilter} name={"state"} label={"مصدر العرض"} placeholder={"أيا يكن"} list={selectOptions.offerState} />
+          <FilterSelect state={props.tempFilter} setState={props.setTempFilter} name={"state"} label={"ملكية العرض"} placeholder={"أيا يكن"} list={selectOptions.offerState} noChoose={true} />
           <FilterSelect state={props.tempFilter} setState={props.setTempFilter} name={"typeOffer"} label={"نوع العرض"} placeholder={"أيا يكن"} list={selectOptions.typeOffer} />
           <FilterSelectMultipleFromDB state={props.tempFilter} setState={props.setTempFilter} name={"categoryIds"} label={"الصنف"} placeholder={"أيا يكن"} list={props.categories} nameKey={"name"} valueKey={"id"} />
           <div className="filter-menu-buttons">
@@ -33,8 +33,8 @@ function OffersFilter(props) {
               <button
                 className="filter-button reset"
                 onClick={() => {
-                  props.setTempFilter({ search: props.tempFilter.search, state: -1, typeOffer: -1, categoryIds: [] });
-                  props.setFilter({ ...props.filter, search: props.tempFilter.search, state: -1, typeOffer: -1, categoryIds: [] });
+                  props.setTempFilter({ search: props.tempFilter.search, state: "عادي", typeOffer: -1, categoryIds: [] });
+                  props.setFilter({ ...props.filter, search: props.tempFilter.search, state: "عادي", typeOffer: -1, categoryIds: [] });
                   props.setOpenFilter(false);
                 }}
               >

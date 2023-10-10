@@ -1,11 +1,12 @@
 import checkPermissions from "../../../../functions/checkPermission";
 import jsonParse from "../../../../functions/jsonParse";
+import { motion } from "framer-motion";
 
 function ShopItemInTable(props) {
   try {
     return (
       <>
-        <tr>
+        <motion.tr initial={{ scaleY: 0, opacity: 0 }} animate={{ scaleY: 1, opacity: 1 }} transition={{ ease: "linear", duration: "0.5" }}>
           <td>
             <div className="table-wrapper-info">
               <img src={props.offer.avatar ? jsonParse(props.offer.avatar)[1] : "../images/user.webp"} className="" />
@@ -28,7 +29,7 @@ function ShopItemInTable(props) {
               </a>
             </td>
           ) : null}
-        </tr>
+        </motion.tr>
       </>
     );
   } catch (err) {

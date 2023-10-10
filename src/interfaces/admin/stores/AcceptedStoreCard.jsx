@@ -3,12 +3,13 @@ import getIcon from "../../../functions/getIcon";
 import jsonParse from "../../../functions/jsonParse";
 import { defaultStory } from "../../../constants/story";
 import checkPermissions from "../../../functions/checkPermission";
+import { motion } from "framer-motion";
 
 function AcceptedStoreCard(props) {
   try {
     return (
       <>
-        <div className="sales-card">
+        <motion.div className="sales-card" initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", duration: "1.2" }}>
           <div className="poster">
             <img src={jsonParse(props.store.avatar)[0]} alt="Location Unknown" />
           </div>
@@ -64,7 +65,7 @@ function AcceptedStoreCard(props) {
               </ul>
             </div>
           </div>
-        </div>
+        </motion.div>
         {/* <div onClick={() => props.setCurrentEdit(props.store)}>{props.store.nameStore}</div> */}
       </>
     );

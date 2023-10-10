@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import getRemainingTime from "../../../functions/getRemainingTime";
 import jsonParse from "../../../functions/jsonParse";
+import { motion } from "framer-motion";
 
 function RightOfferItem(props) {
   const [remainingTime, setRemainingTime] = useState("");
@@ -22,7 +23,7 @@ function RightOfferItem(props) {
   try {
     return (
       <>
-        <div className="download-item-line">
+        <motion.div className="download-item-line" style={{ overflow: "hidden" }} initial={{ width: 0, opacity: 0 }} animate={{ width: "100%", opacity: 1 }} transition={{ ease: "linear", delay: props.index * 0.1, duration: "0.5" }}>
           <div className="line-header">{new Date(props.item.createdAt).toLocaleDateString()}</div>
           <div className="download-area">
             <div className="download-item-icon" style={{ marginLeft: "10px" }}>
@@ -48,7 +49,7 @@ function RightOfferItem(props) {
               )}
             </div>
           </div>
-        </div>
+        </motion.div>
       </>
     );
   } catch (err) {

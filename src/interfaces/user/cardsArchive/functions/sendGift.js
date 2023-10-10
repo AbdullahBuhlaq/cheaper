@@ -13,7 +13,6 @@ async function sendGift(userInformation, setUserInformation, refreshStatus, setR
     const response = await fetch(`${import.meta.env.VITE_URL}/user/gift?offerId=${offer.offerUserId}&username=${username}`, infoRequestOptions);
     const data = await response.json();
     if (data.success) {
-      setOffers({ ...offers, [offer.offerUserId]: { ...offers[offer.offerUserId], state: "تم الإهداء إلى" + username } });
       setEdit(false);
       toast.success("تم إهداء العرض بنجاح.", {
         position: toast.POSITION.TOP_CENTER,

@@ -33,14 +33,14 @@ function Packs(props) {
           Object.keys(props.packs).map(async (packId, packIndex) => {
             const isTrue = await compare(filter, { name: props.packs[packId].name, duration: props.packs[packId].duration, price: props.packs[packId].price });
             if (isTrue) {
-              return <PackItem key={packIndex} pack={props.packs[packId]} deletePack={deletePack} setCurrentEdit={setCurrentEdit} setAddNew={setAddNew} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />;
+              return <PackItem key={packIndex} index={packIndex} pack={props.packs[packId]} deletePack={deletePack} setCurrentEdit={setCurrentEdit} setAddNew={setAddNew} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />;
             }
           })
         );
         setItems([...newArr]);
       };
 
-      populateArray();
+      if (props.packs != -1) populateArray();
     } catch (err) {
       console.log(err);
     }
@@ -78,7 +78,7 @@ function Packs(props) {
                   <PacksHeader userInformation={props.userInformation} setAddNew={setAddNew} filter={filter} setFilter={setFilter} />
                   <div style={{ display: "flex", justifyContent: "space-between", padding: "10px 30px" }}>
                     <div>
-                      <section className="plan-section">
+                      <section className="plan-section" style={{ flexDirection: "row" }}>
                         {items.map((item) => {
                           return item;
                         })}

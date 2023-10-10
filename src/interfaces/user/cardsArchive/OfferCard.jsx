@@ -2,12 +2,13 @@ import jsonParse from "../../../functions/jsonParse";
 import { defaultStory } from "../../../constants/story";
 import { SlSizeFullscreen } from "react-icons/sl";
 import { BsInfoCircle } from "react-icons/bs";
+import { motion } from "framer-motion";
+
 function OfferCard(props) {
   try {
     return (
       <>
-        {console.log(props.item)}
-        <div className="sales-card">
+        <motion.div className="sales-card" initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", duration: "1.2" }}>
           <div className="poster">
             <img src={props.item.storeInfo.avatar ? jsonParse(props.item.storeInfo.avatar)[3] : "images/user.webp"} alt="Location Unknown" />
           </div>
@@ -37,7 +38,7 @@ function OfferCard(props) {
             </div>
             <div className="tags">
               <span className="tag" style={props.item.state !== false ? { borderColor: "blue" } : props.item.dataTake ? {} : !props.item.QR ? { borderColor: "red" } : { borderColor: "orange" }}>
-                {props.item.state !== false ? props.item.state : props.item.dataTake ? "تم استلام العرض" : !props.item.QR ? "لم يتم استلام العرض" : "ما زال العرض متاحا"}
+                {props.item.state !== false ? <>تم الإهداء إلى {props.item.state.receiver}</> : props.item.dataTake ? "تم استلام العرض" : !props.item.QR ? "لم يتم استلام العرض" : "ما زال العرض متاحا"}
               </span>
             </div>
             <p className="desc"></p>
@@ -61,7 +62,7 @@ function OfferCard(props) {
               </ul>
             </div>
           </div>
-        </div>
+        </motion.div>
       </>
     );
   } catch (err) {

@@ -2,7 +2,7 @@ import { useState } from "react";
 import OffersFilter from "./OffersFilter";
 
 function OfferSearch(props) {
-  const [tempFilter, setTempFilter] = useState({ search: "", state: -1, typeOffer: -1, categoryIds: [] });
+  const [tempFilter, setTempFilter] = useState({ search: "", state: "عادي", typeOffer: -1, categoryIds: [] });
   const [openFilter, setOpenFilter] = useState(false);
 
   try {

@@ -54,7 +54,7 @@ const selectOptions = {
   ],
   offerState: [
     { name: "عادي", value: "عادي" },
-    { name: "اهداء", value: "تم الاهداء" },
+    { name: "تم الاهداء", value: "تم اهدائه" },
   ],
   typeOffer: [
     { name: "مجاني", value: "مجاني" },

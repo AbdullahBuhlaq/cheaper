@@ -4,7 +4,6 @@ import refreshToken from "../../../../functions/refreshToken";
 async function getOffer(setOffer, setStatus, setOpen, city, location, homeInfo, setHomeInfo, userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast) {
   try {
     let response = await fetch(`${import.meta.env.VITE_URL}/user/open-box?longitude=${location.location.coords.longitude}&latitude=${location.location.coords.latitude}&city=${city.city}&type=free`, { ...requestOptions, method: "get", headers: { ...requestOptions.headers, authorization: userInformation.token } });
-    console.log(`${import.meta.env.VITE_URL}/user/open-box?longitude=${location.location.coords.longitude}&latitude=${location.location.coords.latitude}&city=${city.city}&type=free`);
     let data = await response.json();
     // let data = {
     //   success: true,

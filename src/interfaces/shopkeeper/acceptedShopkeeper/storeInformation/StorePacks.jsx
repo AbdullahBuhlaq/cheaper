@@ -5,6 +5,7 @@ import ReactApexChart from "react-apexcharts";
 import StorePackItem from "./StorePackItem";
 import LoadingChart from "../../../../components/LoadingChart";
 import EmptyChart from "../../../../components/EmptyChart";
+import { motion } from "framer-motion";
 
 function StorePacks(props) {
   const [openPacks, setOpenPakcs] = useState(false);
@@ -29,7 +30,7 @@ function StorePacks(props) {
           </div>
           {openPacks ? (
             <>
-              <div style={{ display: "flex", flexDirection: "row" }}>
+              <motion.div style={{ display: "flex", flexDirection: "row" }} initial={{ scaleY: 0, opacity: 0 }} animate={{ scaleY: 1, originY: "-10%", opacity: 1 }} transition={{ duration: 0.5 }}>
                 <div class="panel-body" style={{ maxHeight: "600px", overflow: "auto" }}>
                   <div class="right-area-header-wrapper">
                     <div className="received-item-line" style={{ height: "auto" }}>
@@ -58,7 +59,7 @@ function StorePacks(props) {
                     {props.packsChart.loading ? <LoadingChart width={"400"} height={200} /> : props.packsChart.series[0].data.length + props.packsChart.series[1].data.length == 0 ? <EmptyChart width={"400"} height={200} /> : <ReactApexChart options={props.packsChart.options} series={props.packsChart.series} type="bar" width={"400"} height={200} />}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </>
           ) : null}
         </div>

@@ -78,75 +78,77 @@ function ProfileLeft(props) {
           <ProfileHeader userProfile={props.userProfile} />
 
           <ProfileDetails userProfile={props.userProfile} />
-          {checkPermissions(props.userInformation, ["admin.users.block.chartUser"]) ? (
-            <>
-              {props.userChart.loading ? (
-                <>
-                  <div style={{ width: "100%", textAlign: "center" }}>
-                    <span>إحصائيات شراء العروض</span>
-                  </div>
-                  <div className="chart-loading-logo">
-                    <div className="loading-container">
-                      <video className="loading-video" autoPlay loop muted playsInline style={{ backgroundColor: "transparent", width: "100px", marginLeft: "40%", marginTop: "50px" }}>
-                        <source src="../videos/1.webm" type="video/webm" />
-                      </video>
+          <div style={{ marginTop: "30px", position: "relative" }}>
+            {checkPermissions(props.userInformation, ["admin.users.block.chartUser"]) ? (
+              <>
+                {props.userChart.loading ? (
+                  <>
+                    <div style={{ width: "100%", textAlign: "center" }}>
+                      <span>إحصائيات شراء العروض</span>
                     </div>
-                  </div>
-                  <Chart options={loadingChartData.options} series={loadingChartData.series} type="area" width={"100%"} height={200} />
-                </>
-              ) : props.userChart.series[0].data.length + props.userChart.series[0].data.length == 0 ? (
-                <>
-                  <div style={{ width: "100%", textAlign: "center" }}>
-                    <span>إحصائيات شراء العروض</span>
-                  </div>
-                  <div className="chart-loading-logo" style={{ width: "150%", height: "50%", display: "flex", justifyContent: "center", alignItems: "center", marginLeft: "10%", marginTop: "30px" }}>
-                    لا توجد بيانات{" "}
-                    <span style={{ marginRight: "5px" }}>
-                      <FcDeleteDatabase />
-                    </span>
-                  </div>
-                  <Chart options={loadingChartData.options} series={loadingChartData.series} type="area" width={"100%"} height={200} />
-                </>
-              ) : (
-                <>
-                  <div style={{ width: "100%", textAlign: "center" }}>
-                    <span>إحصائيات شراء العروض</span>
-                  </div>
-                  <Chart options={props.userChart.options} series={props.userChart.series} type="area" width={"100%"} height={200} />
-                </>
-              )}
-            </>
-          ) : (
-            <>
-              <div style={{ width: "100%", textAlign: "center" }}>
-                <span>إحصائيات شراء العروض</span>
-              </div>
-              <div style={{ position: "absolute", zIndex: 30, top: "0", right: "-15%", width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-                <span style={{ fontSize: "80px" }}>
-                  <FcCancel />
-                </span>
-                <span>لا تملك صلاحية لعرض الرسم البياني</span>
-              </div>
-              <Chart options={loadingChartData.options} series={loadingChartData.series} type="area" width={"100%"} height={200} />
-            </>
-          )}
-          {checkPermissions(props.userInformation, ["admin.users.block.offerUser"]) && props.offers != -1 ? (
-            <ShopsTable
-              setOpenStore={props.setOpenStore}
-              offers={props.offers}
-              filter={props.filter}
-              setFilter={props.setFilter}
-              usersPage={props.usersPage}
-              setUsersPage={props.setUsersPage}
-              userInformation={props.userInformation}
-              setUserInformation={props.setUserInformation}
-              refreshStatus={props.refreshStatus}
-              setRefreshStatus={props.setRefreshStatus}
-              setUserOffer={props.setUserOffer}
-              toast={props.toast}
-              id={props.id}
-            />
-          ) : null}
+                    <div style={{ width: "100%", position: "absolute", top: "-25%", right: "10%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                      <div className="loading-container">
+                        <video className="loading-video" autoPlay loop muted playsInline style={{ backgroundColor: "transparent", width: "100px", marginLeft: "40%", marginTop: "50px" }}>
+                          <source src="../videos/1.webm" type="video/webm" />
+                        </video>
+                      </div>
+                    </div>
+                    <Chart options={loadingChartData.options} series={loadingChartData.series} type="area" width={"100%"} height={200} />
+                  </>
+                ) : props.userChart.series[0].data.length + props.userChart.series[0].data.length == 0 ? (
+                  <>
+                    <div style={{ width: "100%", textAlign: "center" }}>
+                      <span>إحصائيات شراء العروض</span>
+                    </div>
+                    <div style={{ width: "100%", position: "absolute", top: "-22%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                      لا توجد بيانات{" "}
+                      <span style={{ marginRight: "5px" }}>
+                        <FcDeleteDatabase />
+                      </span>
+                    </div>
+                    <Chart options={loadingChartData.options} series={loadingChartData.series} type="area" width={"100%"} height={200} />
+                  </>
+                ) : (
+                  <>
+                    <div style={{ width: "100%", textAlign: "center" }}>
+                      <span>إحصائيات شراء العروض</span>
+                    </div>
+                    <Chart options={props.userChart.options} series={props.userChart.series} type="area" width={"100%"} height={200} />
+                  </>
+                )}
+              </>
+            ) : (
+              <>
+                <div style={{ width: "100%", textAlign: "center" }}>
+                  <span>إحصائيات شراء العروض</span>
+                </div>
+                <div style={{ position: "absolute", zIndex: 30, top: "0", right: "-15%", width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+                  <span style={{ fontSize: "80px" }}>
+                    <FcCancel />
+                  </span>
+                  <span>لا تملك صلاحية لعرض الرسم البياني</span>
+                </div>
+                <Chart options={loadingChartData.options} series={loadingChartData.series} type="area" width={"100%"} height={200} />
+              </>
+            )}
+            {checkPermissions(props.userInformation, ["admin.users.block.offerUser"]) && props.offers != -1 ? (
+              <ShopsTable
+                setOpenStore={props.setOpenStore}
+                offers={props.offers}
+                filter={props.filter}
+                setFilter={props.setFilter}
+                usersPage={props.usersPage}
+                setUsersPage={props.setUsersPage}
+                userInformation={props.userInformation}
+                setUserInformation={props.setUserInformation}
+                refreshStatus={props.refreshStatus}
+                setRefreshStatus={props.setRefreshStatus}
+                setUserOffer={props.setUserOffer}
+                toast={props.toast}
+                id={props.id}
+              />
+            ) : null}
+          </div>
 
           {/* <div className="panel panel-default">
             <div

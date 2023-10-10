@@ -1,10 +1,11 @@
 import jsonParse from "../../../functions/jsonParse";
+import { motion } from "framer-motion";
 
 function ProfileTableItem(props) {
   try {
     return (
       <>
-        <tr>
+        <motion.tr initial={{ scaleY: 0, opacity: 0 }} animate={{ scaleY: 1, opacity: 1 }} transition={{ ease: "linear", duration: "0.5" }}>
           <td>
             <div className="table-wrapper-info">
               <img src={props.item["user.avatar"] ? jsonParse(props.item["user.avatar"])[0] : "../images/user.webp"} className="" />
@@ -17,7 +18,7 @@ function ProfileTableItem(props) {
           <td>{props.item.offerType}</td>
           <td>{props.item.evaluate ? props.item.evaluate : "لا يوجد"}</td>
           <td title={props.item.reasonSpam}>{props.item.reasonSpam ? "عرض الإبلاغ" : "لا يوجد"}</td>
-        </tr>
+        </motion.tr>
       </>
     );
   } catch (err) {

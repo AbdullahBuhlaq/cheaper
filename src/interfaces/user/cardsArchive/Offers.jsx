@@ -12,7 +12,7 @@ import NotAllowdPage from "../../general/NotAllowedPage";
 
 function Offers(props) {
   const [offersPage, setOffersPage] = useState({ page: 1, size: 6, loadMore: true, loadingNow: false });
-  const [filter, setFilter] = useState({ search: "", state: -1, typeOffer: -1, categoryIds: [] });
+  const [filter, setFilter] = useState({ search: "", state: "عادي", typeOffer: -1, categoryIds: [] });
   const [openOffer, setOpenOffer] = useState(false);
   const [openSendGift, setOpenSendGift] = useState(false);
   const [currentOffer, setCurrentOffer] = useState(false);

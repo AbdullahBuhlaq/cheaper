@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import checkPermissions from "../../../functions/checkPermission";
+import { motion } from "framer-motion";
 
 function PackItem(props) {
   const [show, setShow] = useState(false);
@@ -10,10 +11,11 @@ function PackItem(props) {
       }
     });
   }, []);
+
   try {
     return (
       <>
-        <div className="plan-container">
+        <motion.div className="plan-container" initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", duration: "1.2", delay: 0.1 * props.index }}>
           <div className="plan-container-right">
             <div className="plan-container-right-header">
               <h1>{props.pack.name}</h1>
@@ -59,7 +61,7 @@ function PackItem(props) {
               </div>
             </div>
 
-            <div className="plan-container-right-body">
+            <div className="plan-container-right-body" >
               <div className="plan-container-right-body-date">
                 <h1 style={{ width: "max-content" }}>الفترة : </h1>
                 <h2>{props.pack.duration} يوما</h2>
@@ -69,13 +71,13 @@ function PackItem(props) {
                 <h1 style={{ width: "max-content" }}>السعر : </h1>
                 <h2>{props.pack.price} S.P</h2>
               </div>
-            </div>
           </div>
 
           {/* <div className="plan-container-left">
            <h1>testtttttttt</h1>
       </div> */}
         </div>
+            </motion.div>
       </>
     );
   } catch (err) {

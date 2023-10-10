@@ -5,6 +5,7 @@ async function deleteImage(setStoreInformation, storeInformation, userInformatio
   try {
     let response = await fetch(`${import.meta.env.VITE_URL}/store/delete`, { ...requestOptions, method: "delete", headers: { ...requestOptions.headers, authorization: userInformation.token } });
     let data = await response.json();
+    console.log(data);
     if (data.success) {
       setStoreInformation({ ...storeInformation, information: { ...storeInformation.information, avatar: null } });
       toast.success("تم حذف الصورة", {

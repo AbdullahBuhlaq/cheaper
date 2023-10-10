@@ -1,5 +1,6 @@
 import { FcCancel } from "react-icons/fc";
 import checkPermissions from "../../../functions/checkPermission";
+import { motion } from "framer-motion";
 
 function CardsArea(props) {
   function openCardHandle() {
@@ -26,8 +27,11 @@ function CardsArea(props) {
               <div key={index} className="card-section">
                 {Array.from(Array(3).keys()).map((item, innerindex) => {
                   return (
-                    <div
+                    <motion.div
                       key={innerindex}
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ type: "spring", duration: "1.2" }}
                       className="offer-card"
                       style={{ cursor: "pointer", position: "relative", display: "flex", justifyContent: "center", alignItems: "center" }}
                       onClick={() => {
@@ -40,7 +44,7 @@ function CardsArea(props) {
                           <FcCancel />
                         </span>
                       ) : null}
-                    </div>
+                    </motion.div>
                   );
                 })}
               </div>

@@ -26,7 +26,7 @@ function RightArea(props) {
                   </div>
 
                   {props.homeInfo.offerNotTakeYet.map((item, index) => {
-                    return <RightOfferItem key={index} item={item} />;
+                    return <RightOfferItem key={index} index={index} item={item} />;
                   })}
                 </>
               ) : (
@@ -49,7 +49,7 @@ function RightArea(props) {
                     <p className="right-area-header">المتاجر التي قمت بزيارتها</p>
                   </div>
                   {props.homeInfo.recentVisited.map((item, index) => {
-                    return <RightRecentVisited key={index} item={item} />;
+                    return <RightRecentVisited key={index} index={index} item={item} />;
                   })}
                 </>
               ) : (

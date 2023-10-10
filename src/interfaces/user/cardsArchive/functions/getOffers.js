@@ -4,7 +4,7 @@ import refreshToken from "../../../../functions/refreshToken";
 export default async function getOffers(userInformation, setUserInformation, refreshStatus, setRefreshStatus, setOffers, offers, toast, filter, offersPage, setOffersPage) {
   try {
     setOffersPage({ ...offersPage, loadingNow: true });
-    let url = `${import.meta.env.VITE_URL}/user/offer?state=عادي&`;
+    let url = `${import.meta.env.VITE_URL}/user/offer?`;
     let andMark = false;
     await Promise.all(
       Object.keys(filter).map(async (filterKey) => {
@@ -30,6 +30,7 @@ export default async function getOffers(userInformation, setUserInformation, ref
     andMark = true;
     if (andMark) url += `&`;
     url += `size=${offersPage.size}`;
+    console.log(url);
     let response = await fetch(url, { ...requestOptions, method: "get", headers: { ...requestOptions.headers, authorization: userInformation.token } });
     let data = await response.json();
     if (data.success) {

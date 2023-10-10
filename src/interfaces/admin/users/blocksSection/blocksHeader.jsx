@@ -1,5 +1,6 @@
 import checkPermissions from "../../../../functions/checkPermission";
 import Loading from "../../../general/Loading";
+import SecondLoading from "../../../general/SecondLoading";
 
 function BlocksHeader(props) {
   try {
@@ -11,14 +12,14 @@ function BlocksHeader(props) {
               <h1>حالة الحظر: {props.blocked ? "محظور" : "غير محظور"}</h1>
             ) : (
               <span style={{ display: "flex", width: "50px", height: "auto", marginRight: "25px" }}>
-                <Loading />
+                <SecondLoading />
               </span>
             )}
             {props.userBlocks ? (
               <h2>عدد الحظورات: {props.count}</h2>
             ) : (
               <div style={{ display: "flex", width: "50px", height: "auto" }}>
-                <Loading />
+                <SecondLoading />
               </div>
             )}
           </div>

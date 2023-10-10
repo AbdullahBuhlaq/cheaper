@@ -1,13 +1,15 @@
+import { motion } from "framer-motion";
+
 function StatisticsItem(props) {
   try {
     return (
       <>
-        <div className="access-link-wrapper">
+        <motion.div className="access-link-wrapper" initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", duration: "1.2" }}>
           <div className="access-icon">
             <p>{props.value}</p>
           </div>
           <span className="access-text">{props.title}</span>
-        </div>
+        </motion.div>
       </>
     );
   } catch (err) {

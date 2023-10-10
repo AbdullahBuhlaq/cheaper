@@ -50,11 +50,6 @@ function UserProfileLeft(props) {
                     تعديل الملف الشخصي
                   </a>
                 </li>
-                <li>
-                  <a href="#" onClick={() => props.setPopupStatus(5)}>
-                    عرض قائمة الحظورات
-                  </a>
-                </li>
               </ul>
             </div>
           </div>

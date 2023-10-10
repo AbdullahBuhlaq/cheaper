@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import jsonParse from "../../../functions/jsonParse";
 import checkPermissions from "../../../functions/checkPermission";
+import { motion } from "framer-motion";
 
 function EmployeeItem(props) {
   const [showOptions, setShowOptions] = useState(false);
@@ -15,7 +16,7 @@ function EmployeeItem(props) {
   try {
     return (
       <>
-        <div className="products-row">
+        <motion.div className="products-row" initial={{ scaleY: 0, opacity: 0 }} animate={{ scaleY: 1, opacity: 1 }} transition={{ ease: "linear", duration: "0.5" }}>
           <div className="product-cell image">
             <img src={props.employee.avatar ? jsonParse(props.employee.avatar)[1] : "images/user.webp"} alt="product" />
             <span>{props.employee.name}</span>
@@ -61,7 +62,7 @@ function EmployeeItem(props) {
               </ul>
             </div>
           </div>
-        </div>
+        </motion.div>
       </>
     );
   } catch (err) {

@@ -1,11 +1,11 @@
 import { defaultStory } from "../../../constants/story";
 import jsonParse from "../../../functions/jsonParse";
+import { motion } from "framer-motion";
 
 function RightRecentVisited(props) {
   try {
     return (
       <>
-        {console.log(props.item)}
         <div className="received-item-line">
           <div className="progress-line">
             <span className="time start">{new Date(props.item.dateTake).toLocaleDateString()} </span>
@@ -15,17 +15,17 @@ function RightRecentVisited(props) {
             <div className="received-files">
               {props.item.story.map((story, index) => {
                 return (
-                  <div className="image-wrapper" key={index}>
+                  <motion.div className="image-wrapper" key={index} initial={{ scaleY: 0, opacity: 0 }} animate={{ scaleY: 1, opacity: 1 }} transition={{ ease: "linear", duration: "0.5" }}>
                     <img src={jsonParse(story.avatar)[1]} alt="Marco Andrews" title="Marco Andrews" />
-                  </div>
+                  </motion.div>
                 );
               })}
 
               {Array.from(Array(3 - props.item.story.length).keys()).map((item, index) => {
                 return (
-                  <div className="image-wrapper" key={index}>
+                  <motion.div className="image-wrapper" key={index} initial={{ scaleY: 0, opacity: 0 }} animate={{ scaleY: 1, opacity: 1 }} transition={{ ease: "linear", duration: "0.5" }}>
                     <img src={defaultStory[item]} alt="Marco Andrews" title="Marco Andrews" />
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>

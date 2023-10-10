@@ -11,7 +11,7 @@ function FilterSelect(props) {
           }}
           value={props.state[props.name]}
         >
-          <option value={-1}>{props.placeholder}</option>
+          {!props.noChoose ? <option value={-1}>{props.placeholder}</option> : null}
           {Object.keys(props.list).map((listItem, listIndex) => {
             return (
               <option key={listIndex} value={props.list[listItem].value}>

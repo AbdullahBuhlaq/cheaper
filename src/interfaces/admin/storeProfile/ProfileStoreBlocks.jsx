@@ -32,7 +32,7 @@ function ProfileStoreBlocks(props) {
                 props.blocks != -1 ? (
                   <div className="categories-main-modal-body-block-history">
                     {props.blocks.rows.map((block, index) => {
-                      return <BlockCardStore key={index} block={block} deleteStoreBlock={props.deleteStoreBlock} />;
+                      return <BlockCardStore key={index} index={index} block={block} deleteStoreBlock={props.deleteStoreBlock} />;
                     })}
                     {props.blocks.count == 0 ? "لا يوجد" : null}
                   </div>

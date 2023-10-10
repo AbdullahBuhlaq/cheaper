@@ -19,7 +19,7 @@ function OpenOldOffer(props) {
   const [evaPage, setEvaPage] = useState({ page: 1, size: 5, loadMore: true, loadingNow: false });
 
   useEffect(() => {
-    if (props.offer != -1 && checkPermissions(props.userInformation, ["user.moreEvaluation"])) getOfferEvas(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setEva, eva, props.toast, evaPage, setEvaPage, props.offer.storeInfo.id);
+    if (props.offer != -1 && checkPermissions(props.userInformation, ["user.moreEvaluation"]) && !props.offer?.state) getOfferEvas(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setEva, eva, props.toast, evaPage, setEvaPage, props.offer.storeInfo.id);
   }, []);
 
   const [story, setStory] = useState([]);
@@ -125,7 +125,7 @@ function OpenOldOffer(props) {
                 <div className="qr-code">
                   <span style={{ fontSize: "120px", display: "flex", flexDirection: "column", alignItems: "center" }}>
                     <TfiGift />
-                    <span style={{ fontSize: "20px" }}>{props.offer.state}</span>
+                    <span style={{ fontSize: "20px" }}>تم الإهداء إلى {props.offer.state.receiver}</span>
                   </span>
                 </div>
               </>
@@ -161,7 +161,7 @@ function OpenOldOffer(props) {
             )}
 
             <div style={{ height: "calc(96% - 200px)", overflow: "auto" }}>
-              {checkPermissions(props.userInformation, ["user.moreEvaluation"]) ? (
+              {checkPermissions(props.userInformation, ["user.moreEvaluation"]) && !props.offer.state ? (
                 eva != -1 ? (
                   <>
                     <div className="app-main-right-header">

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { reversePermissions, reverseShow } from "../../../../constants/reversePermissions";
 import checkPermissions from "../../../../functions/checkPermission";
+import { motion } from "framer-motion";
 
 function BlockCard(props) {
   const [show, setShow] = useState(false);
@@ -15,7 +16,7 @@ function BlockCard(props) {
   try {
     return (
       <>
-        <div className="categories-main-modal-body-block-history-card">
+        <motion.div className="categories-main-modal-body-block-history-card" initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", duration: "1.2", delay: props.index * 0.1 }}>
           <div className="categories-main-modal-body-block-history-card-header">
             <h1>{props.block["block.reason"]}</h1>
             <div className="dropdown">
@@ -69,7 +70,7 @@ function BlockCard(props) {
               })}
             </div>
           </div>
-        </div>
+        </motion.div>
       </>
     );
   } catch (err) {

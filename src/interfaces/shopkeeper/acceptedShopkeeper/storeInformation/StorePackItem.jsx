@@ -45,6 +45,7 @@ function StorePackItem(props) {
                         <a
                           href="#"
                           onClick={() => {
+                            console.log(props.item);
                             disablePack(props.setStoreInformation, props.storeInformation, props.item.id, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast);
                           }}
                         >

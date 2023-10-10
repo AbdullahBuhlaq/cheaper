@@ -24,7 +24,7 @@ function StoreHeader(props) {
                 style={{ display: "flex", flexDirection: "column", padding: "0 10px", justifyContent: "space-evenly", width: "88%", background: "linear-gradient(225deg, rgba(71, 204, 255, 0.3) 0%,  rgba(71, 204, 255, 0.3) 50% , rgba(255,121,0,0.3)  50%, rgba(255,121,0,0.3)  100%)", overflow: "hidden", position: "absolute", left: "7px", borderRadius: "10px" }}
               >
                 <span
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer", fontWeight: "bold" }}
                   onClick={() => {
                     props.setOpenImage(true);
                   }}
@@ -32,7 +32,7 @@ function StoreHeader(props) {
                   تعديل
                 </span>
                 <span
-                  style={{ alignSelf: "end", cursor: "pointer" }}
+                  style={{ alignSelf: "end", cursor: "pointer", fontWeight: "bold" }}
                   onClick={() => {
                     deleteImage(props.setStoreInformation, props.storeInformation, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast);
                   }}

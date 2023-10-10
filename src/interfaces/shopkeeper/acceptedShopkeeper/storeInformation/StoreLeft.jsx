@@ -42,7 +42,6 @@ function StoreLeft(props) {
             <StoreOptions userInformation={props.userInformation} setOpenStatus={props.setOpenStatus} setOpenUpdate={props.setOpenUpdate} />
 
             <StoreHeader setOpenImage={props.setOpenImage} storeInformation={props.storeInformation} setStoreInformation={props.setStoreInformation} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} />
-            <StoreUsers users={props.storeUsers} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} setUsers={props.setStoreUsers} usersPage={props.usersPage} setUsersPage={props.setUsersPage} />
             <StorePacks
               setOpenPacks={props.setOpenPacks}
               storeInformation={props.storeInformation}
@@ -56,6 +55,7 @@ function StoreLeft(props) {
               packsChart={props.packsChart}
               packs={props.storeInformation.packs}
             />
+            <StoreUsers users={props.storeUsers} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} setUsers={props.setStoreUsers} usersPage={props.usersPage} setUsersPage={props.setUsersPage} />
           </div>
         )}
       </>
