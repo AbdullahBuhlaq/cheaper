@@ -31,7 +31,7 @@ function ProfileStoreBlocks(props) {
               {checkPermissions(props.userInformation, ["admin.users.block.allBlockForUser"]) ? (
                 props.blocks != -1 ? (
                   <div className="categories-main-modal-body-block-history">
-                    {props.blocks.rows.map((block, index) => {
+                    {props.blocks.rows.reverse().map((block, index) => {
                       return <BlockCardStore key={index} index={index} block={block} deleteStoreBlock={props.deleteStoreBlock} />;
                     })}
                     {props.blocks.count == 0 ? "لا يوجد" : null}

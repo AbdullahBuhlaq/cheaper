@@ -55,9 +55,11 @@ function UserBlocks(props) {
             {checkPermissions(props.userInformation, ["admin.users.block.allBlockForUser"]) ? (
               userBlocks ? (
                 <div className="categories-main-modal-body-block-history">
-                  {Object.keys(userBlocks.rows).map((blockKey, index) => {
-                    return <BlockCard key={index} index={index} userInformation={props.userInformation} deleteUserBlock={(id) => deleteUserBlock(id)} stopBlock={(id) => stopBlock(id)} block={userBlocks.rows[blockKey]} />;
-                  })}
+                  {Object.keys(userBlocks.rows)
+                    .reverse()
+                    .map((blockKey, index) => {
+                      return <BlockCard key={index} index={index} userInformation={props.userInformation} deleteUserBlock={(id) => deleteUserBlock(id)} stopBlock={(id) => stopBlock(id)} block={userBlocks.rows[blockKey]} />;
+                    })}
                 </div>
               ) : (
                 <div style={{ display: "flex", width: "100%", height: "50%", justifyContent: "center", alignItems: "center" }}>
