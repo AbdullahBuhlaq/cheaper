@@ -7,9 +7,10 @@ import "../css/notifications.css";
 import NotificationItem from "./NotificationItem";
 import LoadMoreNotifications from "./LoadMoreNotifications";
 import refreshToken from "../functions/refreshToken";
-import { BiSolidLeftArrow } from "react-icons/bi";
+import { BiLogIn, BiSolidLeftArrow } from "react-icons/bi";
 import checkShow from "../functions/checkShow";
 import checkPermissions from "../functions/checkPermission";
+import secureLocalStorage from "react-secure-storage";
 
 function Navbar(props) {
   async function logout(userInformation) {
@@ -17,7 +18,7 @@ function Navbar(props) {
       let response = await fetch(`${import.meta.env.VITE_URL}/auth/logout`, { ...requestOptions, method: "get", headers: { ...requestOptions.headers, authorization: userInformation.token } });
       let data = await response.json();
       if (data.success) {
-        localStorage.removeItem("userInformation");
+        secureLocalStorage.removeItem("userInformation");
         props.navigate("/login");
       } else {
         if (data.error == "jwt expired") {
@@ -167,9 +168,9 @@ function Navbar(props) {
               </svg>
             </button>
           ) : (
-            <li onClick={() => props.navigate("/login")}>
-              <a style={{ color: "green", cursor: "pointer" }}>login</a>
-            </li>
+            <button className="btn-logout" style={{ color: "green", fontSize: "30px", cursor: "pointer" }} onClick={() => props.navigate("/login")}>
+              <BiLogIn />
+            </button>
           )}
         </div>
       </>

@@ -15,6 +15,7 @@ import { acceptedStoreChart } from "./storeInformation/data/acceptedStoreChart";
 import Services from "../../general/Services";
 import AboutUs from "../../general/AboutUs";
 import Contact from "../../general/Contact";
+import Page404 from "../../general/Page404";
 
 function ShopkeeperHome(props) {
   const [currentTab, setCurrentTab] = useState("profile");
@@ -101,6 +102,7 @@ function ShopkeeperHome(props) {
                   />
                 }
               />
+              <Route path="/*" exact element={<Page404 />} />
             </Routes>
           </>
         )}

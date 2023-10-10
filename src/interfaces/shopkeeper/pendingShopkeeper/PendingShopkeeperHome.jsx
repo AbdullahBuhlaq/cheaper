@@ -11,6 +11,7 @@ import PendingShopkeeperProfile from "./profile/PendingShopkeeperProfile";
 import Services from "../../general/Services";
 import AboutUs from "../../general/AboutUs";
 import Contact from "../../general/Contact";
+import Page404 from "../../general/Page404";
 
 function PendingShopkeeperHome(props) {
   const [currentTab, setCurrentTab] = useState("profile");
@@ -81,6 +82,7 @@ function PendingShopkeeperHome(props) {
                   />
                 }
               />
+              <Route path="/*" exact element={<Page404 />} />
             </Routes>
           </>
         )}

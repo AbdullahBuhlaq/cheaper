@@ -5,6 +5,7 @@ import Main from "./Main";
 import Services from "./Services";
 import AboutUs from "./AboutUs";
 import Contact from "./Contact";
+import Page404 from "./Page404";
 
 function GeneralHome(props) {
   const [currentTab, setCurrentTab] = useState("home");
@@ -20,6 +21,7 @@ function GeneralHome(props) {
           <Route path="/services" exact element={<Services />} />
           <Route path="/aboutUs" exact element={<AboutUs />} />
           <Route path="/contactUs" exact element={<Contact />} />
+          <Route path="/*" exact element={<Page404 />} />
         </Routes>
       </>
     );

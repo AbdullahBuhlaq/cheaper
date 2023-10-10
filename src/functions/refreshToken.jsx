@@ -33,7 +33,7 @@ async function refreshToken(userInformation, setUserInformation, refreshStatus, 
       refPromise = null;
       return data.data;
     } else {
-      window.location.replace(`http://localhost:5173/login`);
+      window.location.replace(`${import.meta.env.VITE_URL}/login`);
     }
   } catch (err) {
     console.log(err);

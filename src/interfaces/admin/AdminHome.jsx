@@ -33,6 +33,7 @@ import AboutUs from "../general/AboutUs";
 import Services from "../general/Services";
 import Contact from "../general/Contact";
 import checkShow from "../../functions/checkShow";
+import Page404 from "../general/Page404";
 
 function AdminHome(props) {
   const [currentTab, setCurrentTab] = useState("main");
@@ -200,6 +201,7 @@ function AdminHome(props) {
                   element={<UserProfile categories={categories} setCategories={setCategories} users={users} setUsers={setUsers} blocks={blocks} setBlocks={setBlocks} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />}
                 />
               ) : null}
+              <Route path="/*" exact element={<Page404 />} />
             </Routes>
             {openNotificationsSend ? <Popup classes={"form-popup"} setOpen={setOpenNotificationsSend} component={<SendNotifications categories={categories} setCategories={setCategories} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} />} /> : null}
           </>
