@@ -14,6 +14,7 @@ import Services from "../general/Services";
 import AboutUs from "../general/AboutUs";
 import Contact from "../general/Contact";
 import Page404 from "../general/Page404";
+import Confitte from "react-confetti";
 
 function UserHome(props) {
   const [currentTab, setCurrentTab] = useState("profile");
@@ -26,6 +27,7 @@ function UserHome(props) {
   const [homeInfo, setHomeInfo] = useState(-1);
   const [categories, setCategories] = useState(-1);
   const [offers, setOffers] = useState(-1);
+  const [dimension, setDimension] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
     if (notifications == -1) getNotifications(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setNotifications, notifications, props.toast, notificationsPage, setNotificationsPage);
@@ -33,6 +35,8 @@ function UserHome(props) {
   useEffect(() => {
     if (notifications != -1) setLoading(false);
   }, [notifications]);
+
+  const [run, setRun] = useState(false);
 
   try {
     return (
@@ -42,6 +46,39 @@ function UserHome(props) {
         ) : (
           <>
             <NotificationListener />
+
+            {run ? (
+              <div style={{ position: "absolute", top: 0, left: 0, width: "100vw", height: "100vh", zIndex: 100 }}>
+                <Confitte
+                  numberOfPieces={900}
+                  width={window.innerWidth}
+                  height={window.innerHeight}
+                  onConfettiComplete={() => {
+                    setRun(false);
+                  }}
+                  run={run}
+                  recycle={false}
+                />
+                <Confitte
+                  numberOfPieces={300}
+                  width={window.innerWidth}
+                  height={window.innerHeight}
+                  run={run}
+                  recycle={false}
+                  drawShape={(ctx) => {
+                    ctx.beginPath();
+                    for (let i = 0; i < 22; i++) {
+                      const angle = 0.35 * i;
+                      const x = (0.2 + 1.5 * angle) * Math.cos(angle);
+                      const y = (0.2 + 1.5 * angle) * Math.sin(angle);
+                      ctx.lineTo(x, y);
+                    }
+                    ctx.stroke();
+                    ctx.closePath();
+                  }}
+                />
+              </div>
+            ) : null}
 
             <Navbar
               notifications={notifications}
@@ -65,13 +102,11 @@ function UserHome(props) {
               <Route path="/services" exact element={<Services />} />
               <Route path="/aboutUs" exact element={<AboutUs />} />
               <Route path="/contactUs" exact element={<Contact />} />
-              <Route path="/home" exact element={<HomeOfUser homeInfo={homeInfo} setHomeInfo={setHomeInfo} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />} />
+              <Route path="/home" exact element={<HomeOfUser setRun={setRun} homeInfo={homeInfo} setHomeInfo={setHomeInfo} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />} />
               <Route path="/offers" exact element={<Offers offers={offers} setOffers={setOffers} categories={categories} setCategories={setCategories} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />} />
               <Route path="/profile" exact element={<UserProfile categories={categories} setCategories={setCategories} profile={profile} setProfile={setProfile} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />} />
               <Route path="/*" exact element={<Page404 />} />
             </Routes>
-
-            {}
           </>
         )}
       </>

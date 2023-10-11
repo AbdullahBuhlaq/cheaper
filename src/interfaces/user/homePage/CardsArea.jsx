@@ -8,7 +8,7 @@ function CardsArea(props) {
       props.toast.error("لقد تم حظرك عن فتح العروض اليومية", {
         position: props.toast.POSITION.TOP_CENTER,
       });
-    } else if (props.canOpen > 0) {
+    } else if (props.canOpen > -200) {
       props.setOpenOffer(true);
     } else {
       props.toast.info("لم يعد لديك عروض متاحة, يرجى المحاولة لاحقا", {

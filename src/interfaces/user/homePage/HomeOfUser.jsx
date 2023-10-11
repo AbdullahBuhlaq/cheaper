@@ -22,7 +22,7 @@ function HomeOfUser(props) {
           <MainArea setOpenOffer={setOpenOffer} userInformation={props.userInformation} homeInfo={props.homeInfo} toast={props.toast} />
           <RightArea userInformation={props.userInformation} homeInfo={props.homeInfo} />
 
-          {openOffer ? <Popup setOpen={setOpenOffer} component={<OpenOffer setOpen={setOpenOffer} homeInfo={props.homeInfo} setHomeInfo={props.setHomeInfo} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} />} /> : null}
+          {openOffer ? <Popup setOpen={setOpenOffer} component={<OpenOffer setRun={props.setRun} setOpen={setOpenOffer} homeInfo={props.homeInfo} setHomeInfo={props.setHomeInfo} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} />} /> : null}
         </>
       </>
     );

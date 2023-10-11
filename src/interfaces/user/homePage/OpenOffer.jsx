@@ -59,7 +59,7 @@ function OpenOffer(props) {
       setMsg(city.message);
       setStatus("fail");
     } else if (city.status == "success") {
-      if (offer == -1) getOffer(setOffer, setStatus, props.setOpen, city, location, props.homeInfo, props.setHomeInfo, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast);
+      if (offer == -1) getOffer(props.setRun, setOffer, setStatus, props.setOpen, city, location, props.homeInfo, props.setHomeInfo, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast);
     }
   }, [city]);
 
