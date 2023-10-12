@@ -10,6 +10,7 @@ import ProfileLeft from "./profileSection/profileLeft";
 import ProfileBody from "./profileSection/ProfileBody";
 import HeaderButton from "../../../../components/mainArea";
 import UpdateProfile from "./UpdateProfile";
+import SendCode from "../../../general/SendCode";
 
 function PendingShopkeeperProfile(props) {
   const [loading, setLoading] = useState(true);
@@ -82,6 +83,8 @@ function PendingShopkeeperProfile(props) {
                   <UpdateProfile profile={props.profile.userInformation} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} setEdit={setPopupStatus} setProfile={(userInformation) => props.setProfile({ ...props.profile, userInformation: { ...userInformation } })} />
                 }
               />
+            ) : popupStatus == 5 ? (
+              <Popup setOpen={setPopupStatus} classes={"form-popup-small"} component={<SendCode profile={props.profile} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} setEdit={setPopupStatus} setProfile={props.setProfile} />} />
             ) : null}
           </>
         )}

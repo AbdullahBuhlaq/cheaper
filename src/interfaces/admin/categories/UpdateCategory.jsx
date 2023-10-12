@@ -8,6 +8,7 @@ import Button from "../../../components/Button";
 import editCategory from "./functions/editCategory";
 import selectOptions from "../../../constants/selectOptions";
 import categorySchema from "./schema/categorySchema";
+import Select from "../../../components/Select";
 
 function UpdateCategory(props) {
   const [duringAdd, setDuringAdd] = useState(false);
@@ -34,7 +35,7 @@ function UpdateCategory(props) {
         <form>
           <div className="row">
             <Input placeholder={""} label={"الاسم"} type={"text"} name={"name"} onChange={handleSave} state={category} setState={setCategory} errors={categoryErrors} setErrors={setCategoryErrors} schema={categorySchema} />
-            <CheckBox placeholder={""} label={"له صور حالة؟"} name={"checkWithImageOrNot"} values={selectOptions.checkWithImageOrNot} onChange={handleSave} state={category} setState={setCategory} errors={categoryErrors} setErrors={setCategoryErrors} schema={categorySchema} />
+            <Select placeholder={""} label={"له صور حالة؟"} name={"checkWithImageOrNot"} list={selectOptions.checkWithImageOrNot} onChange={handleSave} state={category} setState={setCategory} errors={categoryErrors} setErrors={setCategoryErrors} schema={categorySchema} noChoose={true} />
             <ChooseIcon label={"اختر أيقونة"} name={"emoji"} onChange={handleSave} state={category} setState={setCategory} errors={categoryErrors} setErrors={setCategoryErrors} schema={categorySchema} />
           </div>
           <Button action={() => editCategory(category, props.currentEdit, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.categories, setDuringAdd, props.setCurrentEdit, props.setCategories, props.toast)} text={"إرسال"} disabled={duringAdd} joiObject={joiCategory} state={category} setStateErrors={setCategoryErrors} toast={props.toast} />

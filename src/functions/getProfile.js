@@ -3,6 +3,7 @@ import requestOptions from "../constants/requestOptions";
 import refreshToken from "./refreshToken";
 // import refreshToken from "./refreshToken";
 import Refresh from "./refreshToken";
+import jsonParse from "./jsonParse";
 
 async function getProfile(setProfile, userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast) {
   try {
@@ -10,7 +11,7 @@ async function getProfile(setProfile, userInformation, setUserInformation, refre
     let data = await response.json();
 
     if (data.success) {
-      setProfile({ ...data.data });
+      setProfile({ ...data.data, userInformation: { ...data.data.userInformation, settings: { ...jsonParse(data.data.userInformation.settings) } } });
     } else {
       if (data.error == "jwt expired") {
         const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);

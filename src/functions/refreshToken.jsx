@@ -31,6 +31,8 @@ async function refreshToken(userInformation, setUserInformation, refreshStatus, 
       secureLocalStorage.setItem("userInformation", JSON.stringify({ ...userInformation, ...data.data, typeUser: jsonParse(data.data.allPermission)["action"][0][0] == "u" ? "مستخدم" : jsonParse(data.data.allPermission)["action"][0][0] == "a" ? "مدير" : data.data.typeUser }));
       status = "done";
       refPromise = null;
+      let newType = jsonParse(data.data.allPermission)["action"][0][0] == "u" ? "مستخدم" : jsonParse(data.data.allPermission)["action"][0][0] == "a" ? "مدير" : data.data.typeUser;
+      if (userInformation.typeUser != newType) window.location.replace(`${import.meta.env.VITE_LOCAL_URL}/main`);
       return data.data;
     } else {
       window.location.replace(`${import.meta.env.VITE_LOCAL_URL}/login`);

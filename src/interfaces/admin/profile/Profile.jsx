@@ -11,6 +11,7 @@ import ProfileBody from "./profileSection/ProfileBody";
 import HeaderButton from "../../../components/mainArea";
 import UpdateProfile from "./UpdateProfile";
 import { FaSwimmer } from "react-icons/fa";
+import SendCode from "../../general/SendCode";
 
 function Profile(props) {
   const [loading, setLoading] = useState(true);
@@ -31,6 +32,7 @@ function Profile(props) {
           </div>
         ) : (
           <>
+            {console.log(props.profile.userInformation.settings.verify.email)}
             <div className="profile-main-area">
               <HeaderButton />
 
@@ -82,6 +84,8 @@ function Profile(props) {
                   <UpdateProfile profile={props.profile.userInformation} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} setEdit={setPopupStatus} setProfile={(userInformation) => props.setProfile({ ...props.profile, userInformation: { ...userInformation } })} />
                 }
               />
+            ) : popupStatus == 5 ? (
+              <Popup setOpen={setPopupStatus} classes={"form-popup-small"} component={<SendCode profile={props.profile} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} setEdit={setPopupStatus} setProfile={props.setProfile} />} />
             ) : null}
           </>
         )}

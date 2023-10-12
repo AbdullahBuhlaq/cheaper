@@ -11,7 +11,7 @@ function ProfileDetails(props) {
       <>
         <section className="details-profile-cards">
           <DetailsCard keyName={"الجنس"} value={props.details["gender"]} icon={props.details["gender"] == "ذكر" ? <BsGenderMale /> : <BsGenderFemale />} />
-          <DetailsCard keyName={"البريد الإلكتروني"} value={props.details["email"]} icon={<AiOutlineMail />} />
+          <DetailsCard keyName={"البريد الإلكتروني"} value={props.details["email"]} icon={<AiOutlineMail />} setPopupStatus={props.setPopupStatus} verify={props.details.settings.verify.email ? { state: true } : { state: false }} />
           <DetailsCard keyName={"رقم الموبايل"} value={props.details["phoneNumber"]} icon={<AiOutlinePhone />} />
           <DetailsCard keyName={"تاريخ الميلاد"} value={props.details["birthday"]} icon={<HiOutlineCake />} />
           <DetailsCard keyName={"اسم المستخدم"} value={props.details["username"] + "@"} icon={<FaRegUserCircle />} />

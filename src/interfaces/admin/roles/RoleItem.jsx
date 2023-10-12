@@ -50,8 +50,7 @@ function RoleItem(props) {
                 {checkPermissions(props.userInformation, ["admin.role.delete", "admin.role.all"]) ? (
                   <Button
                     classes={"action-button filter jsFilter"}
-                    action={(event) => {
-                      event.preventDefault();
+                    action={() => {
                       props.deleteRole(props.currentEdit.id);
                     }}
                     text={"حذف"}

@@ -192,7 +192,7 @@ function OpenOffer(props) {
                     <>
                       <div style={{ height: "calc(96% - 200px)", overflow: "auto" }}>
                         <div className="app-main-right-header">
-                          <span>{offer.evaluate === null ? "-" : offer.evaluate}</span>
+                          <span>{offer.evaluate === null ? "-" : (Math.round(offer.evaluate * 100) / 100).toFixed(2)}</span>
                           <a href="#">التقييمات</a>
                         </div>
                         {eva.map((item, index) => {

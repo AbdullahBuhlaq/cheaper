@@ -55,7 +55,7 @@ function ProfileLeft(props) {
 
           <ProfileHeader profile={props.profile} />
 
-          <ProfileDetails details={props.profile.userInformation} />
+          <ProfileDetails details={props.profile.userInformation} setPopupStatus={props.setPopupStatus} />
         </div>
       </>
     );

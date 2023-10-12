@@ -12,6 +12,7 @@ import Services from "../../general/Services";
 import AboutUs from "../../general/AboutUs";
 import Contact from "../../general/Contact";
 import Page404 from "../../general/Page404";
+import VerifyEmail from "../../general/VerifyEmail";
 
 function PendingShopkeeperHome(props) {
   const [currentTab, setCurrentTab] = useState("profile");
@@ -37,7 +38,7 @@ function PendingShopkeeperHome(props) {
           <Loading />
         ) : (
           <>
-            <NotificationListener />
+            <NotificationListener notifications={notifications} setNotifications={setNotifications} />
 
             <Navbar
               setOpenNotificationsSend={setOpenNotificationsSend}
@@ -62,6 +63,8 @@ function PendingShopkeeperHome(props) {
               <Route path="/services" exact element={<Services />} />
               <Route path="/aboutUs" exact element={<AboutUs />} />
               <Route path="/contactUs" exact element={<Contact />} />
+              <Route path="/account/*" exact element={<VerifyEmail profile={profile} setProfile={setProfile} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} />} />
+
               <Route
                 path="/profile"
                 exact

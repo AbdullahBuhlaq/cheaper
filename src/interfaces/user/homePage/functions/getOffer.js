@@ -27,12 +27,11 @@ async function getOffer(setRun, setOffer, setStatus, setOpen, city, location, ho
     //     offerUserId: 1,
     //   },
     // };
-    console.log(data);
     if (data.success) {
       setOffer({ ...data.data });
       setHomeInfo({ ...homeInfo, freeBoxToday: homeInfo.freeBoxToday - 1, free: { ...homeInfo.free, notTaken: homeInfo.free.notTaken + 1 } });
       setStatus("done");
-      setRun(true)
+      setRun(true);
       toast.success("مبروك!!", {
         position: toast.POSITION.TOP_CENTER,
       });

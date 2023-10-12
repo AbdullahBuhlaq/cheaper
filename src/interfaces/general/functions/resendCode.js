@@ -1,32 +1,32 @@
 import requestOptions from "../../../constants/requestOptions";
 import refreshToken from "../../../functions/refreshToken";
 
-async function changeEmailFunc(changeEmail, setDuringAdd, setProfile, setEdit, toast, profile, userInformation, setUserInformation, refreshStatus, setRefreshStatus) {
+async function resendCode(profile, toast, userInformation, setUserInformation, refreshStatus, setRefreshStatus) {
   try {
-    const newData = changeEmail;
-
     const infoRequestOptions = {
       ...requestOptions,
       headers: { ...requestOptions.headers, authorization: userInformation.token },
       method: "put",
       body: JSON.stringify({
-        ...changeEmail,
+        newEmail: profile.userInformation.email,
       }),
     };
 
-    setDuringAdd(true);
-    const response = await fetch(`${import.meta.env.VITE_URL}/account/ch-email`, infoRequestOptions);
+    console.log(profile.userInformation.email);
+
+    const response = await fetch(`${import.meta.env.VITE_URL}/account/resend`, infoRequestOptions);
     const data = await response.json();
+    console.log(data);
     if (data.success) {
-      setProfile({ ...profile, email: newData.newEmail, settings: { ...profile.settings, verify: { ...profile.settings.verify, email: false } } });
-      setEdit(false);
-      toast.success("تم التعديل بنجاح.", {
+      //   setProfile({ ...profile, email: newData.newEmail });
+
+      toast.success("تمت إعادة إرسال الكود.", {
         position: toast.POSITION.TOP_CENTER,
       });
     } else {
       if (data.error == "jwt expired") {
         const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await changeEmailFunc(changeEmail, setDuringAdd, setProfile, setEdit, toast, profile, { ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus);
+        await resendCode(profile, toast, { ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus);
       } else {
         console.log(data.error);
         toast.error(data.error, {
@@ -34,9 +34,7 @@ async function changeEmailFunc(changeEmail, setDuringAdd, setProfile, setEdit, t
         });
       }
     }
-    setDuringAdd(false);
   } catch (err) {
-    setDuringAdd(false);
     console.log(err);
     toast.error("عذرا حدث خطأ ما", {
       position: toast.POSITION.TOP_CENTER,
@@ -44,4 +42,4 @@ async function changeEmailFunc(changeEmail, setDuringAdd, setProfile, setEdit, t
   }
 }
 
-export default changeEmailFunc;
+export default resendCode;

@@ -6,7 +6,25 @@ function DetailsCard(props) {
       <>
         <motion.div className="details-profile-card" initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", duration: "1.2" }}>
           <div className="details-profile-card-header">
-            <h1>{props.keyName}</h1>
+            <h1>
+              {props.keyName}
+              {props.verify ? (
+                <>
+                  {props.verify.state ? (
+                    <span>{""}</span>
+                  ) : (
+                    <span
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        props.setPopupStatus(6);
+                      }}
+                    >
+                      {"(قم بتأكيد البريد )"}
+                    </span>
+                  )}
+                </>
+              ) : null}
+            </h1>
           </div>
 
           <div className="details-profile-card-body">

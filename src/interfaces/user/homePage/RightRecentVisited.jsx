@@ -8,8 +8,8 @@ function RightRecentVisited(props) {
       <>
         <div className="received-item-line">
           <div className="progress-line">
-            <span className="time start">{new Date(props.item.dateTake).toLocaleDateString()} </span>
-            <span className="time end">{new Date(new Date(props.item.dateTake).setDate(new Date(props.item.dateTake).getDate() + 2)).toLocaleDateString()} </span>
+            <span className="time start">{new Date(props.item.createdAt).toLocaleDateString()} </span>
+            <span className="time end">{new Date(new Date(props.item.createdAt).setDate(new Date(props.item.createdAt).getDate() + 2)).toLocaleDateString()} </span>
           </div>
           <div className="received-items-content">
             <div className="received-files">
@@ -29,6 +29,7 @@ function RightRecentVisited(props) {
                 );
               })}
             </div>
+            {console.log(props.item)}
             <div className="received-files-info">
               لقد قمت بزيارة <span className="info-purple">{props.item.namStore}</span> في تاريخ <span className="info-purple">{new Date(props.item.dateTake).toLocaleDateString()} </span>
             </div>

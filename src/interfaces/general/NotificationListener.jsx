@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { onMessageListener } from "./Firebase";
 
-const NotificationListener = () => {
+const NotificationListener = (props) => {
   const [notification, setNotification] = useState(false);
 
   const notify = () => toast(<ToastDisplay />);
@@ -24,6 +24,7 @@ const NotificationListener = () => {
 
   useEffect(() => {
     if (notification?.title) {
+      props.setNotifications({ [notification.id]: { title: notification.title, message: notification.body, avatar: notification.image, id: notification.id }, ...props.notifications });
       notify();
     }
   }, [notification]);

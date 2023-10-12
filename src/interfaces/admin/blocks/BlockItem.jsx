@@ -58,7 +58,10 @@ function BlockItem(props) {
               {checkPermissions(props.userInformation, ["admin.block.delete", "admin.block.all"]) ? (
                 <Button
                   classes={"action-button filter jsFilter"}
-                  action={() => deleteBlock(props.currentEdit.id, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.blocks, props.setBlocks, props.setCurrentEdit, props.toast)}
+                  action={(event) => {
+                    event.preventDefault();
+                    deleteBlock(props.currentEdit.id, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.blocks, props.setBlocks, props.setCurrentEdit, props.toast);
+                  }}
                   text={"حذف"}
                   disabled={duringAdd}
                   joiObject={joiBlock}

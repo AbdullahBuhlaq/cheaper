@@ -411,3 +411,8 @@ button {
     margin: 10px 0;
     cursor: pointer;
 }
+
+button:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}

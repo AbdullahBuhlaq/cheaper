@@ -22,6 +22,7 @@ export default async function getCityChart(userInformation, setUserInformation, 
           citiesObj[item.city] = true;
         })
       );
+
       await Promise.all(
         selectOptions.city.map((city) => {
           if (!citiesObj[city.name]) {

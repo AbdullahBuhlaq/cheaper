@@ -20,7 +20,7 @@ function Select(props) {
             value={props.state[props.name]}
             disabled={props.disabled}
           >
-            <option value="">{props.placeholder}</option>
+            {props.noChoose ? null : <option value="">{props.placeholder}</option>}
             {Object.keys(props.list).map((listItem, listIndex) => {
               return (
                 <option key={listIndex} value={props.list[listItem].id ? props.list[listItem].id : props.list[listItem].value}>

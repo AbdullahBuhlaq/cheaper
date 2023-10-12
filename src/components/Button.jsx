@@ -14,7 +14,7 @@ function Button(props) {
               isValid = await validateForm(event, props.joiObject, props.state, props.setStateErrors);
             }
             isValid
-              ? await props.action()
+              ? await props.action(event)
               : props.toast.info("يرجى إدخال البيانات كاملة بشكل صحيح!", {
                   position: props.toast.POSITION.TOP_CENTER,
                 });

@@ -8,7 +8,7 @@ export default async function deleteCategory(id, userInformation, setUserInforma
     if (data.success) {
       delete categories[id];
       setCategories({ ...categories });
-      toast.success("تم حذف الدور", {
+      toast.success("تم حذف التصنيف", {
         position: toast.POSITION.TOP_CENTER,
       });
     } else {

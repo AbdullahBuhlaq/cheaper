@@ -30,7 +30,6 @@ export default async function getOffers(userInformation, setUserInformation, ref
     andMark = true;
     if (andMark) url += `&`;
     url += `size=${offersPage.size}`;
-    console.log(url);
     let response = await fetch(url, { ...requestOptions, method: "get", headers: { ...requestOptions.headers, authorization: userInformation.token } });
     let data = await response.json();
     if (data.success) {

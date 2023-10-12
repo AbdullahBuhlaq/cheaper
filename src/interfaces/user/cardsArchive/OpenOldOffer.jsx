@@ -77,7 +77,7 @@ function OpenOldOffer(props) {
                     <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
                   </svg>
                 </div>
-                <span>{props.offer.storeInfo.phoneNumber}</span>
+                <span>{props.offer.storeInfo.user.phoneNumber}</span>
               </div>
               <div className="info-wrapper">
                 <div className="info-icon">
@@ -165,8 +165,7 @@ function OpenOldOffer(props) {
                 eva != -1 ? (
                   <>
                     <div className="app-main-right-header">
-                      {console.log(props.offer)}
-                      <span>{props.offer.evaluate}</span>
+                      <span>{props.offer.evaluate === false ? "-" : (Math.round(props.offer.evaluate * 100) / 100).toFixed(2)}</span>
                       <a href="#">التقييمات</a>
                     </div>
                     {eva.map((item, index) => {

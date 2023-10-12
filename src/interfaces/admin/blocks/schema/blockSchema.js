@@ -50,10 +50,8 @@ const blockSchema = {
       else return value;
     })
     .messages(errorMessages.reason),
-  restrictions: Joi.object({
-    show: Joi.array().items(Joi.string().trim().min(2).max(150)).required().messages(errorMessages.show),
-    action: Joi.array().items(Joi.string().trim().min(1).max(150)).messages(errorMessages.action).required(),
-  }).required(),
+  show: Joi.array().items(Joi.string().trim().min(2).max(150)).required().messages(errorMessages.show),
+  action: Joi.array().items(Joi.string().trim().min(1).max(150)).messages(errorMessages.action).required(),
   duration: Joi.number().integer().min(1).max(1000).required().messages(errorMessages.duration),
 };
 

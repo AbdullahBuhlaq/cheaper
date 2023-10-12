@@ -13,6 +13,7 @@ import HeaderButton from "../../../../components/mainArea";
 import UpdateProfile from "./UpdateProfile";
 import UpdateStoreInformation from "./UpdateStoreInformation";
 import getGeneralCategories from "../../../../functions/getGeneralCategories";
+import SendCode from "../../../general/SendCode";
 
 function PendingShopkeeperProfile(props) {
   const [loading, setLoading] = useState(true);
@@ -93,6 +94,8 @@ function PendingShopkeeperProfile(props) {
                 classes={"form-popup-small"}
                 component={<UpdateStoreInformation categories={props.categories} storeInformation={props.storeInformation} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} setEdit={setPopupStatus} setStoreInformation={props.setStoreInformation} />}
               />
+            ) : popupStatus == 6 ? (
+              <Popup setOpen={setPopupStatus} classes={"form-popup-small"} component={<SendCode profile={props.profile} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} setEdit={setPopupStatus} setProfile={props.setProfile} />} />
             ) : null}
           </>
         )}
