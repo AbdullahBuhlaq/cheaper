@@ -26,7 +26,7 @@ function SendNotifications(props) {
           <Loading />
         ) : (
           <>
-            <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+            <div style={{ display: "flex", flexDirection: "column", width: "100%", height: "85vh", overflow: "auto" }}>
               <div className="notifications-options-container" style={{ display: "flex", width: "100%", justifyContent: "space-evenly" }}>
                 <form>
                   <div className="row">
