@@ -16,7 +16,7 @@ function SelectMultipleFromDB(props) {
     return (
       <>
         <div className="column" style={{ position: "relative" }}>
-          <motion.h3 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: "1.2" }}>
+          <motion.h3 style={{ opacity: 1 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: "1.2" }}>
             {props.label}
           </motion.h3>
           <div style={{ position: "relative" }}>

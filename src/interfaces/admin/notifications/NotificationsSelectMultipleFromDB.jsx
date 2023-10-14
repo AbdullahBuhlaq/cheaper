@@ -15,9 +15,9 @@ function NotificationsSelectMultipleFromDB(props) {
         <div className="column">
           <h3>{props.label}</h3>
           <div style={{ position: "relative" }}>
-            <select className="my-listbox" defaultValue={"hello"} readonly disabled={true}>
+            <select className="my-listbox" style={{ opacity: 1 }} defaultValue={"hello"} readonly disabled={true}>
               <option value="hello" style={{ display: "none" }}>
-                {"أيا يكن"}
+                {"اختر أصناف ..."}
               </option>
             </select>
             <div
