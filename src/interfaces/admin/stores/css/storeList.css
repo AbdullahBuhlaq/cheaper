@@ -278,6 +278,7 @@
     /* border-bottom: 5px solid #0298ff; */
     padding: 17px;
     font-size: 17px;
+    color: var(--main-font-color)
 }
 
 /* Change background color of buttons on hover */

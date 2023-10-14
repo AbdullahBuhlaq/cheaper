@@ -34,13 +34,13 @@ function AddBlockForm(props) {
           </div>
         </form>
 
-        <div className="header upcoming">صلاحيات التعديل</div>
+        <div className="header upcoming">حظورات التعديل</div>
         {Object.keys(props.permission).map((permissionGroup, permissionGroupIndex) => {
           return <PermissionGroup key={permissionGroupIndex} id={-1} index={index} currentEdit={props.currentEdit} setIndex={setIndex} permission={props.permission} permissionGroup={permissionGroup} permissionGroupIndex={permissionGroupIndex} block={block} setBlock={setBlock} blockErrors={blockErrors} setBlockErrors={setBlockErrors} blockSchema={blockSchema} name={"action"} />;
         })}
         {blockErrors["action"] && <div className="validating-error">{blockErrors["action"]}</div>}
 
-        <div className="header upcoming">صلاحيات القراءة</div>
+        <div className="header upcoming">حظورات القراءة</div>
         {props.show.map((showItem, showIndex) => {
           return <ShowItem key={showIndex} id={-1} index={showIndex} showItem={showItem} role={block} setRole={setBlock} roleErrors={blockErrors} setRoleErrors={setBlockErrors} roleSchema={blockSchema} name={"show"} />;
         })}
@@ -48,7 +48,19 @@ function AddBlockForm(props) {
         {checkPermissions(props.userInformation, ["admin.block.create", "admin.block.all"]) ? (
           <form className="role-footer">
             <div className="button-container">
-              <Button classes={"action-button filter jsFilter"} action={() => addBlock(block, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setDuringAdd, props.blocks, props.setBlocks, props.setCurrentEdit, props.toast)} text={"إرسال"} disabled={duringAdd} joiObject={joiBlock} state={block} setStateErrors={setBlockErrors} toast={props.toast} />
+              <Button
+                classes={"action-button filter jsFilter"}
+                action={(event) => {
+                  event.preventDefault();
+                  addBlock(block, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setDuringAdd, props.blocks, props.setBlocks, props.setCurrentEdit, props.toast);
+                }}
+                text={"إرسال"}
+                disabled={duringAdd}
+                joiObject={joiBlock}
+                state={block}
+                setStateErrors={setBlockErrors}
+                toast={props.toast}
+              />
             </div>
           </form>
         ) : null}

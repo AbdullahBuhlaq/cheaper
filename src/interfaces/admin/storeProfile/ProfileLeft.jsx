@@ -33,7 +33,7 @@ function StoreProfileLeft(props) {
             <AutoSlidingImages images={props.store.storeInfo.story.length ? story : defaultSecondStory} />
           </div>
 
-          <ProfileOptions userInformation={props.userInformation} setOpenBlocks={props.setOpenBlocks} name={props.store.storeInfo["nameStore"]} />
+          <ProfileOptions userInformation={props.userInformation} setOpenBlocks={props.setOpenBlocks} name={props.store.storeInfo["nameStore"]} deletedAt={props.store.storeInfo.deletedAt} />
           <ProfileInfoHeader store={props.store} />
           <ProfileCardsContainer store={props.store} />
           <ProfilePacks packsChart={props.packsChart} userInformation={props.userInformation} storeChart={props.storeChart} packs={props.packs} />

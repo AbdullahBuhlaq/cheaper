@@ -93,11 +93,11 @@ const selectOptions = {
     { name: "المستخدمين", value: "users", icon: <FcConferenceCall /> },
     { name: "المحلات", value: "stores", icon: <FcShop /> },
   ],
-  userShow: [
+  shopkeeperShow: [
     { name: "الشخصية", value: "profile", icon: <FcBusinessman /> },
     { name: "المحل", value: "storeInformation", icon: <FcShop /> },
   ],
-  shopkeeperShow: [
+  userShow: [
     { name: "الشخصية", value: "profile", icon: <FcBusinessman /> },
     { name: "الرئيسية", value: "home", icon: <FcHome /> },
     { name: "العروض", value: "offers", icon: <GiOpenTreasureChest /> },

@@ -19,6 +19,8 @@ function StorePackItem(props) {
   try {
     return (
       <>
+        {console.log(props.item)}
+
         <div className="received-item-line">
           <div className="progress-line" style={{ marginRight: "5px" }}>
             <span className="time start">{new Date(props.item.createdAt).toLocaleDateString()}</span>

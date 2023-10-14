@@ -6,12 +6,12 @@ async function deleteUserBlockFunc(usersBlockedChart, setUsersBlockedChart, bloc
     const userId = currentShowBlocks.id;
     const infoRequestOptions = {
       ...requestOptions,
-      method: "put",
+      method: "delete",
       headers: { ...requestOptions.headers, authorization: userInformation.token },
     };
     setDuringAdd(true);
 
-    const response = await fetch(`${import.meta.env.VITE_URL}/admin/users/unblock?userId=${userId}&ids[]=${+id}`, infoRequestOptions);
+    const response = await fetch(`${import.meta.env.VITE_URL}/admin/users/delete-block?userId=${userId}&ids[]=${+id}`, infoRequestOptions);
     const data = await response.json();
 
     // const data = { success: true };

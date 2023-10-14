@@ -38,13 +38,14 @@ function BlockItem(props) {
           </div>
         </form>
 
-        <div className="header">صلاحيات التعديل</div>
+        <div className="header">حظورات التعديل</div>
         {Object.keys(props.permission).map((permissionGroup, permissionGroupIndex) => {
           return <PermissionGroup key={permissionGroupIndex} index={index} currentEdit={props.currentEdit} setIndex={setIndex} permission={props.permission} permissionGroup={permissionGroup} permissionGroupIndex={permissionGroupIndex} block={block} setBlock={setBlock} blockErrors={blockErrors} setBlockErrors={setBlockErrors} blockSchema={blockSchema} name={"action"} />;
         })}
         {blockErrors["action"]}
 
-        <div className="header upcoming">صلاحيات القراءة</div>
+        <div className="header upcoming">حظورات القراءة</div>
+        {console.log(props.currentEdit)}
         {props.show.map((showItem, showIndex) => {
           return <ShowItem key={showIndex} disabled={props.currentEdit.id == 1} id={props.currentEdit.id} index={showIndex} showItem={showItem} role={block} setRole={setBlock} roleErrors={blockErrors} setRoleErrors={setBlockErrors} roleSchema={blockSchema} name={"show"} />;
         })}

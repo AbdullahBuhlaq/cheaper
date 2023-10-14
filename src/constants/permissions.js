@@ -91,6 +91,7 @@ export const shopkeeperPermission = {
     "مسح رمز ال QR عند المستخدم": "manager.verifyQr",
     "تحديث المعلومات الخاصة بالمحل": "manager.updateStore",
     "طلب المعلومات الخاصة بالمحل": "manager.getStoreInfo",
+    "الظهور في العروض اليومية": "store.disableShowInCart",
   },
   الباقات: {
     "إلغاء تفعيل باقة": "manager.deletePack",

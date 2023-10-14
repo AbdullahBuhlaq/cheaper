@@ -70,6 +70,7 @@ export const reversePermissions = {
   "manager.deleteStory": "حذف صور حالات",
   "manager.uploadAvatar": "رفع صورة المحل",
   "manager.deleteAvatar": "حذف صورة المحل",
+  "store.disableShowInCart": "الظهور في العروض اليومية",
 };
 
 export const reverseShow = {

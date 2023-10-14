@@ -11,7 +11,7 @@ async function deleteUserBlockFunc2(blocks, userBlocks, setUserBlocks, id, curre
     };
     setDuringAdd(true);
 
-    const response = await fetch(`${import.meta.env.VITE_URL}/admin/users/deleteMultiBlock?userId=${userId}&ids[]=${+id}`, infoRequestOptions);
+    const response = await fetch(`${import.meta.env.VITE_URL}/admin/users/delete-block?userId=${userId}&ids[]=${+id}`, infoRequestOptions);
     const data = await response.json();
 
     // const data = { success: true };

@@ -32,7 +32,6 @@ function Profile(props) {
           </div>
         ) : (
           <>
-            {console.log(props.profile.userInformation.settings.verify.email)}
             <div className="profile-main-area">
               <HeaderButton />
 

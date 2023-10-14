@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import PackCard from "./PackCard";
 import ProfileDetails from "./ProfileDetails";
 import ProfileHeader from "./ProfileHeader";
@@ -30,7 +30,9 @@ function ProfileLeft(props) {
       <>
         <div className="profile-left">
           <div className="main-header-titel">
-            <h1 href="#">الملف الشخصي للمستخدم</h1>
+            <h1 href="#">
+              الملف الشخصي للمستخدم<tag style={{ color: "red" }}>{props.userProfile.information.disableAt ? " ( محذوف )" : null}</tag>
+            </h1>
 
             <div className="dropdown">
               {checkPermissions(props.userInformation, ["admin.users.block.information", "admin.users.update", "admin.users.delete", "admin.users.block.allBlockForUser", "admin.users.block.deleteBlock", "admin.users.block.multiUnBlock", "admin.users.block.blockUser"]) ? (
@@ -62,7 +64,7 @@ function ProfileLeft(props) {
                     <div>تعديل</div>
                   </li>
                 ) : null}
-                {props.userProfile.disableAt ? null : checkPermissions(props.userInformation, ["admin.users.delete"]) ? (
+                {props.userProfile.information.disableAt ? null : checkPermissions(props.userInformation, ["admin.users.delete"]) ? (
                   <li
                     onClick={() => {
                       props.deleteUser(props.userProfile.information.id);

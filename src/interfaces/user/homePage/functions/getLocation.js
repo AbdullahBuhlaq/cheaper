@@ -3,6 +3,7 @@ function getLocation(setLocation) {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
         (location) => {
+          console.log(location);
           if (location.coords.accuracy > 1000) {
             setLocation({ status: "success", location: { coords: { latitude: 34.732427, longitude: 36.713696 } } });
             // setLocation({ status: "error", message: "لم نتمكن من العثور على موقعك بدقة, يرجى المحاولة مرة اخرى" });

@@ -22,7 +22,8 @@ function ProfileStoreBlocks(props) {
         {props.blocks != -1 ? (
           <>
             <div className="categories-main-modal-body">
-              <BlocksHeaderStore blocks={props.blocks} userInformation={props.userInformation} count={props.blocks.count} blocked={props.blocks.blocked} />
+              {console.log(props.blocks)}
+              <BlocksHeaderStore blocks={props.blocks} userInformation={props.userInformation} count={props.blocks.rows.length} blocked={props.blocks.blocked} />
 
               {checkPermissions(props.userInformation, ["admin.store.accepted.block"]) ? (
                 <AddNewBlockStore blocks={props.blocks} setBlocks={props.setBlocks} store={props.store} setStore={props.setStore} id={props.id} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} />

@@ -14,7 +14,7 @@ import UpdateUserProfile from "./profileSection/UpdateUserProfile";
 import getGeneralCategories from "../../../functions/getGeneralCategories";
 import Loading from "../../general/Loading";
 import SecondLoading from "../../general/SecondLoading";
-import deleteUserFunc2 from "./function/deleteUser";
+import deleteUserFunc2 from "./profileSection/function/deleteUser";
 import { profileChart } from "./data/profleChart";
 import StorePopup from "./profileSection/StorePopup";
 import checkPermissions from "../../../functions/checkPermission";
@@ -49,7 +49,7 @@ function UserProfile(props) {
   }, [props.categories, userProfile]);
 
   async function deleteUser(id) {
-    deleteUserFunc2(id, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast);
+    deleteUserFunc2(id, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, userProfile, setUserProfile, props.toast);
   }
 
   try {

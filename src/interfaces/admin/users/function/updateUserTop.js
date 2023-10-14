@@ -37,7 +37,7 @@ async function updateUserTop(user, currentEdit, setDuringAdd, image, userInforma
           finalCats = [...finalCats, { name: cat, emoji: "" }];
         })
       );
-      setUsers({ ...users, [id]: { category: finalCats, ...newData } });
+      setUsers({ ...users, [id]: { ...users[id], category: finalCats, ...newData, avatar: data.data ? data.data : users[id].avatar } });
       setCurrentEdit(false);
       toast.success("تم تعديل المستخدم", {
         position: toast.POSITION.TOP_CENTER,

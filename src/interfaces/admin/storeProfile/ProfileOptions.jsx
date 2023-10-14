@@ -15,7 +15,9 @@ function ProfileOptions(props) {
     return (
       <>
         <div className="main-header-titel">
-          <h1 href="#">واجهة محل {props.name}</h1>
+          <h1 href="#">
+            واجهة محل {props.name} <tag style={{ color: "red" }}>{props.deletedAt ? " ( محذوف ) " : null}</tag>
+          </h1>
           <div className="dropdown">
             {checkPermissions(props.userInformation, ["admin.store.accepted.block", "admin.store.accepted.unblock", "admin.store.accepted.deleteBlock", "admin.store.accepted.allBlock"]) ? (
               <button

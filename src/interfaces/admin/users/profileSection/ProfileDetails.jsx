@@ -10,10 +10,10 @@ function ProfileDetails(props) {
     return (
       <>
         <section className="details-profile-cards">
-          <DetailsCard keyName={"الجنس"} value={props.userProfile.infoUser["gender"]} icon={props.userProfile.infoUser["gender"] == "ذكر" ? <BsGenderMale /> : <BsGenderFemale />} />
-          <DetailsCard keyName={"رقم الموبايل"} value={props.userProfile.infoUser["phoneNumber"]} icon={<AiOutlinePhone />} />
-          <DetailsCard keyName={"تاريخ الميلاد"} value={props.userProfile.infoUser["birthday"]} icon={<HiOutlineCake />} />
-          <DetailsCard keyName={"اسم المستخدم"} value={props.userProfile.infoUser["username"] + "@"} icon={<FaRegUserCircle />} />
+          <DetailsCard keyName={"الجنس"} value={props.userProfile.information["gender"]} icon={props.userProfile.information["gender"] == "ذكر" ? <BsGenderMale /> : <BsGenderFemale />} />
+          <DetailsCard keyName={"رقم الموبايل"} value={props.userProfile.information["phoneNumber"]} icon={<AiOutlinePhone />} />
+          <DetailsCard keyName={"تاريخ الميلاد"} value={props.userProfile.information["birthday"]} icon={<HiOutlineCake />} />
+          <DetailsCard keyName={"اسم المستخدم"} value={props.userProfile.information["username"] + "@"} icon={<FaRegUserCircle />} />
           <DetailsCard keyName={"حالة الحظر"} value={props.userProfile.checkIfBlocked ? "محظور" : "غير محظور"} icon={<LiaUserSlashSolid />} />
           <DetailsCard keyName={"حالة النشاط"} value={props.userProfile.active ? "نشط" : "غير نشط"} icon={<LiaUserSlashSolid />} />
         </section>

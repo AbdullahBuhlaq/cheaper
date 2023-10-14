@@ -13,6 +13,14 @@ function PopupPendingStore(props) {
   const [storeInformation, setStoreInformation] = useState(-1);
   const [openOptions, setOpenOptions] = useState(false);
 
+  useEffect(() => {
+    document.addEventListener("click", (e) => {
+      if (e.target.className != "dropbtn") {
+        setOpenOptions(false);
+      }
+    });
+  }, []);
+
   try {
     return (
       <>

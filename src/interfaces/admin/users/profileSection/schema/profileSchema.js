@@ -117,56 +117,54 @@ const errorMessages = {
 };
 
 const profileSchema = {
-  userInfo: Joi.object({
-    name: Joi.string()
-      .required()
-      .min(2)
-      .max(50)
-      .trim()
-      .custom((value, helpers) => {
-        if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
-        else return value;
-      })
-      .messages(errorMessages.name),
-    gender: Joi.string().required().messages(errorMessages.gender),
-    birthday: Joi.date().required().max(moment()).min(moment("1930-01-01")).messages(errorMessages.birthday),
-    username: Joi.string()
-      .trim()
-      .pattern(/^[A-Za-z]+[a-zA-Z0-9\_\.]*$/)
-      .min(3)
-      .max(30)
-      .required()
-      .messages(errorMessages.username),
-    phoneNumber: Joi.string()
-      .trim()
-      .required()
-      .pattern(/^(09)(\d{8})$/)
-      .messages(errorMessages.phoneNumber),
+  name: Joi.string()
+    .required()
+    .min(2)
+    .max(50)
+    .trim()
+    .custom((value, helpers) => {
+      if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
+      else return value;
+    })
+    .messages(errorMessages.name),
+  gender: Joi.string().required().messages(errorMessages.gender),
+  birthday: Joi.date().required().max(moment()).min(moment("1930-01-01")).messages(errorMessages.birthday),
+  username: Joi.string()
+    .trim()
+    .pattern(/^[A-Za-z]+[a-zA-Z0-9\_\.]*$/)
+    .min(3)
+    .max(30)
+    .required()
+    .messages(errorMessages.username),
+  phoneNumber: Joi.string()
+    .trim()
+    .required()
+    .pattern(/^(09)(\d{8})$/)
+    .messages(errorMessages.phoneNumber),
 
-    category: Joi.array()
-      .items(
-        Joi.string()
-          .trim()
-          .max(30)
-          .required()
-          .custom((value, helpers) => {
-            if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
-            else return value;
-          })
-          .message(errorMessages.category)
-      )
-      .min(3)
-      .required(),
-    password: Joi.string()
-      .empty()
-      .min(8)
-      .max(50)
-      .custom((value, helpers) => {
-        if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
-        else return value;
-      })
-      .messages(errorMessages.password),
-  }),
+  category: Joi.array()
+    .items(
+      Joi.string()
+        .trim()
+        .max(30)
+        .required()
+        .custom((value, helpers) => {
+          if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
+          else return value;
+        })
+        .message(errorMessages.category)
+    )
+    .min(3)
+    .required(),
+  password: Joi.string()
+    .empty()
+    .min(8)
+    .max(50)
+    .custom((value, helpers) => {
+      if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
+      else return value;
+    })
+    .messages(errorMessages.password),
 };
 
 export default profileSchema;

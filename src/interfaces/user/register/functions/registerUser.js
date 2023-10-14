@@ -1,6 +1,7 @@
 import requestOptions from "../../../../constants/requestOptions";
 import getDeviceToken from "../../../../functions/getDeviceToken";
 import secureLocalStorage from "react-secure-storage";
+import { userInitialPermissions } from "../../../../constants/initialPermissions";
 async function registerUser(user, toast, navigate, setDuringAdd) {
   try {
     const newData = user;
@@ -19,7 +20,7 @@ async function registerUser(user, toast, navigate, setDuringAdd) {
     const response = await fetch(`${import.meta.env.VITE_URL}/auth/signup`, infoRequestOptions);
     const data = await response.json();
     if (data.success) {
-      secureLocalStorage.setItem("userInformation", JSON.stringify({ ...data.data, typeUser: "مستخدم" }));
+      secureLocalStorage.setItem("userInformation", JSON.stringify({ ...data.data, ...userInitialPermissions, typeUser: "مستخدم" }));
       toast.success("أهلا وسهلا!", {
         position: toast.POSITION.TOP_CENTER,
       });

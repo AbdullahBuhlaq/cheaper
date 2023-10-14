@@ -7,7 +7,7 @@ import ShopkeeperHome from "../shopkeeper/acceptedShopkeeper/ShopkeeperHome";
 import PendingShopkeeperHome from "../shopkeeper/pendingShopkeeper/PendingShopkeeperHome";
 import secureLocalStorage from "react-secure-storage";
 function Hub(props) {
-  const [userInformation, setUserInformation] = useState({});
+  const [userInformation, setUserInformation] = useState(-1);
   const [refreshStatus, setRefreshStatus] = useState("good");
 
   const [hub, setHub] = useState("");
@@ -31,13 +31,13 @@ function Hub(props) {
   try {
     return (
       <>
-        {hub == "user" ? (
+        {hub == "user" && userInformation != -1 ? (
           <UserHome userInformation={userInformation} setUserInformation={setUserInformation} refreshStatus={refreshStatus} setRefreshStatus={setRefreshStatus} toast={props.toast} navigate={navigate} />
-        ) : hub == "admin" ? (
+        ) : hub == "admin" && userInformation != -1 ? (
           <AdminHome userInformation={userInformation} setUserInformation={setUserInformation} refreshStatus={refreshStatus} setRefreshStatus={setRefreshStatus} toast={props.toast} navigate={navigate} />
-        ) : hub == "shopkeeper" ? (
+        ) : hub == "shopkeeper" && userInformation != -1 ? (
           <ShopkeeperHome userInformation={userInformation} setUserInformation={setUserInformation} refreshStatus={refreshStatus} setRefreshStatus={setRefreshStatus} toast={props.toast} navigate={navigate} />
-        ) : hub == "newShopkeeper" ? (
+        ) : hub == "newShopkeeper" && userInformation != -1 ? (
           <PendingShopkeeperHome userInformation={userInformation} setUserInformation={setUserInformation} refreshStatus={refreshStatus} setRefreshStatus={setRefreshStatus} toast={props.toast} navigate={navigate} />
         ) : hub == "general" ? (
           <GeneralHome toast={props.toast} navigate={navigate} />

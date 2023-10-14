@@ -18,7 +18,7 @@ function UpdateEmployee(props) {
     email: props.currentEdit.email,
     phoneNumber: props.currentEdit.phoneNumber,
     username: props.currentEdit.username,
-    password: props.currentEdit.password,
+    password: "",
     roleId: props.currentEdit.roleId,
   });
 
@@ -29,7 +29,7 @@ function UpdateEmployee(props) {
       email: props.currentEdit.email,
       phoneNumber: props.currentEdit.phoneNumber,
       username: props.currentEdit.username,
-      password: props.currentEdit.password,
+      password: "",
       roleId: props.currentEdit.roleId,
     });
   }, [props.currentEdit]);

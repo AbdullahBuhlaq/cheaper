@@ -30,14 +30,13 @@ async function updateUser(user, currentEdit, setDuringAdd, image, userInformatio
     const data = response.data;
     // const data = { success: true };
     if (data.success) {
-      console.log(data);
       let finalCats = [];
       await Promise.all(
         newData.category.map((cat) => {
           finalCats = [...finalCats, { name: cat, emoji: "" }];
         })
       );
-      setUserProfile({ ...userProfile, category: finalCats, infoUser: { ...userProfile.infoUser, ...newData } });
+      setUserProfile({ ...userProfile, category: finalCats, information: { ...userProfile.information, ...newData, avatar: data.data ? data.data : userProfile.information.avatar } });
       setCurrentEdit(false);
       toast.success("تم تعديل المستخدم", {
         position: toast.POSITION.TOP_CENTER,

@@ -17,7 +17,7 @@ import Page404 from "../general/Page404";
 import Confitte from "react-confetti";
 
 function UserHome(props) {
-  const [currentTab, setCurrentTab] = useState("profile");
+  const [currentTab, setCurrentTab] = useState("main");
   const [notifications, setNotifications] = useState(-1);
   const [loading, setLoading] = useState(false);
   const [notificationsPage, setNotificationsPage] = useState({ page: 1, size: 5, loadMore: true, loadingNow: false });

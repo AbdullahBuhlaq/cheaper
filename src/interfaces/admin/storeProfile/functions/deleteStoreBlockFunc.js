@@ -12,13 +12,16 @@ export default async function deleteStoreBlockFunc(id, userInformation, setUserI
         setStore({ ...store, block: false });
       }
       const newCheck = blocks.rows[id]?.unblock_date ? blocks.blocked : false;
-      delete blocks.rows[id];
+      let newRows = [];
+      await Promise.all(
+        blocks.rows.map((item) => {
+          if (item.id != id) return item;
+        })
+      );
       setBlocks({
         ...blocks,
         blocked: newCheck,
-        rows: {
-          ...blocks.rows,
-        },
+        rows: [...newRows],
       });
       toast.success("تم حذف الحظر بنجاح", {
         position: toast.POSITION.TOP_CENTER,

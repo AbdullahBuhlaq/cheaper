@@ -20,6 +20,7 @@ export default async function blockStore(id, userInformation, setUserInformation
             "block.reason": "لقد تجاوز المحل الخاص بك على الحد الادنة من الابلاغات",
             "block.duration": 15,
             "block.restrictions": { show: ["store"], action: ["store.disableShowInCart"] },
+            id: data.data,
           },
         ],
       });
