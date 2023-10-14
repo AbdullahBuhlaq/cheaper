@@ -1,7 +1,7 @@
 import requestOptions from "../../../../constants/requestOptions";
 import refreshToken from "../../../../functions/refreshToken";
 
-async function sendGift(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast, setCurrentGift, offer, username, offers, setOffers, setEdit) {
+async function sendGift(setCurrentOffer, userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast, setCurrentGift, offer, username, offers, setOffers, setEdit) {
   try {
     setCurrentGift(username);
     const infoRequestOptions = {
@@ -14,13 +14,16 @@ async function sendGift(userInformation, setUserInformation, refreshStatus, setR
     const data = await response.json();
     if (data.success) {
       setEdit(false);
+      setCurrentOffer(false);
+      delete offers[offer.offerUserId];
+      setOffers({ ...offers });
       toast.success("تم إهداء العرض بنجاح.", {
         position: toast.POSITION.TOP_CENTER,
       });
     } else {
       if (data.error == "jwt expired") {
         const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await sendGift({ ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, toast, setCurrentGift, offer, username, offers, setOffers, setEdit);
+        await sendGift(setCurrentOffer, { ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, toast, setCurrentGift, offer, username, offers, setOffers, setEdit);
       } else {
         console.log(data.error);
         toast.error(data.error, {

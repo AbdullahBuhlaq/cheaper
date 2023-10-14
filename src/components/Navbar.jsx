@@ -84,14 +84,24 @@ function Navbar(props) {
             {props.tabs.length ? (
               <>
                 <div className={"menu-item highlight" + (showNotifications ? " show" : "")} style={{ zIndex: "30" }}>
-                  <div className="menu-text" style={{ zIndex: "30" }} onClick={() => setShowNotifications(!showNotifications)}>
+                  <div
+                    className="menu-text"
+                    style={{ zIndex: "30" }}
+                    onClick={() => {
+                      setShowNotifications(!showNotifications);
+                      props.setThereIsNotifications(0);
+                    }}
+                  >
                     <TbBellRinging />
+                    {props.thereIsNotifications <= 0 ? null : <span style={{ position: "absolute", top: 0, right: 0, width: "10px", height: "10px", backgroundColor: "red", borderRadius: "50%", display: "flex", justifyContent: "center", alignItems: "center", fontSize: "10px", color: "white", overflow: "hidden" }}>{props.thereIsNotifications != -1 ? props.thereIsNotifications : null}</span>}
                   </div>
                   <div className={"sub-menu double" + (showNotifications ? " show" : "")} style={{ zIndex: "30" }}>
                     <div className="notifications-last-update">
-                      {Object.keys(props.notifications).map((item, index) => {
-                        return <NotificationItem key={index} item={props.notifications[item]} />;
-                      })}
+                      {props.notifications != -1
+                        ? Object.keys(props.notifications).map((item, index) => {
+                            return <NotificationItem key={index} item={props.notifications[item]} />;
+                          })
+                        : null}
                       <LoadMoreNotifications
                         userInformation={props.userInformation}
                         setUserInformation={props.setUserInformation}

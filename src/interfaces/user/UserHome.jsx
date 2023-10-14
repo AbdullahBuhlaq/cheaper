@@ -15,11 +15,12 @@ import AboutUs from "../general/AboutUs";
 import Contact from "../general/Contact";
 import Page404 from "../general/Page404";
 import Confitte from "react-confetti";
+import getNotificationsCount from "../../functions/getNotificationsCount";
 
 function UserHome(props) {
   const [currentTab, setCurrentTab] = useState("main");
   const [notifications, setNotifications] = useState(-1);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [notificationsPage, setNotificationsPage] = useState({ page: 1, size: 5, loadMore: true, loadingNow: false });
   const [profile, setProfile] = useState(-1);
   // const [packs, setPacks] = useState(-1);
@@ -28,13 +29,14 @@ function UserHome(props) {
   const [categories, setCategories] = useState(-1);
   const [offers, setOffers] = useState(-1);
   const [dimension, setDimension] = useState({ width: 0, height: 0 });
+  const [thereIsNotifications, setThereIsNotifications] = useState(-1);
 
   useEffect(() => {
-    if (notifications == -1) getNotifications(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setNotifications, notifications, props.toast, notificationsPage, setNotificationsPage);
+    if (thereIsNotifications == -1) getNotificationsCount(setThereIsNotifications, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setNotifications, notifications, props.toast, notificationsPage, setNotificationsPage);
   }, []);
   useEffect(() => {
-    if (notifications != -1) setLoading(false);
-  }, [notifications]);
+    if (thereIsNotifications != -1) setLoading(false);
+  }, [thereIsNotifications]);
 
   const [run, setRun] = useState(false);
 
@@ -81,6 +83,8 @@ function UserHome(props) {
             ) : null}
 
             <Navbar
+              setThereIsNotifications={setThereIsNotifications}
+              thereIsNotifications={thereIsNotifications}
               notifications={notifications}
               setNotifications={setNotifications}
               tabs={userTabs}

@@ -15,6 +15,7 @@ async function sendEva(userInformation, setUserInformation, refreshStatus, setRe
 
     const response = await fetch(`${import.meta.env.VITE_URL}/user/spam-evaluate?type=evaluate&offerUserId=${currentOffer.offerUserId}`, infoRequestOptions);
     const data = await response.json();
+    console.log(data);
     if (data.success) {
       setOffers({ ...offers, [currentOffer.offerUserId]: { ...offers[currentOffer.offerUserId], evaluate: eva } });
       toast.success("تم إرسال التقييم بنجاح.", {

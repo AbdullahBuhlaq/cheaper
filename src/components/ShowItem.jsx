@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import handleSave from "../functions/handleSave";
 function ShowItem(props) {
   try {
+    if (props.showItem.value == "profile") return <></>;
     return (
       <div key={props.id} className="task">
         <input

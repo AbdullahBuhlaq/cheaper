@@ -63,7 +63,7 @@ function Offers(props) {
             <Popup
               setOpen={setOpenSendGift}
               classes={"form-popup-small"}
-              component={<SendGift offer={openSendGift} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} setEdit={setOpenSendGift} offers={props.offers} setOffers={props.setOffers} />}
+              component={<SendGift offer={openSendGift} setCurrentOffer={setCurrentOffer} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} setEdit={setOpenSendGift} offers={props.offers} setOffers={props.setOffers} />}
             />
           </>
         ) : null}

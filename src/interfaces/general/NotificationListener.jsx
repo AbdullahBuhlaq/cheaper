@@ -24,7 +24,8 @@ const NotificationListener = (props) => {
 
   useEffect(() => {
     if (notification?.title) {
-      props.setNotifications({ [notification.id]: { title: notification.title, message: notification.body, avatar: notification.image, id: notification.id }, ...props.notifications });
+      console.log("notifications got", notification);
+      props.setNotifications([{ title: notification.title, message: notification.body, avatar: notification.image }, ...props.notifications]);
       notify();
     }
   }, [notification]);

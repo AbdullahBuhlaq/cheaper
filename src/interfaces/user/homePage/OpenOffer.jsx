@@ -190,16 +190,14 @@ function OpenOffer(props) {
                     </>
                   ) : (
                     <>
-                      <div style={{ height: "calc(96% - 200px)", overflow: "auto" }}>
-                        <div className="app-main-right-header">
-                          <span>{offer.evaluate === null ? "-" : (Math.round(offer.evaluate * 100) / 100).toFixed(2)}</span>
-                          <a href="#">التقييمات</a>
-                        </div>
-                        {eva.map((item, index) => {
-                          return <Eva key={index} item={item} />;
-                        })}
-                        <LoadMoreEvas userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} setUsers={setEva} users={eva} toast={props.toast} usersPage={evaPage} setUsersPage={setEvaPage} id={offer.storeId} />
+                      <div className="app-main-right-header">
+                        <span>{offer.evaluate === null ? "-" : (Math.round(offer.evaluate * 100) / 100).toFixed(2)}</span>
+                        <a href="#">التقييمات</a>
                       </div>
+                      {eva.map((item, index) => {
+                        return <Eva key={index} item={item} />;
+                      })}
+                      <LoadMoreEvas userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} setUsers={setEva} users={eva} toast={props.toast} usersPage={evaPage} setUsersPage={setEvaPage} id={offer.storeId} />
                     </>
                   )
                 ) : (

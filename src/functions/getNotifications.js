@@ -10,6 +10,7 @@ async function getNotifications(userInformation, setUserInformation, refreshStat
     url += `size=${notificationsPage.size}`;
     let response = await fetch(url, { ...requestOptions, method: "get", headers: { ...requestOptions.headers, authorization: userInformation.token } });
     let data = await response.json();
+
     // const data = {
     //   success: true,
     //   data: [
@@ -24,17 +25,10 @@ async function getNotifications(userInformation, setUserInformation, refreshStat
     if (data.success) {
       if (!data.data.length) {
         setNotificationsPage({ ...notificationsPage, loadMore: false, loadingNow: false });
-        if (notifications == -1 || notificationsPage.page == 1) setNotifications({});
+        if (notifications == -1 || notificationsPage.page == 1) setNotifications([]);
       } else {
-        let finalNotifications = {};
-        await Promise.all(
-          data.data.map(async (notifi) => {
-            finalNotifications[notifi.id] = { ...notifi };
-          })
-        );
-
-        if (notificationsPage.page == 1) setNotifications({ ...finalNotifications });
-        else setNotifications({ ...notifications, ...finalNotifications });
+        if (notificationsPage.page == 1) setNotifications([...data.data]);
+        else setNotifications([...notifications, ...data.data]);
 
         setNotificationsPage({ ...notificationsPage, page: notificationsPage.page + 1, loadMore: true, loadingNow: false });
       }

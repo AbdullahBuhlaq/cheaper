@@ -53,7 +53,7 @@ function SendGift(props) {
                           </div>
                           <span style={{ width: "30px", height: "30px", marginRight: "auto", opacity: "0.8", cursor: "pointer", marginLeft: "5px", alignSelf: "end" }}>
                             {currentGift == -1 ? (
-                              <BsFillGiftFill onClick={() => sendGift(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, setCurrentGift, props.offer, item.username, props.offers, props.setOffers, props.setEdit)} />
+                              <BsFillGiftFill onClick={() => sendGift(props.setCurrentOffer, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, setCurrentGift, props.offer, item.username, props.offers, props.setOffers, props.setEdit)} />
                             ) : (
                               <>
                                 {currentGift == item.username ? (
