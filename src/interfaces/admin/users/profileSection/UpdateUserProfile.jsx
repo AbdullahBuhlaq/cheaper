@@ -23,7 +23,7 @@ function UpdateUserProfile(props) {
     category: props.userProfile.category.map((cat) => {
       return cat.name;
     }),
-    password: "",
+
     phoneNumber: props.currentEdit.phoneNumber,
   });
 
@@ -36,7 +36,7 @@ function UpdateUserProfile(props) {
       category: props.userProfile.category.map((cat) => {
         return cat.name;
       }),
-      password: "",
+
       phoneNumber: props.currentEdit.phoneNumber,
     });
   }, [props.currentEdit]);
@@ -55,7 +55,7 @@ function UpdateUserProfile(props) {
             <Input placeholder={""} label={"الاسم"} type={"text"} name={"name"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={profileSchema} />
             <Select label={"الجنس"} placeholder={"اختر الجنس..."} list={selectOptions.gender} name={"gender"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={profileSchema} />
             <Input placeholder={""} label={"اسم المستخدم"} type={"text"} name={"username"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={profileSchema} />
-            <Input placeholder={""} label={"كلمة المرور"} type={"password"} name={"password"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={profileSchema} />
+            {/* <Input placeholder={""} label={"كلمة المرور"} type={"password"} name={"password"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={profileSchema} /> */}
             <Input placeholder={""} label={"تاريخ الميلاد"} type={"date"} name={"birthday"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={profileSchema} />
             <Input placeholder={""} label={"رقم لهاتف"} type={"text"} name={"phoneNumber"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={profileSchema} />
             <SelectMultipleFromDB label={"الأصناف المفضلة"} placeholder={"اختر الأصناف المفضلة..."} list={props.categories} showKey={"name"} valueKey={"name"} name={"category"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={profileSchema} />

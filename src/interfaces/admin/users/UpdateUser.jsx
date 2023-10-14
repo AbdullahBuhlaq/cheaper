@@ -23,7 +23,6 @@ function UpdateUser(props) {
     category: props.currentEdit.categories.map((cat) => {
       return cat.name;
     }),
-    password: "",
     phoneNumber: props.currentEdit.phoneNumber,
   });
 
@@ -36,7 +35,6 @@ function UpdateUser(props) {
       category: props.currentEdit.categories.map((cat) => {
         return cat.name;
       }),
-      password: "",
       phoneNumber: props.currentEdit.phoneNumber,
     });
   }, [props.currentEdit]);
@@ -54,7 +52,6 @@ function UpdateUser(props) {
       .required()
       .messages(messages)
       .label("اسم المستخدم"),
-    password: Joi.string().required().min(8).max(50).messages(messages).label("كلمة المرور"),
     category: Joi.array().items(Joi.string().trim().min(1).max(50)).min(3).required().messages(messages).label("أصناف المحلات المفضلة"),
     phoneNumber: Joi.string()
       .trim()
@@ -75,7 +72,7 @@ function UpdateUser(props) {
             <Select label={"الجنس"} placeholder={"اختر الجنس..."} list={selectOptions.gender} name={"gender"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={userSchema} />
             <Input placeholder={""} label={"رقم الموبايل"} type={"text"} name={"phoneNumber"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={userSchema} />
             <Input placeholder={""} label={"اسم المستخدم"} type={"text"} name={"username"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={userSchema} />
-            <Input placeholder={""} label={"كلمة المرور"} type={"password"} name={"password"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={userSchema} />
+            {/* <Input placeholder={""} label={"كلمة المرور"} type={"password"} name={"password"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={userSchema} /> */}
             <Input placeholder={""} label={"تاريخ الميلاد"} type={"date"} name={"birthday"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={userSchema} />
             <SelectMultipleFromDB label={"صنف المحل"} placeholder={"اختر تصنيف المحل..."} list={props.categories} showKey={"name"} valueKey={"name"} name={"category"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={userSchema} />
             <ImageInput setImage={setImage} />

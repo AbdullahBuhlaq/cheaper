@@ -48,14 +48,14 @@ function SendNotifications(props) {
                 </form>
               </div>
 
-              <div class="mail-contents">
-                <div class="mail">
+              <div className="mail-contents">
+                <div className="mail">
                   <label htmlFor="subj">موضوع الإشعار :</label>
                   <input
                     type={"text"}
                     name={props.name}
                     id="subj"
-                    class="mail-contents-title"
+                    className="mail-contents-title"
                     placeholder={props.placeholder}
                     value={data.title}
                     onChange={async (event) => {
@@ -68,13 +68,13 @@ function SendNotifications(props) {
                   />
                 </div>
                 <br />
-                <div class="mail">
+                <div className="mail">
                   <label htmlFor="inside">نص الإشعار :</label>
                   <input
                     type={"text"}
                     name={props.name}
                     id="inside"
-                    class="mail-inside"
+                    className="mail-inside"
                     placeholder={props.placeholder}
                     value={data.message}
                     onChange={async (event) => {

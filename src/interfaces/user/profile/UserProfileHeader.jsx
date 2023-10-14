@@ -5,9 +5,9 @@ function UserProfileHeader(props) {
   try {
     return (
       <>
-        <div class="profile-info-header">
-          <div class="fix">
-            <div class="profile-img-upload-section">
+        <div className="profile-info-header">
+          <div className="fix">
+            <div className="profile-img-upload-section">
               <img src={props.profile.userInformation.avatar ? jsonParse(props.profile.userInformation.avatar)[3] : "../images/user.webp"} style={{ minHeight: "110px", maxHeight: "110px" }} />
             </div>
             <div className="left-side">

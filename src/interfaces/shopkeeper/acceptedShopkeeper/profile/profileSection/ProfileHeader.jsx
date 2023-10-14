@@ -4,7 +4,7 @@ function ProfileHeader(props) {
   try {
     return (
       <>
-        <div class="profile-info-header">
+        <div className="profile-info-header">
           <div className="fix">
             <div className="profile-img-upload-section">
               <img src={props.profile.userInformation.avatar ? jsonParse(props.profile.userInformation.avatar)[0] : "images/user.webp"} />

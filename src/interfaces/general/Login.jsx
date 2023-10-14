@@ -23,11 +23,11 @@ function Login(props) {
   try {
     return (
       <>
-        <div class="container">
+        <div className="container">
           <h1>مرحباً بك.</h1>
           <p>واجهة تسجيل الدخول.</p>
           <form>
-            <div class="row">
+            <div className="row">
               <Input placeholder={"@example"} label={"اسم المستخدم"} type={"text"} name={"username"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={loginSchema} />
               <Input placeholder={""} label={"كلمة المرور"} type={"password"} name={"password"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={loginSchema} />
             </div>
@@ -40,8 +40,8 @@ function Login(props) {
                 هل نسيت كلمة السر؟
               </div>
             </div>
-            <div class="row">
-              <div class="column">
+            <div className="row">
+              <div className="column">
                 <img src="images/secure.png" style={{ maxHeight: "300px", width: "100%", margin: "4px auto" }} />
               </div>
             </div>

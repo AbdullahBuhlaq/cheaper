@@ -12,7 +12,7 @@ function Spam(props) {
               </div>
 
               <p style={{ marginRight: "10px" }}>{props.item["user.name"]}</p>
-              <div class="profile-info-wrapper-date" style={{ marginRight: "auto", fontSize: "10px" }}>
+              <div className="profile-info-wrapper-date" style={{ marginRight: "auto", fontSize: "10px" }}>
                 <p>{new Date(props.item.createdAt).toLocaleDateString()}</p>
               </div>
             </div>

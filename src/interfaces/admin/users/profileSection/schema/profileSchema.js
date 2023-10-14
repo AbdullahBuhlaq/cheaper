@@ -156,15 +156,6 @@ const profileSchema = {
     )
     .min(3)
     .required(),
-  password: Joi.string()
-    .empty()
-    .min(8)
-    .max(50)
-    .custom((value, helpers) => {
-      if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
-      else return value;
-    })
-    .messages(errorMessages.password),
 };
 
 export default profileSchema;

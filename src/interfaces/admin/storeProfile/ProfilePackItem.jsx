@@ -4,15 +4,15 @@ function ProfilePackItem(props) {
   try {
     return (
       <>
-        <div class="received-item-line">
-          <div class="progress-line" style={{ marginRight: "5px" }}>
-            <span class="time start">{new Date(props.item.createdAt).toLocaleDateString()}</span>
-            <span class="time end">{new Date(new Date(props.item.createdAt).setDate(new Date(props.item.createdAt).getDate() + props.item["pack.duration"])).toLocaleDateString()}</span>
+        <div className="received-item-line">
+          <div className="progress-line" style={{ marginRight: "5px" }}>
+            <span className="time start">{new Date(props.item.createdAt).toLocaleDateString()}</span>
+            <span className="time end">{new Date(new Date(props.item.createdAt).setDate(new Date(props.item.createdAt).getDate() + props.item["pack.duration"])).toLocaleDateString()}</span>
           </div>
-          <div class="received-items-content">
-            <div class="perfect-card-container" dir="ltr">
-              <div class="perfect-card">
-                <div class="perfect-card-right" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-evenly" }}>
+          <div className="received-items-content">
+            <div className="perfect-card-container" dir="ltr">
+              <div className="perfect-card">
+                <div className="perfect-card-right" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-evenly" }}>
                   نسبة الحسم
                   <CircularProgressbar
                     value={[props.item.discount]}
@@ -36,12 +36,12 @@ function ProfilePackItem(props) {
                     })}
                   />
                 </div>
-                <div class="perfect-card-left">
-                  <div class="perfect-card-left-header">
+                <div className="perfect-card-left">
+                  <div className="perfect-card-left-header">
                     <h1>اسم الباقة : {props.item["pack.name"]}</h1>
                     <h2>سعر الباقة : {props.item.cost}</h2>
                   </div>
-                  <div class="perfect-card-left-body">
+                  <div className="perfect-card-left-body">
                     <h1>تم الشراء : {props.item.count.paid}</h1>
                     <h2>لم يتم الشراء : {props.item.count.notPaid}</h2>
                     <h3> المدة : {props.item["pack.duration"]} </h3>

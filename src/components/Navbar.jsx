@@ -61,6 +61,7 @@ function Navbar(props) {
             className="item-link"
             id="pageLink"
             onClick={(event) => {
+              secureLocalStorage.setItem("mode", !secureLocalStorage.getItem("mode"));
               event.preventDefault();
               document.body.classList.toggle("dark");
               document.documentElement.classList.toggle("dark");

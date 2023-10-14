@@ -87,15 +87,7 @@ const employeeSchema = {
       else return value;
     })
     .messages(errorMessages.username),
-  password: Joi.string()
-    .required()
-    .min(8)
-    .max(50)
-    .custom((value, helpers) => {
-      if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
-      else return value;
-    })
-    .messages(errorMessages.password),
+
   roleId: Joi.number().integer().max(1e7).required().messages(errorMessages.roleId),
 };
 

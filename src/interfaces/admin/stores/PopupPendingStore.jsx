@@ -42,14 +42,14 @@ function PopupPendingStore(props) {
               </div>
             </div>
 
-            <div class="right-side">
-              <div class="dropdown">
+            <div className="right-side">
+              <div className="dropdown">
                 {checkPermissions(props.userInformation, ["admin.store.accept", "admin.store.disable"]) ? (
-                  <button onClick={() => setOpenOptions(!openOptions)} class="dropbtn">
+                  <button onClick={() => setOpenOptions(!openOptions)} className="dropbtn">
                     •••
                   </button>
                 ) : null}
-                <ul id="myDropdown" class={"dropdown-content" + (openOptions ? " show" : "")}>
+                <ul id="myDropdown" className={"dropdown-content" + (openOptions ? " show" : "")}>
                   {checkPermissions(props.userInformation, ["admin.store.accept"]) ? (
                     <li>
                       <a

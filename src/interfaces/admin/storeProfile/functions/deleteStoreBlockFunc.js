@@ -3,7 +3,7 @@ import refreshToken from "../../../../functions/refreshToken";
 
 export default async function deleteStoreBlockFunc(id, userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast, blocks, setBlocks, store, setStore) {
   try {
-    console.log(store);
+    console.log(id);
     let response = await fetch(`${import.meta.env.VITE_URL}/admin/stores/delete-block?storeId=${store.storeInfo.id}&ids[]=${id}`, { ...requestOptions, method: "put", headers: { ...requestOptions.headers, authorization: userInformation.token } });
     let data = await response.json();
 
@@ -11,11 +11,12 @@ export default async function deleteStoreBlockFunc(id, userInformation, setUserI
       if (!blocks.rows[id]?.unblock_date) {
         setStore({ ...store, block: false });
       }
-      const newCheck = blocks.rows[id]?.unblock_date ? blocks.blocked : false;
+      let newCheck = blocks.blocked;
       let newRows = [];
       await Promise.all(
         blocks.rows.map((item) => {
-          if (item.id != id) return item;
+          if (item.id != id) newRows = [...newRows, item];
+          else if (!item.unblock_date) newCheck = false;
         })
       );
       setBlocks({

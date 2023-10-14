@@ -20,8 +20,8 @@ function EvaItem(props) {
                 <p>{new Date(props.item.createdAt).toLocaleDateString()}</p>
               </div>
             </div>
-            <div class="profile-rates-area">
-              <input className="range" type="range" min="0" max="100" value={props.item.evaluate} onmousemove="rangevalue1.value=value" />
+            <div className="profile-rates-area">
+              <input className="range" type="range" min="0" max="100" value={props.item.evaluate} readOnly />
               <div style={{ marginRight: props.item.evaluate - props.item.evaluate / 20 + "%" }}>
                 <span style={{ fontWeight: "bold", color: `rgba(${255 - (255 * props.item.evaluate) / 100.0} ,${0 + (255 * props.item.evaluate) / 100.0}, 0)` }}>{props.item.evaluate}</span>
               </div>

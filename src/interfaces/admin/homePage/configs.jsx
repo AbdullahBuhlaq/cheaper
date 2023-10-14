@@ -14,7 +14,7 @@ function Config(props) {
         <div className="setting-values-section" style={{ height: "100%", overflow: "auto" }}>
           {Object.keys(props.configs).map((config, index) => {
             return (
-              <motion.div initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", duration: "1.2", delay: 0.1 * index }} class="setting-values-card" key={index}>
+              <motion.div initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", duration: "1.2", delay: 0.1 * index }} className="setting-values-card" key={index}>
                 <h1 style={{ textAlign: "center" }}>{titles[index]}</h1>
                 <h2>{props.configs[config]}</h2>
               </motion.div>

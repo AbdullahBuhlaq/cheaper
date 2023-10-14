@@ -9,8 +9,16 @@ import "./css/formStyle.css";
 import "./css/popup.css";
 import "./css/textChart.css";
 import ForgotPassword from "./interfaces/general/ForgotPassword";
+import { useEffect } from "react";
+import secureLocalStorage from "react-secure-storage";
 
 function App() {
+  useEffect(() => {
+    if (secureLocalStorage.getItem("mode")) {
+      document.body.classList.toggle("dark");
+      document.documentElement.classList.toggle("dark");
+    }
+  }, []);
   try {
     return (
       <>

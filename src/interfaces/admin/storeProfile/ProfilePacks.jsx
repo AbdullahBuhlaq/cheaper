@@ -35,8 +35,8 @@ function ProfilePacks(props) {
               <>
                 <motion.div style={{ display: "flex", flexDirection: "row" }} initial={{ scaleY: 0, opacity: 0 }} animate={{ scaleY: 1, originY: "-10%", opacity: 1 }} transition={{ duration: 0.5 }}>
                   {checkPermissions(props.userInformation, ["admin.store.accepted.packs"]) && props.packs != -1 ? (
-                    <div class="panel-body" style={{ maxHeight: "600px", overflow: "auto" }}>
-                      <div class="right-area-header-wrapper">
+                    <div className="panel-body" style={{ maxHeight: "600px", overflow: "auto" }}>
+                      <div className="right-area-header-wrapper">
                         {props.packs.map((item, index) => {
                           return <ProfilePackItem key={index} item={item} />;
                         })}

@@ -3,8 +3,8 @@ function OffersStatistics(props) {
   try {
     return (
       <>
-        <div class="advices" style={{ height: "48%", overflow: "auto" }}>
-          <div class="advice-header">
+        <div className="advices" style={{ height: "48%", overflow: "auto" }}>
+          <div className="advice-header">
             <p>إحصائيات العروض</p>
           </div>
           <div className="offers-statistics">

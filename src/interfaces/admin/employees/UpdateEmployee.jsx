@@ -18,7 +18,7 @@ function UpdateEmployee(props) {
     email: props.currentEdit.email,
     phoneNumber: props.currentEdit.phoneNumber,
     username: props.currentEdit.username,
-    password: "",
+
     roleId: props.currentEdit.roleId,
   });
 
@@ -29,7 +29,7 @@ function UpdateEmployee(props) {
       email: props.currentEdit.email,
       phoneNumber: props.currentEdit.phoneNumber,
       username: props.currentEdit.username,
-      password: "",
+
       roleId: props.currentEdit.roleId,
     });
   }, [props.currentEdit]);
@@ -49,7 +49,7 @@ function UpdateEmployee(props) {
             <Input placeholder={""} label={"البريد الإلكتروني"} type={"text"} name={"email"} onChange={handleSave} state={employee} setState={setEmployee} errors={employeeErrors} setErrors={setEmployeeErrors} schema={employeeSchema} />
             <Input placeholder={""} label={"رقم الموبايل"} type={"text"} name={"phoneNumber"} onChange={handleSave} state={employee} setState={setEmployee} errors={employeeErrors} setErrors={setEmployeeErrors} schema={employeeSchema} />
             <Input placeholder={""} label={"اسم المستخدم"} type={"text"} name={"username"} onChange={handleSave} state={employee} setState={setEmployee} errors={employeeErrors} setErrors={setEmployeeErrors} schema={employeeSchema} />
-            <Input placeholder={""} label={"كلمة المرور"} type={"password"} name={"password"} onChange={handleSave} state={employee} setState={setEmployee} errors={employeeErrors} setErrors={setEmployeeErrors} schema={employeeSchema} />
+            {/* <Input placeholder={""} label={"كلمة المرور"} type={"password"} name={"password"} onChange={handleSave} state={employee} setState={setEmployee} errors={employeeErrors} setErrors={setEmployeeErrors} schema={employeeSchema} /> */}
             {props.roles != -1 ? <SelectFromDB label={"الدور"} placeholder={"اختر الدور..."} list={props.roles} type={"less5"} showKey={"name"} valueKey={"id"} name={"roleId"} onChange={handleSave} state={employee} setState={setEmployee} errors={employeeErrors} setErrors={setEmployeeErrors} schema={employeeSchema} /> : null}
             {/* <ImageInput setImage={setImage} /> */}
           </div>

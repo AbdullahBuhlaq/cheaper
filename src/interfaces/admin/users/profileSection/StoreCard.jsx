@@ -111,7 +111,7 @@ function StoreCard(props) {
                   <img src={props.userAvatar ? jsonParse(props.userAvatar)[0] : "../images/user.webp"} alt="Review" />
                 </div>
 
-                <div class="profile-info-wrapper-name" style={{ marginRight: "10px" }}>
+                <div className="profile-info-wrapper-name" style={{ marginRight: "10px" }}>
                   <p>{props.name}</p>
                   <p style={{ opacity: ".8" }}>{props.userName}@</p>
                 </div>
@@ -122,24 +122,24 @@ function StoreCard(props) {
           <div className="app-main-right-header">
             <a href="#">التقييم</a>
           </div>
-          <div class="card-wrapper">
-            <div class="card">
-              <div class="profile-info-wrapper">
-                <div class="fix-profile-image-wrapper">
-                  <div class="profile-img-wrapper">
+          <div className="card-wrapper">
+            <div className="card">
+              <div className="profile-info-wrapper">
+                <div className="fix-profile-image-wrapper">
+                  <div className="profile-img-wrapper">
                     <img src={props.userAvatar ? jsonParse(props.userAvatar)[0] : "../images/user.webp"} alt="Review" />
                   </div>
-                  <div class="profile-info-wrapper-name" style={{ marginRight: "10px" }}>
+                  <div className="profile-info-wrapper-name" style={{ marginRight: "10px" }}>
                     <p>{props.name}</p>
                     <p style={{ opacity: ".8" }}>{props.userName}@</p>
                   </div>
                 </div>
-                <div class="profile-info-wrapper-date" style={{ marginRight: "auto" }}>
+                <div className="profile-info-wrapper-date" style={{ marginRight: "auto" }}>
                   {/* <p>2023/09/12</p> */}
                 </div>
               </div>
-              <div class="profile-rates-area">
-                <input className="range" type="range" min="0" max="100" value={props.store.evaluate} onmousemove="rangevalue1.value=value" style={style} />
+              <div className="profile-rates-area">
+                <input className="range" type="range" min="0" max="100" value={props.store.evaluate} readOnly style={style} />
                 <div style={{ marginRight: props.store.evaluate - props.store.evaluate / 20 + "%" }}>
                   <span style={{ fontWeight: "bold", color: `rgba(${255 - (255 * props.store.evaluate) / 100.0} ,${0 + (255 * props.store.evaluate) / 100.0}, 0)` }}>{props.store.evaluate}</span>
                 </div>

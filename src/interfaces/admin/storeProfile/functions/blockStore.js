@@ -8,6 +8,7 @@ export default async function blockStore(id, userInformation, setUserInformation
 
     if (data.success) {
       setStore({ ...store, block: true });
+      console.log(data);
       setBlocks({
         ...blocks,
         count: blocks.count + 1,
