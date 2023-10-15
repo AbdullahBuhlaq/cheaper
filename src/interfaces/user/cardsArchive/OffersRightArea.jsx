@@ -105,7 +105,9 @@ function OffersRightArea(props) {
               ) : props.currentOffer.QR ? (
                 <>
                   <div className="qr-code">
-                    <QRCode fgColor="#0086d9" bgColor="rgba(0,0,0,0)" size={512} style={{ height: "auto", maxWidth: "130px", width: "130px" }} value={props.currentOffer.QR} viewBox={`0 0 256 256`} />
+                    <div style={{ padding: "10px", backgroundColor: "white" }}>
+                      <QRCode fgColor="#0086d9" bgColor="white" size={512} style={{ height: "auto", maxWidth: "130px", width: "130px" }} value={props.currentOffer.QR} viewBox={`0 0 256 256`} />
+                    </div>
                     امسح ال QR عند المحل لاكتساب العرض
                   </div>
                 </>

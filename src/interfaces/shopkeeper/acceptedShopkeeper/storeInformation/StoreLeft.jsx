@@ -22,8 +22,8 @@ function StoreLeft(props) {
     setStory(newStory);
   }
   useEffect(() => {
-    getStory();
-  }, [props.storeInformation.story]);
+    if (props.storeInformation != -1) getStory();
+  }, [props.storeInformation]);
   try {
     return (
       <>
