@@ -91,6 +91,7 @@ const storeInformationSchema = {
       if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
       else return value;
     }),
+  imageStatus: Joi.string().trim().required(),
 };
 
 export default storeInformationSchema;

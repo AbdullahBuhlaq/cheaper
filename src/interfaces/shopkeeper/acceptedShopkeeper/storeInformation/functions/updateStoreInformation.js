@@ -22,7 +22,7 @@ async function updateStoreInformation(user, setDuringAdd, image, userInformation
     const data = response.data;
 
     if (data.success) {
-      setProfile({ ...profile, information: { ...newData, ["category.name"]: newData.category, avatar: data.data ? data.data : profile.information.avatar } });
+      setProfile({ ...profile, information: { ...newData, ["category.name"]: newData.category, avatar: newData.imageStatus == "same" ? profile.information.avatar : data.data } });
       setEdit(false);
       toast.success("تم التعديل بنجاح", {
         position: toast.POSITION.TOP_CENTER,

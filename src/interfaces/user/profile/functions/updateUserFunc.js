@@ -36,7 +36,7 @@ async function updateUserFunc(user, image, userInformation, profile, setProfile,
         })
       );
       delete newData.category;
-      setProfile({ ...profile, userInformation: { ...newData, avatar: data.data ? data.data : profile.userInformation.avatar }, category: finalCats });
+      setProfile({ ...profile, userInformation: { ...newData, avatar: newData.imageStatus == "same" ? profile.userInformation.avatar : data.data }, category: finalCats });
       setEdit(false);
       toast.success("تم التعديل بنجاح", {
         position: toast.POSITION.TOP_CENTER,

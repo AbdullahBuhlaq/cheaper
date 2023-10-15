@@ -95,6 +95,7 @@ const profileSchema = {
     )
     .min(3)
     .required(),
+  imageStatus: Joi.string().trim().required(),
 };
 
 export default profileSchema;

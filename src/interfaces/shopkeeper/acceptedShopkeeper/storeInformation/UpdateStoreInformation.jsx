@@ -22,6 +22,7 @@ function UpdateStoreInformation(props) {
     category: props.storeInformation.information["category.name"],
     locationText: props.storeInformation.information.locationText,
     city: props.storeInformation.information.city,
+    imageStatus: "same",
   });
   useEffect(() => {
     try {
@@ -34,6 +35,7 @@ function UpdateStoreInformation(props) {
         category: props.storeInformation.information["category.name"],
         locationText: props.storeInformation.information.locationText,
         city: props.storeInformation.information.city,
+        imageStatus: "same",
       });
     } catch (err) {
       console.log(err);
@@ -61,7 +63,8 @@ function UpdateStoreInformation(props) {
             <Input placeholder={""} label={"العنوان"} type={"text"} name={"locationText"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={storeInformationSchema} />
             <Select label={"المدينة"} placeholder={"اختر المدينة..."} list={selectOptions.city} name={"city"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={storeInformationSchema} />
             <SelectFromDB label={"صنف المحل"} placeholder={"اختر تصنيف المحل..."} list={props.categories == -1 ? {} : props.categories} showKey={"name"} valueKey={"name"} name={"category"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={storeInformationSchema} />
-            <ImageInput imageTitle={"صورة المحل"} setImage={setImage} />
+            <Select label={"الصورة الشخصية"} placeholder={""} list={selectOptions.imageStatus} name={"imageStatus"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={storeInformationSchema} noChoose={true} />
+            {user.imageStatus == "edit" ? <ImageInput imageTitle={"صورة المحل"} setImage={setImage} /> : null}
           </div>
           <Button action={updateProfileFunc} text={"إرسال"} disabled={duringAdd} joiObject={joiUser} state={user} setStateErrors={setUserErrors} toast={props.toast} />
         </form>

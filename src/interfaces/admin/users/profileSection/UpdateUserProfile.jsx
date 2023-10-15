@@ -25,6 +25,7 @@ function UpdateUserProfile(props) {
     }),
 
     phoneNumber: props.currentEdit.phoneNumber,
+    imageStatus: "same",
   });
 
   useEffect(() => {
@@ -38,6 +39,7 @@ function UpdateUserProfile(props) {
       }),
 
       phoneNumber: props.currentEdit.phoneNumber,
+      imageStatus: "same",
     });
   }, [props.currentEdit]);
 
@@ -59,7 +61,8 @@ function UpdateUserProfile(props) {
             <Input placeholder={""} label={"تاريخ الميلاد"} type={"date"} name={"birthday"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={profileSchema} />
             <Input placeholder={""} label={"رقم لهاتف"} type={"text"} name={"phoneNumber"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={profileSchema} />
             <SelectMultipleFromDB label={"الأصناف المفضلة"} placeholder={"اختر الأصناف المفضلة..."} list={props.categories} showKey={"name"} valueKey={"name"} name={"category"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={profileSchema} />
-            <ImageInput setImage={setImage} />
+            <Select label={"الصورة الشخصية"} placeholder={""} list={selectOptions.imageStatus} name={"imageStatus"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={profileSchema} noChoose={true} />
+            {user.imageStatus == "edit" ? <ImageInput setImage={setImage} /> : null}
           </div>
         </form>
         <Button action={() => updateUser(user, props.currentEdit, setDuringAdd, image, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.userProfile, props.setUserProfile, props.toast, props.setCurrentEdit)} text={"إرسال"} disabled={duringAdd} joiObject={joiUser} state={user} setStateErrors={setUserErrors} toast={props.toast} />

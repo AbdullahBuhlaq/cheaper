@@ -27,7 +27,7 @@ async function refreshToken(userInformation, setUserInformation, refreshStatus, 
     const data = await response.clone().json();
 
     if (data.success) {
-      setUserInformation({ ...userInformation, ...data.data });
+      setUserInformation({ ...userInformation, ...data.data, typeUser: jsonParse(data.data.allPermission)["action"][0][0] == "u" ? "مستخدم" : jsonParse(data.data.allPermission)["action"][0][0] == "a" ? "مدير" : data.data.typeUser });
       secureLocalStorage.setItem("userInformation", JSON.stringify({ ...userInformation, ...data.data, typeUser: jsonParse(data.data.allPermission)["action"][0][0] == "u" ? "مستخدم" : jsonParse(data.data.allPermission)["action"][0][0] == "a" ? "مدير" : data.data.typeUser }));
       status = "done";
       refPromise = null;

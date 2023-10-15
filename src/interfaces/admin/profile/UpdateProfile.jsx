@@ -17,6 +17,7 @@ function UpdateProfile(props) {
     gender: props.profile.gender,
     birthday: props.profile.birthday,
     username: props.profile.username,
+    imageStatus: "same",
   });
   useEffect(() => {
     try {
@@ -25,6 +26,7 @@ function UpdateProfile(props) {
         gender: props.profile.gender,
         birthday: props.profile.birthday,
         username: props.profile.username,
+        imageStatus: "same",
       });
     } catch (err) {
       console.log(err);
@@ -50,7 +52,8 @@ function UpdateProfile(props) {
             <Select label={"الجنس"} placeholder={"اختر الجنس..."} list={selectOptions.gender} name={"gender"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={userSchema} />
             <Input placeholder={""} label={"تاريخ الميلاد"} type={"date"} name={"birthday"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={userSchema} />
             {/* <Input placeholder={""} label={"اسم المستخدم"} type={"text"} name={"username"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={userSchema} /> */}
-            <ImageInput setImage={setImage} />
+            <Select label={"الصورة الشخصية"} placeholder={""} list={selectOptions.imageStatus} name={"imageStatus"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={userSchema} noChoose={true} />
+            {user.imageStatus == "edit" ? <ImageInput setImage={setImage} /> : null}
           </div>
           <Button action={updateProfileFunc} text={"إرسال"} disabled={duringAdd} joiObject={joiUser} state={user} setStateErrors={setUserErrors} toast={props.toast} />
         </form>

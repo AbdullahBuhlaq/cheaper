@@ -181,6 +181,7 @@ const userSchema = {
     .max(30)
     .required()
     .messages({ ...messages, ...errorMessages.username }),
+  imageStatus: Joi.string().trim().required(),
 };
 
 export default userSchema;

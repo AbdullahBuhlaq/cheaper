@@ -22,8 +22,7 @@ async function updateProfile(user, setDuringAdd, image, userInformation, setUser
     const data = response.data;
 
     if (data.success) {
-      console.log(profile);
-      setProfile({ ...profile, ...newData, avatar: data.data ? data.data : profile.avatar });
+      setProfile({ ...profile, ...newData, avatar: newData.imageStatus == "same" ? profile.avatar : data.data });
       setEdit(false);
       toast.success("تم التعديل بنجاح", {
         position: toast.POSITION.TOP_CENTER,

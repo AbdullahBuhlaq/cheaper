@@ -2,6 +2,10 @@ import { GiOpenTreasureChest } from "react-icons/gi";
 import { FcHome, FcBusinessman, FcTimeline, FcInspection, FcDisclaimer, FcPaid, FcBriefcase, FcConferenceCall, FcShop } from "react-icons/fc";
 
 const selectOptions = {
+  imageStatus: [
+    { name: "كما هي", value: "same" },
+    { name: "تعديل", value: "edit" },
+  ],
   gender: [
     { name: "ذكر", value: "ذكر" },
     { name: "انثى", value: "انثى" },
