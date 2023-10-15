@@ -8,7 +8,7 @@ import Contact from "./Contact";
 import Page404 from "./Page404";
 
 function GeneralHome(props) {
-  const [currentTab, setCurrentTab] = useState("home");
+  const [currentTab, setCurrentTab] = useState("main");
 
   try {
     return (

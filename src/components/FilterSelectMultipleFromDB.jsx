@@ -14,7 +14,7 @@ function FilterSelectMultipleFromDB(props) {
       <>
         <label>{props.label}</label>
         <div style={{ position: "relative" }}>
-          <select className="my-listbox" style={{ opacity: 1 }} defaultValue={"hello"} readonly disabled={true}>
+          <select className="my-listbox" style={{ opacity: 1, backgroundImage: "none" }} defaultValue={"hello"} readonly disabled={true}>
             <option value="hello" style={{ display: "none" }}>
               {props.placeholder}
             </option>
@@ -30,6 +30,7 @@ function FilterSelectMultipleFromDB(props) {
           {open ? (
             <select
               className="my-listbox"
+              style={{ backgroundImage: "none" }}
               onClick={async (event) => {
                 if (event.target.value != -1) {
                   let newValue = [];

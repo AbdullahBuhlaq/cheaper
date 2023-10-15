@@ -13,7 +13,7 @@ function FilterItem(props) {
                 props.setFilter({ ...props.filter, [props.filterKey]: { ...props.filter[props.filterKey], operator: e.target.value } });
               }}
               className={"search-bar"}
-              style={{ padding: "1px", marginLeft: "2px" }}
+              style={{ padding: "1px", marginLeft: "2px", backgroundImage: "none", width: "100%", marginTop: "5px", padding: "12px", border: "none", borderBottom: "3px solid #0298ff", color: "var(--main-font-color)", borderRadius: "6px", float: "center", backgroundColor: "var(--cards-area-bg)", boxShadow: "0px 3px 7px #3a3a3a2e !important" }}
             >
               <option value={null}>أدخل طريقة المقارنة...</option>
               {selectOptions.operators[props.item.type].map((operator, operatorIndex) => {
@@ -47,6 +47,7 @@ function FilterItem(props) {
                   props.setFilter({ ...props.filter, [props.filterKey]: { ...props.filter[props.filterKey], value: e.target.value } });
                 }}
                 className={"search-bar"}
+                style={{ backgroundImage: "none" }}
               >
                 <option value={null}>أدخل القيمة ...</option>
                 {selectOptions[props.filterKey].map((option, optionIndex) => {
@@ -82,6 +83,7 @@ function FilterItem(props) {
                   props.setFilter({ ...props.filter, [props.filterKey]: { ...props.filter[props.filterKey], value: e.target.value } });
                 }}
                 className={"search-bar"}
+                style={{ backgroundImage: "none" }}
                 placeholder="أدخل القيمة ..."
               />
             )}

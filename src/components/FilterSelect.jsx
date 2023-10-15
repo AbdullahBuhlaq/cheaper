@@ -10,6 +10,7 @@ function FilterSelect(props) {
             props.setState({ ...props.state });
           }}
           value={props.state[props.name]}
+          style={{ backgroundImage: "none" }}
         >
           {!props.noChoose ? <option value={-1}>{props.placeholder}</option> : null}
           {Object.keys(props.list).map((listItem, listIndex) => {
