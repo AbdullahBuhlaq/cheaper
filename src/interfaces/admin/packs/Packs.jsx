@@ -65,7 +65,7 @@ function Packs(props) {
     return checkPermissions(props.userInformation, ["admin.packs.all"]) ? (
       <>
         {loading ? (
-          <div className="profile-main-area">
+          <div style={{ display: "flex", width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }}>
             <Loading />
           </div>
         ) : (

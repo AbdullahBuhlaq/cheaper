@@ -73,7 +73,9 @@ function Stores(props) {
               {currentTab == 1 ? (
                 <>
                   {props.acceptedStores == -1 ? (
-                    <Loading />
+                    <div style={{ display: "flex", width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }}>
+                      <Loading />
+                    </div>
                   ) : (
                     <>
                       <AcceptedStores
@@ -98,7 +100,9 @@ function Stores(props) {
               ) : currentTab == 2 ? (
                 <>
                   {props.pendingStores == -1 ? (
-                    <Loading />
+                    <div style={{ display: "flex", width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }}>
+                      <Loading />
+                    </div>
                   ) : (
                     <>
                       <PendingStores

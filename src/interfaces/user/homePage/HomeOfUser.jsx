@@ -19,7 +19,6 @@ function HomeOfUser(props) {
     return (
       <>
         <>
-          {console.log(props.homeInfo)}
           <MainArea setOpenOffer={setOpenOffer} userInformation={props.userInformation} homeInfo={props.homeInfo} toast={props.toast} />
           <RightArea userInformation={props.userInformation} homeInfo={props.homeInfo} />
 

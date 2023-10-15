@@ -13,6 +13,7 @@ import NewPacks from "./Packs";
 import getStoreUsers from "./functions/getStoreUsers";
 import NewImage from "./NewImage";
 import NewStatus from "./NewStatus";
+import Loading from "../../../general/Loading";
 
 function StoreInformation(props) {
   const [loading, setLoading] = useState(true);
@@ -36,51 +37,59 @@ function StoreInformation(props) {
   try {
     return (
       <>
-        <div className="profile-main-area">
-          <HeaderButton />
-          <div className="main-profile">
-            <StoreLeft
-              setOpenStatus={setOpenStatus}
-              setOpenImage={setOpenImage}
-              storeUsers={props.storeUsers}
-              setStoreUsers={props.setStoreUsers}
-              usersPage={props.usersPage}
-              setUsersPage={props.setUsersPage}
-              setOpenPacks={setOpenPacks}
-              packsChart={props.packsChart}
-              storeChart={props.storeChart}
-              setOpenUpdate={setOpenUpdate}
-              storeInformation={props.storeInformation}
-              setStoreInformation={props.setStoreInformation}
-              packs={props.packs}
-              userInformation={props.userInformation}
-              setUserInformation={props.setUserInformation}
-              refreshStatus={props.refreshStatus}
-              setRefreshStatus={props.setRefreshStatus}
-              toast={props.toast}
-            />
-
-            <StoreRight userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} />
+        {loading ? (
+          <div style={{ display: "flex", width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }}>
+            <Loading />
           </div>
-        </div>
+        ) : (
+          <>
+            <div className="profile-main-area">
+              <HeaderButton />
+              <div className="main-profile">
+                <StoreLeft
+                  setOpenStatus={setOpenStatus}
+                  setOpenImage={setOpenImage}
+                  storeUsers={props.storeUsers}
+                  setStoreUsers={props.setStoreUsers}
+                  usersPage={props.usersPage}
+                  setUsersPage={props.setUsersPage}
+                  setOpenPacks={setOpenPacks}
+                  packsChart={props.packsChart}
+                  storeChart={props.storeChart}
+                  setOpenUpdate={setOpenUpdate}
+                  storeInformation={props.storeInformation}
+                  setStoreInformation={props.setStoreInformation}
+                  packs={props.packs}
+                  userInformation={props.userInformation}
+                  setUserInformation={props.setUserInformation}
+                  refreshStatus={props.refreshStatus}
+                  setRefreshStatus={props.setRefreshStatus}
+                  toast={props.toast}
+                />
 
-        {openUpdate ? (
-          <Popup
-            setOpen={setOpenUpdate}
-            classes={"form-popup-small"}
-            component={<UpdateStoreInformation categories={props.categories} storeInformation={props.storeInformation} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} setEdit={setOpenUpdate} setStoreInformation={props.setStoreInformation} />}
-          />
-        ) : openPacks ? (
-          <Popup
-            setOpen={setOpenPacks}
-            classes={"form-popup"}
-            component={<NewPacks packs={props.packs} storeInformation={props.storeInformation} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} setEdit={setOpenPacks} setStoreInformation={props.setStoreInformation} />}
-          />
-        ) : openImage ? (
-          <Popup setOpen={setOpenImage} classes={"form-popup"} component={<NewImage storeInformation={props.storeInformation} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} setEdit={setOpenImage} setStoreInformation={props.setStoreInformation} />} />
-        ) : openStatus ? (
-          <Popup setOpen={setOpenStatus} classes={"form-popup"} component={<NewStatus storeInformation={props.storeInformation} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} setEdit={setOpenStatus} setStoreInformation={props.setStoreInformation} />} />
-        ) : null}
+                <StoreRight userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} />
+              </div>
+            </div>
+
+            {openUpdate ? (
+              <Popup
+                setOpen={setOpenUpdate}
+                classes={"form-popup-small"}
+                component={<UpdateStoreInformation categories={props.categories} storeInformation={props.storeInformation} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} setEdit={setOpenUpdate} setStoreInformation={props.setStoreInformation} />}
+              />
+            ) : openPacks ? (
+              <Popup
+                setOpen={setOpenPacks}
+                classes={"form-popup"}
+                component={<NewPacks packs={props.packs} storeInformation={props.storeInformation} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} setEdit={setOpenPacks} setStoreInformation={props.setStoreInformation} />}
+              />
+            ) : openImage ? (
+              <Popup setOpen={setOpenImage} classes={"form-popup"} component={<NewImage storeInformation={props.storeInformation} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} setEdit={setOpenImage} setStoreInformation={props.setStoreInformation} />} />
+            ) : openStatus ? (
+              <Popup setOpen={setOpenStatus} classes={"form-popup"} component={<NewStatus storeInformation={props.storeInformation} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} setEdit={setOpenStatus} setStoreInformation={props.setStoreInformation} />} />
+            ) : null}
+          </>
+        )}
       </>
     );
   } catch (err) {

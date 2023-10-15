@@ -30,10 +30,8 @@ function UserProfile(props) {
     return (
       <>
         {loading ? (
-          <div className="profile-main-area">
-            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "100%" }}>
-              <Loading />
-            </div>
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "100%" }}>
+            <Loading />
           </div>
         ) : (
           <>
