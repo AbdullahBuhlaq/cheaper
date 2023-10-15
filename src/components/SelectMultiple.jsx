@@ -22,7 +22,7 @@ function SelectMultiple(props) {
           <div style={{ position: "relative" }}>
             <motion.select style={{ opacity: 1 }} initial={{ width: 0, opacity: 0 }} animate={{ width: "100%", opacity: 1 }} transition={{ type: "spring", duration: "1.2" }} className="my-listbox" defaultValue={"hello"} readonly disabled={true}>
               <option value="hello" style={{ display: "none" }}>
-                {props.placeholder}
+                {props.state[props.name].length ? "تم اختيار " + props.state[props.name].length + " عنصر" : props.placeholder}
               </option>
             </motion.select>
             <div

@@ -16,7 +16,7 @@ function FilterSelectMultipleFromDB(props) {
         <div style={{ position: "relative" }}>
           <select className="my-listbox" style={{ opacity: 1, backgroundImage: "none" }} defaultValue={"hello"} readonly disabled={true}>
             <option value="hello" style={{ display: "none" }}>
-              {props.placeholder}
+              {props.state[props.name].length ? "تم اختيار " + props.state[props.name].length + " عنصر" : props.placeholder}
             </option>
           </select>
           <div
