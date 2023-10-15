@@ -80,7 +80,7 @@ function Employees(props) {
               <div className="app-content">
                 <EmployeesHeader userInformation={props.userInformation} setAddNew={setAddNew} filter={filter} setFilter={setFilter} roles={props.roles} />
 
-                <div className="products-area-wrapper tableView">
+                <div className="products-area-wrapper tableView" style={{ paddingBottom: "70px" }}>
                   <div className="products-header">
                     <div className="product-cell image">الاسم</div>
                     <div className="product-cell category">اسم المستخدم</div>

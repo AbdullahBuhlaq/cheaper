@@ -84,7 +84,7 @@ function Users(props) {
                 <div className="app-content">
                   <UserSearch filter={filter} setFilter={setFilter} usersPage={usersPage} setUsersPage={setUsersPage} />
 
-                  <div className="products-area-wrapper tableView">
+                  <div className="products-area-wrapper tableView" style={{ paddingBottom: "70px" }}>
                     <div className="products-header">
                       <div className="product-cell image">الاسم</div>
                       <div className="product-cell category">اسم المستخدم</div>
@@ -94,11 +94,9 @@ function Users(props) {
                       <div className="product-cell status-cell">حالة النشاط</div>
                       {checkPermissions(props.userInformation, ["admin.users.block.information", "admin.users.update", "admin.users.delete", "admin.users.block.allBlockForUser", "admin.users.block.deleteBlock", "admin.users.block.multiUnBlock", "admin.users.block.blockUser"]) ? <div className="product-cell option">خيارات</div> : null}
                     </div>
-
                     {items.map((item) => {
                       return item;
                     })}
-
                     <LoadMoreUsers userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} setUsers={props.setUsers} users={props.users} toast={props.toast} filter={filter} usersPage={usersPage} setUsersPage={setUsersPage} />
                   </div>
 
