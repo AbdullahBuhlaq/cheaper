@@ -25,15 +25,15 @@ const NotificationListener = (props) => {
   useEffect(() => {
     if (notification?.title) {
       console.log("notifications got", notification);
-      props.setNotifications([{ title: notification.title, message: notification.body, avatar: notification.image }, ...props.notifications]);
+      // props.setNotifications([{ title: notification.title, message: notification.body, avatar: notification.image }, ...props.notifications]);
       notify();
     }
   }, [notification]);
 
   onMessageListener()
     .then((payload) => {
-      console.log("recieved");
-      setNotification({ title: payload?.notification?.title, body: payload?.notification?.body });
+      console.log(payload);
+      setNotification({ image: payload?.notification.image, title: payload?.notification?.title, body: payload?.notification?.body });
     })
     .catch((err) => console.log("failed: ", err));
 
