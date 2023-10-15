@@ -1,6 +1,7 @@
 import Joi from "joi";
 import Filter from "bad-word-ar";
 import moment from "moment/moment.js";
+import messages from "../../../../constants/messages";
 
 const filterAr = new Filter("ar");
 const filterEn = new Filter("en");
@@ -149,8 +150,10 @@ const userSchema = {
       if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
       else return value;
     })
-    .messages(errorMessages.name),
-  gender: Joi.string().required().messages(errorMessages.gender),
+    .messages({ ...messages, ...errorMessages.name }),
+  gender: Joi.string()
+    .required()
+    .messages({ ...messages, ...errorMessages.gender }),
   category: Joi.array()
     .items(
       Joi.string()
@@ -161,11 +164,15 @@ const userSchema = {
           if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
           else return value;
         })
-        .message(errorMessages.category)
+        .message({ ...messages, ...errorMessages.category })
     )
     .min(3)
     .required(),
-  birthday: Joi.date().required().max(moment()).min(moment("1930-01-01")).messages(errorMessages.birthday),
+  birthday: Joi.date()
+    .required()
+    .max(moment())
+    .min(moment("1930-01-01"))
+    .messages({ ...messages, ...errorMessages.birthday }),
 
   username: Joi.string()
     .trim()
@@ -173,7 +180,7 @@ const userSchema = {
     .min(3)
     .max(30)
     .required()
-    .messages(errorMessages.username),
+    .messages({ ...messages, ...errorMessages.username }),
 };
 
 export default userSchema;

@@ -1,5 +1,6 @@
 import Joi from "joi";
 import Filter from "bad-word-ar";
+import messages from "../../../../../constants/messages";
 
 const filterAr = new Filter("ar");
 const filterEn = new Filter("en");
@@ -25,59 +26,17 @@ const errorMessages = {
     "any.required": 'حقل "الفئة" مطلوب.',
     "any.custom": message,
   },
-  avatar_store: {
-    "string.empty": 'حقل "صورة المتجر" لا يجب أن يكون فارغًا.',
-  },
+
   locationText: {
     "string.min": 'حقل "نص الموقع" يجب أن يحتوي على الأقل حرف واحد.',
     "string.max": 'حقل "نص الموقع" يجب أن يحتوي على الأكثر 200 حرفًا.',
   },
-  search: {
-    "string.base": 'حقل "search" يجب أن يكون سلسلة نصية.',
-    "any.custom": message,
-    "number.max": 'حقل "search" يجب أن يكون أقل من أو يساوي 200.',
-  },
-  size: {
-    "number.base": 'حقل "الحجم" يجب أن يكون رقمًا.',
-    "number.integer": 'حقل "الحجم" يجب أن يكون رقمًا صحيحًا.',
-    "number.min": 'حقل "الحجم" يجب أن يكون على الأقل 1.',
-    "number.max": 'حقل "الحجم" يجب أن يكون أقل من أو يساوي 1000.',
-    "any.required": 'حقل "الحجم" مطلوب.',
-  },
-  page: {
-    "number.base": 'حقل "الصفحة" يجب أن يكون رقمًا.',
-    "number.integer": 'حقل "الصفحة" يجب أن يكون رقمًا صحيحًا.',
-    "number.min": 'حقل "الصفحة" يجب أن يكون على الأقل 1.',
-    "number.max": 'حقل "الصفحة" يجب أن يكون أقل من أو يساوي 10000.',
-    "any.required": 'حقل "الصفحة" مطلوب.',
-  },
+
   city: {
     "string.min": 'حقل "المدينة" يجب أن يحتوي على الأقل حرف واحد.',
     "string.max": 'حقل "المدينة" يجب أن يحتوي على الأكثر 50 حرفًا.',
     "any.required": 'حقل "المدينة" مطلوب.',
     "any.custom": message,
-  },
-  avatar: {
-    "string.empty": 'حقل "الصورة" لا يجب أن يكون فارغًا.',
-  },
-  id: {
-    "number.empty": 'حقل "المعرف" لا يجب أن يكون فارغًا.',
-    "number.integer": 'حقل "المعرف" يجب أن يكون قيمته عدد صحيح.',
-    "number.min": 'حقل "المعرف" يجب أن تكون قيمته على الأقل 1.',
-    "number.max": 'حقل "المعرف" يجب أن تكون قيمته على الأكثر 10,000,000.',
-    "any.required": 'حقل "المعرف" مطلوب.',
-  },
-  users: {
-    statePaid: {
-      "string.base": 'حقل "statePaid" يجب أن يكون سلسلة نصية.',
-      "any.only": 'قيمة "statePaid" غير صالحة.',
-      "any.required": 'حقل "statePaid" مطلوب.',
-    },
-    type: {
-      "string.base": 'حقل "type" يجب أن يكون سلسلة نصية.',
-      "any.only": 'قيمة "type" غير صالحة.',
-      "any.required": 'حقل "type" مطلوب.',
-    },
   },
 };
 
@@ -87,13 +46,17 @@ const storeInformationSchema = {
     .min(2)
     .max(50)
     .trim()
-    .messages(errorMessages.name)
+    .messages({ ...messages, ...errorMessages.name })
     .custom((value, helpers) => {
       if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
       else return value;
     }),
-  longitude: Joi.number().required().messages(errorMessages.longitude),
-  latitude: Joi.number().required().messages(errorMessages.latitude),
+  longitude: Joi.number()
+    .required()
+    .messages({ ...messages, ...errorMessages.longitude }),
+  latitude: Joi.number()
+    .required()
+    .messages({ ...messages, ...errorMessages.latitude }),
   fromHour: Joi.string()
     .pattern(/^(([0-9]{1})|([0-1]{1}[0-9]{1})|([2]{1}[0-3]{1}))(([:]{1})?)(([0-5]{1}[0-9]?)?)$/)
     .required(),
@@ -104,7 +67,7 @@ const storeInformationSchema = {
     .min(2)
     .max(50)
     .required()
-    .messages(errorMessages.category)
+    .messages({ ...messages, ...errorMessages.category })
 
     .custom((value, helpers) => {
       if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
@@ -114,7 +77,7 @@ const storeInformationSchema = {
     .min(1)
     .max(200)
     .allow(null)
-    .messages(errorMessages.locationText)
+    .messages({ ...messages, ...errorMessages.locationText })
     .custom((value, helpers) => {
       if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
       else return value;
@@ -123,7 +86,7 @@ const storeInformationSchema = {
     .min(1)
     .max(50)
     .required()
-    .messages(errorMessages.city)
+    .messages({ ...messages, ...errorMessages.city })
     .custom((value, helpers) => {
       if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
       else return value;

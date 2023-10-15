@@ -1,17 +1,11 @@
 import Joi from "joi";
 import Filter from "bad-word-ar";
+import messages from "../../../../constants/messages";
 
 const filterAr = new Filter("ar");
 const filterEn = new Filter("en");
 let message = "بعض الحقول تحتوي على كلمات نابية، الرجاء التقيد باداب النص";
 const errorMessages = {
-  id: {
-    "number.empty": 'حقل "المعرف" لا يجب أن يكون فارغًا.',
-    "number.integer": 'حقل "المعرف" يجب أن يكون قيمته عدد صحيح.',
-    "number.min": 'حقل "المعرف" يجب أن تكون قيمته على الأقل 1.',
-    "number.max": 'حقل "المعرف" يجب أن تكون قيمته على الأكثر 10,000,000.',
-    "any.required": 'حقل "المعرف" مطلوب.',
-  },
   reason: {
     "string.empty": 'حقل "السبب" لا يجب أن يكون فارغًا.',
     "string.min": 'حقل "السبب" يجب أن يحتوي على الأقل حرف واحد.',
@@ -49,10 +43,21 @@ const blockSchema = {
       if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
       else return value;
     })
-    .messages(errorMessages.reason),
-  show: Joi.array().items(Joi.string().trim().min(2).max(150)).required().messages(errorMessages.show),
-  action: Joi.array().items(Joi.string().trim().min(1).max(150)).messages(errorMessages.action).required(),
-  duration: Joi.number().integer().min(1).max(1000).required().messages(errorMessages.duration),
+    .messages({ ...messages, ...errorMessages.reason }),
+  show: Joi.array()
+    .items(Joi.string().trim().min(2).max(150))
+    .required()
+    .messages({ ...messages, ...errorMessages.show }),
+  action: Joi.array()
+    .items(Joi.string().trim().min(1).max(150))
+    .messages({ ...messages, ...errorMessages.action })
+    .required(),
+  duration: Joi.number()
+    .integer()
+    .min(1)
+    .max(1000)
+    .required()
+    .messages({ ...messages, ...errorMessages.duration }),
 };
 
 export default blockSchema;

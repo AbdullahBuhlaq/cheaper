@@ -1,5 +1,5 @@
 function checkPermissions(userInformation, permissions) {
-  let permissionStatus = true;
+  let permissionStatus = false;
 
   permissions.map((permission) => {
     permissionStatus = permissionStatus || userInformation.allPermission.action?.includes(permission);

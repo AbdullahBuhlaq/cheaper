@@ -1,4 +1,5 @@
 import Joi from "joi";
+import messages from "../../../../constants/messages";
 
 let errorMessages = {
   discountFreeMessages: {
@@ -33,14 +34,30 @@ let errorMessages = {
 };
 
 export const configSchema = {
-  discountFreeAtLeast: Joi.number().required().messages(errorMessages.discountFreeMessages),
-  discountFreeAtMost: Joi.number().required().messages(errorMessages.discountPaidMessages),
+  discountFreeAtLeast: Joi.number()
+    .required()
+    .messages({ ...messages, ...errorMessages.discountFreeMessages }),
+  discountFreeAtMost: Joi.number()
+    .required()
+    .messages({ ...messages, ...errorMessages.discountPaidMessages }),
 
-  discountPaidATleast: Joi.number().required().messages(errorMessages.discountFreeMessages),
-  discountPaidAtMost: Joi.number().required().messages(errorMessages.discountPaidMessages),
+  discountPaidATleast: Joi.number()
+    .required()
+    .messages({ ...messages, ...errorMessages.discountFreeMessages }),
+  discountPaidAtMost: Joi.number()
+    .required()
+    .messages({ ...messages, ...errorMessages.discountPaidMessages }),
 
-  GiftCard: Joi.number().required().messages(errorMessages.GiftCardMessages),
-  GiftPack: Joi.number().required().messages(errorMessages.GiftPackMessages),
-  spam: Joi.number().required().messages(errorMessages.spamMessages),
-  GiftOfferMore: Joi.number().required().messages(errorMessages.GiftOfferMoreMessages),
+  GiftCard: Joi.number()
+    .required()
+    .messages({ ...messages, ...errorMessages.GiftCardMessages }),
+  GiftPack: Joi.number()
+    .required()
+    .messages({ ...messages, ...errorMessages.GiftPackMessages }),
+  spam: Joi.number()
+    .required()
+    .messages({ ...messages, ...errorMessages.spamMessages }),
+  GiftOfferMore: Joi.number()
+    .required()
+    .messages({ ...messages, ...errorMessages.GiftOfferMoreMessages }),
 };

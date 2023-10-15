@@ -1,5 +1,6 @@
 import Joi from "joi";
 import Filter from "bad-word-ar";
+import messages from "../../../../constants/messages";
 
 const filterAr = new Filter("ar");
 const filterEn = new Filter("en");
@@ -41,12 +42,7 @@ const errorMessages = {
     "any.required": 'حقل "كلمة المرور" مطلوب.',
   },
   // params
-  id: {
-    "number.base": 'حقل "المعرف" يجب أن يكون رقمًا.',
-    "number.integer": 'حقل "المعرف" يجب أن يكون رقمًا صحيحًا.',
-    "number.max": 'حقل "المعرف" يجب أن يكون أقل من أو يساوي 1000000.',
-    "any.required": 'حقل "المعرف" مطلوب.',
-  },
+
   roleId: {
     "number.base": 'حقل "roleId" يجب أن يكون رقمًا.',
     "number.integer": 'حقل "roleId" يجب أن يكون رقمًا صحيحًا.',
@@ -64,18 +60,20 @@ const employeeSchema = {
       if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
       else return value;
     })
-    .messages(errorMessages.name),
-  gender: Joi.string().required().messages(errorMessages.gender),
+    .messages({ ...messages, ...errorMessages.name }),
+  gender: Joi.string()
+    .required()
+    .messages({ ...messages, ...errorMessages.gender }),
   email: Joi.string()
     .trim()
     .required()
     .pattern(/^[a-zA-Z0-9]+[a-zA-Z0-9._]*@gmail\.com$/)
-    .messages(errorMessages.email),
+    .messages({ ...messages, ...errorMessages.email }),
   phoneNumber: Joi.string()
     .trim()
     .required()
     .pattern(/^(09)(\d{8})$/)
-    .messages(errorMessages.phoneNumber),
+    .messages({ ...messages, ...errorMessages.phoneNumber }),
   username: Joi.string()
     .trim()
     .pattern(/^[A-Za-z]+[a-zA-Z0-9\_\.]*$/)
@@ -86,7 +84,7 @@ const employeeSchema = {
       if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
       else return value;
     })
-    .messages(errorMessages.username),
+    .messages({ ...messages, ...errorMessages.username }),
   password: Joi.string()
 
     .min(8)
@@ -95,9 +93,13 @@ const employeeSchema = {
       if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
       else return value;
     })
-    .messages(errorMessages.password),
+    .messages({ ...messages, ...errorMessages.password }),
 
-  roleId: Joi.number().integer().max(1e7).required().messages(errorMessages.roleId),
+  roleId: Joi.number()
+    .integer()
+    .max(1e7)
+    .required()
+    .messages({ ...messages, ...errorMessages.roleId }),
 };
 
 export default employeeSchema;

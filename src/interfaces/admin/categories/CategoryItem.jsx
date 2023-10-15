@@ -33,7 +33,7 @@ function CategoryItem(props) {
             <div className="categories-card-header">
               <h1>{props.category.name}</h1>
               <div className="dropdown">
-                {checkPermissions(props.userInformation, ["admin.category.update", "admin.category.all", "admin.category.delete"]) ? (
+                {checkPermissions(props.userInformation, ["admin.category.update", "admin.category.delete"]) ? (
                   <button
                     className="cat-dropbtn"
                     onClick={() => {
@@ -45,7 +45,7 @@ function CategoryItem(props) {
                 ) : null}
 
                 <ul id="myDropdown" className={"dropdown-content" + (openDropDown ? " show" : "")}>
-                  {checkPermissions(props.userInformation, ["admin.category.update", "admin.category.all"]) ? (
+                  {checkPermissions(props.userInformation, ["admin.category.update"]) ? (
                     <li>
                       <div
                         onClick={() => {
@@ -57,7 +57,7 @@ function CategoryItem(props) {
                       </div>
                     </li>
                   ) : null}
-                  {checkPermissions(props.userInformation, ["admin.category.delete", "admin.category.all"]) ? (
+                  {checkPermissions(props.userInformation, ["admin.category.delete"]) ? (
                     <li>
                       <div
                         onClick={() => {

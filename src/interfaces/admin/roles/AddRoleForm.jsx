@@ -44,7 +44,7 @@ function AddRoleForm(props) {
         })}
         {roleErrors["show"] && <div className="validating-error">{roleErrors["show"]}</div>}
 
-        {checkPermissions(props.userInformation, ["admin.role.create", "admin.role.all"]) ? (
+        {checkPermissions(props.userInformation, ["admin.role.create"]) ? (
           <form className="role-footer">
             <div className="button-container">
               <Button classes={"action-button filter jsFilter"} action={() => addRole(role, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setDuringAdd, props.setRoles, props.roles, props.setCurrentEdit, props.toast)} text={"إضافة"} disabled={duringAdd} joiObject={joiRole} state={role} setStateErrors={setRoleErrors} toast={props.toast} />

@@ -22,7 +22,7 @@ function CategoryHeader(props) {
             }}
           />
 
-          {checkPermissions(props.userInformation, ["admin.category.create", "admin.category.all"]) ? (
+          {checkPermissions(props.userInformation, ["admin.category.create"]) ? (
             <button
               className="action-button filter jsFilter"
               onClick={() => {

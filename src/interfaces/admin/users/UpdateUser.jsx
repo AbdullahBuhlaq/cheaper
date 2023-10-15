@@ -11,6 +11,7 @@ import CheckPasswordInput from "../../../components/CheckPasswordInput";
 import ImageInput from "../../../components/ImageInput";
 import SelectMultipleFromDB from "../../../components/SelectMultipleFromDB";
 import updateUserTop from "./function/updateUserTop";
+import profileSchema from "./profileSection/schema/profileSchema";
 
 function UpdateUser(props) {
   const [duringAdd, setDuringAdd] = useState(false);
@@ -40,26 +41,8 @@ function UpdateUser(props) {
   }, [props.currentEdit]);
 
   const [userErrors, setUserErrors] = useState({});
-  const userSchema = {
-    name: Joi.string().required().min(2).max(50).trim().messages(messages).label("الاسم"),
-    gender: Joi.string().required().messages(messages).label("الجنس"),
-    birthday: Joi.date().required().messages(messages).label("تاريخ الميلاد"),
-    username: Joi.string()
-      .trim()
-      .pattern(/[a-zA-Z]+[a-zA-Z0-9\_\.]*$/)
-      .min(3)
-      .max(30)
-      .required()
-      .messages(messages)
-      .label("اسم المستخدم"),
-    category: Joi.array().items(Joi.string().trim().min(1).max(50)).min(3).required().messages(messages).label("أصناف المحلات المفضلة"),
-    phoneNumber: Joi.string()
-      .trim()
-      .required()
-      .pattern(/^(09)(\d{8})$/)
-      .messages(messages),
-  };
-  const joiUser = Joi.object(userSchema);
+
+  const joiUser = Joi.object(profileSchema);
 
   const [image, setImage] = useState(false);
 
@@ -68,13 +51,13 @@ function UpdateUser(props) {
       <>
         <form>
           <div className="row">
-            <Input placeholder={""} label={"الاسم"} type={"text"} name={"name"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={userSchema} />
-            <Select label={"الجنس"} placeholder={"اختر الجنس..."} list={selectOptions.gender} name={"gender"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={userSchema} />
-            <Input placeholder={""} label={"رقم الموبايل"} type={"text"} name={"phoneNumber"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={userSchema} />
-            <Input placeholder={""} label={"اسم المستخدم"} type={"text"} name={"username"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={userSchema} />
-            {/* <Input placeholder={""} label={"كلمة المرور"} type={"password"} name={"password"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={userSchema} /> */}
-            <Input placeholder={""} label={"تاريخ الميلاد"} type={"date"} name={"birthday"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={userSchema} />
-            <SelectMultipleFromDB label={"صنف المحل"} placeholder={"اختر تصنيف المحل..."} list={props.categories} showKey={"name"} valueKey={"name"} name={"category"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={userSchema} />
+            <Input placeholder={""} label={"الاسم"} type={"text"} name={"name"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={profileSchema} />
+            <Select label={"الجنس"} placeholder={"اختر الجنس..."} list={selectOptions.gender} name={"gender"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={profileSchema} />
+            <Input placeholder={""} label={"رقم الموبايل"} type={"text"} name={"phoneNumber"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={profileSchema} />
+            <Input placeholder={""} label={"اسم المستخدم"} type={"text"} name={"username"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={profileSchema} />
+            {/* <Input placeholder={""} label={"كلمة المرور"} type={"password"} name={"password"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={profileSchema} /> */}
+            <Input placeholder={""} label={"تاريخ الميلاد"} type={"date"} name={"birthday"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={profileSchema} />
+            <SelectMultipleFromDB label={"صنف المحل"} placeholder={"اختر تصنيف المحل..."} list={props.categories} showKey={"name"} valueKey={"name"} name={"category"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={profileSchema} />
             <ImageInput setImage={setImage} />
           </div>
           <Button action={() => updateUserTop(user, props.currentEdit, setDuringAdd, image, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.users, props.setUsers, props.toast, props.setCurrentEdit)} text={"إرسال"} disabled={duringAdd} joiObject={joiUser} state={user} setStateErrors={setUserErrors} toast={props.toast} />

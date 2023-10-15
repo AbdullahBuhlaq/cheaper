@@ -1,5 +1,6 @@
 import Joi from "joi";
 import Filter from "bad-word-ar";
+import messages from "../../../../constants/messages";
 
 const filterAr = new Filter("ar");
 const filterEn = new Filter("en");
@@ -43,9 +44,15 @@ const roleSchema = {
       if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
       else return value;
     })
-    .messages(errorMessages.name),
-  show: Joi.array().items(Joi.string().trim().min(2).max(100)).required().messages(errorMessages.show),
-  action: Joi.array().items(Joi.string().required().min(2).max(100).trim()).required().messages(errorMessages.action),
+    .messages({ ...messages, ...errorMessages.name }),
+  show: Joi.array()
+    .items(Joi.string().trim().min(2).max(100))
+    .required()
+    .messages({ ...messages, ...errorMessages.show }),
+  action: Joi.array()
+    .items(Joi.string().required().min(2).max(100).trim())
+    .required()
+    .messages({ ...messages, ...errorMessages.action }),
 };
 
 export default roleSchema;

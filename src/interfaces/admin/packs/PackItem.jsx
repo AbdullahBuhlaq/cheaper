@@ -21,7 +21,7 @@ function PackItem(props) {
               <h1>{props.pack.name}</h1>
 
               <div className="dropdown">
-                {checkPermissions(props.userInformation, ["admin.packs.update", "admin.packs.delete", "admin.packs.all"]) ? (
+                {checkPermissions(props.userInformation, ["admin.packs.update", "admin.packs.delete"]) ? (
                   <button
                     className="dropbtn"
                     onClick={() => {
@@ -32,7 +32,7 @@ function PackItem(props) {
                   </button>
                 ) : null}
                 <ul id="myDropdown" className={"dropdown-content" + (show ? " show" : "")}>
-                  {checkPermissions(props.userInformation, ["admin.packs.update", "admin.packs.all"]) ? (
+                  {checkPermissions(props.userInformation, ["admin.packs.update"]) ? (
                     <li>
                       <a
                         href="#"
@@ -45,7 +45,7 @@ function PackItem(props) {
                       </a>
                     </li>
                   ) : null}
-                  {checkPermissions(props.userInformation, ["admin.packs.delete", "admin.packs.all"]) ? (
+                  {checkPermissions(props.userInformation, ["admin.packs.delete"]) ? (
                     <li>
                       <a
                         href="#"
@@ -61,7 +61,7 @@ function PackItem(props) {
               </div>
             </div>
 
-            <div className="plan-container-right-body" >
+            <div className="plan-container-right-body">
               <div className="plan-container-right-body-date">
                 <h1 style={{ width: "max-content" }}>الفترة : </h1>
                 <h2>{props.pack.duration} يوما</h2>
@@ -71,13 +71,13 @@ function PackItem(props) {
                 <h1 style={{ width: "max-content" }}>السعر : </h1>
                 <h2>{props.pack.price} S.P</h2>
               </div>
-          </div>
+            </div>
 
-          {/* <div className="plan-container-left">
+            {/* <div className="plan-container-left">
            <h1>testtttttttt</h1>
       </div> */}
-        </div>
-            </motion.div>
+          </div>
+        </motion.div>
       </>
     );
   } catch (err) {

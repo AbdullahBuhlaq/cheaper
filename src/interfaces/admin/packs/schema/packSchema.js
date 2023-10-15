@@ -1,5 +1,6 @@
 import Joi from "joi";
 import Filter from "bad-word-ar";
+import messages from "../../../../constants/messages";
 
 const filterAr = new Filter("ar");
 const filterEn = new Filter("en");
@@ -19,12 +20,7 @@ const errorMessages = {
     "number.max": 'حقل "المدة" يجب أن تكون قيمته على الأكثر 10,000.',
     "any.required": 'حقل "المدة" مطلوب.',
   },
-  id: {
-    "number.base": 'حقل "المعرف" يجب أن يكون رقمًا.',
-    "number.integer": 'حقل "المعرف" يجب أن يكون رقمًا صحيحًا.',
-    "number.max": 'حقل "المعرف" يجب أن يكون أقل من أو يساوي  يجب أن يكون أقل من أو يساوي 1 000 000.',
-    "any.required": 'حقل "المعرف" مطلوب.',
-  },
+
   price: {
     "number.base": 'حقل "المعرف" يجب أن يكون رقمًا.',
     "number.integer": 'حقل "المعرف" يجب أن يكون رقمًا صحيحًا.',
@@ -42,9 +38,19 @@ const packSchema = {
       if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
       else return value;
     })
-    .messages(errorMessages.name),
-  duration: Joi.number().integer().min(1).max(1e4).required().messages(errorMessages.duration),
-  price: Joi.number().integer().min(0).max(1e7).required().messages(errorMessages.price),
+    .messages({ ...messages, ...errorMessages.name }),
+  duration: Joi.number()
+    .integer()
+    .min(1)
+    .max(1e4)
+    .required()
+    .messages({ ...messages, ...errorMessages.duration }),
+  price: Joi.number()
+    .integer()
+    .min(0)
+    .max(1e7)
+    .required()
+    .messages({ ...messages, ...errorMessages.price }),
 };
 
 export default packSchema;

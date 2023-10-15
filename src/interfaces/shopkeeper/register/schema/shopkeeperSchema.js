@@ -1,6 +1,7 @@
 import Joi from "joi";
 import Filter from "bad-word-ar";
 import moment from "moment/moment.js";
+import messages from "../../../../constants/messages";
 
 const filterAr = new Filter("ar");
 const filterEn = new Filter("en");
@@ -48,54 +49,7 @@ const errorMessages = {
     "date.min": 'حقل "تاريخ الميلاد" يجب أن يكون تاريخًا بعد "1930-01-01".',
     "any.required": 'حقل "تاريخ الميلاد" مطلوب.',
   },
-  size: {
-    "number.base": 'حقل "الحجم" يجب أن يكون رقمًا.',
-    "number.integer": 'حقل "الحجم" يجب أن يكون رقمًا صحيحًا.',
-    "number.min": 'حقل "الحجم" يجب أن يكون على الأقل 1.',
-    "number.max": 'حقل "الحجم" يجب أن يكون أقل من أو يساوي 1000.',
-    "any.required": 'حقل "الحجم" مطلوب.',
-  },
-  page: {
-    "number.base": 'حقل "الصفحة" يجب أن يكون رقمًا.',
-    "number.integer": 'حقل "الصفحة" يجب أن يكون رقمًا صحيحًا.',
-    "number.min": 'حقل "الصفحة" يجب أن يكون على الأقل 1.',
-    "number.max": 'حقل "الصفحة" يجب أن يكون أقل من أو يساوي 10000.',
-    "any.required": 'حقل "الصفحة" مطلوب.',
-  },
-  type: {
-    "boolean.base": 'حقل "النوع" يجب أن يكون منطقيًا.',
-    "any.required": 'حقل "النوع" مطلوب.',
-  },
-  tokenDevice: {
-    "string.base": 'حقل "كلمة المرور" يجب أن يكون نصًا.',
-    "string.empty": 'حقل "كلمة المرور" لا يجب أن يكون فارغًا.',
-    "string.min": 'حقل "كلمة المرور" يجب أن يحتوي على الحد الأدنى من 20  أحرف.',
-    "string.max": 'حقل "كلمة المرور" يجب أن يحتوي على الحد الأقصى لـ 400 حرفًا.',
-    "any.required": 'حقل "كلمة المرور" مطلوب.',
-  },
 
-  search: {
-    "string.base": 'حقل "search" يجب أن يكون سلسلة نصية.',
-    "any.custom": message,
-    "number.max": 'حقل "search" يجب أن يكون أقل من أو يساوي 200.',
-  },
-  id: {
-    "number.base": 'حقل "المعرف" يجب أن يكون رقمًا.',
-    "number.integer": 'حقل "المعرف" يجب أن يكون رقمًا صحيحًا.',
-    "number.max": 'حقل "المعرف" يجب أن يكون أقل من أو يساوي  يجب أن يكون أقل من أو يساوي 1 000 000.',
-    "any.required": 'حقل "المعرف" مطلوب.',
-  },
-  active: {
-    "boolean.base": 'حقل "النوع" يجب أن يكون منطقيًا.',
-    "any.required": 'حقل "النوع" مطلوب.',
-  },
-  email: {
-    "string.empty": 'حقل "البريد الإلكتروني" لا يجب أن يكون فارغًا.',
-    "string.pattern.base": 'حقل "البريد الإلكتروني" يجب أن يكون بتنسيق صحيح (example@gmail.com).',
-    "any.required": 'حقل "البريد الإلكتروني" مطلوب.',
-  },
-
-  // store
   longitude: {
     "number.required": 'حقل "خط الطول" مطلوب.',
   },
@@ -149,21 +103,27 @@ const shopkeeperSchema = {
       if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
       else return value;
     })
-    .messages(errorMessages.name),
-  gender: Joi.string().required().messages(errorMessages.gender),
-  birthday: Joi.date().required().max(moment()).min(moment("1930-01-01")).messages(errorMessages.birthday),
+    .messages({ ...messages, ...errorMessages.name }),
+  gender: Joi.string()
+    .required()
+    .messages({ ...messages, ...errorMessages.gender }),
+  birthday: Joi.date()
+    .required()
+    .max(moment())
+    .min(moment("1930-01-01"))
+    .messages({ ...messages, ...errorMessages.birthday }),
 
   email: Joi.string()
     .trim()
     .required()
     .pattern(/^[a-zA-Z0-9]+[a-zA-Z0-9._]*@gmail\.com$/)
-    .messages(errorMessages.email),
+    .messages({ ...messages, ...errorMessages.email }),
 
   phoneNumber: Joi.string()
     .trim()
     .required()
     .pattern(/^(09)(\d{8})$/)
-    .messages(errorMessages.phoneNumber),
+    .messages({ ...messages, ...errorMessages.phoneNumber }),
 
   username: Joi.string()
     .trim()
@@ -171,7 +131,7 @@ const shopkeeperSchema = {
     .min(3)
     .max(30)
     .required()
-    .messages(errorMessages.username),
+    .messages({ ...messages, ...errorMessages.username }),
   password: Joi.string()
 
     .min(8)
@@ -180,13 +140,13 @@ const shopkeeperSchema = {
       if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
       else return value;
     })
-    .messages(errorMessages.password),
+    .messages({ ...messages, ...errorMessages.password }),
 
   locationText: Joi.string()
     .min(1)
     .max(200)
     .allow(null)
-    .messages(errorMessages.locationText)
+    .messages({ ...messages, ...errorMessages.locationText })
 
     .custom((value, helpers) => {
       if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
@@ -197,14 +157,18 @@ const shopkeeperSchema = {
     .min(2)
     .max(50)
     .trim()
-    .messages(errorMessages.name)
+    .messages({ ...messages, ...errorMessages.name })
     .custom((value, helpers) => {
       if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
       else return value;
     }),
 
-  longitude: Joi.number().required().messages(errorMessages.longitude),
-  latitude: Joi.number().required().messages(errorMessages.latitude),
+  longitude: Joi.number()
+    .required()
+    .messages({ ...messages, ...errorMessages.longitude }),
+  latitude: Joi.number()
+    .required()
+    .messages({ ...messages, ...errorMessages.latitude }),
 
   fromHour: Joi.string()
     .pattern(/^(([0-9]{1})|([0-1]{1}[0-9]{1})|([2]{1}[0-3]{1}))(([:]{1})?)(([0-5]{1}[0-9]?)?)$/)
@@ -217,7 +181,7 @@ const shopkeeperSchema = {
     .min(2)
     .max(50)
     .required()
-    .messages(errorMessages.category)
+    .messages({ ...messages, ...errorMessages.category })
 
     .custom((value, helpers) => {
       if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);

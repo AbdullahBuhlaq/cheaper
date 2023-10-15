@@ -54,7 +54,7 @@ function Packs(props) {
   }, [props.packs]);
 
   useEffect(() => {
-    if (props.packsChart.loading && checkPermissions(props.userInformation, ["admin.packs.chart", "admin.packs.all"])) getPackChart(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setPacksChart, props.packsChart);
+    if (props.packsChart.loading && checkPermissions(props.userInformation, ["admin.packs.chart"])) getPackChart(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setPacksChart, props.packsChart);
   }, []);
 
   async function deletePack(id) {
@@ -100,7 +100,7 @@ function Packs(props) {
                       ) : null}
                     </div>
                     <div>
-                      {!checkPermissions(props.userInformation, ["admin.packs.chart", "admin.packs.all"]) ? (
+                      {!checkPermissions(props.userInformation, ["admin.packs.chart"]) ? (
                         <SuspendChart width={"230%"} height={400} />
                       ) : props.packsChart.loading ? (
                         <LoadingChart width={"230%"} height={400} />

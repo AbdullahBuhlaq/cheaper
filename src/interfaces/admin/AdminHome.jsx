@@ -137,7 +137,7 @@ function AdminHome(props) {
                   }
                 />
               ) : null}
-              {checkShow(props.userInformation, ["profile"]) ? <Route path="/profile" exact element={<Profile profile={profile} setProfile={setProfile} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />} /> : null}
+              <Route path="/profile" exact element={<Profile profile={profile} setProfile={setProfile} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />} />
               {checkShow(props.userInformation, ["categories"]) ? <Route path="/categories" exact element={<Categories categories={categories} setCategories={setCategories} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />} /> : null}
               {checkShow(props.userInformation, ["roles"]) ? (
                 <Route path="/roles" exact element={<Roles roles={roles} setRoles={setRoles} employees={employees} setEmployees={setEmployees} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />} />

@@ -41,13 +41,13 @@ function RoleItem(props) {
         })}
         {roleErrors["show"]}
         {props.currentEdit.id > 5 ? (
-          checkPermissions(props.userInformation, ["admin.role.update", "admin.role.delete", "admin.role.all"]) ? (
+          checkPermissions(props.userInformation, ["admin.role.update", "admin.role.delete"]) ? (
             <form className="role-footer">
               <div className="button-container">
-                {checkPermissions(props.userInformation, ["admin.role.update", "admin.role.all"]) ? (
+                {checkPermissions(props.userInformation, ["admin.role.update"]) ? (
                   <Button classes={"action-button filter jsFilter"} action={() => editRole(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, role, setDuringAdd, props.setRoles, props.roles, props.currentEdit, props.toast)} text={"حفظ التعديل"} disabled={duringAdd} joiObject={joiRole} state={role} setStateErrors={setRoleErrors} toast={props.toast} />
                 ) : null}
-                {checkPermissions(props.userInformation, ["admin.role.delete", "admin.role.all"]) ? (
+                {checkPermissions(props.userInformation, ["admin.role.delete"]) ? (
                   <Button
                     classes={"action-button filter jsFilter"}
                     action={() => {

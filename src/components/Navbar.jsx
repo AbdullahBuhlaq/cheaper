@@ -133,7 +133,7 @@ function Navbar(props) {
           </a>
 
           {props.tabs.map((tab, tabIndex) => {
-            if (currentHeight / 100 >= tabIndex + 1 && checkShow(props.userInformation, [tab.value])) {
+            if (currentHeight / 100 >= tabIndex + 1 && (checkShow(props.userInformation, [tab.value]) || tab.value == "profile")) {
               return <Tab key={tabIndex} tab={tab} currentTab={props.currentTab} setCurrentTab={props.setCurrentTab} />;
             }
           })}
@@ -157,7 +157,7 @@ function Navbar(props) {
                 <div className={"sub-menu double" + (showMore ? " show" : "")} style={{ zIndex: "30", height: "320px", top: "-242px", overflow: "auto", minWidth: "initial", textAlign: "center" }}>
                   <div className="notifications-last-update">
                     {props.tabs.map((tab, tabIndex) => {
-                      if (currentHeight / 100 < tabIndex + 1 && checkShow(props.userInformation, [tab.value])) {
+                      if (currentHeight / 100 < tabIndex + 1 && (checkShow(props.userInformation, [tab.value]) || tab.value == "profile")) {
                         return <Tab key={tabIndex} tab={tab} currentTab={props.currentTab} setCurrentTab={props.setCurrentTab} />;
                       }
                     })}

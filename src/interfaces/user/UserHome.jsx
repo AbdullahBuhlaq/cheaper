@@ -16,6 +16,7 @@ import Contact from "../general/Contact";
 import Page404 from "../general/Page404";
 import Confitte from "react-confetti";
 import getNotificationsCount from "../../functions/getNotificationsCount";
+import checkShow from "../../functions/checkShow";
 
 function UserHome(props) {
   const [currentTab, setCurrentTab] = useState("main");
@@ -106,8 +107,10 @@ function UserHome(props) {
               <Route path="/services" exact element={<Services />} />
               <Route path="/aboutUs" exact element={<AboutUs />} />
               <Route path="/contactUs" exact element={<Contact />} />
-              <Route path="/home" exact element={<HomeOfUser setRun={setRun} homeInfo={homeInfo} setHomeInfo={setHomeInfo} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />} />
-              <Route path="/offers" exact element={<Offers offers={offers} setOffers={setOffers} categories={categories} setCategories={setCategories} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />} />
+              {checkShow(props.userInformation, ["home"]) ? <Route path="/home" exact element={<HomeOfUser setRun={setRun} homeInfo={homeInfo} setHomeInfo={setHomeInfo} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />} /> : null}
+              {checkShow(props.userInformation, ["home"]) ? (
+                <Route path="/offers" exact element={<Offers offers={offers} setOffers={setOffers} categories={categories} setCategories={setCategories} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />} />
+              ) : null}
               <Route path="/profile" exact element={<UserProfile categories={categories} setCategories={setCategories} profile={profile} setProfile={setProfile} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />} />
               <Route path="/*" exact element={<Page404 />} />
             </Routes>

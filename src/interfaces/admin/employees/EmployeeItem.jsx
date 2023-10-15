@@ -30,7 +30,7 @@ function EmployeeItem(props) {
             <span className="cell-label">خيارات :</span>
 
             <div className="dropdown">
-              {checkPermissions(props.userInformation, ["admin.employee.update", "admin.employee.delete", "admin.employee.all"]) ? (
+              {checkPermissions(props.userInformation, ["admin.employee.update", "admin.employee.delete"]) ? (
                 <button
                   onClick={() => {
                     setShowOptions(!showOptions);
@@ -41,7 +41,7 @@ function EmployeeItem(props) {
                 </button>
               ) : null}
               <ul className={"dropdown-content" + (showOptions ? " show" : "")}>
-                {checkPermissions(props.userInformation, ["admin.employee.update", "admin.employee.all"]) ? (
+                {checkPermissions(props.userInformation, ["admin.employee.update"]) ? (
                   <li
                     onClick={() => {
                       props.setCurrentEdit(props.employee.id);
@@ -50,7 +50,7 @@ function EmployeeItem(props) {
                     <div>تعديل</div>
                   </li>
                 ) : null}
-                {checkPermissions(props.userInformation, ["admin.employee.delete", "admin.employee.all"]) ? (
+                {checkPermissions(props.userInformation, ["admin.employee.delete"]) ? (
                   <li
                     onClick={() => {
                       props.deleteEmployee(props.employee.id);

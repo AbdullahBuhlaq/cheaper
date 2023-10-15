@@ -22,7 +22,8 @@
 
 .form-popup {
     width: 60%;
-    height: 95%;
+    height: max-content !important;
+    max-height: 95%;
     background: var(--main-modal);
     border-radius: 20px;
     position: relative;
@@ -30,11 +31,13 @@
     padding: 22px;
     border: 1.8px solid #fff;
     box-shadow: 0px 4px 13px #00008024 !important;
+
 }
 
 .form-popup-small {
     width: 35%;
-    height: 95%;
+    height: max-content !important;
+    max-height: 95%;
     background: var(--main-modal);
     border-radius: 20px;
     position: relative;
@@ -110,6 +113,7 @@
     backdrop-filter: blur(8px);
     width: 100%;
     height: 100%;
+    align-items: center;
 }
 
 @-webkit-keyframes show {

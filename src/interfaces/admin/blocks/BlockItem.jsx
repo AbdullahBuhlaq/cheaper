@@ -50,13 +50,13 @@ function BlockItem(props) {
           return <ShowItem key={showIndex} disabled={props.currentEdit.id == 1} id={props.currentEdit.id} index={showIndex} showItem={showItem} role={block} setRole={setBlock} roleErrors={blockErrors} setRoleErrors={setBlockErrors} roleSchema={blockSchema} name={"show"} />;
         })}
         {blockErrors["show"]}
-        {props.currentEdit.id == 1 ? null : checkPermissions(props.userInformation, ["admin.block.update", "admin.block.delete", "admin.block.all"]) ? (
+        {props.currentEdit.id == 1 ? null : checkPermissions(props.userInformation, ["admin.block.update", "admin.block.delete"]) ? (
           <form className="role-footer">
             <div className="button-container">
-              {checkPermissions(props.userInformation, ["admin.block.update", "admin.block.all"]) ? (
+              {checkPermissions(props.userInformation, ["admin.block.update"]) ? (
                 <Button classes={"action-button filter jsFilter"} action={() => editBlock(block, props.currentEdit, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setDuringAdd, props.blocks, props.setBlocks, props.toast)} text={"حفظ"} disabled={duringAdd} joiObject={joiBlock} state={block} setStateErrors={setBlockErrors} toast={props.toast} />
               ) : null}
-              {checkPermissions(props.userInformation, ["admin.block.delete", "admin.block.all"]) ? (
+              {checkPermissions(props.userInformation, ["admin.block.delete"]) ? (
                 <Button
                   classes={"action-button filter jsFilter"}
                   action={(event) => {

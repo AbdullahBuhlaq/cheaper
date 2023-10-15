@@ -45,7 +45,7 @@ function AddBlockForm(props) {
           return <ShowItem key={showIndex} id={-1} index={showIndex} showItem={showItem} role={block} setRole={setBlock} roleErrors={blockErrors} setRoleErrors={setBlockErrors} roleSchema={blockSchema} name={"show"} />;
         })}
         {blockErrors["show"] && <div className="validating-error">{blockErrors["show"]}</div>}
-        {checkPermissions(props.userInformation, ["admin.block.create", "admin.block.all"]) ? (
+        {checkPermissions(props.userInformation, ["admin.block.create"]) ? (
           <form className="role-footer">
             <div className="button-container">
               <Button

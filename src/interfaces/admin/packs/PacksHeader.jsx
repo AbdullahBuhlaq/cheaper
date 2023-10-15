@@ -22,7 +22,7 @@ function PacksHeader(props) {
             }}
           />
 
-          {checkPermissions(props.userInformation, ["admin.packs.create", "admin.packs.all"]) ? (
+          {checkPermissions(props.userInformation, ["admin.packs.create"]) ? (
             <button
               className="action-button filter jsFilter"
               onClick={() => {
