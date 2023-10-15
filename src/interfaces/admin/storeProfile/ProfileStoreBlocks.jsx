@@ -22,7 +22,6 @@ function ProfileStoreBlocks(props) {
         {props.blocks != -1 ? (
           <>
             <div className="categories-main-modal-body">
-              {console.log(props.blocks)}
               <BlocksHeaderStore blocks={props.blocks} userInformation={props.userInformation} count={props.blocks.rows.length} blocked={props.blocks.blocked} />
 
               {checkPermissions(props.userInformation, ["admin.store.accepted.block"]) ? (
@@ -32,9 +31,12 @@ function ProfileStoreBlocks(props) {
               {checkPermissions(props.userInformation, ["admin.users.block.allBlockForUser"]) ? (
                 props.blocks != -1 ? (
                   <div className="categories-main-modal-body-block-history">
-                    {props.blocks.rows.reverse().map((block, index) => {
-                      return <BlockCardStore key={index} index={index} block={block} deleteStoreBlock={props.deleteStoreBlock} />;
-                    })}
+                    {props.blocks.rows
+                      .slice()
+                      .reverse()
+                      .map((block, index) => {
+                        return <BlockCardStore key={index} index={index} block={block} deleteStoreBlock={props.deleteStoreBlock} />;
+                      })}
                     {props.blocks.count == 0 ? "لا يوجد" : null}
                   </div>
                 ) : (

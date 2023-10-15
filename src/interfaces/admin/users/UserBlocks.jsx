@@ -56,6 +56,7 @@ function UserBlocks(props) {
               userBlocks ? (
                 <div className="categories-main-modal-body-block-history">
                   {Object.keys(userBlocks.rows)
+                    .slice()
                     .reverse()
                     .map((blockKey, index) => {
                       return <BlockCard key={index} index={index} userInformation={props.userInformation} deleteUserBlock={(id) => deleteUserBlock(id)} stopBlock={(id) => stopBlock(id)} block={userBlocks.rows[blockKey]} />;
