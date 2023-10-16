@@ -109,6 +109,8 @@ function Stores(props) {
                         setCurrentEditType={setCurrentEditType}
                         pendingStores={props.pendingStores}
                         setPendingStores={props.setPendingStores}
+                        acceptedStores={props.acceptedStores}
+                        setAcceptedStores={props.setAcceptedStores}
                         setCurrentEdit={setCurrentEdit}
                         pendingStoresFilter={pendingStoresFilter}
                         setPendingStoresFilter={setPendingStoresFilter}

@@ -2,12 +2,31 @@ import { SlSizeFullscreen } from "react-icons/sl";
 import getIcon from "../../../functions/getIcon";
 import jsonParse from "../../../functions/jsonParse";
 import { motion } from "framer-motion";
+import { useState } from "react";
+import checkPermissions from "../../../functions/checkPermission";
 
 function PendingStoreCard(props) {
+  const [choosen, setChoosen] = useState(false);
   try {
     return (
       <>
-        <motion.div className="sales-card" initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", duration: "1.2" }}>
+        <motion.div
+          className={"sales-card" + (choosen ? " choosen-store" : "")}
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ type: "spring", duration: "1.2" }}
+          onClick={() => {
+            if (checkPermissions(props.userInformation, ["admin.store.accept"])) {
+              if (choosen) {
+                props.deleteCard(props.store.id);
+              } else {
+                props.addCard(props.store.id);
+              }
+              setChoosen(!choosen);
+            }
+          }}
+          style={{ cursor: "pointer" }}
+        >
           <div className="poster">
             <img src={jsonParse(props.store.avatar)[3] ? jsonParse(props.store.avatar)[3] : jsonParse(props.store.avatar)[0]} />
           </div>

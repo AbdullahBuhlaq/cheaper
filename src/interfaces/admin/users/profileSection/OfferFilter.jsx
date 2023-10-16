@@ -6,8 +6,8 @@ function OfferFilter(props) {
     return (
       <>
         <div className="filter-menu active">
-          <FilterSelect state={props.tempFilter} setState={props.setTempFilter} name={"statePaid"} label={"حالة الدفع"} placeholder={"أيا يكن"} list={selectOptions.statePaid} />
-          <FilterSelect state={props.tempFilter} setState={props.setTempFilter} name={"type"} label={"النوع"} placeholder={"أيا يكن"} list={selectOptions.typeStore} />
+          <FilterSelect state={props.tempFilter} setState={props.setTempFilter} name={"statePaid"} label={"حالة العرض"} placeholder={"أيا يكن"} list={selectOptions.statePaid} />
+          <FilterSelect state={props.tempFilter} setState={props.setTempFilter} name={"type"} label={"نوع العرض"} placeholder={"أيا يكن"} list={selectOptions.typeStore} />
           <div className="filter-menu-buttons">
             <button
               className="filter-button reset"

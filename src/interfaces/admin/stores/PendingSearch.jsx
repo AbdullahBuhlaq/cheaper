@@ -27,6 +27,13 @@ function PendingSearch(props) {
             بحث
           </button>
           <div className="app-content-actions-wrapper">
+            {props.selected.length ? (
+              <div className="filter-button-wrapper">
+                <button className="action-button filter jsFilter" disabled={props.duringAdd} onClick={() => props.sendSelected()}>
+                  قبول المحدد
+                </button>
+              </div>
+            ) : null}
             <div className="filter-button-wrapper">
               <button
                 className="action-button filter jsFilter"

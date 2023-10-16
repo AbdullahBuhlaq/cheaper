@@ -5,7 +5,7 @@ function ProfileBody(props) {
     return (
       <>
         <section className="profile-right-section">
-          <DevicesCards profile={props.profile} />
+          <DevicesCards profile={props.profile} logoutDevice={props.logoutDevice} />
         </section>
       </>
     );

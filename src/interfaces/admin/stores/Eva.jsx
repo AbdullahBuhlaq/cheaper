@@ -9,7 +9,7 @@ function Eva(props) {
             <div className="profile-info-wrapper">
               <div className="fix-profile-image-wrapper">
                 <div className="profile-img-wrapper">
-                  <img src={props.item.avater ? jsonParse(props.item.avater)[0] : "images/user.webp"} alt="Review" />
+                  <img src={props.item.avatar ? jsonParse(props.item.avatar)[0] : "images/user.webp"} alt="Review" />
                 </div>
                 <div className="profile-info-wrapper-name" style={{ marginRight: "10px" }}>
                   <p>{props.item["user.name"]}</p>

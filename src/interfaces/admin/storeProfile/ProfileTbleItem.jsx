@@ -17,7 +17,18 @@ function ProfileTableItem(props) {
           <td>{props.item.dataTake ? new Date(props.item.dataTake).toLocaleDateString() : "لم يستلم"}</td>
           <td>{props.item.offerType}</td>
           <td>{props.item.evaluate ? props.item.evaluate : "لا يوجد"}</td>
-          <td title={props.item.reasonSpam}>{props.item.reasonSpam ? "عرض الإبلاغ" : "لا يوجد"}</td>
+          <td
+            title={props.item.reasonSpam}
+            style={props.item.reasonSpam ? { cursor: "pointer" } : {}}
+            onClick={() => {
+              if (props.item.reasonSpam)
+                props.toast(props.item.reasonSpam, {
+                  position: props.toast.POSITION.BOTTOM_CENTER,
+                });
+            }}
+          >
+            {props.item.reasonSpam ? "عرض الإبلاغ" : "لا يوجد"}
+          </td>
         </motion.tr>
       </>
     );

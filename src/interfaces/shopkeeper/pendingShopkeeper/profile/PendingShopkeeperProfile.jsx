@@ -14,6 +14,7 @@ import UpdateProfile from "./UpdateProfile";
 import UpdateStoreInformation from "./UpdateStoreInformation";
 import getGeneralCategories from "../../../../functions/getGeneralCategories";
 import SendCode from "../../../general/SendCode";
+import logoutDevice from "../../../../functions/logoutDevice";
 
 function PendingShopkeeperProfile(props) {
   const [loading, setLoading] = useState(true);
@@ -27,6 +28,10 @@ function PendingShopkeeperProfile(props) {
   useEffect(() => {
     if (props.profile != -1 && props.storeInformation != -1) setLoading(false);
   }, [props.profile, props.storeInformation]);
+
+  function logoutDeviceFunc(id) {
+    logoutDevice(id, props.setProfile, props.profile, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast);
+  }
 
   try {
     return (
@@ -43,7 +48,7 @@ function PendingShopkeeperProfile(props) {
               <div className="main-profile">
                 <ProfileLeft storeInformation={props.storeInformation} profile={props.profile} setPopupStatus={setPopupStatus} />
 
-                <ProfileBody profile={props.profile} />
+                <ProfileBody profile={props.profile} logoutDevice={logoutDeviceFunc} />
               </div>
             </div>
 

@@ -11,7 +11,7 @@ function UserDevicesCards(props) {
           </div>
 
           {props.profile.devices.map((device, index) => {
-            return <DeviceCard key={index} index={index} device={device} />;
+            return <DeviceCard key={index} index={index} device={device} logoutDevice={props.logoutDevice} />;
           })}
         </div>
       </>

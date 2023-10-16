@@ -12,13 +12,13 @@ const generalTabs = [
 export const adminTabs = [
   { name: "الرئيسية", value: "home", icon: <FcHome /> },
   { name: "الشخصية", value: "profile", icon: <FcBusinessman /> },
-  { name: "الأصناف", value: "categories", icon: <FcTimeline /> },
-  { name: "الأدوار", value: "roles", icon: <FcInspection /> },
-  { name: "الحظورات", value: "blocks", icon: <FcDisclaimer /> },
-  { name: "الباقات", value: "packs", icon: <FcPaid /> },
-  { name: "الموظفين", value: "employees", icon: <FcBriefcase /> },
-  { name: "المستخدمين", value: "users", icon: <FcConferenceCall /> },
   { name: "المحلات", value: "stores", icon: <FcShop /> },
+  { name: "المستخدمين", value: "users", icon: <FcConferenceCall /> },
+  { name: "الباقات", value: "packs", icon: <FcPaid /> },
+  { name: "الأصناف", value: "categories", icon: <FcTimeline /> },
+  { name: "الموظفين", value: "employees", icon: <FcBriefcase /> },
+  { name: "الحظورات", value: "blocks", icon: <FcDisclaimer /> },
+  { name: "الأدوار", value: "roles", icon: <FcInspection /> },
 ];
 export const pendingShopkeeperTabs = [{ name: "الشخصية", value: "profile", icon: <FcBusinessman /> }];
 export const acceptedShopkeeperTabs = [

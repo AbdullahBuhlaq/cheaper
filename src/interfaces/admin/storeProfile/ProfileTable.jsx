@@ -20,7 +20,7 @@ function ProfileTable(props) {
             </thead>
             <tbody className="tbody">
               {props.users.map((item, index) => {
-                return <ProfileTableItem key={index} item={item} />;
+                return <ProfileTableItem key={index} item={item} toast={props.toast} />;
               })}
             </tbody>
             <LoadMoreStoreUsers userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} setUsers={props.setUsers} users={props.users} toast={props.toast} usersPage={props.usersPage} setUsersPage={props.setUsersPage} id={props.id} />

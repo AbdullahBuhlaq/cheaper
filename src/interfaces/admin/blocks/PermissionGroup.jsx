@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import PermissionItem from "../../../components/PermissionItem";
 import { motion } from "framer-motion";
+import handleSave from "../../../functions/handleSave";
 
 function PermissionGroup(props) {
   const [opened, setOpened] = useState(false);
@@ -35,6 +36,29 @@ function PermissionGroup(props) {
       console.log(err);
     }
   }, [props.block]);
+
+  async function selectAll() {
+    let finalPermissions = [];
+    await Promise.all(
+      Object.keys(props.permission[props.permissionGroup]).map(async (permissionItem, permissionIndex) => {
+        if (props.block[props.name].indexOf(props.permission[props.permissionGroup][permissionItem]) != -1) props.block[props.name].splice(props.block[props.name].indexOf(props.permission[props.permissionGroup][permissionItem]), 1);
+        finalPermissions = [...finalPermissions, props.permission[props.permissionGroup][permissionItem]];
+      })
+    );
+    await handleSave({ target: { name: props.name, value: [...props.block[props.name], ...finalPermissions] } }, props.block, props.setBlock, props.blockErrors, props.setBlockErrors, props.blockSchema);
+  }
+
+  async function deleteAll() {
+    await Promise.all(
+      Object.keys(props.permission[props.permissionGroup]).map(async (permissionItem, permissionIndex) => {
+        if (props.block[props.name].indexOf(props.permission[props.permissionGroup][permissionItem]) != -1) props.block[props.name].splice(props.block[props.name].indexOf(props.permission[props.permissionGroup][permissionItem]), 1);
+      })
+    );
+    await handleSave({ target: { name: props.name, value: [...props.block[props.name]] } }, props.block, props.setBlock, props.blockErrors, props.setBlockErrors, props.blockSchema);
+  }
+
+  const [isSelect, setIsSelect] = useState(true);
+
   try {
     return (
       <>
@@ -48,6 +72,25 @@ function PermissionGroup(props) {
           </div>
           {opened ? (
             <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "max-content", originY: "-30%", opacity: 1 }} exit={{ scaleY: 0, originY: "-30%", opacity: 0 }} transition={{ duration: 0.05 * elements.length }} style={{ overflow: "hidden" }}>
+              {props.currentEdit?.id == 1 ? null : isSelect ? (
+                <button
+                  onClick={() => {
+                    selectAll();
+                    setIsSelect(false);
+                  }}
+                >
+                  تحديد الكل
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    deleteAll();
+                    setIsSelect(true);
+                  }}
+                >
+                  إلغاء تحديد الكل
+                </button>
+              )}
               {elements}
             </motion.div>
           ) : null}

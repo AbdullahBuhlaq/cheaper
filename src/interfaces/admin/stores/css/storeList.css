@@ -301,3 +301,7 @@
     border: 1px solid #ccc;
     border-top: none;
 }
+
+.choosen-store {
+    border: 2px solid blue
+}

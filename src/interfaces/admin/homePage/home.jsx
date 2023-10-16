@@ -33,7 +33,7 @@ function Home(props) {
   try {
     return (
       <>
-        <div className="cards home-container" style={{ width: "75%" }}>
+        <div className="cards home-container" style={{ width: "75%", height: "100vh" }}>
           {expanded ? <div className="expanded-card-container" onClick={() => setExpanded(false)}></div> : null}
           <div className="admin-home-charts-container">
             <div className="card-row">
@@ -108,12 +108,9 @@ function Home(props) {
 
           <div
             className="cityChart"
-            style={
-              {
-                // background: props.homeCityChart.color.backGround,
-                // boxShadow: props.homeCityChart.color.boxShadow,
-              }
-            }
+            style={{
+              height: "100%",
+            }}
           >
             <span>{"توزع المحلات على المدن"}</span>
             {!checkPermissions(props.userInformation, ["admin.home.cityChart"]) ? (
@@ -124,8 +121,14 @@ function Home(props) {
                 <span>ليست لديك الصلاحية لطلب هذا الرسم البياني</span>
               </div>
             ) : (
-              <div className="chartContainer" style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
-                {props.homeCityChart.loading ? <Loading /> : <Chart options={props.homeCityChart.options} series={props.homeCityChart.options.series} type="bar" width={"280%"} height={"225%"} />}
+              <div className="chartContainer" style={{ height: "100%", display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
+                {props.homeCityChart.loading ? (
+                  <Loading />
+                ) : (
+                  <div style={{ height: "100%", width: "100%" }}>
+                    <Chart options={props.homeCityChart.options} series={props.homeCityChart.options.series} type="bar" width={"100%"} height={"100%"} />
+                  </div>
+                )}
               </div>
             )}
           </div>

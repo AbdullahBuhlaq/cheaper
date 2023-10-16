@@ -10,8 +10,8 @@ import ProfileLeft from "./profileSection/profileLeft";
 import ProfileBody from "./profileSection/ProfileBody";
 import HeaderButton from "../../../components/mainArea";
 import UpdateProfile from "./UpdateProfile";
-import { FaSwimmer } from "react-icons/fa";
 import SendCode from "../../general/SendCode";
+import logoutDevice from "../../../functions/logoutDevice";
 
 function Profile(props) {
   const [loading, setLoading] = useState(true);
@@ -22,6 +22,10 @@ function Profile(props) {
   useEffect(() => {
     if (props.profile != -1) setLoading(false);
   }, [props.profile]);
+
+  function logoutDeviceFunc(id) {
+    logoutDevice(id, props.setProfile, props.profile, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast);
+  }
 
   try {
     return (
@@ -38,7 +42,7 @@ function Profile(props) {
               <div className="main-profile">
                 <ProfileLeft profile={props.profile} setPopupStatus={setPopupStatus} />
 
-                <ProfileBody profile={props.profile} />
+                <ProfileBody profile={props.profile} logoutDevice={logoutDeviceFunc} />
               </div>
             </div>
 

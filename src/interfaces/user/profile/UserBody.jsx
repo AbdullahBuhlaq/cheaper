@@ -5,7 +5,7 @@ function UserBody(props) {
     return (
       <>
         <section className="profile-right-section">
-          <UserDevicesCards profile={props.profile} />
+          <UserDevicesCards profile={props.profile} logoutDevice={props.logoutDevice} />
 
           {/* <OffersStatistics userProfile={props.userProfile} /> */}
         </section>

@@ -50,6 +50,9 @@ function Navbar(props) {
     resizeObserver.observe(document.getElementById("nav"));
   }, []);
 
+  let index = 0;
+  let overflow = false;
+
   try {
     return (
       <>
@@ -133,16 +136,21 @@ function Navbar(props) {
           </a>
 
           {props.tabs.map((tab, tabIndex) => {
-            if (currentHeight / 100 >= tabIndex + 1 && (checkShow(props.userInformation, [tab.value]) || tab.value == "profile")) {
+            if (tabIndex == 0) index = 0;
+            if (currentHeight / 100 >= index + 1 && (checkShow(props.userInformation, [tab.value]) || tab.value == "profile")) {
+              index = index + 1;
               return <Tab key={tabIndex} tab={tab} currentTab={props.currentTab} setCurrentTab={props.setCurrentTab} />;
             }
           })}
           {generalTabs.map((tab, tabIndex) => {
-            if (currentHeight / 100 >= tabIndex + 1 + props.tabs.length) {
+            if (currentHeight / 100 >= index + 1) {
+              index = index + 1;
               return <Tab key={tabIndex} tab={tab} currentTab={props.currentTab} setCurrentTab={props.setCurrentTab} />;
+            } else {
+              overflow = true;
             }
           })}
-          {currentHeight / ((props.tabs.length + generalTabs.length) * 100) < 1 ? (
+          {overflow ? (
             <>
               <div className={"menu-item highlight" + (showMore ? " show" : "")} style={{ zIndex: "30" }}>
                 <div
@@ -157,12 +165,14 @@ function Navbar(props) {
                 <div className={"sub-menu double" + (showMore ? " show" : "")} style={{ zIndex: "30", height: "320px", top: "-242px", overflow: "auto", minWidth: "initial", textAlign: "center" }}>
                   <div className="notifications-last-update">
                     {props.tabs.map((tab, tabIndex) => {
-                      if (currentHeight / 100 < tabIndex + 1 && (checkShow(props.userInformation, [tab.value]) || tab.value == "profile")) {
-                        return <Tab key={tabIndex} tab={tab} currentTab={props.currentTab} setCurrentTab={props.setCurrentTab} />;
+                      if (checkShow(props.userInformation, [tab.value]) || tab.value == "profile") {
+                        index = index - 1;
+                        if (index < 0) return <Tab key={tabIndex} tab={tab} currentTab={props.currentTab} setCurrentTab={props.setCurrentTab} />;
                       }
                     })}
                     {generalTabs.map((tab, tabIndex) => {
-                      if (currentHeight / 100 < tabIndex + 1 + props.tabs.length) {
+                      index = index - 1;
+                      if (index < 0) {
                         return <Tab key={tabIndex} tab={tab} currentTab={props.currentTab} setCurrentTab={props.setCurrentTab} />;
                       }
                     })}

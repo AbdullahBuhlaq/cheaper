@@ -8,7 +8,7 @@ function PendingFilter(props) {
       <>
         <div className="filter-menu active">
           <FilterSelect state={props.tempFilter} setState={props.setTempFilter} name={"city"} label={"المدينة"} placeholder={"أيا يكن"} list={selectOptions.city} />
-          <FilterSelectFromDB state={props.tempFilter} setState={props.setTempFilter} name={"category"} label={"الصنف"} placeholder={"أيا يكن"} list={props.categories} valueKey={"name"} nameKey={"name"} />
+          <FilterSelectFromDB state={props.tempFilter} setState={props.setTempFilter} name={"category"} label={"الصنف"} placeholder={"أيا يكن"} list={props.categories} valueKey={"id"} nameKey={"name"} />
           <div className="filter-menu-buttons">
             <button
               className="filter-button reset"

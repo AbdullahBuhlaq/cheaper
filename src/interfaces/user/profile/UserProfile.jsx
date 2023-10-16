@@ -10,6 +10,7 @@ import UserProfileLeft from "./UserProfileLeft";
 import UpdateProfile from "./UpdateProfile";
 import getGeneralCategories from "../../../functions/getGeneralCategories";
 import UserBody from "./UserBody";
+import logoutDevice from "../../../functions/logoutDevice";
 
 function UserProfile(props) {
   const [loading, setLoading] = useState(true);
@@ -26,6 +27,10 @@ function UserProfile(props) {
     if (props.categories == -1) getGeneralCategories(props.setCategories, props.toast);
   }, []);
 
+  function logoutDeviceFunc(id) {
+    logoutDevice(id, props.setProfile, props.profile, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast);
+  }
+
   try {
     return (
       <>
@@ -39,9 +44,9 @@ function UserProfile(props) {
               <HeaderButton />
 
               <div className="main-profile">
-                <UserProfileLeft profile={props.profile} setPopupStatus={setPopupStatus} />
+                <UserProfileLeft profile={props.profile} setPopupStatus={setPopupStatus} userInformation={props.userInformation} />
 
-                <UserBody profile={props.profile} />
+                <UserBody profile={props.profile} logoutDevice={logoutDeviceFunc} />
               </div>
             </div>
 

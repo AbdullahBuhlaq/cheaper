@@ -10,14 +10,17 @@ const selectOptions = {
     { name: "ذكر", value: "ذكر" },
     { name: "انثى", value: "انثى" },
   ],
+  //hooon
+
   statePaid: [
-    { name: "مدفوع", value: "مدفوع" },
-    { name: "غير مدفوع", value: "غير مدفوع" },
+    { name: "تم الاستلام", value: "تم اخذ" },
+    { name: "لم يتم الاستلام", value: "لم تتم الاخذ" },
   ],
   typeStore: [
-    { name: "شغلة", value: "شغلة" },
-    { name: "شغلة2", value: "شغلة2" },
+    { name: "مدفوع", value: "مدفوع" },
+    { name: "مجاني", value: "مجاني" },
   ],
+  //hoooon
   notificationsType: [
     { name: "مستخدم عادي", value: "users" },
     { name: "صاحب محل", value: "shop" },

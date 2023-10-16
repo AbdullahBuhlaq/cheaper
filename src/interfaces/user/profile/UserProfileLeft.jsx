@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import UserProfileHeader from "./UserProfileHeader";
 import UserProfileDetails from "./UserProfileDetails";
+import { FcCancel } from "react-icons/fc";
 
 function UserProfileLeft(props) {
   const [openCollapse, setOpenCollapse] = useState(false);
@@ -19,7 +20,16 @@ function UserProfileLeft(props) {
       <>
         <div className="profile-left">
           <div className="main-header-titel">
-            <h1 href="#">الملف الشخصي </h1>
+            <h1 href="#">
+              الملف الشخصي{" "}
+              {props.userInformation.allRestrictions[0].show.length || props.userInformation.allRestrictions[0].action.length ? (
+                <tag style={{ color: "red" }}>
+                  {" ( لقد تم حظرك عن بعض النشاطات "}
+                  <FcCancel />
+                  {" )"}
+                </tag>
+              ) : null}{" "}
+            </h1>
             <div className="dropdown">
               <button
                 className="dropbtn"

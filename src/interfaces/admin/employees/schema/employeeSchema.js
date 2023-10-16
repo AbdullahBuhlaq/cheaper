@@ -44,10 +44,10 @@ const errorMessages = {
   // params
 
   roleId: {
-    "number.base": 'حقل "roleId" يجب أن يكون رقمًا.',
-    "number.integer": 'حقل "roleId" يجب أن يكون رقمًا صحيحًا.',
-    "number.max": 'حقل "roleId" يجب أن يكون أقل من أو يساوي 1000000.',
-    "any.required": 'حقل "roleId" مطلوب.',
+    "number.base": 'حقل "الدور" مطلوب.',
+    "number.integer": 'حقل "الدور" يجب أن يكون رقمًا صحيحًا.',
+    "number.max": 'حقل "الدور" يجب أن يكون أقل من أو يساوي 1000000.',
+    "any.required": 'حقل "الدور" مطلوب.',
   },
 };
 const employeeSchema = {

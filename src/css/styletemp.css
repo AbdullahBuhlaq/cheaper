@@ -52,6 +52,13 @@
     /* --tag-color-text-three: #e77f89; */
     --tag-color-four: #eff7ff;
     /* --tag-color-text-four: #a0a6b5; */
+    --toastify-color-progress-light: linear-gradient(to right,
+            #fecca1,
+            #f8b67c,
+            #f8a359,
+            #ff9335,
+            #f88017,
+            #ff7700);
 }
 
 .dark:root {
@@ -92,6 +99,13 @@
     --tag-color-four: #a4a4a4;
     /* --tag-color-text-four: #a0a6b5; */
     --button-bg-light: #030303;
+    --toastify-color-progress-light: linear-gradient(to right,
+            #fecca1,
+            #f8b67c,
+            #f8a359,
+            #ff9335,
+            #f88017,
+            #ff7700);
 
 }
 

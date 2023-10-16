@@ -7,7 +7,6 @@ async function getNotificationsCount(setThereIsNotifications, userInformation, s
 
     let response = await fetch(url, { ...requestOptions, method: "get", headers: { ...requestOptions.headers, authorization: userInformation.token } });
     let data = await response.json();
-    console.log(data);
 
     if (data.success) {
       setThereIsNotifications(data.count);
@@ -16,7 +15,6 @@ async function getNotificationsCount(setThereIsNotifications, userInformation, s
         const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
         await getNotificationsCount(setThereIsNotifications, { ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, setNotifications, notifications, toast, notificationsPage, setNotificationsPage);
       } else {
-        setNotificationsPage({ ...notificationsPage, loadingNow: false });
         console.log(data.error);
         toast.error(data.error, {
           position: toast.POSITION.TOP_CENTER,
@@ -24,7 +22,6 @@ async function getNotificationsCount(setThereIsNotifications, userInformation, s
       }
     }
   } catch (err) {
-    setNotificationsPage({ ...notificationsPage, loadingNow: false });
     console.log(err);
   }
 }
