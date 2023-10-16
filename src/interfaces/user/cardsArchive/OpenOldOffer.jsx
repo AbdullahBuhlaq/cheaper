@@ -110,7 +110,7 @@ function OpenOldOffer(props) {
                 <button className="btn-book">إغلاق</button>
                 <div className="add-favourite">
                   <input type="checkbox" id="favourite" />
-                  <label for="favourite">
+                  <label htmlFor="favourite">
                     <span className="favourite-icon"></span>
                     <span>إذا بدنا نحط خريطة الوصول ↓</span>
                   </label>
@@ -161,13 +161,12 @@ function OpenOldOffer(props) {
                 </div>
               </>
             )}
-
             <div style={{ height: "calc(96% - 200px)", overflow: "auto" }}>
               {checkPermissions(props.userInformation, ["user.moreEvaluation"]) && !props.offer.state ? (
                 eva != -1 ? (
                   <>
                     <div className="app-main-right-header">
-                      <span>{props.offer.evaluate === false ? "-" : (Math.round(props.offer.evaluate * 100) / 100).toFixed(2)}</span>
+                      <span>{props.offer.evaluateAverage === false ? "-" : (Math.round(props.offer.evaluateAverage * 100) / 100).toFixed(2)}</span>
                       <a href="#">التقييمات</a>
                     </div>
                     {eva.map((item, index) => {
