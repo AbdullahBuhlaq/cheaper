@@ -17,7 +17,7 @@ function StoreOptions(props) {
         <div className="main-header-titel">
           <h1 href="#" style={{ display: "flex" }}>
             الواجهة الرئيسية للمحل
-            {props.userInformation.allRestrictions[0].action ? (
+            {props.userInformation.allRestrictions[0]?.action ? (
               <h1 style={{ color: "red", display: "flex" }}>
                 {" (لقد تم حظرك لتجاوزك الحد الأدنى من الإبلاغات "}
                 <h1 style={{ marginTop: "4px" }}>
