@@ -16,9 +16,12 @@ async function login(user, toast, setDuringAdd, navigate) {
       }),
     };
     setDuringAdd(true);
+    console.log("here");
     const response = await fetch(`${import.meta.env.VITE_URL}/auth/login`, infoRequestOptions);
     const data = await response.json();
+    console.log(data);
     if (data.success) {
+      console.log(JSON.stringify({ ...data.data, allPermission: jsonParse(data.data.allPermission), typeUser: jsonParse(data.data.allPermission)["action"][0][0] == "u" ? "مستخدم" : jsonParse(data.data.allPermission)["action"][0][0] == "a" ? "مدير" : data.data.typeUser }));
       secureLocalStorage.setItem("userInformation", JSON.stringify({ ...data.data, allPermission: jsonParse(data.data.allPermission), typeUser: jsonParse(data.data.allPermission)["action"][0][0] == "u" ? "مستخدم" : jsonParse(data.data.allPermission)["action"][0][0] == "a" ? "مدير" : data.data.typeUser }));
       toast.success("أهلا وسهلا!", {
         position: toast.POSITION.TOP_CENTER,
