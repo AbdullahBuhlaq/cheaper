@@ -18,6 +18,8 @@ const messaging = getMessaging(app);
 async function getDeviceToken(toast) {
   try {
     let token = "";
+    console.log("im here in device token");
+    console.log(import.meta.env.VITE_VAPID_KEY);
     await getToken(messaging, { vapidKey: import.meta.env.VITE_VAPID_KEY }).then((currentToken) => {
       if (currentToken) {
         token = currentToken;
@@ -30,6 +32,7 @@ async function getDeviceToken(toast) {
     });
     return token;
   } catch (err) {
+    console.log("error here");
     console.log(err);
   }
 }
