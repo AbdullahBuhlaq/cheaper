@@ -22,7 +22,7 @@ function UserProfileLeft(props) {
           <div className="main-header-titel">
             <h1 href="#">
               الملف الشخصي{" "}
-              {props.userInformation.allRestrictions[0].show.length || props.userInformation.allRestrictions[0].action.length ? (
+              {props.userInformation.allRestrictions[0]?.show.length || props.userInformation.allRestrictions[0]?.action.length ? (
                 <tag style={{ color: "red" }}>
                   {" ( لقد تم حظرك عن بعض النشاطات "}
                   <FcCancel />
