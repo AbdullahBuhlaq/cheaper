@@ -12,7 +12,8 @@ function getLocation(setLocation) {
           }
         },
         (err) => {
-          setLocation({ status: "error", message: err.message });
+          if (err.message == "Failed to query location from network service. Check the DevTools console for more information.") setLocation({ status: "error", message: "يرجى إعطاء السماحية لقراءة موقعك الحالي , أو استخدام متصفح آخر." });
+          else setLocation({ status: "error", message: err.message });
         },
         {
           enableHighAccuracy: true,

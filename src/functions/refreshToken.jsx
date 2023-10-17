@@ -35,6 +35,8 @@ async function refreshToken(userInformation, setUserInformation, refreshStatus, 
       if (userInformation.typeUser != newType) window.location.replace(`${import.meta.env.VITE_LOCAL_URL}/main`);
       return data.data;
     } else {
+      secureLocalStorage.removeItem("userInformation");
+
       window.location.replace(`${import.meta.env.VITE_LOCAL_URL}/login`);
     }
   } catch (err) {
