@@ -20,7 +20,7 @@ async function getDeviceToken(toast) {
     let token = "";
     console.log("im here in device token");
     console.log(import.meta.env.VITE_VAPID_KEY);
-    await getToken(messaging, { vapidKey: "BPC7ZjL57Bzc1Zqtqwvl2iPiLotP_aOdO0WB3gSH-UIzyNlOK9bhB-VCq_DXdaEG1ETNs-pLLx7mi0Z8m9tqlt8" }).then((currentToken) => {
+    await getToken(messaging, { vapidKey: import.meta.env.VITE_VAPID_KEY }).then((currentToken) => {
       if (currentToken) {
         token = currentToken;
       } else {
