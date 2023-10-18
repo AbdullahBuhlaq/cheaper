@@ -53,7 +53,6 @@ function Categories(props) {
 
       if (props.categories != -1) populateArray();
     } catch (err) {
-      console.log("error", props.categories);
       console.log(err);
     }
   }, [props.categories, currentEdit, filter]);

@@ -1,7 +1,7 @@
 import Login from "./interfaces/general/Login";
 import Register from "./interfaces/general/Register";
 import Hub from "./interfaces/general/Hub";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./css/styletemp.css";
@@ -23,14 +23,14 @@ function App() {
     return (
       <>
         <ToastContainer />
-        <BrowserRouter>
+        <HashRouter>
           <Routes>
             <Route path="/login" exact element={<Login toast={toast} />} />
             <Route path="/forgotPassword" exact element={<ForgotPassword toast={toast} />} />
             <Route path="/register" exact element={<Register toast={toast} />} />
             <Route path="/*" exact element={<Hub toast={toast} />} />
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
       </>
     );
   } catch (err) {
