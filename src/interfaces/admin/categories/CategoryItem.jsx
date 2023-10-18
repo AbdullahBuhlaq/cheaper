@@ -74,15 +74,15 @@ function CategoryItem(props) {
             <div className="categories-card-content">
               <div className="categories-card-icon">{getIcon(props.category.emoji)}</div>
               <motion.div className="categories-card-details" initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", duration: "1.2" }}>
-                <h1>{props.category.count.offerTaken}</h1>
+                <h1>{props.category?.count?.offerTaken}</h1>
                 <h2>العروض</h2>
               </motion.div>
               <motion.div className="categories-card-details" initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", duration: "1.2", delay: 0.1 }}>
-                <h1>{props.category.count.user}</h1>
+                <h1>{props.category?.count?.user}</h1>
                 <h2>المستخدمين</h2>
               </motion.div>
               <motion.div className="categories-card-details" initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", duration: "1.2", delay: 0.2 }}>
-                <h1>{props.category.count.store}</h1>
+                <h1>{props.category?.count?.store}</h1>
                 <h2>المحلات</h2>
               </motion.div>
               <motion.div className="categories-card-details" initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", duration: "1.2", delay: 0.3 }}>
