@@ -62,6 +62,15 @@ function AdminHome(props) {
   const [usersBlockedChart, setUsersBlockedChart] = useState(usersBlocked);
   const [loading, setLoading] = useState(true);
   const [notificationsPage, setNotificationsPage] = useState({ page: 1, size: 5, loadMore: true, loadingNow: false });
+
+  const [acceptedStoresPage, setAcceptedStoresPage] = useState({ page: 1, size: 5, loadMore: true, loadingNow: false });
+  const [acceptedStoresFilter, setAcceptedStoresFilter] = useState({ search: "", city: -1, type: true, category: -1 });
+  const [pendingStoresPage, setPendingStoresPage] = useState({ page: 1, size: 5, loadMore: true, loadingNow: false });
+  const [pendingStoresFilter, setPendingStoresFilter] = useState({ search: "", city: -1, type: false, category: -1 });
+
+  const [usersAdminPage, setUsersAdminPage] = useState({ page: 1, size: 5, loadMore: true, loadingNow: false });
+  const [usersAdminFilter, setUsersAdminFilter] = useState({ search: "", gender: -1, blocked: -1, active: -1 });
+
   const [openNotificationsSend, setOpenNotificationsSend] = useState(false);
   const [thereIsNotifications, setThereIsNotifications] = useState(-1);
 
@@ -157,6 +166,14 @@ function AdminHome(props) {
                   exact
                   element={
                     <Stores
+                      acceptedStoresFilter={acceptedStoresFilter}
+                      setAcceptedStoresFilter={setAcceptedStoresFilter}
+                      pendingStoresFilter={pendingStoresFilter}
+                      setPendingStoresFilter={setPendingStoresFilter}
+                      acceptedStoresPage={acceptedStoresPage}
+                      setAcceptedStoresPage={setAcceptedStoresPage}
+                      pendingStoresPage={pendingStoresPage}
+                      setPendingStoresPage={setPendingStoresPage}
                       categories={categories}
                       setCategories={setCategories}
                       acceptedStores={acceptedStores}
@@ -182,6 +199,10 @@ function AdminHome(props) {
                     <Users
                       users={users}
                       setUsers={setUsers}
+                      usersPage={usersAdminPage}
+                      setUsersPage={setUsersAdminPage}
+                      filter={usersAdminFilter}
+                      setFilter={setUsersAdminFilter}
                       blocks={blocks}
                       setBlocks={setBlocks}
                       categories={categories}

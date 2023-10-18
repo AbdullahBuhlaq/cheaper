@@ -20,8 +20,6 @@ function Users(props) {
   const [loadingUsersStatisticsInfo, setLoadingUsersStatisticsInfo] = useState(true);
   const [currentEdit, setCurrentEdit] = useState(false);
   const [currentShowBlocks, setCurrentShowBlocks] = useState(false);
-  const [usersPage, setUsersPage] = useState({ page: 1, size: 5, loadMore: true, loadingNow: false });
-  const [filter, setFilter] = useState({ search: "", gender: -1, blocked: -1, active: -1 });
 
   const [items, setItems] = useState([]);
   useEffect(() => {
@@ -43,11 +41,11 @@ function Users(props) {
     } catch (err) {
       console.log(err);
     }
-  }, [props.users, currentEdit, currentShowBlocks, filter]);
+  }, [props.users, currentEdit, currentShowBlocks, props.filter]);
 
   useEffect(() => {
-    if (!usersPage.loadingNow && checkPermissions(props.userInformation, ["admin.users.filterAndSearch"])) getUsers(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setUsers, props.users, props.toast, filter, { ...usersPage, page: 1, loadMore: true }, setUsersPage);
-  }, [filter]);
+    if (!props.usersPage.loadingNow && checkPermissions(props.userInformation, ["admin.users.filterAndSearch"])) getUsers(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setUsers, props.users, props.toast, props.filter, { ...props.usersPage, page: 1, loadMore: true }, props.setUsersPage);
+  }, [props.filter]);
   useEffect(() => {
     if (props.blocks == -1 && checkPermissions(props.userInformation, ["admin.block.all"])) getBlocks(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setBlocks, props.toast);
   }, []);
@@ -82,7 +80,7 @@ function Users(props) {
             <div className="users-container">
               <div className="users-main-area">
                 <div className="app-content">
-                  <UserSearch filter={filter} setFilter={setFilter} usersPage={usersPage} setUsersPage={setUsersPage} />
+                  <UserSearch filter={props.filter} setFilter={props.setFilter} usersPage={props.usersPage} setUsersPage={props.setUsersPage} />
 
                   <div className="products-area-wrapper tableView" style={{ paddingBottom: "70px" }}>
                     <div className="products-header">
@@ -97,7 +95,7 @@ function Users(props) {
                     {items.map((item) => {
                       return item;
                     })}
-                    <LoadMoreUsers userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} setUsers={props.setUsers} users={props.users} toast={props.toast} filter={filter} usersPage={usersPage} setUsersPage={setUsersPage} />
+                    <LoadMoreUsers userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} setUsers={props.setUsers} users={props.users} toast={props.toast} filter={props.filter} usersPage={props.usersPage} setUsersPage={props.setUsersPage} />
                   </div>
 
                   {currentEdit ? (
