@@ -1,6 +1,6 @@
 function Main(props) {
   try {
-    return <>hello page223456789</>;
+    return <>hello page</>;
   } catch (error) {
     console.log(error);
   }

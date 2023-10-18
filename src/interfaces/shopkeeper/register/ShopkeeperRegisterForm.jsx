@@ -61,7 +61,9 @@ function ShopkeeperRegisterForm(props) {
     return (
       <>
         {categories == -1 ? (
-          <Loading />
+          <div style={{ width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <Loading />
+          </div>
         ) : (
           <div className="container" style={{ overflow: "auto" }}>
             <div style={{ display: "flex" }}>
