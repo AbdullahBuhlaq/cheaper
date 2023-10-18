@@ -11,6 +11,7 @@ import "./css/textChart.css";
 import ForgotPassword from "./interfaces/general/ForgotPassword";
 import { useEffect } from "react";
 import secureLocalStorage from "react-secure-storage";
+import Test from "./Test";
 
 function App() {
   useEffect(() => {
@@ -28,6 +29,7 @@ function App() {
             <Route path="/login" exact element={<Login toast={toast} />} />
             <Route path="/forgotPassword" exact element={<ForgotPassword toast={toast} />} />
             <Route path="/register" exact element={<Register toast={toast} />} />
+            <Route path="/test" exact element={<Test toast={toast} />} />
             <Route path="/*" exact element={<Hub toast={toast} />} />
           </Routes>
         </BrowserRouter>

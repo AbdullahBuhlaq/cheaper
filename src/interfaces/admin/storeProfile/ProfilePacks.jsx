@@ -44,7 +44,7 @@ function ProfilePacks(props) {
                     </div>
                   ) : null}
 
-                  <div style={{ display: "flex", flexDirection: "column", paddingTop: "35px", justifyContent: "space-evenly", alignItems: "center", marginRight: "5%" }}>
+                  <div style={{ display: "flex", flexDirection: "column", paddingTop: "35px", justifyContent: "space-evenly", alignItems: "center", marginRight: "auto", marginLeft: "auto" }}>
                     <div style={{ width: "100%", textAlign: "center" }}>
                       <span>سجل الظهور في الكروت</span>
                       {checkPermissions(props.userInformation, ["admin.store.accepted.chart"]) ? (
