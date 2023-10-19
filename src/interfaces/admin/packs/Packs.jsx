@@ -58,7 +58,7 @@ function Packs(props) {
   }, []);
 
   async function deletePack(id) {
-    deletePackFunc(id, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.packs, props.setPacks, props.toast);
+    deletePackFunc(id, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.packs, props.setPacks, props.packsChart, props.setPacksChart, props.toast);
   }
 
   try {

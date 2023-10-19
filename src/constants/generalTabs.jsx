@@ -3,10 +3,18 @@ import { GiOpenTreasureChest } from "react-icons/gi";
 import { FcAbout, FcContacts, FcServices, FcHome, FcBusinessman, FcTimeline, FcInspection, FcDisclaimer, FcPaid, FcBriefcase, FcConferenceCall, FcShop } from "react-icons/fc";
 
 const generalTabs = [
-  { name: "مرحبا", value: "main", icon: <PiHandWaving /> },
-  { name: "من نحن", value: "aboutUs", icon: <FcAbout /> },
-  { name: "الخدمات", value: "services", icon: <FcServices /> },
-  { name: "التواصل", value: "contactUs", icon: <FcContacts /> },
+  {
+    name: "Cheaper",
+    value: "main",
+    icon: (
+      <div style={{ width: "35px", height: "35px", objectFit: "cover" }}>
+        <img src="images/cheaper_icon.png" style={{ width: "100%" }} />
+      </div>
+    ),
+  },
+  // { name: "من نحن", value: "aboutUs", icon: <FcAbout /> },
+  // { name: "الخدمات", value: "services", icon: <FcServices /> },
+  // { name: "التواصل", value: "contactUs", icon: <FcContacts /> },
 ];
 
 export const adminTabs = [

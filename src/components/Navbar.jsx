@@ -135,15 +135,15 @@ function Navbar(props) {
             ) : null}
           </a>
 
-          {props.tabs.map((tab, tabIndex) => {
+          {generalTabs.map((tab, tabIndex) => {
             if (tabIndex == 0) index = 0;
-            if (currentHeight / 100 >= index + 1 && (checkShow(props.userInformation, [tab.value]) || tab.value == "profile")) {
+            if (currentHeight / 100 >= index + 1) {
               index = index + 1;
               return <Tab key={tabIndex} tab={tab} currentTab={props.currentTab} setCurrentTab={props.setCurrentTab} />;
             }
           })}
-          {generalTabs.map((tab, tabIndex) => {
-            if (currentHeight / 100 >= index + 1) {
+          {props.tabs.map((tab, tabIndex) => {
+            if (currentHeight / 100 >= index + 1 && (checkShow(props.userInformation, [tab.value]) || tab.value == "profile")) {
               index = index + 1;
               return <Tab key={tabIndex} tab={tab} currentTab={props.currentTab} setCurrentTab={props.setCurrentTab} />;
             } else {
@@ -164,16 +164,16 @@ function Navbar(props) {
                 </div>
                 <div className={"sub-menu double" + (showMore ? " show" : "")} style={{ zIndex: "30", height: "320px", top: "-242px", overflow: "auto", minWidth: "initial", textAlign: "center" }}>
                   <div className="notifications-last-update">
-                    {props.tabs.map((tab, tabIndex) => {
-                      if (checkShow(props.userInformation, [tab.value]) || tab.value == "profile") {
-                        index = index - 1;
-                        if (index < 0) return <Tab key={tabIndex} tab={tab} currentTab={props.currentTab} setCurrentTab={props.setCurrentTab} />;
-                      }
-                    })}
                     {generalTabs.map((tab, tabIndex) => {
                       index = index - 1;
                       if (index < 0) {
                         return <Tab key={tabIndex} tab={tab} currentTab={props.currentTab} setCurrentTab={props.setCurrentTab} />;
+                      }
+                    })}
+                    {props.tabs.map((tab, tabIndex) => {
+                      if (checkShow(props.userInformation, [tab.value]) || tab.value == "profile") {
+                        index = index - 1;
+                        if (index < 0) return <Tab key={tabIndex} tab={tab} currentTab={props.currentTab} setCurrentTab={props.setCurrentTab} />;
                       }
                     })}
                   </div>
