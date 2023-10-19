@@ -1,5 +1,6 @@
 import HeaderButton from "../../../components/mainArea";
 import CardsArea from "./CardsArea";
+import GiftIcon from "./GiftIcon";
 import StatisticsArea from "./StatisticsArea";
 
 function MainArea(props) {
@@ -8,6 +9,7 @@ function MainArea(props) {
       <>
         <div className="main-area">
           <HeaderButton />
+          {props.homeInfo.countYourGift > 0 ? <GiftIcon setIsGift={props.setIsGift} setOpenOffer={props.setOpenOffer} /> : null}
 
           <div className="main-area-header">
             <img className="wrapper" src="images/bg.png" />

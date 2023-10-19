@@ -10,6 +10,7 @@ import checkPermissions from "../../../functions/checkPermission";
 
 function HomeOfUser(props) {
   const [openOffer, setOpenOffer] = useState(false);
+  const [isGift, setIsGift] = useState(false);
 
   useEffect(() => {
     if (props.homeInfo == -1 && checkPermissions(props.userInformation, ["user.home"])) getHomeInfo(props.setHomeInfo, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast);
@@ -19,10 +20,12 @@ function HomeOfUser(props) {
     return (
       <>
         <>
-          <MainArea setOpenOffer={setOpenOffer} userInformation={props.userInformation} homeInfo={props.homeInfo} toast={props.toast} />
+          <MainArea setOpenOffer={setOpenOffer} setIsGift={setIsGift} userInformation={props.userInformation} homeInfo={props.homeInfo} toast={props.toast} />
           <RightArea userInformation={props.userInformation} homeInfo={props.homeInfo} />
 
-          {openOffer ? <Popup setOpen={setOpenOffer} component={<OpenOffer setRun={props.setRun} setOpen={setOpenOffer} homeInfo={props.homeInfo} setHomeInfo={props.setHomeInfo} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} />} /> : null}
+          {openOffer ? (
+            <Popup setOpen={setOpenOffer} component={<OpenOffer isGift={isGift} setIsGift={setIsGift} setRun={props.setRun} setOpen={setOpenOffer} homeInfo={props.homeInfo} setHomeInfo={props.setHomeInfo} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} />} />
+          ) : null}
         </>
       </>
     );

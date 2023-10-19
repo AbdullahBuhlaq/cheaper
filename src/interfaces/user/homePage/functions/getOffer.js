@@ -1,7 +1,7 @@
 import requestOptions from "../../../../constants/requestOptions";
 import refreshToken from "../../../../functions/refreshToken";
 
-async function getOffer(setRun, setOffer, setStatus, setOpen, city, location, homeInfo, setHomeInfo, userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast) {
+async function getOffer(isGift, setIsGift, setRun, setOffer, setStatus, setOpen, city, location, homeInfo, setHomeInfo, userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast) {
   try {
     let response = await fetch(`${import.meta.env.VITE_URL}/user/open-box?longitude=${location.location.coords.longitude}&latitude=${location.location.coords.latitude}&city=${city.city}&type=free`, { ...requestOptions, method: "get", headers: { ...requestOptions.headers, authorization: userInformation.token } });
     let data = await response.json();
@@ -29,16 +29,17 @@ async function getOffer(setRun, setOffer, setStatus, setOpen, city, location, ho
     // };
     if (data.success) {
       setOffer({ ...data.data });
-      setHomeInfo({ ...homeInfo, freeBoxToday: homeInfo.freeBoxToday - 1, free: { ...homeInfo.free, notTaken: homeInfo.free.notTaken + 1 } });
+      setHomeInfo({ ...homeInfo, countYourGift: isGift ? homeInfo.countYourGift - 1 : homeInfo.countYourGift, freeBoxToday: homeInfo.freeBoxToday - 1, free: { ...homeInfo.free, notTaken: homeInfo.free.notTaken + 1 } });
       setStatus("done");
       setRun(true);
+      setIsGift(false);
       toast.success("مبروك!!", {
         position: toast.POSITION.TOP_CENTER,
       });
     } else {
       if (data.error == "jwt expired") {
         const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await getOffer(setRun, setOffer, setStatus, setOpen, city, location, homeInfo, setHomeInfo, userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
+        await getOffer(isGift, setIsGift, setRun, setOffer, setStatus, setOpen, city, location, homeInfo, setHomeInfo, userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
       } else {
         setOpen(false);
         console.log(data.error);
