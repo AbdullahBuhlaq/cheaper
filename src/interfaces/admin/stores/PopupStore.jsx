@@ -208,7 +208,7 @@ function PopupStore(props) {
                   return <Eva key={index} item={item} />;
                 })}
 
-                <LoadMoreEvas userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} setUsers={setSpam} users={spam} toast={props.toast} usersPage={spamPage} setUsersPage={setSpamPage} id={props.store.id} />
+                <LoadMoreEvas userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} setUsers={setSpam} users={eva} toast={props.toast} usersPage={evaPage} setUsersPage={setSpamPage} id={props.store.id} />
               </div>
             </div>
           </>

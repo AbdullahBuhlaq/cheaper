@@ -24,7 +24,7 @@ export default async function getPendingStores(userInformation, setUserInformati
     let data = await response.json();
     if (data.success) {
       if (!data.data.length) {
-        setPendingStoresPage({ ...pendingStoresPage, loadMore: false, loadingNow: false, OnlyClick: false });
+        setPendingStoresPage({ ...pendingStoresPage, search: false, loadMore: false, loadingNow: false, OnlyClick: false });
         if (pendingStores == -1 || pendingStoresPage.page == 1) setPendingStores({});
       } else {
         let finalPendingStores = {};
@@ -37,14 +37,14 @@ export default async function getPendingStores(userInformation, setUserInformati
         if (pendingStoresPage.page == 1) setPendingStores({ ...finalPendingStores });
         else setPendingStores({ ...pendingStores, ...finalPendingStores });
 
-        setPendingStoresPage({ ...pendingStoresPage, page: pendingStoresPage.page + 1, loadMore: true, loadingNow: false, OnlyClick: false });
+        setPendingStoresPage({ ...pendingStoresPage, search: false, page: pendingStoresPage.page + 1, loadMore: true, loadingNow: false, OnlyClick: false });
       }
     } else {
       if (data.error == "jwt expired") {
         const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
         await getPendingStores({ ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, setPendingStores, pendingStores, toast, filter, pendingStoresPage, setPendingStoresPage);
       } else {
-        setPendingStoresPage({ ...pendingStoresPage, loadingNow: false, OnlyClick: true });
+        setPendingStoresPage({ ...pendingStoresPage, search: false, loadingNow: false, OnlyClick: true });
         console.log(data.error);
         toast.error(data.error, {
           position: toast.POSITION.TOP_CENTER,
@@ -52,7 +52,7 @@ export default async function getPendingStores(userInformation, setUserInformati
       }
     }
   } catch (err) {
-    setPendingStoresPage({ ...pendingStoresPage, loadingNow: false, OnlyClick: true });
+    setPendingStoresPage({ ...pendingStoresPage, search: false, loadingNow: false, OnlyClick: true });
     console.log(err);
   }
 }

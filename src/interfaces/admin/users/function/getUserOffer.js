@@ -63,7 +63,7 @@ export default async function getUserOffer(userInformation, setUserInformation, 
     // };
     if (data.success) {
       if (!data.data.length) {
-        setUsersPage({ ...usersPage, loadMore: false, loadingNow: false, OnlyClick: false });
+        setUsersPage({ ...usersPage, search: false, loadMore: false, loadingNow: false, OnlyClick: false });
         if (userOffer == -1 || usersPage.page == 1) setUserOffer({});
       } else {
         let finalUsers = {};
@@ -76,14 +76,14 @@ export default async function getUserOffer(userInformation, setUserInformation, 
         if (usersPage.page == 1) setUserOffer({ ...finalUsers });
         else setUserOffer({ ...userOffer, ...finalUsers });
 
-        setUsersPage({ ...usersPage, page: usersPage.page + 1, loadMore: true, loadingNow: false, OnlyClick: false });
+        setUsersPage({ ...usersPage, search: false, page: usersPage.page + 1, loadMore: true, loadingNow: false, OnlyClick: false });
       }
     } else {
       if (data.error == "jwt expired") {
         const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
         await getUserOffer({ ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, id, setUserOffer, userOffer, toast, filter, usersPage, setUsersPage);
       } else {
-        setUsersPage({ ...usersPage, loadingNow: false, OnlyClick: true });
+        setUsersPage({ ...usersPage, search: false, loadingNow: false, OnlyClick: true });
         console.log(data.error);
         toast.error(data.error, {
           position: toast.POSITION.TOP_CENTER,
@@ -91,7 +91,7 @@ export default async function getUserOffer(userInformation, setUserInformation, 
       }
     }
   } catch (err) {
-    setUsersPage({ ...usersPage, loadingNow: false, OnlyClick: true });
+    setUsersPage({ ...usersPage, search: false, loadingNow: false, OnlyClick: true });
     console.log(err);
   }
 }

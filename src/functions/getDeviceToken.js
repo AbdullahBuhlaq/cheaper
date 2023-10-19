@@ -18,7 +18,7 @@ const messaging = getMessaging(app);
 async function getDeviceToken(toast) {
   try {
     let token = "";
-    await getToken(messaging, { vapidKey: import.meta.env.VITE_VAPID_KEY }).then((currentToken) => {
+    await getToken(messaging, { vapidKey: "BPC7ZjL57Bzc1Zqtqwvl2iPiLotP_aOdO0WB3gSH-UIzyNlOK9bhB-VCq_DXdaEG1ETNs-pLLx7mi0Z8m9tqlt8" }).then((currentToken) => {
       if (currentToken) {
         token = currentToken;
       } else {

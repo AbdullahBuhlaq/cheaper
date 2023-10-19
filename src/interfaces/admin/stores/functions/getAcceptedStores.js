@@ -24,7 +24,7 @@ export default async function getAcceptedStores(userInformation, setUserInformat
     let data = await response.json();
     if (data.success) {
       if (!data.data.length) {
-        setAcceptedStoresPage({ ...acceptedStoresPage, loadMore: false, loadingNow: false, OnlyClick: false });
+        setAcceptedStoresPage({ ...acceptedStoresPage, search: false, loadMore: false, loadingNow: false, OnlyClick: false });
         if (acceptedStores == -1 || acceptedStoresPage.page == 1) setAcceptedStores({});
       } else {
         let finalAcceptedStores = {};
@@ -37,14 +37,14 @@ export default async function getAcceptedStores(userInformation, setUserInformat
         if (acceptedStoresPage.page == 1) setAcceptedStores({ ...finalAcceptedStores });
         else setAcceptedStores({ ...acceptedStores, ...finalAcceptedStores });
 
-        setAcceptedStoresPage({ ...acceptedStoresPage, page: acceptedStoresPage.page + 1, loadMore: true, loadingNow: false, OnlyClick: false });
+        setAcceptedStoresPage({ ...acceptedStoresPage, search: false, page: acceptedStoresPage.page + 1, loadMore: true, loadingNow: false, OnlyClick: false });
       }
     } else {
       if (data.error == "jwt expired") {
         const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
         await getAcceptedStores({ ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, setAcceptedStores, acceptedStores, toast, filter, acceptedStoresPage, setAcceptedStoresPage);
       } else {
-        setAcceptedStoresPage({ ...acceptedStoresPage, loadingNow: false, OnlyClick: true });
+        setAcceptedStoresPage({ ...acceptedStoresPage, search: false, loadingNow: false, OnlyClick: true });
         console.log(data.error);
         toast.error(data.error, {
           position: toast.POSITION.TOP_CENTER,
@@ -52,7 +52,7 @@ export default async function getAcceptedStores(userInformation, setUserInformat
       }
     }
   } catch (err) {
-    setAcceptedStoresPage({ ...acceptedStoresPage, loadingNow: false, OnlyClick: true });
+    setAcceptedStoresPage({ ...acceptedStoresPage, search: false, loadingNow: false, OnlyClick: true });
     console.log(err);
   }
 }

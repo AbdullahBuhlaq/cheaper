@@ -5,9 +5,13 @@ import jsonParse from "../../../functions/jsonParse";
 
 async function login(user, toast, setDuringAdd, navigate) {
   try {
+    setDuringAdd(true);
     const newData = user;
     let tokenDevice = await getDeviceToken(toast);
-    if (!tokenDevice) return;
+    if (!tokenDevice) {
+      setDuringAdd(false);
+      return;
+    }
     const infoRequestOptions = {
       ...requestOptions,
       body: JSON.stringify({
@@ -15,7 +19,6 @@ async function login(user, toast, setDuringAdd, navigate) {
         tokenDevice,
       }),
     };
-    setDuringAdd(true);
     const response = await fetch(`${import.meta.env.VITE_URL}/auth/login`, infoRequestOptions);
     const data = await response.json();
     if (data.success) {

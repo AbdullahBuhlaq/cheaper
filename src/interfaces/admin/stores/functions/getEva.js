@@ -48,6 +48,7 @@ export default async function getEva(userInformation, setUserInformation, refres
     //   ],
     // };
     if (data.success) {
+      console.log(data, url);
       if (!data.data.length) {
         setUsersPage({ ...usersPage, loadMore: false, loadingNow: false, OnlyClick: false });
         if (users == -1 || usersPage.page == 1) setUsers([]);

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PendingFilter from "./PendingFilter";
+import { motion } from "framer-motion";
 
 function PendingSearch(props) {
   const [tempFilter, setTempFilter] = useState({ search: "", city: -1, type: false, category: -1 });
@@ -21,10 +22,12 @@ function PendingSearch(props) {
           <button
             className="action-button filter jsFilter"
             onClick={() => {
+              props.setUsersPage({ ...props.usersPage, search: true });
               props.setFilter({ ...tempFilter });
             }}
+            style={props.usersPage.search ? { opacity: ".5" } : {}}
           >
-            بحث
+            {props.usersPage.search ? <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 2, ease: "linear" }} style={{ width: "20px", height: "20px", borderRadius: "50%", border: "2px solid blue", borderTopColor: "transparent" }}></motion.div> : "بحث"}
           </button>
           <div className="app-content-actions-wrapper">
             {props.selected.length ? (
