@@ -29,7 +29,7 @@ async function getOffer(isGift, setIsGift, setRun, setOffer, setStatus, setOpen,
     // };
     if (data.success) {
       setOffer({ ...data.data });
-      setHomeInfo({ ...homeInfo, countYourGift: isGift ? homeInfo.countYourGift - 1 : homeInfo.countYourGift, freeBoxToday: homeInfo.freeBoxToday - 1, free: { ...homeInfo.free, notTaken: homeInfo.free.notTaken + 1 } });
+      setHomeInfo({ ...homeInfo, stillToGetGift: isGift ? homeInfo.stillToGetGift : homeInfo.stillToGetGift - 1, countYourGift: isGift ? homeInfo.countYourGift - 1 : homeInfo.countYourGift, freeBoxToday: homeInfo.freeBoxToday - 1, free: { ...homeInfo.free, notTaken: homeInfo.free.notTaken + 1 } });
       setStatus("done");
       setRun(true);
       setIsGift(false);
