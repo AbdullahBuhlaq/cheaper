@@ -11,20 +11,26 @@ import { BiLogIn, BiSolidLeftArrow } from "react-icons/bi";
 import checkShow from "../functions/checkShow";
 import checkPermissions from "../functions/checkPermission";
 import secureLocalStorage from "react-secure-storage";
+import { motion } from "framer-motion";
 
 function Navbar(props) {
+  const [duringLogout, setDuringLogout] = useState(false);
   async function logout(userInformation) {
     try {
+      setDuringLogout(true);
       let response = await fetch(`${import.meta.env.VITE_URL}/auth/logout`, { ...requestOptions, method: "get", headers: { ...requestOptions.headers, authorization: userInformation.token } });
       let data = await response.json();
       if (data.success) {
         secureLocalStorage.removeItem("userInformation");
+        setDuringLogout(false);
         props.navigate("/login");
       } else {
         if (data.error == "jwt expired") {
           const status = await refreshToken(userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast);
           await logout({ ...userInformation, ...status });
         } else {
+          setDuringLogout(false);
+
           console.log(data.error);
           props.toast.error(data.error, {
             position: props.toast.POSITION.TOP_CENTER,
@@ -32,6 +38,8 @@ function Navbar(props) {
         }
       }
     } catch (err) {
+      setDuringLogout(false);
+
       console.log(err);
     }
   }
@@ -45,6 +53,7 @@ function Navbar(props) {
   useEffect(() => {
     const resizeObserver = new ResizeObserver((entries) => {
       if (ref.current) setCurrentHeight(ref.current.offsetHeight - 200);
+      //768
     });
 
     resizeObserver.observe(document.getElementById("nav"));
@@ -183,10 +192,14 @@ function Navbar(props) {
           ) : null}
           {props.tabs.length ? (
             <button className="btn-logout" onClick={() => logout(props.userInformation)}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="feather feather-log-out" viewBox="0 0 24 24">
-                <defs></defs>
-                <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"></path>
-              </svg>
+              {duringLogout ? (
+                <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 2, ease: "linear" }} style={{ width: "20px", height: "20px", borderRadius: "50%", border: "2px solid white", borderTopColor: "transparent" }}></motion.div>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="feather feather-log-out" viewBox="0 0 24 24">
+                  <defs></defs>
+                  <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"></path>
+                </svg>
+              )}
             </button>
           ) : (
             <button className="btn-logout" style={{ color: "green", fontSize: "30px", cursor: "pointer" }} onClick={() => props.navigate("/login")}>
