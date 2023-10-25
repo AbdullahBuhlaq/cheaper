@@ -1,5 +1,5 @@
 function checkShow(userInformation, shows) {
-  let showStatus = true;
+  let showStatus = false;
   shows.map((show) => {
     showStatus = showStatus || userInformation.allPermission.show?.includes(show);
   });
