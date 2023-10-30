@@ -41,7 +41,7 @@ function OpenOffer(props) {
 
   useEffect(() => {
     if (location.status == "success") {
-      getCity(setCity, location);
+      if (offer == -1) getOffer(props.isGift, props.setIsGift, props.setRun, setOffer, setStatus, props.setOpen, city, location, props.homeInfo, props.setHomeInfo, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast);
     } else if (location.status == "error") {
       props.toast.error(location.message, {
         position: props.toast.POSITION.TOP_CENTER,
@@ -51,17 +51,17 @@ function OpenOffer(props) {
     }
   }, [location]);
 
-  useEffect(() => {
-    if (city.status == "error") {
-      props.toast.error(city.message, {
-        position: props.toast.POSITION.TOP_CENTER,
-      });
-      setMsg(city.message);
-      setStatus("fail");
-    } else if (city.status == "success") {
-      if (offer == -1) getOffer(props.isGift, props.setIsGift, props.setRun, setOffer, setStatus, props.setOpen, city, location, props.homeInfo, props.setHomeInfo, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast);
-    }
-  }, [city]);
+  // useEffect(() => {
+  //   if (city.status == "error") {
+  //     props.toast.error(city.message, {
+  //       position: props.toast.POSITION.TOP_CENTER,
+  //     });
+  //     setMsg(city.message);
+  //     setStatus("fail");
+  //   } else if (city.status == "success") {
+  //     if (offer == -1) getOffer(props.isGift, props.setIsGift, props.setRun, setOffer, setStatus, props.setOpen, city, location, props.homeInfo, props.setHomeInfo, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast);
+  //   }
+  // }, [city]);
 
   useEffect(() => {
     if (offer != -1 && checkPermissions(props.userInformation, ["user.moreEvaluation"])) getOfferEvas(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, setEva, eva, props.toast, evaPage, setEvaPage, offer.storeId);

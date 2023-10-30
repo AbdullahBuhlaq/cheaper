@@ -60,7 +60,14 @@ function StorePackItem(props) {
                     </ul>
                   </div>
                   <div style={{ display: "flex" }}>
-                    {!props.item.deletedAt ? <MdOutlineKeyboardDoubleArrowUp style={{ color: "white", marginTop: "25%", cursor: "pointer" }} onClick={() => setNewDiscount(newDiscount + 1)} /> : null}
+                    {!props.item.deletedAt ? (
+                      <MdOutlineKeyboardDoubleArrowUp
+                        style={{ color: "white", marginTop: "25%", cursor: "pointer" }}
+                        onClick={() => {
+                          if (props.item.discount + newDiscount + 1 <= 100 && !duringAdd) setNewDiscount(newDiscount + 1);
+                        }}
+                      />
+                    ) : null}
                     <CircularProgressbar
                       value={[props.item.discount + newDiscount]}
                       text={`${[props.item.discount + newDiscount]}%`}
@@ -82,7 +89,14 @@ function StorePackItem(props) {
                         backgroundColor: "#3e98c7",
                       })}
                     />
-                    {!props.item.deletedAt ? <MdOutlineKeyboardDoubleArrowDown style={{ color: "white", marginTop: "25%", cursor: "pointer" }} onClick={() => setNewDiscount(newDiscount - 1)} /> : null}
+                    {!props.item.deletedAt ? (
+                      <MdOutlineKeyboardDoubleArrowDown
+                        style={{ color: "white", marginTop: "25%", cursor: "pointer" }}
+                        onClick={() => {
+                          if (props.item.discount + newDiscount - 1 >= 15 && !duringAdd) setNewDiscount(newDiscount - 1);
+                        }}
+                      />
+                    ) : null}
                   </div>
                   {/* <FaArrowDown /> */}
                   {newDiscount ? (
