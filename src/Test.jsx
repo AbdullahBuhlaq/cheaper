@@ -4,9 +4,6 @@ import mapboxgl from "mapbox-gl";
 mapboxgl.accessToken = "pk.eyJ1IjoiM2JkdWxsYWgtYnU3bGE4IiwiYSI6ImNsa2lqcHU2ZTBibnQzZW1nMnAwMXNjajIifQ.vnDf9FPi6lquHvpl520TLg";
 
 const apiKey = "5b3ce3597851110001cf62481ae5c95c615c41f5a7618abb76ccd41b";
-const [lat, setLat] = useState("");
-const [long, setLong] = useState("");
-const [coord, setCoord] = useState({ lat: 34.72682, long: 36.72339 });
 
 // function Test() {
 //   const [map, setMap] = useState(null);
@@ -107,6 +104,9 @@ const [coord, setCoord] = useState({ lat: 34.72682, long: 36.72339 });
 // }
 
 function Test() {
+  const [lat, setLat] = useState("");
+  const [long, setLong] = useState("");
+  const [coord, setCoord] = useState({ lat: 34.72682, long: 36.72339 });
   return (
     <>
       <div>
