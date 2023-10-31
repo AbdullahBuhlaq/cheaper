@@ -4,6 +4,9 @@ import mapboxgl from "mapbox-gl";
 mapboxgl.accessToken = "pk.eyJ1IjoiM2JkdWxsYWgtYnU3bGE4IiwiYSI6ImNsa2lqcHU2ZTBibnQzZW1nMnAwMXNjajIifQ.vnDf9FPi6lquHvpl520TLg";
 
 const apiKey = "5b3ce3597851110001cf62481ae5c95c615c41f5a7618abb76ccd41b";
+const [lat, setLat] = useState("");
+const [long, setLong] = useState("");
+const [coord, setCoord] = useState({ lat: 34.72682, long: 36.72339 });
 
 // function Test() {
 //   const [map, setMap] = useState(null);
@@ -106,8 +109,34 @@ const apiKey = "5b3ce3597851110001cf62481ae5c95c615c41f5a7618abb76ccd41b";
 function Test() {
   return (
     <>
+      <div>
+        <input
+          type="text"
+          placeholder="lat"
+          value={lat}
+          onChange={(e) => {
+            setLat(e.target.value);
+          }}
+        />
+        <input
+          type="text"
+          placeholder="long"
+          value={long}
+          onChange={(e) => {
+            setLong(e.target.value);
+          }}
+        />
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            setCoord({ ...coord, lat: lat, long: long });
+          }}
+        >
+          mark
+        </button>
+      </div>
       <div class="gmap_canvas">
-        <iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=34.72682,36.72339&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+        <iframe width="600" height="500" id="gmap_canvas" src={`https://maps.google.com/maps?q=${lat},${long}&t=&z=13&ie=UTF8&iwloc=&output=embed`} frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
       </div>
     </>
   );
