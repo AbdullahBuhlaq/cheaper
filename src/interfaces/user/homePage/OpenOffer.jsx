@@ -15,6 +15,8 @@ import QRCode from "react-qr-code";
 import jsonParse from "../../../functions/jsonParse";
 import NotAllowdPage from "../../general/NotAllowedPage";
 import checkPermissions from "../../../functions/checkPermission";
+import Map from "../../../components/Map";
+import Distance from "../../../functions/distance";
 
 function OpenOffer(props) {
   const [status, setStatus] = useState("check");
@@ -140,7 +142,7 @@ function OpenOffer(props) {
                       <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path>
                     </svg>
                   </div>
-                  <span>بعيد X متر عنك</span>
+                  <span>بعيد {Distance(location.location.coords.latitude, offer.latitude, location.location.coords.longitude, offer.longitude)} متر عنك</span>
                 </div>
                 <div className="info-wrapper">
                   <div className="info-icon">
@@ -159,18 +161,8 @@ function OpenOffer(props) {
                   <span>وقت الاغلاق : {offer.toHour}</span>
                 </div>
               </div>
-              <div className="desc-wrapper">
-                <div className="modal-info-header"></div>
-                <div className="desc-actions">
-                  <button className="btn-book">إغلاق</button>
-                  <div className="add-favourite">
-                    <input type="checkbox" id="favourite" />
-                    <label for="favourite">
-                      <span className="favourite-icon"></span>
-                      <span>إذا بدنا نحط خريطة الوصول ↓</span>
-                    </label>
-                  </div>
-                </div>
+              <div className="desc-wrapper" style={{ marginTop: "20px", marginLeft: "20px" }}>
+                <Map width={"100%"} height={"500"} lat={offer.latitude} long={offer.longitude} />
               </div>
             </div>
 

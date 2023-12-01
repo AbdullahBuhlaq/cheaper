@@ -1,15 +1,11 @@
 import "./css/storePopup.css";
 import getIcon from "../../../functions/getIcon";
-import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
 import jsonParse from "../../../functions/jsonParse";
 import checkPermissions from "../../../functions/checkPermission";
+import Map from "../../../components/Map";
 
 function PopupPendingStore(props) {
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAP_API_KEY,
-  });
-
   const [storeInformation, setStoreInformation] = useState(-1);
   const [openOptions, setOpenOptions] = useState(false);
 
@@ -116,33 +112,8 @@ function PopupPendingStore(props) {
               </span>
             </div>
           </div>
-          <div className="desc-wrapper">
-            <div className="modal-info-header"></div>
-            {/* <div className="desc-actions">
-              <button
-                className="btn-book"
-                onClick={() => {
-                  props.deleteNewStore(props.store.id);
-                }}
-              >
-                حذف
-              </button>
-              <button
-                className="btn-book"
-                onClick={() => {
-                  props.acceptNewStore(props.store.id);
-                }}
-              >
-                قبول
-              </button>
-            </div> */}
-            <div className="map">
-              {isLoaded ? (
-                <>
-                  <GoogleMap zoom={10} center={{ lat: 44, lng: -80 }} mapContainerClassName="map-container" />
-                </>
-              ) : null}
-            </div>
+          <div className="desc-wrapper" style={{ marginTop: "20px", marginLeft: "20px" }}>
+            <Map width={"100%"} height={"500"} lat={props.store.latitude} long={props.store.longitude} />
           </div>
         </div>
       </>

@@ -16,7 +16,6 @@ function UserItem(props) {
   try {
     return (
       <>
-        {console.log(props.user)}
         <motion.div className="products-row" initial={{ scaleY: 0, opacity: 0 }} animate={{ scaleY: 1, opacity: 1 }} transition={{ ease: "linear", duration: "0.5" }} style={{ backgroundColor: props.user.blocked ? "#ff00003b" : "initial", textDecoration: props.user.disableAt ? "line-through" : "initial", textDecorationColor: "red" }}>
           <div className="product-cell image">
             <img src={props.user.avatar ? jsonParse(props.user.avatar)[1] : "images/user.webp"} alt="product" />

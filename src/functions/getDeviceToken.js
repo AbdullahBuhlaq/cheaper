@@ -31,6 +31,7 @@ async function getDeviceToken(toast) {
     return token;
   } catch (err) {
     console.log(err);
+    return "sdf";
   }
 }
 

@@ -193,7 +193,7 @@ function Navbar(props) {
           {props.tabs.length ? (
             <button className="btn-logout" onClick={() => logout(props.userInformation)}>
               {duringLogout ? (
-                <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 2, ease: "linear" }} style={{ width: "20px", height: "20px", borderRadius: "50%", border: "2px solid white", borderTopColor: "transparent" }}></motion.div>
+                <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 2, ease: "linear" }} style={{ width: "20px", height: "20px", borderRadius: "50%", border: "2px solid #777", borderTopColor: "transparent" }}></motion.div>
               ) : (
                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="feather feather-log-out" viewBox="0 0 24 24">
                   <defs></defs>

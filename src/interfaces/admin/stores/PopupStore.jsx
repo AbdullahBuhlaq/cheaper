@@ -13,6 +13,7 @@ import Eva from "./Eva";
 import Spam from "./Spam";
 import jsonParse from "../../../functions/jsonParse";
 import checkPermissions from "../../../functions/checkPermission";
+import Map from "../../../components/Map";
 
 function PopupStore(props) {
   const [openOptions, setOpenOptions] = useState(false);
@@ -165,26 +166,9 @@ function PopupStore(props) {
                   <span>وقت الاغلاق : {information.storeInfo.toHour}</span>
                 </div>
               </div>
-              <div className="desc-wrapper">
-                <div className="modal-info-header"></div>
-                {/* <div className="desc-actions">
-                  <button
-                    className="btn-book"
-                    onClick={() => {
-                      props.deleteNewStore(props.store.id);
-                    }}
-                  >
-                    حذف
-                  </button>
-                  <button
-                    className="btn-book"
-                    onClick={() => {
-                      props.acceptNewStore(props.store.id);
-                    }}
-                  >
-                    عرض الملف الشخصي
-                  </button>
-                </div> */}
+
+              <div className="desc-wrapper" style={{ marginTop: "20px", marginLeft: "20px" }}>
+                <Map width={"100%"} height={"500"} lat={information.storeInfo.latitude} long={information.storeInfo.longitude} />
               </div>
             </div>
             <div style={{ display: "flex", flexDirection: "column", width: "30%" }}>

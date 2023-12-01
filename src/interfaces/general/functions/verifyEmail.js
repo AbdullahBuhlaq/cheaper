@@ -10,6 +10,7 @@ async function verifyEmail(setEdit, profile, setProfile, setStatus, code, toast,
     };
 
     const response = await fetch(`${import.meta.env.VITE_URL}/account/verify?code=${code}`, infoRequestOptions);
+    console.log(code);
     const data = await response.json();
     if (data.success) {
       //   setProfile({ ...profile, email: newData.newEmail });

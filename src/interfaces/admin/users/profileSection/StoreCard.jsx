@@ -4,6 +4,7 @@ import "./css/storePopup.css";
 import AutoSlidingImages from "./AutoSlider";
 import jsonParse from "../../../../functions/jsonParse";
 import { useEffect, useState } from "react";
+import Map from "../../../../components/Map";
 
 const style = {
   "::-webkit-slider-runnable-track": {
@@ -45,10 +46,7 @@ function StoreCard(props) {
               </div>
             </div>
             <div className="right-side">
-              <span className="amount">
-                التصنيف : {props.store.category.name}
-                {getIcon(props.store.category.emoji)}
-              </span>
+              <span className="amount"></span>
             </div>
           </div>
           <div className="info-bar">
@@ -67,7 +65,10 @@ function StoreCard(props) {
                   <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path>
                 </svg>
               </div>
-              <span>بعيد X متر عنك</span>
+              <span>
+                التصنيف : {props.store.category.name}
+                {getIcon(props.store.category.emoji)}
+              </span>
             </div>
             <div className="info-wrapper">
               <div className="info-icon">
@@ -86,17 +87,9 @@ function StoreCard(props) {
               <span>وقت الاغلاق {props.store.toHour}</span>
             </div>
           </div>
-          <div className="desc-wrapper">
-            <div className="modal-info-header"></div>
-            <div className="desc-actions">
-              <div className="add-favourite">
-                <input type="checkbox" id="favourite" />
-                <label htmlFor="favourite">
-                  <span className="favourite-icon"></span>
-                  <span>إذا بدنا نحط خريطة الوصول ↓</span>
-                </label>
-              </div>
-            </div>
+
+          <div className="desc-wrapper" style={{ marginTop: "20px", marginLeft: "20px" }}>
+            <Map width={"100%"} height={"500"} lat={props.store.latitude} long={props.store.longitude} />
           </div>
         </div>
 

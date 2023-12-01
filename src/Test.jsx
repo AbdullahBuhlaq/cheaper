@@ -107,6 +107,7 @@ function Test() {
   const [lat, setLat] = useState("");
   const [long, setLong] = useState("");
   const [coord, setCoord] = useState({ lat: 34.72682, long: 36.72339 });
+
   return (
     <>
       <div>
@@ -135,8 +136,8 @@ function Test() {
           mark
         </button>
       </div>
-      <div class="gmap_canvas">
-        <iframe width="600" height="500" id="gmap_canvas" src={`https://maps.google.com/maps?q=${lat},${long}&t=&z=13&ie=UTF8&iwloc=&output=embed`} frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0" onClickCapture={(e) => console.log(e)}></iframe>
+      <div className="gmap_canvas">
+        <iframe width="600" height="500" id="gmap_canvas" src={`https://maps.google.com/maps?q=${lat},${long}&t=&z=13&ie=UTF8&iwloc=&output=embed`}></iframe>
       </div>
     </>
   );

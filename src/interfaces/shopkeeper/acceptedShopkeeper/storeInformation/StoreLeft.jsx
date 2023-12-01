@@ -7,6 +7,7 @@ import StorePacks from "./StorePacks";
 import StoreUsers from "./StoreUsers";
 import jsonParse from "../../../../functions/jsonParse";
 import Loading from "../../../general/Loading";
+import Map from "../../../../components/Map";
 
 function StoreLeft(props) {
   const [story, setStory] = useState(-1);
@@ -55,6 +56,8 @@ function StoreLeft(props) {
               packsChart={props.packsChart}
               packs={props.storeInformation.packs}
             />
+            <Map width={"100%"} height={"500"} lat={props.storeInformation.information.latitude} long={props.storeInformation.information.longitude} />
+
             <StoreUsers users={props.storeUsers} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} setUsers={props.setStoreUsers} usersPage={props.usersPage} setUsersPage={props.setUsersPage} />
           </div>
         )}

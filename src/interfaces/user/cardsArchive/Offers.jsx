@@ -9,6 +9,7 @@ import OpenOldOffer from "./OpenOldOffer";
 import SendGift from "./SendGift";
 import checkPermissions from "../../../functions/checkPermission";
 import NotAllowdPage from "../../general/NotAllowedPage";
+import getLocation from "../homePage/functions/getLocation";
 
 function Offers(props) {
   const [offersPage, setOffersPage] = useState({ page: 1, size: 6, loadMore: true, loadingNow: false });
@@ -16,6 +17,11 @@ function Offers(props) {
   const [openOffer, setOpenOffer] = useState(false);
   const [openSendGift, setOpenSendGift] = useState(false);
   const [currentOffer, setCurrentOffer] = useState(false);
+  const [location, setLocation] = useState({ status: "" });
+
+  useEffect(() => {
+    getLocation(setLocation);
+  }, []);
 
   useEffect(() => {
     setCurrentOffer(false);
@@ -56,7 +62,7 @@ function Offers(props) {
 
         {openOffer ? (
           <>
-            <Popup setOpen={setOpenOffer} component={<OpenOldOffer offer={openOffer} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />} />
+            <Popup setOpen={setOpenOffer} component={<OpenOldOffer location={location} offer={openOffer} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />} />
           </>
         ) : openSendGift ? (
           <>

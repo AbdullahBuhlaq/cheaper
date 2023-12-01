@@ -95,7 +95,7 @@ function ProfileLeft(props) {
                         </video>
                       </div>
                     </div>
-                    <Chart options={loadingChartData.options} series={loadingChartData.series} type="area" width={"100%"} height={200} />
+                    <Chart options={loadingChartData.options} series={loadingChartData.series} type="area" width={"100%"} height={400} />
                   </>
                 ) : props.userChart.series[0].data.length + props.userChart.series[0].data.length == 0 ? (
                   <>
@@ -108,14 +108,14 @@ function ProfileLeft(props) {
                         <FcDeleteDatabase />
                       </span>
                     </div>
-                    <Chart options={loadingChartData.options} series={loadingChartData.series} type="area" width={"100%"} height={200} />
+                    <Chart options={loadingChartData.options} series={loadingChartData.series} type="area" width={"100%"} height={400} />
                   </>
                 ) : (
                   <>
                     <div style={{ width: "100%", textAlign: "center" }}>
                       <span>إحصائيات شراء العروض</span>
                     </div>
-                    <Chart options={props.userChart.options} series={props.userChart.series} type="area" width={"100%"} height={200} />
+                    <Chart options={props.userChart.options} series={props.userChart.series} type="area" width={"100%"} height={400} />
                   </>
                 )}
               </>

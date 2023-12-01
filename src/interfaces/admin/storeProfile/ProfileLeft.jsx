@@ -8,6 +8,7 @@ import AutoSlidingImages from "../users/profileSection/AutoSlider";
 import { defaultSecondStory } from "../../../constants/story";
 import jsonParse from "../../../functions/jsonParse";
 import checkPermissions from "../../../functions/checkPermission";
+import Map from "../../../components/Map";
 
 function StoreProfileLeft(props) {
   const [story, setStory] = useState([]);
@@ -37,6 +38,7 @@ function StoreProfileLeft(props) {
           <ProfileInfoHeader store={props.store} />
           <ProfileCardsContainer store={props.store} />
           <ProfilePacks packsChart={props.packsChart} userInformation={props.userInformation} storeChart={props.storeChart} packs={props.packs} />
+          <Map width={"100%"} height={"500"} lat={props.store.storeInfo.latitude} long={props.store.storeInfo.longitude} />
           {checkPermissions(props.userInformation, ["admin.store.accepted.evaluationAndSpam"]) && props.users != -1 ? (
             <ProfileTable users={props.users} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} setUsers={props.setUsers} usersPage={props.usersPage} setUsersPage={props.setUsersPage} id={props.id} />
           ) : null}

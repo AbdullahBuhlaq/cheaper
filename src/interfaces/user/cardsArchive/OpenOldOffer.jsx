@@ -13,6 +13,8 @@ import { PiMaskSadDuotone } from "react-icons/pi";
 import jsonParse from "../../../functions/jsonParse";
 import checkPermissions from "../../../functions/checkPermission";
 import NotAllowdPage from "../../general/NotAllowedPage";
+import Map from "../../../components/Map";
+import Distance from "../../../functions/distance";
 
 function OpenOldOffer(props) {
   const [eva, setEva] = useState(-1);
@@ -85,7 +87,7 @@ function OpenOldOffer(props) {
                     <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path>
                   </svg>
                 </div>
-                <span>بعيد X متر عنك</span>
+                <span>بعيد {props.location.status == "success" ? Distance(props.location.location.coords.latitude, props.offer.storeInfo.latitude, props.location.location.coords.longitude, props.offer.storeInfo.longitude) : "X"} متر عنك</span>
               </div>
               <div className="info-wrapper">
                 <div className="info-icon">
@@ -104,18 +106,8 @@ function OpenOldOffer(props) {
                 <span>وقت الاغلاق : {props.offer.storeInfo.toHour}</span>
               </div>
             </div>
-            <div className="desc-wrapper">
-              <div className="modal-info-header"></div>
-              <div className="desc-actions">
-                <button className="btn-book">إغلاق</button>
-                <div className="add-favourite">
-                  <input type="checkbox" id="favourite" />
-                  <label htmlFor="favourite">
-                    <span className="favourite-icon"></span>
-                    <span>إذا بدنا نحط خريطة الوصول ↓</span>
-                  </label>
-                </div>
-              </div>
+            <div className="desc-wrapper" style={{ marginTop: "20px", marginLeft: "20px" }}>
+              <Map width={"100%"} height={"500"} lat={props.offer.storeInfo.latitude} long={props.offer.storeInfo.longitude} />
             </div>
           </div>
 

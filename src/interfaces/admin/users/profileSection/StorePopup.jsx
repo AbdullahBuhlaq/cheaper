@@ -13,7 +13,9 @@ function StorePopup(props) {
     return (
       <>
         {storeInfo == -1 ? (
-          <SecondLoading />
+          <div style={{ display: "flex", width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }}>
+            <SecondLoading />
+          </div>
         ) : (
           <>
             <StoreCard store={storeInfo} userName={props.username} name={props.name} userAvatar={props.userAvatar} />
