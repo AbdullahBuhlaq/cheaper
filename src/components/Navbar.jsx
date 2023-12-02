@@ -12,6 +12,7 @@ import checkShow from "../functions/checkShow";
 import checkPermissions from "../functions/checkPermission";
 import secureLocalStorage from "react-secure-storage";
 import { motion } from "framer-motion";
+import { FaCircleXmark } from "react-icons/fa6";
 
 function Navbar(props) {
   const [duringLogout, setDuringLogout] = useState(false);
@@ -66,6 +67,14 @@ function Navbar(props) {
     return (
       <>
         <div className="left-area" style={{ overflow: "visible" }} id="nav" ref={ref}>
+          <div
+            className={"btn-close-left"}
+            onClick={() => {
+              document.getElementsByClassName("left-area")[0].classList.remove("show");
+            }}
+          >
+            <FaCircleXmark />
+          </div>
           <div className="app-name">Cheaper</div>
 
           <a

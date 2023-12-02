@@ -11,7 +11,7 @@ function UserChart(props) {
               <Loading />
             </div>
           ) : (
-            <Chart options={props.chartData.options} series={props.chartData.series} type="donut" />
+            <Chart options={props.chartData.options} series={props.chartData.series} type="donut" width={"100%"} height={"100%"} />
           )}
         </div>
       </>

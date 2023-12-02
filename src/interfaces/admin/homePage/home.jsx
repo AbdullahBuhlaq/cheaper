@@ -13,6 +13,8 @@ import Config from "./configs";
 import getUserCartChart from "./getUserCartChartData";
 import checkPermissions from "../../../functions/checkPermission";
 import { FcCancel } from "react-icons/fc";
+import HeaderButton from "../../../components/mainArea";
+import { FaCircleXmark } from "react-icons/fa6";
 
 function Home(props) {
   const [expanded, setExpanded] = useState(false);
@@ -33,7 +35,8 @@ function Home(props) {
   try {
     return (
       <>
-        <div className="cards home-container" style={{ width: "75%", height: "100vh" }}>
+        <HeaderButton />
+        <div className="cards home-container" style={{ height: "100vh" }}>
           {expanded ? <div className="expanded-card-container" onClick={() => setExpanded(false)}></div> : null}
           <div className="admin-home-charts-container">
             <div className="card-row">
@@ -133,7 +136,15 @@ function Home(props) {
             )}
           </div>
         </div>
-        <div style={{ width: "25%" }}>
+        <div className="new-right-area">
+          <div
+            className={"btn-close-right"}
+            onClick={() => {
+              document.getElementsByClassName("new-right-area")[0].classList.remove("show");
+            }}
+          >
+            <FaCircleXmark />
+          </div>
           {!checkPermissions(props.userInformation, ["admin.config.all"]) ? (
             <>
               <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", width: "100%", height: "100%" }}>

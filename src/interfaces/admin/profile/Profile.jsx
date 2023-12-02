@@ -36,16 +36,12 @@ function Profile(props) {
           </div>
         ) : (
           <>
-            <div className="profile-main-area">
-              <HeaderButton />
+            <HeaderButton />
+            <div className="main-profile">
+              <ProfileLeft profile={props.profile} setPopupStatus={setPopupStatus} />
 
-              <div className="main-profile">
-                <ProfileLeft profile={props.profile} setPopupStatus={setPopupStatus} />
-
-                <ProfileBody profile={props.profile} logoutDevice={logoutDeviceFunc} />
-              </div>
+              <ProfileBody profile={props.profile} logoutDevice={logoutDeviceFunc} />
             </div>
-
             {popupStatus == 1 ? (
               <Popup
                 setOpen={setPopupStatus}

@@ -15,6 +15,7 @@ import HeaderButton from "../../../components/mainArea";
 import jsonParse from "../../../functions/jsonParse";
 import checkPermissions from "../../../functions/checkPermission";
 import NotAllowdPage from "../../general/NotAllowedPage";
+import { FaCircleXmark } from "react-icons/fa6";
 
 function Roles(props) {
   const cardRef = useRef();
@@ -88,8 +89,16 @@ function Roles(props) {
           </div>
         ) : (
           <>
-            <div className="main-area" style={{ flex: "initial" }}>
-              <HeaderButton />
+            <HeaderButton />
+            <div className="main-area new-right-area" style={{ flex: "initial" }}>
+              <div
+                className={"btn-close-right"}
+                onClick={() => {
+                  document.getElementsByClassName("new-right-area")[0].classList.remove("show");
+                }}
+              >
+                <FaCircleXmark />
+              </div>
 
               <div className="role-right-area">
                 <div id="role-cards" ref={cardRef}>

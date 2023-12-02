@@ -14,6 +14,8 @@ import deleteUserFunc from "./function/deleteUser";
 import getGeneralCategories from "../../../functions/getGeneralCategories";
 import checkPermissions from "../../../functions/checkPermission";
 import NotAllowdPage from "../../general/NotAllowedPage";
+import HeaderButton from "../../../components/mainArea";
+import { FaCircleXmark } from "react-icons/fa6";
 
 function Users(props) {
   const [loading, setLoading] = useState(true);
@@ -78,6 +80,7 @@ function Users(props) {
         ) : (
           <>
             <div className="users-container">
+              <HeaderButton />
               <div className="users-main-area">
                 <div className="app-content">
                   <UserSearch filter={props.filter} setFilter={props.setFilter} usersPage={props.usersPage} setUsersPage={props.setUsersPage} />
@@ -151,7 +154,15 @@ function Users(props) {
                 </div>
               </div>
               {checkPermissions(props.userInformation, ["admin.users.statisticsInfo"]) ? (
-                <div className="users-chart-container">
+                <div className=" users-chart-container new-right-area" style={{ height: "100%" }}>
+                  <div
+                    className={"btn-close-right"}
+                    onClick={() => {
+                      document.getElementsByClassName("new-right-area")[0].classList.remove("show");
+                    }}
+                  >
+                    <FaCircleXmark />
+                  </div>
                   <UserChart chartData={props.usersAgeChart} />
                   <UserChart chartData={props.usersGenderChart} />
                   <UserChart chartData={props.usersBlockedChart} />

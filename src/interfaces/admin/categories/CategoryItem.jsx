@@ -89,7 +89,9 @@ function CategoryItem(props) {
                 <h1>{props.category.checkWithImageOrNot == "مع صور حالات" ? "نعم" : "لا"}</h1>
                 <h2 style={{ width: "max-content" }}>صور حالات</h2>
               </motion.div>
-              <CategoryChart id={props.category.id} name={props.category.name} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />
+              <div style={{ flexGrow: 2 }}>
+                <CategoryChart id={props.category.id} name={props.category.name} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />
+              </div>
             </div>
           </div>
         </div>

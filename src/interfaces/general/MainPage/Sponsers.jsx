@@ -1,8 +1,8 @@
 function Sponsers() {
   return (
     <>
-      <div class="sponser-home">
-        <div class="sponser-details">
+      <div className="sponser-home">
+        <div className="sponser-details">
           <h4>الداعمين و الراعين لنا:</h4>
           <p>
             1- فندق شمينتو - دير عطية
@@ -13,7 +13,7 @@ function Sponsers() {
           </p>
         </div>
 
-        <div class="sponser-slider"></div>
+        <div className="sponser-slider"></div>
       </div>
     </>
   );

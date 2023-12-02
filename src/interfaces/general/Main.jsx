@@ -8,12 +8,14 @@ import Statistics from "./MainPage/Statistics";
 import Openion from "./MainPage/Openion";
 import ContactUs from "./MainPage/ContactUs";
 import Footer from "./MainPage/Footer";
+import HeaderButton from "../../components/mainArea";
 
 function Main(props) {
   try {
     return (
       <>
         <div className="main-page">
+          <HeaderButton />
           <TopSection />
           <Sponsers />
           <AboutJoin />

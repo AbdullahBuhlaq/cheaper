@@ -76,9 +76,9 @@ function Packs(props) {
               <div className="main-categories">
                 <section className="categories-left">
                   <PacksHeader userInformation={props.userInformation} setAddNew={setAddNew} filter={filter} setFilter={setFilter} />
-                  <div style={{ display: "flex", justifyContent: "space-between", padding: "10px 30px" }}>
-                    <div>
-                      <section className="plan-section" style={{ flexDirection: "row" }}>
+                  <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", padding: "10px 30px" }}>
+                    <div style={{ width: "100%", marginBottom: "25px" }}>
+                      <section className="plan-section" style={{ flexDirection: "row", justifyContent: "right" }}>
                         {items.map((item) => {
                           return item;
                         })}
@@ -99,7 +99,7 @@ function Packs(props) {
                         </>
                       ) : null}
                     </div>
-                    <div>
+                    <div style={{ width: "100%" }}>
                       {!checkPermissions(props.userInformation, ["admin.packs.chart"]) ? (
                         <SuspendChart width={"230%"} height={400} />
                       ) : props.packsChart.loading ? (
@@ -110,7 +110,7 @@ function Packs(props) {
                         </>
                       ) : (
                         <>
-                          <Chart options={props.packsChart.options} series={props.packsChart.series} type="area" width={"230%"} height={400} />
+                          <Chart options={props.packsChart.options} series={props.packsChart.series} type="area" width={"100%"} height={400} />
                         </>
                       )}
                     </div>

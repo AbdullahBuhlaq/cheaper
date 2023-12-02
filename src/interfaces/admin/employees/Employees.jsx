@@ -12,6 +12,7 @@ import getRoles from "../roles/functions/getRoles";
 import deleteEmployeeFunc from "./functions/deleteEmployee";
 import NotAllowdPage from "../../general/NotAllowedPage";
 import checkPermissions from "../../../functions/checkPermission";
+import HeaderButton from "../../../components/mainArea";
 
 function Employees(props) {
   const [loading, setLoading] = useState(true);
@@ -77,6 +78,7 @@ function Employees(props) {
         ) : (
           <>
             <div className="users-main-area">
+              <HeaderButton />
               <div className="app-content">
                 <EmployeesHeader userInformation={props.userInformation} setAddNew={setAddNew} filter={filter} setFilter={setFilter} roles={props.roles} />
 

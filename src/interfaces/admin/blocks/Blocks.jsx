@@ -13,6 +13,7 @@ import HeaderButton from "../../../components/mainArea";
 import compare from "../../../functions/compare";
 import checkPermissions from "../../../functions/checkPermission";
 import NotAllowdPage from "../../general/NotAllowedPage";
+import { FaCircleXmark } from "react-icons/fa6";
 
 function Blocks(props) {
   const cardRef = useRef();
@@ -78,10 +79,17 @@ function Blocks(props) {
           </div>
         ) : (
           <>
-            <div className="main-area" style={{ flex: "initial" }}>
-              <HeaderButton />
-
-              <div className="role-right-area">
+            <HeaderButton />
+            <div className="main-area new-right-area" style={{ flex: "initial" }}>
+              <div
+                className={"btn-close-right"}
+                onClick={() => {
+                  document.getElementsByClassName("new-right-area")[0].classList.remove("show");
+                }}
+              >
+                <FaCircleXmark />
+              </div>
+              <div className="role-right-area ">
                 <div id="role-cards" ref={cardRef}>
                   <div
                     className="role-card"
