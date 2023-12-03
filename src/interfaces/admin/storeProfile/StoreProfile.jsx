@@ -58,46 +58,44 @@ function StoreProfile(props) {
       <>
         {!loading ? (
           <>
-            <div className="profile-main-area">
-              <HeaderButton />
+            <HeaderButton />
 
-              <div className="main-profile">
-                <StoreProfileLeft
-                  setOpenBlocks={setOpenBlocks}
-                  packsChart={packsChart}
-                  storeChart={storeChart}
-                  packs={packs}
-                  store={storeInformation}
-                  users={users}
-                  userInformation={props.userInformation}
-                  setUserInformation={props.setUserInformation}
-                  refreshStatus={props.refreshStatus}
-                  setRefreshStatus={props.setRefreshStatus}
-                  toast={props.toast}
-                  setUsers={setUsers}
-                  usersPage={usersPage}
-                  setUsersPage={setUsersPage}
-                  id={params.id}
-                />
-                <StoreProfileRight
-                  totalSpam={storeInformation.spam}
-                  totalEva={storeInformation.evaluateAverage}
-                  spam={spam}
-                  eva={eva}
-                  userInformation={props.userInformation}
-                  setUserInformation={props.setUserInformation}
-                  refreshStatus={props.refreshStatus}
-                  setRefreshStatus={props.setRefreshStatus}
-                  toast={props.toast}
-                  setSpam={setSpam}
-                  setEva={setEva}
-                  spamPage={spamPage}
-                  evaPage={evaPage}
-                  setSpamPage={setSpamPage}
-                  setEvaPage={setEvaPage}
-                  id={params.id}
-                />
-              </div>
+            <div className="main-profile">
+              <StoreProfileLeft
+                setOpenBlocks={setOpenBlocks}
+                packsChart={packsChart}
+                storeChart={storeChart}
+                packs={packs}
+                store={storeInformation}
+                users={users}
+                userInformation={props.userInformation}
+                setUserInformation={props.setUserInformation}
+                refreshStatus={props.refreshStatus}
+                setRefreshStatus={props.setRefreshStatus}
+                toast={props.toast}
+                setUsers={setUsers}
+                usersPage={usersPage}
+                setUsersPage={setUsersPage}
+                id={params.id}
+              />
+              <StoreProfileRight
+                totalSpam={storeInformation.spam}
+                totalEva={storeInformation.evaluateAverage}
+                spam={spam}
+                eva={eva}
+                userInformation={props.userInformation}
+                setUserInformation={props.setUserInformation}
+                refreshStatus={props.refreshStatus}
+                setRefreshStatus={props.setRefreshStatus}
+                toast={props.toast}
+                setSpam={setSpam}
+                setEva={setEva}
+                spamPage={spamPage}
+                evaPage={evaPage}
+                setSpamPage={setSpamPage}
+                setEvaPage={setEvaPage}
+                id={params.id}
+              />
             </div>
 
             {openBlocks ? (

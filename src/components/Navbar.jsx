@@ -66,6 +66,8 @@ function Navbar(props) {
   try {
     return (
       <>
+        {showNotifications ? <div style={{ width: "100vw", zIndex: 1, right: "0", height: "100vh", top: 0, backgroundColor: "transparent", position: "absolute" }} onClick={() => setShowNotifications(false)}></div> : null}
+
         <div className="left-area" style={{ overflow: "visible" }} id="nav" ref={ref}>
           <div
             className={"btn-close-left"}
@@ -116,6 +118,7 @@ function Navbar(props) {
                     <TbBellRinging />
                     {props.thereIsNotifications <= 0 ? null : <span style={{ position: "absolute", top: 0, right: 0, width: "10px", height: "10px", backgroundColor: "red", borderRadius: "50%", display: "flex", justifyContent: "center", alignItems: "center", fontSize: "10px", color: "white", overflow: "hidden" }}>{props.thereIsNotifications != -1 ? props.thereIsNotifications : null}</span>}
                   </div>
+
                   <div className={"sub-menu double" + (showNotifications ? " show" : "")} style={{ zIndex: "30" }}>
                     <div className="notifications-last-update">
                       {props.notifications != -1

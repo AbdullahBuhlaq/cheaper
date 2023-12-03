@@ -58,35 +58,33 @@ function UserProfile(props) {
         {checkPermissions(props.userInformation, ["admin.users.block.information"]) ? (
           !loading ? (
             <>
-              <div className="profile-main-area">
-                <HeaderButton />
+              <HeaderButton />
 
-                <div className="main-profile">
-                  <ProfileLeft
-                    setOpenStore={setOpenStore}
-                    userChart={userChart}
-                    offers={userOffer}
-                    setUserOffer={setUserOffer}
-                    deleteUser={deleteUser}
-                    setCurrentEdit={setCurrentEdit}
-                    setShowBlocks={setShowBlocks}
-                    userProfile={userProfile}
-                    setUserProfile={setUserProfile}
-                    filter={filter}
-                    setFilter={setFilter}
-                    usersPage={usersPage}
-                    setUsersPage={setUsersPage}
-                    userInformation={props.userInformation}
-                    setUserInformation={props.setUserInformation}
-                    refreshStatus={props.refreshStatus}
-                    setRefreshStatus={props.setRefreshStatus}
-                    navigate={props.navigate}
-                    toast={props.toast}
-                    id={params.id}
-                  />
+              <div className="main-profile">
+                <ProfileLeft
+                  setOpenStore={setOpenStore}
+                  userChart={userChart}
+                  offers={userOffer}
+                  setUserOffer={setUserOffer}
+                  deleteUser={deleteUser}
+                  setCurrentEdit={setCurrentEdit}
+                  setShowBlocks={setShowBlocks}
+                  userProfile={userProfile}
+                  setUserProfile={setUserProfile}
+                  filter={filter}
+                  setFilter={setFilter}
+                  usersPage={usersPage}
+                  setUsersPage={setUsersPage}
+                  userInformation={props.userInformation}
+                  setUserInformation={props.setUserInformation}
+                  refreshStatus={props.refreshStatus}
+                  setRefreshStatus={props.setRefreshStatus}
+                  navigate={props.navigate}
+                  toast={props.toast}
+                  id={params.id}
+                />
 
-                  <ProfileBody userProfile={userProfile} />
-                </div>
+                <ProfileBody userProfile={userProfile} />
               </div>
 
               {showBlocks ? (
