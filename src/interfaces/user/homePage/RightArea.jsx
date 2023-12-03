@@ -3,19 +3,21 @@ import RightOfferItem from "./RightOffersItem";
 import RightRecentVisited from "./RightRecentVisited";
 import NotAllowdPage from "../../general/NotAllowedPage";
 import Loading from "../../general/Loading";
+import { FaCircleXmark } from "react-icons/fa6";
 
 function RightArea(props) {
   try {
     return (
       <>
-        <div className="right-area homeuser">
-          <button className="btn-close-right">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="feather feather-x-circle" viewBox="0 0 24 24">
-              <defs></defs>
-              <circle cx="12" cy="12" r="10"></circle>
-              <path d="M15 9l-6 6M9 9l6 6"></path>
-            </svg>
-          </button>
+        <div className="new-right-area homeuser ">
+          <div
+            className={"btn-close-right"}
+            onClick={() => {
+              document.getElementsByClassName("new-right-area")[0].classList.remove("show");
+            }}
+          >
+            <FaCircleXmark />
+          </div>
 
           <div style={{ height: "48%", overflow: "auto", marginBottom: "2%" }}>
             {checkPermissions(props.userInformation, ["user.home"]) ? (

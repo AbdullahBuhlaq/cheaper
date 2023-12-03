@@ -1,4 +1,6 @@
-function TopSection(props) {
+import CountUp, { useCountUp } from "react-countup";
+
+function TopSection() {
   return (
     <>
       <div className="first-section-home">

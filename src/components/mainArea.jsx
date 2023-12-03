@@ -1,4 +1,5 @@
-import { FaAlignLeft, FaDashcube } from "react-icons/fa";
+import { FaLeaf } from "react-icons/fa";
+
 function HeaderButton(props) {
   try {
     return (
@@ -10,7 +11,7 @@ function HeaderButton(props) {
               document.getElementsByClassName("left-area")[0].classList.add("show");
             }}
           >
-            <FaDashcube />
+            <FaLeaf />
             left
           </button>
           <button
@@ -19,7 +20,7 @@ function HeaderButton(props) {
               document.getElementsByClassName("new-right-area")[0].classList.add("show");
             }}
           >
-            <FaAlignLeft />
+            <FaLeaf />
             right
           </button>
         </div>

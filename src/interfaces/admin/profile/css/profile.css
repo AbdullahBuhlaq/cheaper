@@ -1056,6 +1056,15 @@ input[type=upload] {
 
 }
 
+.profile-left {
+    height: 100% !important;
+    overflow: auto !important;
+}
+
+.main-profile {
+    height: 100vh !important;
+    overflow: hidden !important;
+}
 
 
 
@@ -1161,13 +1170,7 @@ input[type=upload] {
         margin-bottom: 4px;
     }
 
-    .main-profile {
-        flex-direction: column;
-        overflow-y: auto;
-        height: 100%;
-        width: 100%;
-        margin: 20px;
-    }
+
 
     #profile-window {
         padding: 0;

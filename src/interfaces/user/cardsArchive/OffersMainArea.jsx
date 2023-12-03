@@ -8,8 +8,6 @@ function OffersMainArea(props) {
     return (
       <>
         <div className="main-area">
-          <HeaderButton />
-
           <OfferSearch
             filter={props.filter}
             setFilter={props.setFilter}

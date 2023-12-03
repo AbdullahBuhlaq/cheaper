@@ -43,32 +43,30 @@ function StoreInformation(props) {
           </div>
         ) : (
           <>
-            <div className="profile-main-area">
-              <HeaderButton />
-              <div className="main-profile">
-                <StoreLeft
-                  setOpenStatus={setOpenStatus}
-                  setOpenImage={setOpenImage}
-                  storeUsers={props.storeUsers}
-                  setStoreUsers={props.setStoreUsers}
-                  usersPage={props.usersPage}
-                  setUsersPage={props.setUsersPage}
-                  setOpenPacks={setOpenPacks}
-                  packsChart={props.packsChart}
-                  storeChart={props.storeChart}
-                  setOpenUpdate={setOpenUpdate}
-                  storeInformation={props.storeInformation}
-                  setStoreInformation={props.setStoreInformation}
-                  packs={props.packs}
-                  userInformation={props.userInformation}
-                  setUserInformation={props.setUserInformation}
-                  refreshStatus={props.refreshStatus}
-                  setRefreshStatus={props.setRefreshStatus}
-                  toast={props.toast}
-                />
+            <HeaderButton />
+            <div className="main-profile">
+              <StoreLeft
+                setOpenStatus={setOpenStatus}
+                setOpenImage={setOpenImage}
+                storeUsers={props.storeUsers}
+                setStoreUsers={props.setStoreUsers}
+                usersPage={props.usersPage}
+                setUsersPage={props.setUsersPage}
+                setOpenPacks={setOpenPacks}
+                packsChart={props.packsChart}
+                storeChart={props.storeChart}
+                setOpenUpdate={setOpenUpdate}
+                storeInformation={props.storeInformation}
+                setStoreInformation={props.setStoreInformation}
+                packs={props.packs}
+                userInformation={props.userInformation}
+                setUserInformation={props.setUserInformation}
+                refreshStatus={props.refreshStatus}
+                setRefreshStatus={props.setRefreshStatus}
+                toast={props.toast}
+              />
 
-                <StoreRight userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} />
-              </div>
+              <StoreRight userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} />
             </div>
 
             {openUpdate ? (

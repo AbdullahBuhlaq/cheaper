@@ -660,7 +660,6 @@ p {
 .openion-section-box {
   background: var(--app-container);
   padding: 15px;
-  margin: 10px;
   border-radius: 11px;
 }
 
@@ -669,7 +668,18 @@ p {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-end;
+}
+
+.profile-right-section {
+  background-color: var(--app-container);
+}
+
+@media screen and (max-width: 900px) {
+  .profile-right-section {
+    width: 40vw;
+  }
+
 }
 
 .openion-section-box-header img {
@@ -983,4 +993,8 @@ p {
   padding: 8px 0px;
   transition: 0.3s ease;
   position: relative;
+}
+
+.slick-list {
+  width: 50vw
 }

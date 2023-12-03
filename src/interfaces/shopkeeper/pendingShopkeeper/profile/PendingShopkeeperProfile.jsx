@@ -42,14 +42,12 @@ function PendingShopkeeperProfile(props) {
           </div>
         ) : (
           <>
-            <div className="profile-main-area">
-              <HeaderButton />
+            <HeaderButton />
 
-              <div className="main-profile">
-                <ProfileLeft storeInformation={props.storeInformation} profile={props.profile} setPopupStatus={setPopupStatus} />
+            <div className="main-profile">
+              <ProfileLeft storeInformation={props.storeInformation} profile={props.profile} setPopupStatus={setPopupStatus} />
 
-                <ProfileBody profile={props.profile} logoutDevice={logoutDeviceFunc} />
-              </div>
+              <ProfileBody profile={props.profile} logoutDevice={logoutDeviceFunc} />
             </div>
 
             {popupStatus == 1 ? (

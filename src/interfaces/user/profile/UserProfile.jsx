@@ -40,14 +40,12 @@ function UserProfile(props) {
           </div>
         ) : (
           <>
-            <div className="profile-main-area">
-              <HeaderButton />
+            <HeaderButton />
 
-              <div className="main-profile">
-                <UserProfileLeft profile={props.profile} setPopupStatus={setPopupStatus} userInformation={props.userInformation} />
+            <div className="main-profile">
+              <UserProfileLeft profile={props.profile} setPopupStatus={setPopupStatus} userInformation={props.userInformation} />
 
-                <UserBody profile={props.profile} logoutDevice={logoutDeviceFunc} />
-              </div>
+              <UserBody profile={props.profile} logoutDevice={logoutDeviceFunc} />
             </div>
 
             {popupStatus == 1 ? (

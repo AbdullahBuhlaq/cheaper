@@ -321,6 +321,8 @@ a {
 
 .main-buttons-container {
     display: none;
+    position: absolute;
+    left: 30px;
     z-index: 98;
 }
 
@@ -402,7 +404,6 @@ a {
 @media screen and (max-width: 900px) {
     .main-buttons-container {
         display: flex;
-        width: 85vw;
     }
 
     .new-right-area {
@@ -434,7 +435,6 @@ a {
 @media screen and (max-width: 768px) {
     .main-buttons-container {
         display: flex;
-        width: 95vw
     }
 
     .left-area {

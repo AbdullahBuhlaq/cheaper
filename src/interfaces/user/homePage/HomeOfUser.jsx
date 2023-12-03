@@ -8,6 +8,7 @@ import OpenOffer from "./OpenOffer";
 import Loading from "../../general/Loading";
 import checkPermissions from "../../../functions/checkPermission";
 import WinGift from "./WinGift";
+import HeaderButton from "../../../components/mainArea";
 
 function HomeOfUser(props) {
   const [openOffer, setOpenOffer] = useState(false);
@@ -22,6 +23,7 @@ function HomeOfUser(props) {
     return (
       <>
         <>
+          <HeaderButton />
           <MainArea setOpenOffer={setOpenOffer} setIsGift={setIsGift} userInformation={props.userInformation} homeInfo={props.homeInfo} toast={props.toast} />
           <RightArea userInformation={props.userInformation} homeInfo={props.homeInfo} />
 

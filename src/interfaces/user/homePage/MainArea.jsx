@@ -8,7 +8,6 @@ function MainArea(props) {
     return (
       <>
         <div className="main-area">
-          <HeaderButton />
           {props.homeInfo.countYourGift > 0 ? <GiftIcon setIsGift={props.setIsGift} setOpenOffer={props.setOpenOffer} /> : null}
 
           <div className="main-area-header">

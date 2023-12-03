@@ -1163,13 +1163,7 @@ input[type=upload] {
         margin-bottom: 4px;
     }
 
-    .main-profile {
-        flex-direction: column;
-        overflow-y: auto;
-        height: 100%;
-        width: 100%;
-        margin: 20px;
-    }
+
 
     #profile-window {
         padding: 0;

@@ -10,6 +10,7 @@ import SendGift from "./SendGift";
 import checkPermissions from "../../../functions/checkPermission";
 import NotAllowdPage from "../../general/NotAllowedPage";
 import getLocation from "../homePage/functions/getLocation";
+import HeaderButton from "../../../components/mainArea";
 
 function Offers(props) {
   const [offersPage, setOffersPage] = useState({ page: 1, size: 6, loadMore: true, loadingNow: false });
@@ -38,6 +39,7 @@ function Offers(props) {
           </div>
         ) : (
           <>
+            <HeaderButton />
             <OffersMainArea
               currentOffer={currentOffer}
               setCurrentOffer={setCurrentOffer}

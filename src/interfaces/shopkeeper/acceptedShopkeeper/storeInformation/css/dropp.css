@@ -67,3 +67,8 @@
 .choosen-pack {
     border: 1px solid blue
 }
+
+.qr-scanner {
+    background-color: var(--app-container);
+    border-radius: 20px;
+}

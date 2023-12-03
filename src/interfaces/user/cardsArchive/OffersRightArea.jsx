@@ -13,6 +13,7 @@ import getRemainingTime from "../../../functions/getRemainingTime";
 import checkPermissions from "../../../functions/checkPermission";
 import { FcCancel } from "react-icons/fc";
 import { motion } from "framer-motion";
+import { FaCircleXmark } from "react-icons/fa6";
 
 function OffersRightArea(props) {
   const [rate, setRate] = useState(50);
@@ -40,14 +41,15 @@ function OffersRightArea(props) {
       <>
         {props.currentOffer ? (
           <>
-            <motion.div className="right-area homeuser" key={props.currentOffer.offerUserId} initial={{ x: "-100%", opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ type: "spring", duration: "1.2" }} style={{ background: "transparent" }}>
-              <button className="btn-close-right">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="feather feather-x-circle" viewBox="0 0 24 24">
-                  <defs></defs>
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <path d="M15 9l-6 6M9 9l6 6"></path>
-                </svg>
-              </button>
+            <motion.div className="homeuser new-right-area" key={props.currentOffer.offerUserId} initial={{ x: "-100%", opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ type: "spring", duration: "1.2" }} style={{ background: "transparent" }}>
+              <div
+                className={"btn-close-right"}
+                onClick={() => {
+                  document.getElementsByClassName("new-right-area")[0].classList.remove("show");
+                }}
+              >
+                <FaCircleXmark />
+              </div>
 
               <div className="more-card-info">
                 <div className="more-card-info-header">
@@ -220,14 +222,15 @@ function OffersRightArea(props) {
           </>
         ) : (
           <>
-            <div className="right-area homeuser">
-              <button className="btn-close-right">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="feather feather-x-circle" viewBox="0 0 24 24">
-                  <defs></defs>
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <path d="M15 9l-6 6M9 9l6 6"></path>
-                </svg>
-              </button>
+            <div className="new-right-area homeuser">
+            <div
+                className={"btn-close-right"}
+                onClick={() => {
+                  document.getElementsByClassName("new-right-area")[0].classList.remove("show");
+                }}
+              >
+                <FaCircleXmark />
+              </div>
               قم باختيار عرض لعرض المعلومات والتقييم والإبلاغ.
             </div>
           </>
