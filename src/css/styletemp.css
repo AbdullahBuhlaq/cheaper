@@ -416,6 +416,7 @@ a {
     .new-right-area.show {
         position: absolute;
         display: flex !important;
+        width: 100vw;
     }
 
     .btn-show-right-area {
@@ -448,7 +449,7 @@ a {
         height: 100%;
         position: absolute;
         z-index: 2;
-        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.4);
+        box-shadow: 0 0 0 10px #59575742;
         display: none;
     }
 

@@ -757,6 +757,12 @@ input[type=upload] {
     align-items: stretch;
 }
 
+@media screen and (max-width: 578px) {
+    .details-profile-cards {
+        justify-content: center !important;
+    }
+}
+
 .details-profile-card {
     background: var(--main-profile);
     height: auto;
