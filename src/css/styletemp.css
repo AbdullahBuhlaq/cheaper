@@ -912,16 +912,25 @@ input[type=time] {
 @media screen and (max-width: 520px) {
     .app-content-actions {
         flex-direction: column;
+        position: relative
     }
 
     .app-content-actions .search-bar {
         max-width: 100%;
-        order: 2;
+        /* order: 2; */
+    }
+
+    .app-content-actions>.action-button {
+        position: absolute;
+        right: 13px;
+        top: 72px;
+        /* margin: 0 */
     }
 
     .app-content-actions .app-content-actions-wrapper {
         padding-bottom: 16px;
-        order: 1;
+        /* margin-right: 0; */
+        /* order: 1; */
     }
 }
 
@@ -1017,6 +1026,13 @@ input[type=time] {
     width: max-content !important;
     max-width: 50vw;
 
+}
+
+@media screen and (max-width: 900px) {
+    .filter-menu {
+        max-width: 82vw !important;
+        width: 82vw !important;
+    }
 }
 
 .filter-menu:before {

@@ -31,7 +31,9 @@ async function getDeviceToken(toast) {
     return token;
   } catch (err) {
     console.log(err);
-    return "sdf";
+    toast.error(err, {
+      position: toast.POSITION.TOP_CENTER,
+    });
   }
 }
 

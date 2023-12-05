@@ -170,6 +170,12 @@
     transition: all 0.25s ease-out, opacity 0.25s ease-in, margin-left 0.25s ease-out, clip-path 0.15s ease-out;
 }
 
+@media screen and (max-width: 900px) {
+    .menu-item .sub-menu {
+        min-width: 70vw;
+    }
+}
+
 .menu-item .sub-menu.double {
     /* min-width: 41.25em; */
     height: 18.75em;
