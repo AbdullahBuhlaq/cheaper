@@ -7,7 +7,7 @@ function Openion() {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
+    slidesToShow: 2,
     slidesToScroll: 1,
     autoplay: true,
   };
@@ -25,18 +25,20 @@ function Openion() {
           <Slider pauseOnHover {...settings}>
             {showData.map((item, index) => {
               return (
-                <div key={index} className="openion-section-box">
-                  <div className="openion-section-box-header">
-                    <div className="openion-section-box-header-name">
-                      <a href="#">
-                        <h5>{showData[index].name}</h5>
-                        <span>{showData[index].city}</span>
-                      </a>
+                <div key={index}>
+                  <div className="openion-section-box" style={{ margin: "0 0.6vw", width: "30vw" }}>
+                    <div className="openion-section-box-header">
+                      <div className="openion-section-box-header-name">
+                        <a href="#">
+                          <h5>{item.name}</h5>
+                          <span>{item.city}</span>
+                        </a>
+                      </div>
+                      <img className="customer-profile-pic" src={`images/img/${item.image}`} alt="" />
                     </div>
-                    <img className="customer-profile-pic" src={`images/img/${showData[index].image}`} alt="" />
-                  </div>
-                  <div className="openion-section-box-body">
-                    <p>{showData[index].comment}</p>
+                    <div className="openion-section-box-body">
+                      <p>{item.comment}</p>
+                    </div>
                   </div>
                 </div>
               );
