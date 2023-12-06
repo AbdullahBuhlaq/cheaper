@@ -248,6 +248,7 @@ p {
 
 .sponser-home {
   display: flex;
+  justify-content: space-between;
   width: 100%;
   padding: 25px 35px;
   background: var(--cards-area-bg);
@@ -565,7 +566,7 @@ p {
   top: -6px;
   width: 84px;
   height: 85px;
-  background: url(../img/icon/icon-hover.png) no-repeat center center;
+  background: url(images/img/icon/icon-hover.png) no-repeat center center;
   background-size: contain;
   z-index: -2;
 }
@@ -997,4 +998,8 @@ p {
 
 .slick-list {
   width: 50vw
+}
+
+.sponser-slider .slick-list {
+  width: 52vw;
 }

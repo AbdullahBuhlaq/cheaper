@@ -3,7 +3,7 @@
 }
 
 .dark:root {
-    --main-modal: rgba(0, 0, 0, 0.23);
+    --main-modal: rgb(0, 134, 217, .44)
 }
 
 

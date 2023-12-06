@@ -4,13 +4,13 @@ import { motion } from "framer-motion";
 
 function SelectMultipleFromDB(props) {
   const [open, setOpen] = useState(false);
-  useEffect(() => {
-    document.addEventListener("click", (e) => {
-      if (e.target.tagName != "OPTION" && e.target.className != "open") {
-        setOpen(false);
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   document.addEventListener("click", (e) => {
+  //     if (e.target.tagName != "OPTION" && e.target.className != "open") {
+  //       setOpen(false);
+  //     }
+  //   });
+  // }, []);
 
   try {
     return (
