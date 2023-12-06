@@ -1,48 +1,24 @@
-import CountUp from "react-countup";
+import STATISTICS from "../data/statistics";
+import CountUpStatistic from "./CountUpStatistic";
 
 function Statistics() {
   return (
     <>
       <div className="counter-home-section">
-        <div className="counter-home-box">
-          <div className="counter-home-box-img">
-            <img src="images/icon/click.png" />
-          </div>
-          <h3 className="counter">
-            <CountUp enableScrollSpy={true} scrollSpyOnce={false} end={613074} />
-          </h3>
-          <p>متجر مشترك معنا</p>
-        </div>
-
-        <div className="counter-home-box">
-          <div className="counter-home-box-img">
-            <img src="images/icon/link.png" />
-          </div>
-          <h3 className="counter">
-            <CountUp end={24117} />
-          </h3>
-          <p>عدد المستخدمين النشطين</p>
-        </div>
-
-        <div className="counter-home-box">
-          <div className="counter-home-box-img">
-            <img src="images/icon/members.png" />
-          </div>
-          <h3 className="counter">
-            <CountUp end={5605} />
-          </h3>
-          <p>عملية شـراء</p>
-        </div>
-
-        <div className="counter-home-box">
-          <div className="counter-home-box-img">
-            <img src="images/icon/dollar.png" />
-          </div>
-          <h3 className="counter" data-number="1,981">
-            <CountUp end={1981} />
-          </h3>
-          <p>عرض حصري و قوي</p>
-        </div>
+        {STATISTICS.map((item, index) => {
+          return (
+            <div key={index} className="counter-home-box">
+              <div className="counter-home-box-img">
+                <img src="images/icon/click.png" />
+              </div>
+              <h3 className="counter">
+                <CountUpStatistic number={item.number} />
+                {/* <CountUp enableScrollSpy={true} scrollSpyOnce={false} end={item.number} /> */}
+              </h3>
+              <p>{item.title}</p>
+            </div>
+          );
+        })}
       </div>
     </>
   );

@@ -1,6 +1,8 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { SPONSERS, IMAGES } from "../data/sponsers";
+import { Fragment } from "react";
 
 function Sponsers() {
   const settings = {
@@ -11,24 +13,26 @@ function Sponsers() {
     slidesToScroll: 1,
     autoplay: true,
   };
-  const showData = ["images/user.webp", "images/user.webp"];
   return (
     <>
       <div className="sponser-home">
         <div className="sponser-details">
           <h4>الداعمين و الراعين لنا:</h4>
           <p>
-            1- فندق شمينتو - دير عطية
-            <br />
-            2- مطعم ضيعتنا - ريف دمشق
-            <br />
-            3- اسم تجاري ضخم - موقعه الجغرافي
+            {SPONSERS.map((item, index) => {
+              return (
+                <Fragment key={index}>
+                  {item}
+                  <br />
+                </Fragment>
+              );
+            })}
           </p>
         </div>
 
         <div className="sponser-slider">
           <Slider pauseOnHover {...settings}>
-            {showData.map((item, index) => {
+            {IMAGES.map((item, index) => {
               return (
                 <div key={index} style={{ width: "50vw", height: "100%" }}>
                   <img src={item} style={{ objectFit: "cover", width: "50vw", height: "300px", borderRadius: "20px", margin: "1vw" }} />
