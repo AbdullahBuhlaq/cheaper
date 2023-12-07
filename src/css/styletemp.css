@@ -417,7 +417,7 @@ a {
     .new-right-area.show {
         position: absolute;
         display: flex !important;
-        width: 100vw;
+        width: 80vw !important;
     }
 
     .btn-show-right-area {
