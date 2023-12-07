@@ -417,7 +417,8 @@ a {
     .new-right-area.show {
         position: absolute;
         display: flex !important;
-        width: 80vw !important;
+        width: 40vw !important;
+        max-width: 40vw !important;
     }
 
     .btn-show-right-area {
@@ -437,6 +438,11 @@ a {
 @media screen and (max-width: 768px) {
     .main-buttons-container {
         display: flex;
+    }
+
+    .new-right-area.show {
+        width: 50vw !important;
+        max-width: 50vw !important;
     }
 
     .left-area {
@@ -475,6 +481,20 @@ a {
 
     .btn-show-right-area {
         display: flex;
+    }
+}
+
+@media screen and (max-width: 612px) {
+    .new-right-area.show {
+        width: 60vw !important;
+        max-width: 60vw !important;
+    }
+}
+
+@media screen and (max-width: 512px) {
+    .new-right-area.show {
+        width: 75vw !important;
+        max-width: 75vw !important;
     }
 }
 
