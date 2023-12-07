@@ -58,7 +58,7 @@ function Stores(props) {
     return checkPermissions(props.userInformation, ["admin.store.all"]) ? (
       <>
         <div className="main-area" style={{ width: "100%" }}>
-          <HeaderButton />
+          <HeaderButton noRight={true} />
           <div className="tab" style={{ width: "100%" }}>
             <StoreTab tabName={"مقبولين"} tabNumber={1} currentTab={currentTab} setCurrentTab={setCurrentTab} />
             <StoreTab tabName={"معلقين"} tabNumber={2} currentTab={currentTab} setCurrentTab={setCurrentTab} />

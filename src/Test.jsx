@@ -141,6 +141,59 @@ function Test() {
       </div>
     </>
   );
+
+  // function getIconss(id) {
+  //   let iconvar = false;
+  //   if (id == "ci") iconvar = ci;
+  //   else if (id == "fa") iconvar = fa;
+  //   else if (id == "fa6") iconvar = fa6;
+  //   else if (id == "io") iconvar = io;
+  //   else if (id == "io5") iconvar = io5;
+  //   else if (id == "md") iconvar = md;
+  //   else if (id == "ti") iconvar = ti;
+  //   else if (id == "go") iconvar = go;
+  //   else if (id == "fi") iconvar = fi;
+  //   else if (id == "lu") iconvar = lu;
+  //   else if (id == "gi") iconvar = gi;
+  //   else if (id == "wi") iconvar = wi;
+  //   else if (id == "di") iconvar = di;
+  //   else if (id == "ai") iconvar = ai;
+  //   else if (id == "bs") iconvar = bs;
+  //   else if (id == "ri") iconvar = ri;
+  //   else if (id == "fc") iconvar = fc;
+  //   else if (id == "gr") iconvar = gr;
+  //   else if (id == "hi") iconvar = hi;
+  //   else if (id == "hi2") iconvar = hi2;
+  //   else if (id == "si") iconvar = si;
+  //   else if (id == "sl") iconvar = sl;
+  //   else if (id == "im") iconvar = im;
+  //   else if (id == "bi") iconvar = bi;
+  //   else if (id == "cg") iconvar = cg;
+  //   else if (id == "vsc") iconvar = vsc;
+  //   else if (id == "tb") iconvar = tb;
+  //   else if (id == "tfi") iconvar = tfi;
+  //   else if (id == "rx") iconvar = rx;
+  //   else if (id == "pi") iconvar = pi;
+  //   else if (id == "lia") iconvar = lia;
+  //   let arr = ["ci", "fa", "fa6", "io", "io5", "md", "ti", "go", "fi", "lu", "gi", "wi", "di", "ai", "bs", "ri", "fc", "gr", "hi", "hi2", "si", "sl", "im", "bi", "cg", "vsc", "tb", "tfi", "rx", "pi", "lia"];
+
+  //   if (iconvar) return <div style={{ display: "flex" }}>{console.log(iconvar, Object.keys(iconvar).length)}</div>;
+  // }
+
+  // return (
+  //   <>
+  //     <div style={{ display: "flex", flexDirection: "column", overflow: "auto" }}>
+  //       {reactIcons.IconsManifest.map((item, index) => {
+  //         return (
+  //           <div key={index}>
+  //             <h1>{item.id}</h1>
+  //             {getIconss(item.id)}
+  //           </div>
+  //         );
+  //       })}
+  //     </div>
+  //   </>
+  // );
 }
 
 export default Test;

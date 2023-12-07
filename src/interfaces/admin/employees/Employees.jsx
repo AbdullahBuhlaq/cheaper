@@ -78,7 +78,7 @@ function Employees(props) {
         ) : (
           <>
             <div className="users-main-area">
-              <HeaderButton />
+              <HeaderButton noRight={true} />
               <div className="app-content">
                 <EmployeesHeader userInformation={props.userInformation} setAddNew={setAddNew} filter={filter} setFilter={setFilter} roles={props.roles} />
 

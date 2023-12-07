@@ -71,7 +71,7 @@ function Packs(props) {
         ) : (
           <>
             <div className="profile-main-area">
-              <HeaderButton />
+              <HeaderButton noRight={true} />
 
               <div className="main-categories">
                 <section className="categories-left">

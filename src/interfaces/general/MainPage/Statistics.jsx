@@ -13,7 +13,6 @@ function Statistics() {
               </div>
               <h3 className="counter">
                 <CountUpStatistic number={item.number} />
-                {/* <CountUp enableScrollSpy={true} scrollSpyOnce={false} end={item.number} /> */}
               </h3>
               <p>{item.title}</p>
             </div>

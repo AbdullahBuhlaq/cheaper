@@ -15,7 +15,7 @@ function Main(props) {
     return (
       <>
         <div className="main-page">
-          <HeaderButton />
+          <HeaderButton noRight={true} />
           <TopSection />
           <Sponsers />
           <AboutJoin />

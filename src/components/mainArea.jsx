@@ -1,4 +1,6 @@
-import { FaLeaf } from "react-icons/fa";
+import { GoSidebarCollapse } from "react-icons/go";
+import { FaBars } from "react-icons/fa6";
+import { FaCircleXmark } from "react-icons/fa6";
 
 function HeaderButton(props) {
   try {
@@ -10,19 +12,21 @@ function HeaderButton(props) {
             onClick={() => {
               document.getElementsByClassName("left-area")[0].classList.add("show");
             }}
+            style={{ minWidth: "max-content", fontSize: "18px" }}
           >
-            <FaLeaf />
-            left
+            <FaBars />
           </button>
-          <button
-            className="btn-show-right-area"
-            onClick={() => {
-              document.getElementsByClassName("new-right-area")[0].classList.add("show");
-            }}
-          >
-            <FaLeaf />
-            right
-          </button>
+          {props.noRight ? null : (
+            <button
+              className="btn-show-right-area"
+              onClick={() => {
+                document.getElementsByClassName("new-right-area")[0].classList.add("show");
+              }}
+              style={{ minWidth: "max-content", fontSize: "18px" }}
+            >
+              <GoSidebarCollapse />
+            </button>
+          )}
         </div>
       </>
     );
