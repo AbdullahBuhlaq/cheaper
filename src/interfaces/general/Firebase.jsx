@@ -12,7 +12,7 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_MEASUREMENT_ID,
 };
 
-const app = initializeApp(firebaseConfig, "cheaper4");
+const app = initializeApp(firebaseConfig, "cheaperwebapp1");
 
 const messaging = getMessaging(app);
 
