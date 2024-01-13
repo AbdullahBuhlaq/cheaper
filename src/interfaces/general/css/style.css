@@ -756,8 +756,8 @@ p {
   background: var(--cards-area-bg);
   z-index: -1;
   margin-bottom: 150px;
-  /* margin-right: auto;
-  margin-left: auto; */
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .contact-us-section-header {
@@ -846,7 +846,7 @@ p {
 .contact-form-home label {
   font-size: 18px;
   color: var(--category-column-header);
-  margin: 0 0 7px;
+  margin: 20px 0 7px;
 }
 
 .first-row {
