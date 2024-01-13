@@ -218,7 +218,7 @@ html {
 html,
 body {
     width: 100%;
-    height: 100vh;
+    height: 100svh;
     margin: 0;
 }
 
@@ -351,7 +351,7 @@ body {
     align-items: center;
     background-color: var(--roles-bg-color);
     display: flex;
-    height: 100vh;
+    height: 100svh;
     justify-content: center;
     margin: 0px;
     overflow: hidden;

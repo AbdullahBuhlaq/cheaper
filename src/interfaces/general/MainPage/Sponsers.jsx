@@ -2,17 +2,20 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { SPONSERS, IMAGES } from "../data/sponsers";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
+import useWindowDimensions from "../../../functions/useWindowDimensions";
 
 function Sponsers() {
-  const settings = {
+  const { height, width } = useWindowDimensions();
+  const [settings, setSettings] = useState({
     dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-  };
+  });
+
   return (
     <>
       <div className="sponser-home">
@@ -34,8 +37,8 @@ function Sponsers() {
           <Slider pauseOnHover {...settings}>
             {IMAGES.map((item, index) => {
               return (
-                <div key={index} style={{ width: "50vw", height: "100%" }}>
-                  <img src={item} style={{ objectFit: "cover", width: "50vw", height: "300px", borderRadius: "20px", margin: "1vw" }} />
+                <div key={index} style={{ width: width >= 768 ? "50vw" : "98%", height: "100%" }}>
+                  <img src={item} style={{ objectFit: "cover", width: width >= 768 ? "50vw" : "98%", height: "300px", borderRadius: "20px", margin: "1vw" }} />
                 </div>
               );
             })}

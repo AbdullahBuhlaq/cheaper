@@ -23,7 +23,7 @@ function Main(props) {
           <Services />
           <Statistics />
           <Openion />
-          <ContactUs />
+          <ContactUs toast={props.toast} />
           <Footer />
         </div>
       </>

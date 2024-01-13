@@ -2,26 +2,28 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import OPENIONS from "../data/openion";
+import { useState } from "react";
+import useWindowDimensions from "../../../functions/useWindowDimensions";
 
 function Openion() {
-  const settings = {
+  const { height, width } = useWindowDimensions();
+  const [settings, setSettings] = useState({
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 2,
     slidesToScroll: 1,
     autoplay: true,
-  };
+  });
 
   try {
     return (
       <>
         <div className="openion-section" style={{ position: "relative", height: "max-contant", overflow: "hidden" }}>
-          <Slider pauseOnHover {...settings}>
+          <Slider pauseOnHover {...settings} slidesToShow={width >= 768 ? 2 : 1}>
             {OPENIONS.map((item, index) => {
               return (
                 <div key={index}>
-                  <div className="openion-section-box" style={{ margin: "0 0.6vw", width: "30vw" }}>
+                  <div className="openion-section-box" style={{ margin: "0 0.6vw", width: width >= 768 ? "30vw" : "60vw" }}>
                     <div className="openion-section-box-header">
                       <div className="openion-section-box-header-name">
                         <a href="#">

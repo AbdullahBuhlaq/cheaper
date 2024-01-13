@@ -104,13 +104,11 @@ function UserHome(props) {
               pendingSendNotifications={true}
             />
             <Routes>
-              <Route path="/" exact element={<Main />} />
-              <Route path="/main" exact element={<Main />} />
-              <Route path="/services" exact element={<Services />} />
-              <Route path="/aboutUs" exact element={<AboutUs />} />
-              <Route path="/contactUs" exact element={<Contact />} />
+              <Route path="/" exact element={<Main toast={props.toast} />} />
+              <Route path="/main" exact element={<Main toast={props.toast} />} />
+
               {checkShow(props.userInformation, ["home"]) ? <Route path="/home" exact element={<HomeOfUser setRun={setRun} homeInfo={homeInfo} setHomeInfo={setHomeInfo} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />} /> : null}
-              {checkShow(props.userInformation, ["home"]) ? (
+              {checkShow(props.userInformation, ["offers"]) ? (
                 <Route path="/offers" exact element={<Offers offers={offers} setOffers={setOffers} categories={categories} setCategories={setCategories} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />} />
               ) : null}
               <Route path="/profile" exact element={<UserProfile categories={categories} setCategories={setCategories} profile={profile} setProfile={setProfile} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />} />

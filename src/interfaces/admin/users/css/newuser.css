@@ -214,7 +214,7 @@ html {
 html,
 body {
     width: 100%;
-    height: 100vh;
+    height: 100svh;
     margin: 0;
 }
 
@@ -348,7 +348,7 @@ body {
     align-items: center;
     background-color: var(--bg-color);
     display: flex;
-    height: 100vh;
+    height: 100svh;
     justify-content: center;
     margin: 0px;
     overflow: hidden;
@@ -1727,7 +1727,7 @@ ul:after {
 
 
 .users-chart-container {
-    height: 100vh;
+    height: 100svh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

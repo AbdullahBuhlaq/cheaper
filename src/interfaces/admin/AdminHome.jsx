@@ -111,11 +111,9 @@ function AdminHome(props) {
               setNotificationsPage={setNotificationsPage}
             />
             <Routes>
-              <Route path="/" exact element={<Main />} />
-              <Route path="/main" exact element={<Main />} />
-              <Route path="/services" exact element={<Services />} />
-              <Route path="/aboutUs" exact element={<AboutUs />} />
-              <Route path="/contactUs" exact element={<Contact />} />
+              <Route path="/" exact element={<Main toast={props.toast} />} />
+              <Route path="/main" exact element={<Main toast={props.toast} />} />
+
               <Route path="/account/*" exact element={<VerifyEmail profile={profile} setProfile={setProfile} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} />} />
 
               {checkShow(props.userInformation, ["home"]) ? (

@@ -142,7 +142,7 @@
 
 
 body {
-    height: 100vh;
+    height: 100svh;
     background: var(--form-style-right-area);
     font-family: 'Tajawal';
 }

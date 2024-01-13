@@ -4,18 +4,20 @@ import refreshToken from "../../../../functions/refreshToken";
 async function addEmployee(employee, userInformation, setUserInformation, refreshStatus, setRefreshStatus, setDuringAdd, setEmployees, employees, toast, setAddNew) {
   try {
     const newData = employee;
+
     const infoRequestOptions = {
       ...requestOptions,
       headers: { ...requestOptions.headers, authorization: userInformation.token },
       body: JSON.stringify({
         ...employee,
         roleId: +employee.roleId,
-        // "user.mac": "web",
       }),
     };
+
     setDuringAdd(true);
     const response = await fetch(`${import.meta.env.VITE_URL}/admin/employee/create`, infoRequestOptions);
     const data = await response.json();
+
     if (data.success) {
       setEmployees({ ...employees, [data.data]: { id: data.data, ...newData } });
       toast.success("تمت إضافة الموظف بنجاح.", {

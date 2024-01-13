@@ -83,7 +83,7 @@
 .ExpandedCard {
     position: fixed;
     width: 60%;
-    height: 70vh;
+    height: 70svh;
     z-index: 9;
     top: 13%;
     left: 18%;
@@ -128,7 +128,7 @@
 .expanded-card-container {
     position: absolute;
     width: 100vw;
-    height: 100vh;
+    height: 100svh;
     background-color: rgba(255, 255, 255, .5);
     z-index: 20;
 }
