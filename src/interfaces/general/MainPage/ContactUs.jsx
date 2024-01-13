@@ -11,7 +11,7 @@ function ContactUs(props) {
       e.preventDefault();
 
       setDuringSend(true);
-      emailjs.sendForm("my_portfolio", "template_a20f5sr", form.current, "SYZ60ke8yXBKT3aFB").then(
+      emailjs.sendForm(import.meta.env.VITE_EMAILJS_SERVICE_ID, import.meta.env.VITE_EMAILJS_TEMPLATE_ID, form.current, import.meta.env.VITE_EMAILJS_PUBLIC_KEY).then(
         (result) => {
           if (result.text == "OK" || result.status == 200)
             props.toast.success("تم إرسال الرسالة بنجاح", {
