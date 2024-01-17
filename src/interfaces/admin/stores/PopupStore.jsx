@@ -62,7 +62,7 @@ function PopupStore(props) {
     return (
       <>
         {loading ? (
-          <div className="profile-main-area">
+          <div style={{ width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
             <Loading />
           </div>
         ) : (
@@ -136,7 +136,7 @@ function PopupStore(props) {
                       <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
                     </svg>
                   </div>
-                  <span>الرقم : {information.storeInfo["user.phoneNumber"]}</span>
+                  <span>الرقم: {information.storeInfo["user.phoneNumber"]}</span>
                 </div>
                 <div className="info-wrapper">
                   <div className="info-icon">
@@ -145,7 +145,7 @@ function PopupStore(props) {
                     </svg>
                   </div>
                   <span>
-                    التصنيف : {props.store["category.name"]}
+                    التصنيف: {props.store["category.name"]}
                     {getIcon(props.store["category.emoji"])}
                   </span>
                 </div>
@@ -155,7 +155,7 @@ function PopupStore(props) {
                       <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                     </svg>
                   </div>
-                  <span>وقت الافتتاح : {information.storeInfo.fromHour}</span>
+                  <span>الافتتاح: {information.storeInfo.fromHour}</span>
                 </div>
                 <div className="info-wrapper">
                   <div className="info-icon">
@@ -163,7 +163,7 @@ function PopupStore(props) {
                       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                     </svg>
                   </div>
-                  <span>وقت الاغلاق : {information.storeInfo.toHour}</span>
+                  <span>الاغلاق: {information.storeInfo.toHour}</span>
                 </div>
               </div>
 
@@ -171,7 +171,7 @@ function PopupStore(props) {
                 <Map width={"100%"} height={"500"} lat={information.storeInfo.latitude} long={information.storeInfo.longitude} />
               </div>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", width: "30%" }}>
+            <div style={{ display: "flex", flexDirection: "column", width: "30%" }} className="modal-right-container">
               <div className="modal-right" style={{ height: "48%" }}>
                 <div className="app-main-right-header">
                   <span>{information.spam}</span>

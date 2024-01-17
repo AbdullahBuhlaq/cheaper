@@ -15,6 +15,8 @@ import checkPermissions from "../../../functions/checkPermission";
 import { FcCancel } from "react-icons/fc";
 import HeaderButton from "../../../components/mainArea";
 import { FaCircleXmark } from "react-icons/fa6";
+import UpdateConfigs from "./UpdateConfigs";
+import Popup from "../../general/Popup";
 
 function Home(props) {
   const [expanded, setExpanded] = useState(false);
@@ -22,6 +24,8 @@ function Home(props) {
   useEffect(() => {
     if (props.configs == -1 && checkPermissions(props.userInformation, ["admin.config.all"])) getConfig(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setConfigs);
   }, []);
+
+  const [currentEdit, setCurrentEdit] = useState(false);
 
   useEffect(() => {
     if (props.homeCount.loading && checkPermissions(props.userInformation, ["admin.home.getCount"])) getCount(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast, props.setHomeCount, props.setHomeUserChart, props.homeUserChart, props.setHomeStoreChart, props.homeStoreChart);
@@ -159,9 +163,18 @@ function Home(props) {
               <Loading />
             </div>
           ) : (
-            <Config configs={props.configs} setConfigs={props.setConfigs} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />
+            <Config setCurrentEdit={setCurrentEdit} configs={props.configs} setConfigs={props.setConfigs} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} navigate={props.navigate} />
           )}
         </div>
+        {currentEdit ? (
+          <>
+            <Popup
+              setOpen={setCurrentEdit}
+              classes={"form-popup"}
+              component={<UpdateConfigs configs={props.configs} setConfigs={props.setConfigs} currentEdit={props.configs} setCurrentEdit={setCurrentEdit} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} navigate={props.navigate} toast={props.toast} />}
+            />
+          </>
+        ) : null}
       </>
     );
   } catch (err) {

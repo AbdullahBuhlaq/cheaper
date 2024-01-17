@@ -19,6 +19,7 @@ function OfferCard(props) {
                 style={{ cursor: "pointer", marginRight: "auto", marginLeft: "10px" }}
                 onClick={() => {
                   props.setCurrentOffer(props.item);
+                  document.getElementsByClassName("new-right-area")[0].classList.add("show");
                 }}
               >
                 <BsInfoCircle />

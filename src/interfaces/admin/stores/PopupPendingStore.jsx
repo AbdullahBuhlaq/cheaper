@@ -91,7 +91,7 @@ function PopupPendingStore(props) {
                   <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                 </svg>
               </div>
-              <span>وقت الافتتاح : {props.store.fromHour}</span>
+              <span>الافتتاح: {props.store.fromHour}</span>
             </div>
             <div className="info-wrapper">
               <div className="info-icon">
@@ -99,7 +99,7 @@ function PopupPendingStore(props) {
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                 </svg>
               </div>
-              <span>وقت الاغلاق : {props.store.toHour}</span>
+              <span>الاغلاق: {props.store.toHour}</span>
             </div>
             <div className="info-wrapper">
               <div className="info-icon">

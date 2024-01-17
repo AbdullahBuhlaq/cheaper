@@ -33,7 +33,7 @@ function ProfilePacks(props) {
             </div>
             {openPacks ? (
               <>
-                <motion.div style={{ display: "flex", flexDirection: "row" }} initial={{ scaleY: 0, opacity: 0 }} animate={{ scaleY: 1, originY: "-10%", opacity: 1 }} transition={{ duration: 0.5 }}>
+                <motion.div className="packs-container" style={{ display: "flex", flexDirection: "row" }} initial={{ scaleY: 0, opacity: 0 }} animate={{ scaleY: 1, originY: "-10%", opacity: 1 }} transition={{ duration: 0.5 }}>
                   {checkPermissions(props.userInformation, ["admin.store.accepted.packs"]) && props.packs != -1 ? (
                     <div className="panel-body" style={{ maxHeight: "600px", overflow: "auto" }}>
                       <div className="right-area-header-wrapper">
@@ -49,28 +49,28 @@ function ProfilePacks(props) {
                       <span>سجل الظهور في الكروت</span>
                       {checkPermissions(props.userInformation, ["admin.store.accepted.chart"]) ? (
                         props.storeChart.loading ? (
-                          <SecondLoadingChart width={"400"} height={200} />
+                          <SecondLoadingChart width={"100%"} height={200} />
                         ) : props.storeChart.series[0].data.length + props.storeChart.series[1].data.length == 0 ? (
-                          <EmptyChart width={"400"} height={200} />
+                          <EmptyChart width={"100%"} height={200} />
                         ) : (
-                          <Chart options={props.storeChart.options} series={props.storeChart.series} type="area" width={"400"} height={200} />
+                          <Chart options={props.storeChart.options} series={props.storeChart.series} type="area" width={"100%"} height={200} />
                         )
                       ) : (
-                        <SuspendChart width={"400"} height={200} />
+                        <SuspendChart width={"100%"} height={200} />
                       )}
                     </div>
                     <div style={{ width: "100%", textAlign: "center" }}>
                       <span>بيانات الباقات</span>
                       {checkPermissions(props.userInformation, ["admin.store.accepted.packs"]) ? (
                         props.packsChart.loading ? (
-                          <SecondLoadingChart width={"400"} height={200} />
+                          <SecondLoadingChart width={"100%"} height={200} />
                         ) : props.packsChart.series[0].data.length + props.packsChart.series[1].data.length == 0 ? (
-                          <EmptyChart width={"400"} height={200} />
+                          <EmptyChart width={"100%"} height={200} />
                         ) : (
-                          <ReactApexChart options={props.packsChart.options} series={props.packsChart.series} type="bar" width={"400"} height={200} />
+                          <ReactApexChart options={props.packsChart.options} series={props.packsChart.series} type="bar" width={"100%"} height={200} />
                         )
                       ) : (
-                        <SuspendChart width={"400"} height={200} />
+                        <SuspendChart width={"100%"} height={200} />
                       )}
                     </div>
                   </div>

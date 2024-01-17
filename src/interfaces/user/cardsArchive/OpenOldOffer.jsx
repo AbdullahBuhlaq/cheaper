@@ -95,7 +95,7 @@ function OpenOldOffer(props) {
                     <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                   </svg>
                 </div>
-                <span>وقت الافتتاح : {props.offer.storeInfo.fromHour}</span>
+                <span>الافتتاح: {props.offer.storeInfo.fromHour}</span>
               </div>
               <div className="info-wrapper">
                 <div className="info-icon">
@@ -103,7 +103,7 @@ function OpenOldOffer(props) {
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                   </svg>
                 </div>
-                <span>وقت الاغلاق : {props.offer.storeInfo.toHour}</span>
+                <span>الاغلاق: {props.offer.storeInfo.toHour}</span>
               </div>
             </div>
             <div className="desc-wrapper" style={{ marginTop: "20px", marginLeft: "20px" }}>

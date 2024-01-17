@@ -148,7 +148,7 @@ body {
     background: #fff;
     overflow: hidden;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
+    transition: all 0s ease !important;
 }
 
 .container:hover {
@@ -410,15 +410,19 @@ a {
         position: absolute;
         left: 0;
         z-index: 99;
-        display: none;
+        display: flex;
         height: 100svh;
+        transform: translateX(-100%) !important;
+        transition: all 500ms ease;
+        width: 40vw !important;
+        max-width: 40vw !important;
     }
 
     .new-right-area.show {
         position: absolute;
+        transform: translateX(0) !important;
+        transition: all 500ms ease;
         display: flex !important;
-        width: 40vw !important;
-        max-width: 40vw !important;
     }
 
     .btn-show-right-area {
@@ -446,7 +450,6 @@ a {
     }
 
     .left-area {
-
         padding: 12px;
         flex-basis: 1 0 132px;
         background: var(--app-container);
@@ -457,13 +460,16 @@ a {
         position: absolute;
         z-index: 2;
         box-shadow: 0 0 0 10px #59575742;
-        display: none;
+        transform: translateX(100%) !important;
+        transition: all 500ms ease;
     }
 
     .left-area.show {
         position: absolute;
         width: max-content;
         display: flex;
+        transform: translateX(0) !important;
+        transition: all 500ms ease;
     }
 
     .show .btn-close-left {
@@ -1509,4 +1515,19 @@ input[type=time] {
 
 .qr-code {
     /* background-color: white !important; */
+}
+
+.apexcharts-toolbar svg {
+    color: var(--dark-font) !important;
+    fill: var(--dark-font) !important;
+}
+
+.apexcharts-toolbar .apexcharts-element-hidden {
+    opacity: 1 !important;
+    transform: scale(.85);
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    line-height: 24px;
+    text-align: center;
 }

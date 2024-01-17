@@ -48,7 +48,7 @@ function Login(props) {
             <p>واجهة تسجيل الدخول.</p>
             <form>
               <div className="row">
-                <Input placeholder={"@example"} label={"اسم المستخدم"} type={"text"} name={"username"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={loginSchema} />
+                <Input placeholder={""} label={"اسم المستخدم"} type={"text"} name={"username"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={loginSchema} />
                 <Input placeholder={""} label={"كلمة المرور"} type={"password"} name={"password"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={loginSchema} />
               </div>
 

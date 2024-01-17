@@ -308,6 +308,13 @@ input[type=upload] {
     justify-content: center;
 }
 
+@media screen and (max-width:970px) {
+    .categories-card-content {
+        flex-direction: column !important;
+    }
+
+}
+
 .categories-card img {
     height: 60px;
     margin: 7px;

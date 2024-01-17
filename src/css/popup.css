@@ -51,7 +51,12 @@
 
     .form-popup,
     .form-popup-small {
-        width: 100%;
+        width: 100% !important;
+    }
+
+    .main-modal,
+    .categories-main-modal {
+        width: 100% !important;
     }
 }
 
