@@ -1,3 +1,4 @@
+import { storeImag } from "../../../../constants/story";
 import checkPermissions from "../../../../functions/checkPermission";
 import jsonParse from "../../../../functions/jsonParse";
 import { motion } from "framer-motion";
@@ -9,7 +10,7 @@ function ShopItemInTable(props) {
         <motion.tr initial={{ scaleY: 0, opacity: 0 }} animate={{ scaleY: 1, opacity: 1 }} transition={{ ease: "linear", duration: "0.5" }}>
           <td>
             <div className="table-wrapper-info">
-              <img src={props.offer.avatar ? jsonParse(props.offer.avatar)[1] : "../images/user.webp"} className="" />
+              <img src={props.offer.avatar ? jsonParse(props.offer.avatar)[1] : storeImag} style={{ width: "50px", height: "50px", objectFit: "cover" }} />
               <p>{props.offer.nameStore}</p>
             </div>
           </td>
