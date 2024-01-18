@@ -1,3 +1,4 @@
+import { userImag } from "../../../constants/story";
 import jsonParse from "../../../functions/jsonParse";
 
 function EvaItem(props) {
@@ -9,7 +10,7 @@ function EvaItem(props) {
             <div className="profile-info-wrapper">
               <div className="fix-profile-image-wrapper">
                 <div className="profile-img-wrapper">
-                  <img src={props.item.avatar ? jsonParse(props.item.avatar)[0] : "../images/user.webp"} alt="Review" />
+                  <img src={props.item.avatar ? jsonParse(props.item.avatar)[0] : userImag} style={{ width: "40px", height: "40px", objectFit: "cover" }} />
                 </div>
                 <div className="profile-info-wrapper-name">
                   <h1>{props.item["user.name"]}</h1>

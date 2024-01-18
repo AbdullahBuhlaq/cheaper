@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Loading from "../../general/Loading";
 import getIcon from "../../../functions/getIcon";
-import { defaultStory } from "../../../constants/story";
+import { defaultStory, storeImag } from "../../../constants/story";
 import AutoSlidingImages from "../../admin/users/profileSection/AutoSlider";
 import Eva from "../../admin/stores/Eva";
 import LoadMoreEvas from "../homePage/LoadMoreEvas";
@@ -51,7 +51,7 @@ function OpenOldOffer(props) {
 
             <div className="modal-info-header">
               <div style={{ display: "flex" }}>
-                <img src={props.offer.storeInfo.avatar ? jsonParse(props.offer.storeInfo.avatar)[0] : "images/user.webp"} style={{ width: "109px", height: "auto", borderRadius: "11px", margin: "0 8px" }} />
+                <img src={props.offer.storeInfo.avatar ? jsonParse(props.offer.storeInfo.avatar)[0] : storeImag} style={{ width: "109px", height: "109px", borderRadius: "11px", margin: "0 8px", objectFit: "cover" }} />
                 <div className="left-side" style={{ padding: "10px 0" }}>
                   <h1 className="modalHeader-js">
                     لقد حصلت على خصم {props.offer.discount}% من محل {props.offer.storeInfo.nameStore}

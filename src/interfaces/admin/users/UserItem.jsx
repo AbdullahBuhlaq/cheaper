@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import checkPermissions from "../../../functions/checkPermission";
 import jsonParse from "../../../functions/jsonParse";
 import { motion } from "framer-motion";
+import { userImag } from "../../../constants/story";
 
 function UserItem(props) {
   const [showOptions, setShowOptions] = useState(false);
@@ -18,7 +19,7 @@ function UserItem(props) {
       <>
         <motion.div className="products-row" initial={{ scaleY: 0, opacity: 0 }} animate={{ scaleY: 1, opacity: 1 }} transition={{ ease: "linear", duration: "0.5" }} style={{ backgroundColor: props.user.blocked ? "#ff00003b" : "initial", textDecoration: props.user.disableAt ? "line-through" : "initial", textDecorationColor: "red" }}>
           <div className="product-cell image">
-            <img src={props.user.avatar ? jsonParse(props.user.avatar)[1] : "images/user.webp"} alt="product" />
+            <img src={props.user.avatar ? jsonParse(props.user.avatar)[1] : userImag} style={{ width: "32px", height: "32px", objectFit: "cover" }} />
             <span>{props.user.name}</span>
           </div>
           <div className="product-cell category">{props.user.username}@</div>

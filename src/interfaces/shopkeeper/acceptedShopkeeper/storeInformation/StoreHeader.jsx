@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import jsonParse from "../../../../functions/jsonParse";
 import deleteImage from "./functions/deleteImage";
+import { storeImag } from "../../../../constants/story";
 function StoreHeader(props) {
   const [heigth, setHeight] = useState(false);
   try {
@@ -10,7 +11,7 @@ function StoreHeader(props) {
         <div className="profile-info-header">
           <div className="fix">
             <motion.div className="profile-img-upload-section" onMouseEnter={() => setHeight(true)} onMouseLeave={() => setHeight(false)} style={{ position: "relative" }}>
-              <img src={props.storeInformation.information.avatar ? jsonParse(props.storeInformation.information.avatar)[0] : "../images/user.webp"} />
+              <img src={props.storeInformation.information.avatar ? jsonParse(props.storeInformation.information.avatar)[0] : storeImag} style={{ width: "110px", height: "110px", borderRadius: "11px", margin: "0 8px", objectFit: "cover" }} />
               <motion.div
                 variants={{
                   hover: {

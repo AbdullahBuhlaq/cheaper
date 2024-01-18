@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import jsonParse from "../../../functions/jsonParse";
 import checkPermissions from "../../../functions/checkPermission";
 import Map from "../../../components/Map";
+import { userImag } from "../../../constants/story";
 
 function PopupPendingStore(props) {
   const [storeInformation, setStoreInformation] = useState(-1);
@@ -26,7 +27,7 @@ function PopupPendingStore(props) {
           </div>
           <div className="modal-info-header">
             <div style={{ display: "flex" }}>
-              <img src={props.store["user.avatar"] ? jsonParse(props.store["user.avatar"])[2] : "images/user.webp"} style={{ width: "109px", height: "auto", borderRadius: "11px", margin: "0 8px" }} />
+              <img src={props.store["user.avatar"] ? jsonParse(props.store["user.avatar"])[2] : userImag} style={{ width: "109px", height: "109px", borderRadius: "11px", margin: "0 8px", objectFit: "cover" }} />
               <div className="left-side">
                 <div>
                   <h1 className="modalHeader-js">{props.store["user.name"]}</h1>

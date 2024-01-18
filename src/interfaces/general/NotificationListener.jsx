@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { onMessageListener } from "./Firebase";
+import { userImag } from "../../constants/story";
 
 const NotificationListener = (props) => {
   const [notification, setNotification] = useState(false);
@@ -10,8 +11,8 @@ const NotificationListener = (props) => {
     return (
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div style={{ display: "flex" }}>
-          <div style={{ width: "40px", aspectRatio: "1 / 1", objectFit: "cover" }}>
-            <img src={notification?.image ? notification.image : "images/user.webp"} style={{ width: "100%", objectFit: "cover" }} alt="" />
+          <div style={{ width: "40px", height: "40px", objectFit: "cover" }}>
+            <img src={notification?.image ? notification.image : userImag} style={{ width: "40px", height: "40px", objectFit: "cover" }} />
           </div>
           <p style={{ marginRight: "10px" }}>
             <b>{notification?.title}</b>
@@ -24,7 +25,6 @@ const NotificationListener = (props) => {
 
   useEffect(() => {
     if (notification?.title) {
-      console.log("notifications got", notification);
       // props.setNotifications([{ title: notification.title, message: notification.body, avatar: notification.image }, ...props.notifications]);
       notify();
     }

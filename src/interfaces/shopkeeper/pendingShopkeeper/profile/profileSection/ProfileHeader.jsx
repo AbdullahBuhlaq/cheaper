@@ -1,3 +1,4 @@
+import { userImag } from "../../../../../constants/story";
 import jsonParse from "../../../../../functions/jsonParse";
 
 function ProfileHeader(props) {
@@ -6,7 +7,7 @@ function ProfileHeader(props) {
       <>
         <div className="profile-info-header">
           <div className="fix">
-            <img src={props.avatar ? jsonParse(props.avatar)[0] : "images/user.webp"} />
+            <img src={props.avatar ? jsonParse(props.avatar)[0] : userImag} style={{ width: "110px", height: "110px", borderRadius: "11px", margin: "0 8px", objectFit: "cover" }} />
             <div className="left-side">
               <h1 className="profileHeader-js">{props.storeInformation.information.nameStore}</h1>
               <p>العنوان : {props.storeInformation.information.locationText}</p>

@@ -50,7 +50,7 @@ function AcceptedStoreCard(props) {
                 {props.store.story.map((story, index) => {
                   return (
                     <li key={index}>
-                      <img src={jsonParse(story.avatar)[1]} alt="Marco Andrews" title="Marco Andrews" />
+                      <img src={jsonParse(story.avatar)[1]} />
                     </li>
                   );
                 })}
@@ -58,7 +58,7 @@ function AcceptedStoreCard(props) {
                 {Array.from(Array(3 - props.store.story.length).keys()).map((item, index) => {
                   return (
                     <li key={index}>
-                      <img src={defaultStory[item]} alt="Marco Andrews" title="Marco Andrews" />
+                      <img src={defaultStory[item]} />
                     </li>
                   );
                 })}

@@ -3,7 +3,7 @@ import "./css/storePopup.css";
 import Loading from "../../general/Loading";
 import getInformation from "./functions/getInformation";
 import AutoSlidingImages from "../users/profileSection/AutoSlider";
-import { defaultSecondStory, defaultStory } from "../../../constants/story";
+import { defaultSecondStory, defaultStory, userImag } from "../../../constants/story";
 import getIcon from "../../../functions/getIcon";
 import getSpam from "./functions/getSpam";
 import getEva from "./functions/getEva";
@@ -73,7 +73,7 @@ function PopupStore(props) {
               </div>
               <div className="modal-info-header">
                 <div style={{ display: "flex" }}>
-                  <img src={information.storeInfo["user.avatar"] ? jsonParse(information.storeInfo["user.avatar"])[0] : "images/user.webp"} style={{ width: "109px", height: "auto", borderRadius: "11px", margin: "0 8px" }} />
+                  <img src={information.storeInfo["user.avatar"] ? jsonParse(information.storeInfo["user.avatar"])[0] : userImag} style={{ width: "109px", height: "109px", borderRadius: "11px", margin: "0 8px", objectFit: "cover" }} />
                   <div className="left-side" style={{ justifyContent: "space-evenly" }}>
                     <h1 className="modalHeader-js">{information.storeInfo["user.name"]}</h1>
                     <p>{information.storeInfo.locationText}</p>

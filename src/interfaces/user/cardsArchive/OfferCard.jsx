@@ -1,5 +1,5 @@
 import jsonParse from "../../../functions/jsonParse";
-import { defaultStory } from "../../../constants/story";
+import { defaultStory, storeImag } from "../../../constants/story";
 import { SlSizeFullscreen } from "react-icons/sl";
 import { BsInfoCircle } from "react-icons/bs";
 import { motion } from "framer-motion";
@@ -10,7 +10,7 @@ function OfferCard(props) {
       <>
         <motion.div className="sales-card" initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", duration: "1.2" }}>
           <div className="poster">
-            <img src={props.item.storeInfo.avatar ? jsonParse(props.item.storeInfo.avatar)[3] : "images/user.webp"} alt="Location Unknown" />
+            <img src={props.item.storeInfo.avatar ? jsonParse(props.item.storeInfo.avatar)[3] : storeImag} alt="Location Unknown" />
           </div>
           <div className="details">
             <div className="sales-card-more-details">

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import getRemainingTime from "../../../functions/getRemainingTime";
 import jsonParse from "../../../functions/jsonParse";
 import { motion } from "framer-motion";
+import { storeImag } from "../../../constants/story";
 
 function RightOfferItem(props) {
   const [remainingTime, setRemainingTime] = useState("");
@@ -27,7 +28,7 @@ function RightOfferItem(props) {
           <div className="line-header">{new Date(props.item.createdAt).toLocaleDateString()}</div>
           <div className="download-area">
             <div className="download-item-icon" style={{ marginLeft: "10px" }}>
-              <img src={props.item.store.avatar ? jsonParse(props.item.store.avatar)[1] : "images/user.webp"} alt="" style={{ width: "50px", height: "50px", borderRadius: "50%", marginLeft: "10px" }} />
+              <img src={props.item.store.avatar ? jsonParse(props.item.store.avatar)[1] : storeImag} alt="" style={{ width: "50px", height: "50px", objectFit: "cover", borderRadius: "50%", marginLeft: "10px" }} />
             </div>
             <div className="download-item-texts">
               <p className="download-text-header">

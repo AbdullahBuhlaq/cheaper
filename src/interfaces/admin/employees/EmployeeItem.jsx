@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import jsonParse from "../../../functions/jsonParse";
 import checkPermissions from "../../../functions/checkPermission";
 import { motion } from "framer-motion";
+import { userImag } from "../../../constants/story";
 
 function EmployeeItem(props) {
   const [showOptions, setShowOptions] = useState(false);
@@ -18,7 +19,7 @@ function EmployeeItem(props) {
       <>
         <motion.div className="products-row" initial={{ scaleY: 0, opacity: 0 }} animate={{ scaleY: 1, opacity: 1 }} transition={{ ease: "linear", duration: "0.5" }}>
           <div className="product-cell image">
-            <img src={props.employee.avatar ? jsonParse(props.employee.avatar)[1] : "images/user.webp"} alt="product" />
+            <img src={props.employee.avatar ? jsonParse(props.employee.avatar)[1] : userImag} style={{ width: "32px", height: "32px", objectFit: "cover" }} />
             <span>{props.employee.name}</span>
           </div>
           <div className="product-cell category">{props.employee.username}@</div>

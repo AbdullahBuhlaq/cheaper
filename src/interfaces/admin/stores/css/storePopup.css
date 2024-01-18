@@ -2259,9 +2259,9 @@ a {
     }
 
     .access-links {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        grid-template-rows: 1fr 1fr !important;
     }
 
     .access-link-wrapper {
@@ -2278,7 +2278,7 @@ a {
     }
 
     .access-link-wrapper .access-icon {
-        height: max-content;
+        height: max-content !important;
     }
 
     .modal-right-container {
@@ -2333,5 +2333,12 @@ a {
     .packs-container>div:nth-child(2) {
         flex-direction: column !important;
         width: 100% !important;
+    }
+}
+
+
+@media screen and (max-width: 520px) {
+    .modal-right {
+        max-height: 400px !important;
     }
 }

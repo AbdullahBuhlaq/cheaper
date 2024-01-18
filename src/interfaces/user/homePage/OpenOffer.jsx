@@ -6,7 +6,7 @@ import getLocation from "./functions/getLocation";
 import getCity from "./functions/getCity";
 import getOffer from "./functions/getOffer";
 import getIcon from "../../../functions/getIcon";
-import { defaultStory } from "../../../constants/story";
+import { defaultStory, storeImag } from "../../../constants/story";
 import AutoSlidingImages from "../../admin/users/profileSection/AutoSlider";
 import getOfferEvas from "./functions/getOfferEvas";
 import Eva from "../../admin/stores/Eva";
@@ -108,7 +108,7 @@ function OpenOffer(props) {
 
               <div className="modal-info-header">
                 <div style={{ display: "flex" }}>
-                  <img src={offer.avatarStore ? jsonParse(offer.avatarStore)[0] : "images/user.webp"} style={{ width: "109px", height: "auto", borderRadius: "11px", margin: "0 8px" }} />
+                  <img src={offer.avatarStore ? jsonParse(offer.avatarStore)[0] : storeImag} style={{ width: "110px", height: "110px", borderRadius: "11px", margin: "0 8px", objectFit: "cover" }} />
                   <div className="left-side" style={{ padding: "10px 0" }}>
                     <h1 className="modalHeader-js">
                       لقد حصلت على خصم {offer.discount}% من محل {offer.nameStore}

@@ -8,6 +8,7 @@ import checkUser from "./functions/checkUser";
 import jsonParse from "../../../functions/jsonParse";
 import { BsFillGiftFill } from "react-icons/bs";
 import sendGift from "./functions/sendGift";
+import { userImag } from "../../../constants/story";
 
 function SendGift(props) {
   const [duringAdd, setDuringAdd] = useState(false);
@@ -45,7 +46,7 @@ function SendGift(props) {
                       <div className="card">
                         <div className="profile-info-wrapper" style={{ display: "flex", alignItems: "center" }}>
                           <div className="profile-img-wrapper">
-                            <img src={item.avatar ? jsonParse(item.avatar)[1] : "images/user.webp"} alt="Review" />
+                            <img src={item.avatar ? jsonParse(item.avatar)[1] : userImag} style={{ width: "32px", height: "32px", objectFit: "cover" }} />
                           </div>
                           <div style={{ display: "flex", flexDirection: "column", marginRight: "10px" }}>
                             <span>{item.name}</span>

@@ -1,4 +1,4 @@
-import { defaultSecondStory } from "../../../../constants/story";
+import { defaultSecondStory, storeImag, userImag } from "../../../../constants/story";
 import getIcon from "../../../../functions/getIcon";
 import "./css/storePopup.css";
 import AutoSlidingImages from "./AutoSlider";
@@ -26,8 +26,6 @@ function StoreCard(props) {
     setStory(newStory);
   }
   useEffect(() => {
-    console.log(props.store);
-
     if (props.store != -1) getStory();
   }, [props.store]);
   try {
@@ -39,7 +37,7 @@ function StoreCard(props) {
           </div>
           <div className="modal-info-header">
             <div style={{ display: "flex" }}>
-              <img src={props.store.avatar ? jsonParse(props.store.avatar)[2] : "../images/user.webp"} style={{ maxHeight: "110px", minHeight: "110px", aspectRatio: "1 / 1", borderRadius: "11px", margin: "0 8px" }} />
+              <img src={props.store.avatar ? jsonParse(props.store.avatar)[2] : storeImag} style={{ width: "110px", height: "110px", objectFit: "cover", borderRadius: "11px", margin: "0 8px" }} />
               <div className="left-side" style={{ justifyContent: "space-evenly" }}>
                 <h1 className="modalHeader-js">{props.store.name}</h1>
                 <p>{props.store.locationText}</p>
@@ -101,7 +99,7 @@ function StoreCard(props) {
             <div className="card">
               <div className="profile-info-wrapper">
                 <div className="profile-img-wrapper">
-                  <img src={props.userAvatar ? jsonParse(props.userAvatar)[0] : "../images/user.webp"} alt="Review" />
+                  <img src={props.userAvatar ? jsonParse(props.userAvatar)[0] : userImag} style={{ width: "40px", height: "40px", objectFit: "cover" }} />
                 </div>
 
                 <div className="profile-info-wrapper-name" style={{ marginRight: "10px" }}>
@@ -120,7 +118,7 @@ function StoreCard(props) {
               <div className="profile-info-wrapper">
                 <div className="fix-profile-image-wrapper">
                   <div className="profile-img-wrapper">
-                    <img src={props.userAvatar ? jsonParse(props.userAvatar)[0] : "../images/user.webp"} alt="Review" />
+                    <img src={props.userAvatar ? jsonParse(props.userAvatar)[0] : userImag} style={{ width: "40px", height: "40px", objectFit: "cover" }} />
                   </div>
                   <div className="profile-info-wrapper-name" style={{ marginRight: "10px" }}>
                     <p>{props.name}</p>
