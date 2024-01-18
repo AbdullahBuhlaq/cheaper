@@ -7,6 +7,7 @@
 
 :root {
     --app-container: #fff;
+    --app-container-rgb: 255, 255, 255;
     --option: #111317;
     --profile-before: rgba(215, 215, 215, .5);
     --main-font-color: #000;
@@ -63,6 +64,7 @@
 
 .dark:root {
     --app-container: #111317;
+    --app-container-rgb: 17, 19, 23;
     --option: #111317;
     --main-font-color: #fff;
     --cards-area-bg: #20222a;
@@ -1531,3 +1533,7 @@ input[type=time] {
     line-height: 24px;
     text-align: center;
 }
+
+/* .apexcharts-canvas {
+    background: rgba(var(--app-container-rgb), .2) !important;
+} */

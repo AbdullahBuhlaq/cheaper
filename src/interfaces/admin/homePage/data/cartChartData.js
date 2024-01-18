@@ -7,6 +7,7 @@ export const cartChartData = {
     backGround: "linear-gradient(180deg, #00919D 0%, #00929D 100%)",
     boxShadow: "0px 10px 20px 0px #FDC0C7",
   },
+
   barValue: 100,
   value: "18/9",
   png: BiSolidCoupon,
@@ -22,6 +23,8 @@ export const cartChartData = {
   ],
   loading: true,
   options: {
+    colors: ["#3F51B5", "#00E396", "#FEB019", "#FF4560", "#775DD0"],
+
     chart: {
       type: "area",
       height: "auto",

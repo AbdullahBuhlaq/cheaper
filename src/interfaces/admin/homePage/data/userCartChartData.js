@@ -22,6 +22,8 @@ export const userCartChartData = {
   ],
   loading: true,
   options: {
+    colors: ["#3F51B5", "#00E396", "#FEB019", "#FF4560", "#775DD0"],
+
     chart: {
       type: "area",
       height: "auto",

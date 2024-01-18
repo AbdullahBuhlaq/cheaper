@@ -21,8 +21,31 @@ export default async function getUserChart(userInformation, setUserInformation, 
         series: [{ name: homeUserChart.series[0].name, data: chartData }],
         options: {
           ...homeUserChart.options,
+          chart: {
+            ...homeUserChart.options.chart,
+            events: {
+              beforeResetZoom: (ctx, opt) => {
+                return {
+                  xaxis: {
+                    min: Math.max(chartData.length - 10, 1),
+                    max: chartData.length,
+                  },
+                };
+              },
+              beforeZoom: (ctx, opt) => {
+                return {
+                  xaxis: {
+                    min: opt.xaxis.min < 1 ? 1 : opt.xaxis.min,
+                    max: opt.xaxis.max > chartData.length ? chartData.length : opt.xaxis.max,
+                  },
+                };
+              },
+            },
+          },
           xaxis: {
             categories: chartDate,
+            min: Math.max(chartData.length - 10, 1),
+            max: chartData.length,
           },
         },
       }));

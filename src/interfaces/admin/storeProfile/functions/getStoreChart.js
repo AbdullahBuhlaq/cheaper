@@ -46,9 +46,32 @@ export default async function getStoreProfileChart(userInformation, setUserInfor
         ],
         options: {
           ...userChart.options,
+          chart: {
+            ...userChart.options.chart,
+            events: {
+              beforeResetZoom: (ctx, opt) => {
+                return {
+                  xaxis: {
+                    min: Math.max(finalDate.length - 10, 1),
+                    max: finalDate.length,
+                  },
+                };
+              },
+              beforeZoom: (ctx, opt) => {
+                return {
+                  xaxis: {
+                    min: opt.xaxis.min < 1 ? 1 : opt.xaxis.min,
+                    max: opt.xaxis.max > finalDate.length ? finalDate.length : opt.xaxis.max,
+                  },
+                };
+              },
+            },
+          },
           xaxis: {
             // type: "datetime",
             categories: finalDate,
+            min: Math.max(finalDate.length - 10, 1),
+            max: finalDate.length,
           },
         },
       });

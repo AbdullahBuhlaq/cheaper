@@ -97,6 +97,18 @@
 
 }
 
+@media screen and (max-width: 767px) {
+    .ExpandedCard {
+        width: 96% !important;
+        left: 2% !important;
+        padding: 0 !important;
+    }
+
+    .ExpandedCard .chartContainer {
+        width: 100% !important;
+    }
+}
+
 .ExpandedCard>span:nth-of-type(1) {
     color: white;
     font-size: 26px;
@@ -129,7 +141,8 @@
     position: absolute;
     width: 100vw;
     height: 100svh;
-    background-color: rgba(255, 255, 255, .5);
+    background-color: rgba(var(--app-container-rgb), .5) var(--app-container);
+    backdrop-filter: blur(7px);
     z-index: 20;
 }
 

@@ -25,8 +25,31 @@ export default async function getStoreChart(userInformation, setUserInformation,
         ],
         options: {
           ...homeStoreChart.options,
+          chart: {
+            ...homeStoreChart.options.chart,
+            events: {
+              beforeResetZoom: (ctx, opt) => {
+                return {
+                  xaxis: {
+                    min: Math.max(chartDataFree.length - 10, 1),
+                    max: chartDataFree.length,
+                  },
+                };
+              },
+              beforeZoom: (ctx, opt) => {
+                return {
+                  xaxis: {
+                    min: opt.xaxis.min < 1 ? 1 : opt.xaxis.min,
+                    max: opt.xaxis.max > chartDataFree.length ? chartDataFree.length : opt.xaxis.max,
+                  },
+                };
+              },
+            },
+          },
           xaxis: {
             categories: chartDate,
+            min: Math.max(chartDataFree.length - 10, 1),
+            max: chartDataFree.length,
           },
         },
       }));

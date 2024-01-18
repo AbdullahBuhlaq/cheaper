@@ -45,9 +45,32 @@ async function getPackChart(userInformation, setUserInformation, refreshStatus, 
         series: packData,
         options: {
           ...packsChart.options,
+          chart: {
+            ...packsChart.options.chart,
+            events: {
+              beforeResetZoom: (ctx, opt) => {
+                return {
+                  xaxis: {
+                    min: Math.max(datesArr.length - 10, 1),
+                    max: datesArr.length,
+                  },
+                };
+              },
+              beforeZoom: (ctx, opt) => {
+                return {
+                  xaxis: {
+                    min: opt.xaxis.min < 1 ? 1 : opt.xaxis.min,
+                    max: opt.xaxis.max > datesArr.length ? datesArr.length : opt.xaxis.max,
+                  },
+                };
+              },
+            },
+          },
           xaxis: {
             // type: "datetime",
             categories: datesArr,
+            min: Math.max(datesArr.length - 10, 1),
+            max: datesArr.length,
           },
         },
       });

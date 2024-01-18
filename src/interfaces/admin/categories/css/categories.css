@@ -313,6 +313,31 @@ input[type=upload] {
         flex-direction: column !important;
     }
 
+    .chartContainer.categories-chart-container {
+        width: 100% !important;
+    }
+
+    .category-chart {
+        width: 80% !important;
+    }
+
+    .categories-card-details {
+        width: 80% !important;
+        margin: 5px 0 !important;
+    }
+
+}
+
+@media screen and (max-width:520px) {
+
+    .category-chart {
+        width: 100% !important;
+    }
+
+    .categories-card-details {
+        width: 100% !important;
+    }
+
 }
 
 .categories-card img {

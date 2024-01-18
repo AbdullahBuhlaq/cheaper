@@ -36,9 +36,32 @@ export default async function getCartChart(userInformation, setUserInformation, 
         ],
         options: {
           ...homeCartChart.options,
+          chart: {
+            ...homeCartChart.options.chart,
+            events: {
+              beforeResetZoom: (ctx, opt) => {
+                return {
+                  xaxis: {
+                    min: Math.max(ser1.length - 10, 1),
+                    max: ser1.length,
+                  },
+                };
+              },
+              beforeZoom: (ctx, opt) => {
+                return {
+                  xaxis: {
+                    min: opt.xaxis.min < 1 ? 1 : opt.xaxis.min,
+                    max: opt.xaxis.max > ser1.length ? ser1.length : opt.xaxis.max,
+                  },
+                };
+              },
+            },
+          },
           xaxis: {
             // type: "datetime",
             categories: finalDate,
+            min: Math.max(ser1.length - 10, 1),
+            max: ser1.length,
           },
         },
       });

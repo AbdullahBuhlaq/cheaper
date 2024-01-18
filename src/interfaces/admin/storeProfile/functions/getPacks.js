@@ -66,8 +66,31 @@ export default async function getStorePacks(id, userInformation, setUserInformat
         loading: false,
         options: {
           ...packsChart.options,
+          chart: {
+            ...packsChart.options.chart,
+            events: {
+              beforeResetZoom: (ctx, opt) => {
+                return {
+                  xaxis: {
+                    min: Math.max(cats.length - 10, 1),
+                    max: cats.length,
+                  },
+                };
+              },
+              beforeZoom: (ctx, opt) => {
+                return {
+                  xaxis: {
+                    min: opt.xaxis.min < 1 ? 1 : opt.xaxis.min,
+                    max: opt.xaxis.max > cats.length ? cats.length : opt.xaxis.max,
+                  },
+                };
+              },
+            },
+          },
           xaxis: {
             categories: cats,
+            min: Math.max(cats.length - 10, 1),
+            max: cats.length,
           },
         },
         series: [

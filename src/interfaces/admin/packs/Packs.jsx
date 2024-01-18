@@ -76,7 +76,7 @@ function Packs(props) {
               <div className="main-categories">
                 <section className="categories-left">
                   <PacksHeader userInformation={props.userInformation} setAddNew={setAddNew} filter={filter} setFilter={setFilter} />
-                  <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", padding: "10px 30px" }}>
+                  <div className="packs-page-container" style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", padding: "10px 30px" }}>
                     <div style={{ width: "100%", marginBottom: "25px" }}>
                       <section className="plan-section" style={{ flexDirection: "row", justifyContent: "right" }}>
                         {items.map((item) => {

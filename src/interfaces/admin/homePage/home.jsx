@@ -40,7 +40,7 @@ function Home(props) {
     return (
       <>
         <HeaderButton />
-        <div className="cards home-container" style={{ height: "100vh" }}>
+        <div className="cards home-container" style={{ height: "100svh" }}>
           {expanded ? <div className="expanded-card-container" onClick={() => setExpanded(false)}></div> : null}
           <div className="admin-home-charts-container">
             <div className="card-row">

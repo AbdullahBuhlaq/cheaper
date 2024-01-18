@@ -19,10 +19,13 @@ export const categoryChartData = {
   categories: [],
   loading: true,
   options: {
+    colors: ["#3F51B5", "#00E396", "#FEB019", "#FF4560", "#775DD0"],
+
     chart: {
       type: "area",
       width: 100,
       height: 100,
+      backGround: "#fff",
     },
 
     dropShadow: {
@@ -37,34 +40,47 @@ export const categoryChartData = {
 
     fill: {
       type: "gradient",
-      gradient: {
-        shade: "dark",
-        type: "vertical",
-        shadeIntensity: 0.5,
-        gradientToColors: true, // optional, if not defined - uses the shades of same color in series
-        inverseColors: true,
-        opacityFrom: 0,
-        opacityTo: 0,
-        stops: [0, 100],
-        colorStops: [
-          {
-            offset: 0,
-            color: "#ff962c",
-          },
-          {
-            offset: 100,
-            color: "white",
-            opacity: ".6",
-          },
-        ],
-      },
+      // gradient: {
+      //   shade: "dark",
+      //   type: "vertical",
+      //   shadeIntensity: 0.5,
+      //   gradientToColors: true, // optional, if not defined - uses the shades of same color in series
+      //   inverseColors: true,
+      //   opacityFrom: 0,
+      //   opacityTo: 0,
+      //   stops: [0, 100],
+      //   colorStops: [
+      //     [
+      //       {
+      //         offset: 0,
+      //         color: "#ff962c",
+      //       },
+      //       {
+      //         offset: 100,
+      //         color: "white",
+      //         opacity: ".6",
+      //       },
+      //     ],
+      //     [
+      //       {
+      //         offset: 0,
+      //         color: "#black",
+      //       },
+      //       {
+      //         offset: 100,
+      //         color: "white",
+      //         opacity: ".6",
+      //       },
+      //     ],
+      //   ],
+      // },
     },
     dataLabels: {
       enabled: false,
     },
     stroke: {
       curve: "smooth",
-      colors: ["white", "black"],
+      // colors: ["white", "black"],
     },
     point: {
       backgroundColor: "#00c7d6",

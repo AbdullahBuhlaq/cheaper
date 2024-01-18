@@ -91,7 +91,7 @@ function ExpandedCard({ param }) {
           <UilTimes onClick={() => param.setExpanded(false)} />
         </div>
         <span>{param.title}</span>
-        <div className="chartContainer">{!checkPermissions(param.userInformation, [param.index == 1 ? "admin.home.chartUsers" : param.index == 2 ? "admin.home.chartStores" : "admin.home.cartChart"]) ? <SuspendChart /> : param.loading ? <LoadingChart /> : <Chart options={param.options} series={param.series} categories={param.categories} type="area" />}</div>
+        <div className="chartContainer">{!checkPermissions(param.userInformation, [param.index == 1 ? "admin.home.chartUsers" : param.index == 2 ? "admin.home.chartStores" : "admin.home.cartChart"]) ? <SuspendChart /> : param.loading ? <LoadingChart /> : <Chart options={param.options} series={param.series} categories={param.categories} type="area" width={"100%"} />}</div>
         <span>كل الأشهر</span>
       </motion.div>
     );

@@ -24,6 +24,35 @@ async function getCategoryChart(id, userInformation, setUserInformation, refresh
         ],
         categories: finalDate,
         loading: false,
+        options: {
+          ...categoryChart.options,
+          chart: {
+            ...categoryChart.options.chart,
+            events: {
+              beforeResetZoom: (ctx, opt) => {
+                return {
+                  xaxis: {
+                    min: Math.max(ser1.length - 10, 1),
+                    max: ser1.length,
+                  },
+                };
+              },
+              beforeZoom: (ctx, opt) => {
+                return {
+                  xaxis: {
+                    min: opt.xaxis.min < 1 ? 1 : opt.xaxis.min,
+                    max: opt.xaxis.max > ser1.length ? ser1.length : opt.xaxis.max,
+                  },
+                };
+              },
+            },
+          },
+          xaxis: {
+            ...categoryChart.options.xaxis,
+            min: Math.max(ser1.length - 10, 1),
+            max: ser1.length,
+          },
+        },
       });
     } else {
       if (data.error == "jwt expired") {
