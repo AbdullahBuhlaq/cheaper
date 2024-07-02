@@ -1,7 +1,18 @@
 import requestOptions from "../../../../constants/requestOptions";
 import refreshToken from "../../../../functions/refreshToken";
 
-export default async function getOffers(userInformation, setUserInformation, refreshStatus, setRefreshStatus, setOffers, offers, toast, filter, offersPage, setOffersPage) {
+export default async function getOffers(
+  userInformation,
+  setUserInformation,
+  refreshStatus,
+  setRefreshStatus,
+  setOffers,
+  offers,
+  toast,
+  filter,
+  offersPage,
+  setOffersPage
+) {
   try {
     setOffersPage({ ...offersPage, loadingNow: true });
     let url = `${import.meta.env.VITE_URL}/user/offer?`;
@@ -30,16 +41,28 @@ export default async function getOffers(userInformation, setUserInformation, ref
     andMark = true;
     if (andMark) url += `&`;
     url += `size=${offersPage.size}`;
-    let response = await fetch(url, { ...requestOptions, method: "get", headers: { ...requestOptions.headers, authorization: userInformation.token } });
+    let response = await fetch(url, {
+      ...requestOptions,
+      method: "get",
+      headers: {
+        ...requestOptions.headers,
+        authorization: userInformation.token,
+      },
+    });
     let data = await response.json();
     if (data.success) {
-      if (!data.data.length) {
-        setOffersPage({ ...offersPage, loadMore: false, loadingNow: false, OnlyClick: false });
+      if (!data.data.data.length) {
+        setOffersPage({
+          ...offersPage,
+          loadMore: false,
+          loadingNow: false,
+          OnlyClick: false,
+        });
         if (offers == -1 || offersPage.page == 1) setOffers({});
       } else {
         let finalUsers = {};
         await Promise.all(
-          data.data.map(async (user) => {
+          data.data.data.map(async (user) => {
             finalUsers[user.offerUserId] = { ...user };
           })
         );
@@ -47,12 +70,35 @@ export default async function getOffers(userInformation, setUserInformation, ref
         if (offersPage.page == 1) setOffers({ ...finalUsers });
         else setOffers({ ...offers, ...finalUsers });
 
-        setOffersPage({ ...offersPage, page: offersPage.page + 1, loadMore: true, loadingNow: false, OnlyClick: false });
+        setOffersPage({
+          ...offersPage,
+          page: offersPage.page + 1,
+          loadMore: true,
+          loadingNow: false,
+          OnlyClick: false,
+        });
       }
     } else {
       if (data.error == "jwt expired") {
-        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await getOffers({ ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, setOffers, offers, toast, filter, offersPage, setOffersPage);
+        const status = await refreshToken(
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
+        await getOffers(
+          { ...userInformation, ...status },
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          setOffers,
+          offers,
+          toast,
+          filter,
+          offersPage,
+          setOffersPage
+        );
       } else {
         setOffersPage({ ...offersPage, loadingNow: false, OnlyClick: true });
         console.log(data.error);

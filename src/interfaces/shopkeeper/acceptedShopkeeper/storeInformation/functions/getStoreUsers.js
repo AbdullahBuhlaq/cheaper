@@ -1,11 +1,33 @@
 import requestOptions from "../../../../../constants/requestOptions";
 import refreshToken from "../../../../../functions/refreshToken";
 
-export default async function getStoreUsers(userInformation, setUserInformation, refreshStatus, setRefreshStatus, setUsers, users, toast, usersPage, setUsersPage) {
+export default async function getStoreUsers(
+  userInformation,
+  setUserInformation,
+  refreshStatus,
+  setRefreshStatus,
+  setUsers,
+  users,
+  toast,
+  usersPage,
+  setUsersPage
+) {
   try {
     setUsersPage({ ...usersPage, loadingNow: true });
 
-    let response = await fetch(`${import.meta.env.VITE_URL}/store/users/?&page=${usersPage.page}&size=${usersPage.size}`, { ...requestOptions, method: "get", headers: { ...requestOptions.headers, authorization: userInformation.token } });
+    let response = await fetch(
+      `${import.meta.env.VITE_URL}/store/users/?&page=${usersPage.page}&size=${
+        usersPage.size
+      }`,
+      {
+        ...requestOptions,
+        method: "get",
+        headers: {
+          ...requestOptions.headers,
+          authorization: userInformation.token,
+        },
+      }
+    );
     let data = await response.json();
     // let data = {
     //   success: true,
@@ -20,19 +42,46 @@ export default async function getStoreUsers(userInformation, setUserInformation,
     //   ],
     // };
     if (data.success) {
-      if (!data.data.length) {
-        setUsersPage({ ...usersPage, loadMore: false, loadingNow: false, OnlyClick: false });
+      if (!data.data.data.length) {
+        setUsersPage({
+          ...usersPage,
+          loadMore: false,
+          loadingNow: false,
+          OnlyClick: false,
+        });
         if (users == -1 || usersPage.page == 1) setUsers([]);
       } else {
-        if (usersPage.page == 1) setUsers([...data.data]);
-        else setUsers([...users, ...data.data]);
+        if (usersPage.page == 1) setUsers([...data.data.data]);
+        else setUsers([...users, ...data.data.data]);
 
-        setUsersPage({ ...usersPage, page: usersPage.page + 1, loadMore: true, loadingNow: false, OnlyClick: false });
+        setUsersPage({
+          ...usersPage,
+          page: usersPage.page + 1,
+          loadMore: true,
+          loadingNow: false,
+          OnlyClick: false,
+        });
       }
     } else {
       if (data.error == "jwt expired") {
-        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await getStoreUsers({ ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, setUsers, users, toast, usersPage, setUsersPage);
+        const status = await refreshToken(
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
+        await getStoreUsers(
+          { ...userInformation, ...status },
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          setUsers,
+          users,
+          toast,
+          usersPage,
+          setUsersPage
+        );
       } else {
         setUsersPage({ ...usersPage, loadingNow: false, OnlyClick: true });
         console.log(data.error);
