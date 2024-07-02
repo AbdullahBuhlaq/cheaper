@@ -1,5 +1,5 @@
 import { userImag } from "../../../constants/story";
-import jsonParse from "../../../functions/jsonParse";
+import getAvater from "../../../functions/getAvater";
 
 function Eva(props) {
   try {
@@ -10,20 +10,58 @@ function Eva(props) {
             <div className="profile-info-wrapper">
               <div className="fix-profile-image-wrapper">
                 <div className="profile-img-wrapper">
-                  <img src={props.item.avatar ? jsonParse(props.item.avatar)[0] : userImag} style={{ width: "40px", height: "40px", objectFit: "cover" }} />
+                  <img
+                    src={
+                      props.item.avatar
+                        ? getAvater(props.item.avatar)
+                        : userImag
+                    }
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      objectFit: "cover",
+                    }}
+                  />
                 </div>
-                <div className="profile-info-wrapper-name" style={{ marginRight: "10px" }}>
+                <div
+                  className="profile-info-wrapper-name"
+                  style={{ marginRight: "10px" }}
+                >
                   <p>{props.item["user.name"]}</p>
                 </div>
               </div>
-              <div className="profile-info-wrapper-date" style={{ marginRight: "auto" }}>
+              <div
+                className="profile-info-wrapper-date"
+                style={{ marginRight: "auto" }}
+              >
                 <p>{new Date(props.item.createdAt).toLocaleDateString()}</p>
               </div>
             </div>
             <div className="profile-rates-area">
-              <input className="range" type="range" min="0" max="100" value={props.item.evaluate} readOnly />
-              <div style={{ marginRight: props.item.evaluate - props.item.evaluate / 20 + "%" }}>
-                <span style={{ fontWeight: "bold", color: `rgba(${255 - (255 * props.item.evaluate) / 100.0} ,${0 + (255 * props.item.evaluate) / 100.0}, 0)` }}>{props.item.evaluate}</span>
+              <input
+                className="range"
+                type="range"
+                min="0"
+                max="100"
+                value={props.item.evaluate}
+                readOnly
+              />
+              <div
+                style={{
+                  marginRight:
+                    props.item.evaluate - props.item.evaluate / 20 + "%",
+                }}
+              >
+                <span
+                  style={{
+                    fontWeight: "bold",
+                    color: `rgba(${
+                      255 - (255 * props.item.evaluate) / 100.0
+                    } ,${0 + (255 * props.item.evaluate) / 100.0}, 0)`,
+                  }}
+                >
+                  {props.item.evaluate}
+                </span>
               </div>
             </div>
           </div>

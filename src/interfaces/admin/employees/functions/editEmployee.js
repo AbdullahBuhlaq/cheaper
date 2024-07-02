@@ -1,7 +1,20 @@
 import requestOptions from "../../../../constants/requestOptions";
 import refreshToken from "../../../../functions/refreshToken";
 
-async function editEmployee(employee, currentEdit, setDuringAdd, image, userInformation, setUserInformation, refreshStatus, setRefreshStatus, setEmployees, employees, setCurrentEdit, toast) {
+async function editEmployee(
+  employee,
+  currentEdit,
+  setDuringAdd,
+  image,
+  userInformation,
+  setUserInformation,
+  refreshStatus,
+  setRefreshStatus,
+  setEmployees,
+  employees,
+  setCurrentEdit,
+  toast
+) {
   try {
     const newData = employee;
     const id = currentEdit.id;
@@ -10,13 +23,19 @@ async function editEmployee(employee, currentEdit, setDuringAdd, image, userInfo
     const infoRequestOptions = {
       ...requestOptions,
       method: "put",
-      headers: { ...requestOptions.headers, authorization: userInformation.token },
+      headers: {
+        ...requestOptions.headers,
+        authorization: userInformation.token,
+      },
       body: JSON.stringify({
         ...employee,
       }),
     };
     setDuringAdd(true);
-    const response = await fetch(`${import.meta.env.VITE_URL}/admin/employee/update/${id}`, infoRequestOptions);
+    const response = await fetch(
+      `${import.meta.env.VITE_URL}/admin/employee/update/${id}`,
+      infoRequestOptions
+    );
     const data = await response.json();
 
     if (data.success) {
@@ -27,8 +46,27 @@ async function editEmployee(employee, currentEdit, setDuringAdd, image, userInfo
       });
     } else {
       if (data.error == "jwt expired") {
-        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await editEmployee(employee, currentEdit, setDuringAdd, image, { ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, setEmployees, employees, setCurrentEdit, toast);
+        const status = await refreshToken(
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
+        await editEmployee(
+          employee,
+          currentEdit,
+          setDuringAdd,
+          image,
+          { ...userInformation, ...status },
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          setEmployees,
+          employees,
+          setCurrentEdit,
+          toast
+        );
       } else {
         console.log(data.error);
         toast.error(data.error, {

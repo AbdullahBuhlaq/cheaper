@@ -14,18 +14,31 @@ async function shopRegister(shopkeeper, toast, navigate, setDuringAdd, city) {
       body: JSON.stringify({
         ...shopkeeper,
         city: city.city,
-        mac: "web",
+        mac_key: "web",
         tokenDevice,
       }),
     };
     setDuringAdd(true);
-    const response = await fetch(`${import.meta.env.VITE_URL}/auth/signup-manger`, infoRequestOptions);
+    const response = await fetch(
+      `${import.meta.env.VITE_URL}/auth/signup-manger`,
+      infoRequestOptions
+    );
     const data = await response.json();
     if (data.success) {
-      secureLocalStorage.setItem("userInformation", JSON.stringify({ ...data.data, ...shopkeeperInitialPermissions, typeUser: "مدير محل جديد" }));
-      toast.success("تم إرسال طلب التسجيل, يرجى الانتظار حتى مراجعة الطلب وقبوله.", {
-        position: toast.POSITION.TOP_CENTER,
-      });
+      secureLocalStorage.setItem(
+        "userInformation",
+        JSON.stringify({
+          ...data.data,
+          ...shopkeeperInitialPermissions,
+          typeUser: "مدير محل جديد",
+        })
+      );
+      toast.success(
+        "تم إرسال طلب التسجيل, يرجى الانتظار حتى مراجعة الطلب وقبوله.",
+        {
+          position: toast.POSITION.TOP_CENTER,
+        }
+      );
       navigate("/main");
     } else {
       console.log(data.error);

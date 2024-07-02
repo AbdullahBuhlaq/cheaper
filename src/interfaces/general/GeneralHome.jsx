@@ -18,7 +18,6 @@ function GeneralHome(props) {
         <Routes>
           <Route path="/" exact element={<Main toast={props.toast} />} />
           <Route path="/main" exact element={<Main toast={props.toast} />} />
-
           <Route path="/*" exact element={<Page404 />} />
         </Routes>
       </>

@@ -1,6 +1,19 @@
 import { PiHandWaving } from "react-icons/pi";
 import { GiOpenTreasureChest } from "react-icons/gi";
-import { FcAbout, FcContacts, FcServices, FcHome, FcBusinessman, FcTimeline, FcInspection, FcDisclaimer, FcPaid, FcBriefcase, FcConferenceCall, FcShop } from "react-icons/fc";
+import {
+  FcAbout,
+  FcContacts,
+  FcServices,
+  FcHome,
+  FcBusinessman,
+  FcTimeline,
+  FcInspection,
+  FcDisclaimer,
+  FcPaid,
+  FcBriefcase,
+  FcConferenceCall,
+  FcShop,
+} from "react-icons/fc";
 
 const generalTabs = [
   {
@@ -28,7 +41,9 @@ export const adminTabs = [
   { name: "الحظورات", value: "blocks", icon: <FcDisclaimer /> },
   { name: "الأدوار", value: "roles", icon: <FcInspection /> },
 ];
-export const pendingShopkeeperTabs = [{ name: "الشخصية", value: "profile", icon: <FcBusinessman /> }];
+export const pendingShopkeeperTabs = [
+  { name: "الشخصية", value: "profile", icon: <FcBusinessman /> },
+];
 export const acceptedShopkeeperTabs = [
   { name: "الشخصية", value: "profile", icon: <FcBusinessman /> },
   { name: "المحل", value: "storeInformation", icon: <FcShop /> },

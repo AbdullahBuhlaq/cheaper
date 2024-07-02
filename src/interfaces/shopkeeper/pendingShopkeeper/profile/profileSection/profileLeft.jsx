@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import ProfileDetails from "./ProfileDetails";
 import ProfileHeader from "./ProfileHeader";
-import jsonParse from "../../../../../functions/jsonParse";
 import Map from "../../../../../components/Map";
+import getAvater from "../../../../../functions/getAvater";
 
 function ProfileLeft(props) {
   const [open, setOpen] = useState(false);
@@ -19,7 +19,13 @@ function ProfileLeft(props) {
       <>
         <div className="profile-left">
           <div className="modal-image-wrapper">
-            <img src={props.storeInformation.information.avatar ? jsonParse(props.storeInformation.information.avatar)[3] : "images/user.webp"} />
+            <img
+              src={
+                props.storeInformation.information.avatar
+                  ? getAvater(props.storeInformation.information.avatar)
+                  : "images/user.webp"
+              }
+            />
           </div>
           <div className="main-header-titel">
             <h1 href="#">الصفحة الشخصية</h1>
@@ -33,7 +39,10 @@ function ProfileLeft(props) {
                 •••
               </button>
 
-              <ul id="myDropdown" className={"dropdown-content" + (open ? " show" : "")}>
+              <ul
+                id="myDropdown"
+                className={"dropdown-content" + (open ? " show" : "")}
+              >
                 <li>
                   <a href="#" onClick={() => props.setPopupStatus(4)}>
                     تعديل الملف الشخصي
@@ -63,11 +72,22 @@ function ProfileLeft(props) {
             </div>
           </div>
 
-          <ProfileHeader avatar={props.profile.userInformation.avatar} storeInformation={props.storeInformation} />
+          <ProfileHeader
+            avatar={props.profile.userInformation.avatar}
+            storeInformation={props.storeInformation}
+          />
 
-          <ProfileDetails details={props.profile.userInformation} setPopupStatus={props.setPopupStatus} />
+          <ProfileDetails
+            details={props.profile.userInformation}
+            setPopupStatus={props.setPopupStatus}
+          />
 
-          <Map width={"100%"} height={"500"} lat={props.storeInformation.information.latitude} long={props.storeInformation.information.longitude} />
+          <Map
+            width={"100%"}
+            height={"500"}
+            lat={props.storeInformation.information.latitude}
+            long={props.storeInformation.information.longitude}
+          />
         </div>
       </>
     );

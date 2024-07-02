@@ -49,7 +49,19 @@ function UpdateStoreInformation(props) {
   const [image, setImage] = useState(false);
 
   async function updateProfileFunc() {
-    updateStoreInformation(user, setDuringAdd, image, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setStoreInformation, props.storeInformation, props.setEdit, props.toast);
+    updateStoreInformation(
+      user,
+      setDuringAdd,
+      image,
+      props.userInformation,
+      props.setUserInformation,
+      props.refreshStatus,
+      props.setRefreshStatus,
+      props.setStoreInformation,
+      props.storeInformation,
+      props.setEdit,
+      props.toast
+    );
   }
 
   try {
@@ -57,16 +69,106 @@ function UpdateStoreInformation(props) {
       <>
         <form>
           <div className="row">
-            <Input placeholder={""} label={"اسم المحل"} type={"text"} name={"nameStore"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={storeInformationSchema} />
-            <Input placeholder={""} label={"ساعة الافتتاح"} type={"time"} name={"fromHour"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={storeInformationSchema} />
-            <Input placeholder={""} label={"ساعة الإغلاق"} type={"time"} name={"toHour"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={storeInformationSchema} />
-            <Input placeholder={""} label={"العنوان"} type={"text"} name={"locationText"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={storeInformationSchema} />
-            <Select label={"المدينة"} placeholder={"اختر المدينة..."} list={selectOptions.city} name={"city"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={storeInformationSchema} />
-            <SelectFromDB label={"صنف المحل"} placeholder={"اختر تصنيف المحل..."} list={props.categories == -1 ? {} : props.categories} showKey={"name"} valueKey={"name"} name={"category"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={storeInformationSchema} />
-            <Select label={"الصورة الشخصية"} placeholder={""} list={selectOptions.imageStatus} name={"imageStatus"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={storeInformationSchema} noChoose={true} />
-            {user.imageStatus == "edit" ? <ImageInput imageTitle={"صورة المحل"} setImage={setImage} /> : null}
+            <Input
+              placeholder={""}
+              label={"اسم المحل"}
+              type={"text"}
+              name={"nameStore"}
+              onChange={handleSave}
+              state={user}
+              setState={setUser}
+              errors={userErrors}
+              setErrors={setUserErrors}
+              schema={storeInformationSchema}
+            />
+            <Input
+              placeholder={""}
+              label={"ساعة الافتتاح"}
+              type={"time"}
+              name={"fromHour"}
+              onChange={handleSave}
+              state={user}
+              setState={setUser}
+              errors={userErrors}
+              setErrors={setUserErrors}
+              schema={storeInformationSchema}
+            />
+            <Input
+              placeholder={""}
+              label={"ساعة الإغلاق"}
+              type={"time"}
+              name={"toHour"}
+              onChange={handleSave}
+              state={user}
+              setState={setUser}
+              errors={userErrors}
+              setErrors={setUserErrors}
+              schema={storeInformationSchema}
+            />
+            <Input
+              placeholder={""}
+              label={"العنوان"}
+              type={"text"}
+              name={"locationText"}
+              onChange={handleSave}
+              state={user}
+              setState={setUser}
+              errors={userErrors}
+              setErrors={setUserErrors}
+              schema={storeInformationSchema}
+            />
+            <Select
+              label={"المدينة"}
+              placeholder={"اختر المدينة..."}
+              list={selectOptions.city}
+              name={"city"}
+              onChange={handleSave}
+              state={user}
+              setState={setUser}
+              errors={userErrors}
+              setErrors={setUserErrors}
+              schema={storeInformationSchema}
+            />
+            <SelectFromDB
+              label={"صنف المحل"}
+              placeholder={"اختر تصنيف المحل..."}
+              list={props.categories == -1 ? {} : props.categories}
+              showKey={"name"}
+              valueKey={"id"}
+              name={"category"}
+              onChange={handleSave}
+              state={user}
+              setState={setUser}
+              errors={userErrors}
+              setErrors={setUserErrors}
+              schema={storeInformationSchema}
+            />
+            <Select
+              label={"الصورة الشخصية"}
+              placeholder={""}
+              list={selectOptions.imageStatus}
+              name={"imageStatus"}
+              onChange={handleSave}
+              state={user}
+              setState={setUser}
+              errors={userErrors}
+              setErrors={setUserErrors}
+              schema={storeInformationSchema}
+              noChoose={true}
+            />
+            {user.imageStatus == "edit" ? (
+              <ImageInput imageTitle={"صورة المحل"} setImage={setImage} />
+            ) : null}
           </div>
-          <Button action={updateProfileFunc} text={"إرسال"} disabled={duringAdd} joiObject={joiUser} state={user} setStateErrors={setUserErrors} toast={props.toast} />
+          <Button
+            action={updateProfileFunc}
+            text={"إرسال"}
+            disabled={duringAdd}
+            joiObject={joiUser}
+            state={user}
+            setStateErrors={setUserErrors}
+            toast={props.toast}
+          />
         </form>
       </>
     );

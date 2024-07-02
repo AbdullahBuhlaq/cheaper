@@ -1,16 +1,25 @@
 import { storeImag } from "../../../../constants/story";
 import checkPermissions from "../../../../functions/checkPermission";
-import jsonParse from "../../../../functions/jsonParse";
+import getAvater from "../../../../functions/getAvater";
 import { motion } from "framer-motion";
 
 function ShopItemInTable(props) {
   try {
     return (
       <>
-        <motion.tr initial={{ scaleY: 0, opacity: 0 }} animate={{ scaleY: 1, opacity: 1 }} transition={{ ease: "linear", duration: "0.5" }}>
+        <motion.tr
+          initial={{ scaleY: 0, opacity: 0 }}
+          animate={{ scaleY: 1, opacity: 1 }}
+          transition={{ ease: "linear", duration: "0.5" }}
+        >
           <td>
             <div className="table-wrapper-info">
-              <img src={props.offer.avatar ? jsonParse(props.offer.avatar)[1] : storeImag} style={{ width: "50px", height: "50px", objectFit: "cover" }} />
+              <img
+                src={
+                  props.offer.avatar ? getAvater(props.offer.avatar) : storeImag
+                }
+                style={{ width: "50px", height: "50px", objectFit: "cover" }}
+              />
               <p>{props.offer.nameStore}</p>
             </div>
           </td>
@@ -18,7 +27,9 @@ function ShopItemInTable(props) {
           <td>{new Date(props.offer.createdAt).toLocaleDateString()}</td>
           <td>{new Date(props.offer.dataTake).toLocaleDateString()}</td>
           <td>{props.offer.offerType}</td>
-          {checkPermissions(props.userInformation, ["admin.users.block.informationStoreInfo"]) ? (
+          {checkPermissions(props.userInformation, [
+            "admin.users.block.informationStoreInfo",
+          ]) ? (
             <td>
               <a
                 href="#"

@@ -51,6 +51,7 @@ function Blocks(props) {
   useEffect(() => {
     if (props.blocks == -1 && checkPermissions(props.userInformation, ["admin.block.all"])) getBlocks(props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.setBlocks, props.toast);
   }, []);
+
   useEffect(() => {
     if (props.blocks != -1) setLoading(false);
   }, [props.blocks]);
@@ -73,6 +74,7 @@ function Blocks(props) {
   try {
     return checkPermissions(props.userInformation, ["admin.block.all"]) ? (
       <>
+        {console.log(props.blocks)}
         {loading ? (
           <div style={{ display: "flex", width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }}>
             <Loading />

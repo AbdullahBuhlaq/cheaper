@@ -1,5 +1,5 @@
 import { userImag } from "../../../../../constants/story";
-import jsonParse from "../../../../../functions/jsonParse";
+import getAvater from "../../../../../functions/getAvater";
 
 function ProfileHeader(props) {
   try {
@@ -8,13 +8,35 @@ function ProfileHeader(props) {
         <div className="profile-info-header">
           <div className="fix">
             <div className="profile-img-upload-section">
-              <img src={props.profile.userInformation.avatar ? jsonParse(props.profile.userInformation.avatar)[0] : userImag} style={{ width: "110px", height: "110px", borderRadius: "11px", margin: "0 8px", objectFit: "cover" }} />
+              <img
+                src={
+                  props.profile.userInformation.avatar
+                    ? getAvater(props.profile.userInformation.avatar)
+                    : userImag
+                }
+                style={{
+                  width: "110px",
+                  height: "110px",
+                  borderRadius: "11px",
+                  margin: "0 8px",
+                  objectFit: "cover",
+                }}
+              />
             </div>
-            <div style={{ display: "flex", flexDirection: "column", justifyContent: "end" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "end",
+              }}
+            >
               <h1 className="profileHeader-js" style={{ fontSize: "25px" }}>
                 {props.profile.userInformation.name}
               </h1>
-              <h1 className="profileHeader-js" style={{ fontSize: "20px", opacity: "0.8" }}>
+              <h1
+                className="profileHeader-js"
+                style={{ fontSize: "20px", opacity: "0.8" }}
+              >
                 {props.profile.userInformation.username}@
               </h1>
             </div>

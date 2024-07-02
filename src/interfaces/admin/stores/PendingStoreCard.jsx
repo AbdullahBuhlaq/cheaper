@@ -1,9 +1,9 @@
 import { SlSizeFullscreen } from "react-icons/sl";
 import getIcon from "../../../functions/getIcon";
-import jsonParse from "../../../functions/jsonParse";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import checkPermissions from "../../../functions/checkPermission";
+import getAvater from "../../../functions/getAvater";
 
 function PendingStoreCard(props) {
   const [choosen, setChoosen] = useState(false);
@@ -16,7 +16,9 @@ function PendingStoreCard(props) {
           animate={{ scale: 1, opacity: 1 }}
           transition={{ type: "spring", duration: "1.2" }}
           onClick={() => {
-            if (checkPermissions(props.userInformation, ["admin.store.accept"])) {
+            if (
+              checkPermissions(props.userInformation, ["admin.store.accept"])
+            ) {
               if (choosen) {
                 props.deleteCard(props.store.id);
               } else {
@@ -28,7 +30,13 @@ function PendingStoreCard(props) {
           style={{ cursor: "pointer" }}
         >
           <div className="poster">
-            <img src={jsonParse(props.store.avatar)[3] ? jsonParse(props.store.avatar)[3] : jsonParse(props.store.avatar)[0]} />
+            <img
+              src={
+                props.store.avatar
+                  ? getAvater(props.store.avatar)
+                  : getAvater(props.store.avatar)
+              }
+            />
           </div>
           <div className="details">
             <div className="sales-card-more-details">

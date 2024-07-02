@@ -1,22 +1,29 @@
 import { SlSizeFullscreen } from "react-icons/sl";
 import getIcon from "../../../functions/getIcon";
-import jsonParse from "../../../functions/jsonParse";
 import { defaultStory } from "../../../constants/story";
 import checkPermissions from "../../../functions/checkPermission";
 import { motion } from "framer-motion";
+import getAvater from "../../../functions/getAvater";
 
 function AcceptedStoreCard(props) {
   try {
     return (
       <>
-        <motion.div className="sales-card" initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: "spring", duration: "1.2" }}>
+        <motion.div
+          className="sales-card"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ type: "spring", duration: "1.2" }}
+        >
           <div className="poster">
-            <img src={jsonParse(props.store.avatar)[0]} alt="Location Unknown" />
+            <img src={getAvater(props.store.avatar)} alt="Location Unknown" />
           </div>
           <div className="details">
             <div className="sales-card-more-details">
               <h1>اسم المحل : {props.store.nameStore}</h1>
-              {checkPermissions(props.userInformation, ["admin.store.accepted.info"]) ? (
+              {checkPermissions(props.userInformation, [
+                "admin.store.accepted.info",
+              ]) ? (
                 <span
                   style={{ cursor: "pointer" }}
                   onClick={() => {
@@ -33,13 +40,15 @@ function AcceptedStoreCard(props) {
             <div className="rating">{/* <span>قيمة الحسم : 25%</span> */}</div>
             <div className="tags">
               <span className="tag">
-                {"التصنيف : " + props.store["category.name"]} {getIcon(props.store["category.emoji"])}
+                {"التصنيف : " + props.store["category.name"]}{" "}
+                {getIcon(props.store["category.emoji"])}
               </span>
             </div>
             {props.store.deletedAt ? (
               <div className="tags">
                 <span className="tag" style={{ borderColor: "red" }}>
-                  {"محذوف في : " + new Date(props.store.deletedAt).toLocaleDateString()}
+                  {"محذوف في : " +
+                    new Date(props.store.deletedAt).toLocaleDateString()}
                 </span>
               </div>
             ) : null}
@@ -50,18 +59,20 @@ function AcceptedStoreCard(props) {
                 {props.store.story.map((story, index) => {
                   return (
                     <li key={index}>
-                      <img src={jsonParse(story.avatar)[1]} />
+                      <img src={getAvater(story.avatar)} />
                     </li>
                   );
                 })}
 
-                {Array.from(Array(3 - props.store.story.length).keys()).map((item, index) => {
-                  return (
-                    <li key={index}>
-                      <img src={defaultStory[item]} />
-                    </li>
-                  );
-                })}
+                {Array.from(Array(3 - props.store.story.length).keys()).map(
+                  (item, index) => {
+                    return (
+                      <li key={index}>
+                        <img src={defaultStory[item]} />
+                      </li>
+                    );
+                  }
+                )}
               </ul>
             </div>
           </div>

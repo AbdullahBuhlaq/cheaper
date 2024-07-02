@@ -1,5 +1,5 @@
 import { userImag } from "../../../constants/story";
-import jsonParse from "../../../functions/jsonParse";
+import getAvater from "../../../functions/getAvater";
 
 function Spam(props) {
   try {
@@ -9,11 +9,19 @@ function Spam(props) {
           <div className="card">
             <div className="profile-info-wrapper">
               <div className="profile-img-wrapper">
-                <img src={props.item.avatar ? jsonParse(props.item.avatar)[0] : userImag} style={{ width: "40px", height: "40px", objectFit: "cover" }} />
+                <img
+                  src={
+                    props.item.avatar ? getAvater(props.item.avatar) : userImag
+                  }
+                  style={{ width: "40px", height: "40px", objectFit: "cover" }}
+                />
               </div>
 
               <p style={{ marginRight: "10px" }}>{props.item["user.name"]}</p>
-              <div className="profile-info-wrapper-date" style={{ marginRight: "auto", fontSize: "10px" }}>
+              <div
+                className="profile-info-wrapper-date"
+                style={{ marginRight: "auto", fontSize: "10px" }}
+              >
                 <p>{new Date(props.item.createdAt).toLocaleDateString()}</p>
               </div>
             </div>

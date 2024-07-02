@@ -53,17 +53,122 @@ function UpdateUser(props) {
       <>
         <form>
           <div className="row">
-            <Input placeholder={""} label={"الاسم"} type={"text"} name={"name"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={profileSchema} />
-            <Select label={"الجنس"} placeholder={"اختر الجنس..."} list={selectOptions.gender} name={"gender"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={profileSchema} />
-            <Input placeholder={""} label={"رقم الموبايل"} type={"text"} name={"phoneNumber"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={profileSchema} />
-            <Input placeholder={""} label={"اسم المستخدم"} type={"text"} name={"username"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={profileSchema} />
+            <Input
+              placeholder={""}
+              label={"الاسم"}
+              type={"text"}
+              name={"name"}
+              onChange={handleSave}
+              state={user}
+              setState={setUser}
+              errors={userErrors}
+              setErrors={setUserErrors}
+              schema={profileSchema}
+            />
+            <Select
+              label={"الجنس"}
+              placeholder={"اختر الجنس..."}
+              list={selectOptions.gender}
+              name={"gender"}
+              onChange={handleSave}
+              state={user}
+              setState={setUser}
+              errors={userErrors}
+              setErrors={setUserErrors}
+              schema={profileSchema}
+            />
+            <Input
+              placeholder={""}
+              label={"رقم الموبايل"}
+              type={"text"}
+              name={"phoneNumber"}
+              onChange={handleSave}
+              state={user}
+              setState={setUser}
+              errors={userErrors}
+              setErrors={setUserErrors}
+              schema={profileSchema}
+            />
+            <Input
+              placeholder={""}
+              label={"اسم المستخدم"}
+              type={"text"}
+              name={"username"}
+              onChange={handleSave}
+              state={user}
+              setState={setUser}
+              errors={userErrors}
+              setErrors={setUserErrors}
+              schema={profileSchema}
+            />
             {/* <Input placeholder={""} label={"كلمة المرور"} type={"password"} name={"password"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={profileSchema} /> */}
-            <Input placeholder={""} label={"تاريخ الميلاد"} type={"date"} name={"birthday"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={profileSchema} />
-            <SelectMultipleFromDB label={"صنف المحل"} placeholder={"اختر تصنيف المحل..."} list={props.categories} showKey={"name"} valueKey={"name"} name={"category"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={profileSchema} />
-            <Select label={"الصورة الشخصية"} placeholder={""} list={selectOptions.imageStatus} name={"imageStatus"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={profileSchema} noChoose={true} />
-            {user.imageStatus == "edit" ? <ImageInput setImage={setImage} /> : null}
+            <Input
+              placeholder={""}
+              label={"تاريخ الميلاد"}
+              type={"date"}
+              name={"birthday"}
+              onChange={handleSave}
+              state={user}
+              setState={setUser}
+              errors={userErrors}
+              setErrors={setUserErrors}
+              schema={profileSchema}
+            />
+            <SelectMultipleFromDB
+              label={"صنف المحل"}
+              placeholder={"اختر تصنيف المحل..."}
+              list={props.categories}
+              showKey={"name"}
+              valueKey={"id"}
+              name={"category"}
+              onChange={handleSave}
+              state={user}
+              setState={setUser}
+              errors={userErrors}
+              setErrors={setUserErrors}
+              schema={profileSchema}
+            />
+            <Select
+              label={"الصورة الشخصية"}
+              placeholder={""}
+              list={selectOptions.imageStatus}
+              name={"imageStatus"}
+              onChange={handleSave}
+              state={user}
+              setState={setUser}
+              errors={userErrors}
+              setErrors={setUserErrors}
+              schema={profileSchema}
+              noChoose={true}
+            />
+            {user.imageStatus == "edit" ? (
+              <ImageInput setImage={setImage} />
+            ) : null}
           </div>
-          <Button action={() => updateUserTop(user, props.currentEdit, setDuringAdd, image, props.userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.users, props.setUsers, props.toast, props.setCurrentEdit)} text={"إرسال"} disabled={duringAdd} joiObject={joiUser} state={user} setStateErrors={setUserErrors} toast={props.toast} />
+          <Button
+            action={() =>
+              updateUserTop(
+                user,
+                props.currentEdit,
+                setDuringAdd,
+                image,
+                props.userInformation,
+                props.setUserInformation,
+                props.refreshStatus,
+                props.setRefreshStatus,
+                props.users,
+                props.setUsers,
+                props.toast,
+                props.setCurrentEdit
+              )
+            }
+            text={"إرسال"}
+            disabled={duringAdd}
+            joiObject={joiUser}
+            state={user}
+            setStateErrors={setUserErrors}
+            toast={props.toast}
+          />
         </form>
       </>
     );

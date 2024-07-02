@@ -5,9 +5,9 @@ import StoreHeader from "./StoreHeader";
 import StoreOptions from "./StoreOptions";
 import StorePacks from "./StorePacks";
 import StoreUsers from "./StoreUsers";
-import jsonParse from "../../../../functions/jsonParse";
 import Loading from "../../../general/Loading";
 import Map from "../../../../components/Map";
+import getAvater from "../../../../functions/getAvater";
 
 function StoreLeft(props) {
   const [story, setStory] = useState(-1);
@@ -16,7 +16,7 @@ function StoreLeft(props) {
 
     await Promise.all(
       props.storeInformation.story.map((item) => {
-        newStory = [...newStory, jsonParse(item.path)[3]];
+        newStory = [...newStory, getAvater(item.path)];
       })
     );
 
@@ -30,19 +30,44 @@ function StoreLeft(props) {
       <>
         {story == -1 ? (
           <div className="profile-left">
-            <div style={{ display: "flex", width: "100%", height: "100%", justifyContent: "center", alignItems: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                width: "100%",
+                height: "100%",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
               <Loading />
             </div>
           </div>
         ) : (
           <div className="profile-left">
             <div className="profile-image-wrapper">
-              <AutoSlidingImages images={props.storeInformation.story.length ? story : defaultStory} />
+              <AutoSlidingImages
+                images={
+                  props.storeInformation.story.length ? story : defaultStory
+                }
+              />
             </div>
 
-            <StoreOptions userInformation={props.userInformation} setOpenStatus={props.setOpenStatus} setOpenUpdate={props.setOpenUpdate} />
+            <StoreOptions
+              userInformation={props.userInformation}
+              setOpenStatus={props.setOpenStatus}
+              setOpenUpdate={props.setOpenUpdate}
+            />
 
-            <StoreHeader setOpenImage={props.setOpenImage} storeInformation={props.storeInformation} setStoreInformation={props.setStoreInformation} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} />
+            <StoreHeader
+              setOpenImage={props.setOpenImage}
+              storeInformation={props.storeInformation}
+              setStoreInformation={props.setStoreInformation}
+              userInformation={props.userInformation}
+              setUserInformation={props.setUserInformation}
+              refreshStatus={props.refreshStatus}
+              setRefreshStatus={props.setRefreshStatus}
+              toast={props.toast}
+            />
             <StorePacks
               setOpenPacks={props.setOpenPacks}
               storeInformation={props.storeInformation}
@@ -56,9 +81,24 @@ function StoreLeft(props) {
               packsChart={props.packsChart}
               packs={props.storeInformation.packs}
             />
-            <Map width={"100%"} height={"500"} lat={props.storeInformation.information.latitude} long={props.storeInformation.information.longitude} />
+            <Map
+              width={"100%"}
+              height={"500"}
+              lat={props.storeInformation.information.latitude}
+              long={props.storeInformation.information.longitude}
+            />
 
-            <StoreUsers users={props.storeUsers} userInformation={props.userInformation} setUserInformation={props.setUserInformation} refreshStatus={props.refreshStatus} setRefreshStatus={props.setRefreshStatus} toast={props.toast} setUsers={props.setStoreUsers} usersPage={props.usersPage} setUsersPage={props.setUsersPage} />
+            <StoreUsers
+              users={props.storeUsers}
+              userInformation={props.userInformation}
+              setUserInformation={props.setUserInformation}
+              refreshStatus={props.refreshStatus}
+              setRefreshStatus={props.setRefreshStatus}
+              toast={props.toast}
+              setUsers={props.setStoreUsers}
+              usersPage={props.usersPage}
+              setUsersPage={props.setUsersPage}
+            />
           </div>
         )}
       </>

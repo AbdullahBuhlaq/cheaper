@@ -1,5 +1,5 @@
 import { userImag } from "../../../constants/story";
-import jsonParse from "../../../functions/jsonParse";
+import getAvater from "../../../functions/getAvater";
 
 function SpamItem(props) {
   try {
@@ -10,11 +10,26 @@ function SpamItem(props) {
             <div className="profile-info-wrapper">
               <div className="fix-profile-image-wrapper">
                 <div className="profile-img-wrapper">
-                  <img src={props.item.avatar ? jsonParse(props.item.avatar)[0] : userImag} style={{ width: "40px", height: "40px", objectFit: "cover" }} />
+                  <img
+                    src={
+                      props.item.avatar
+                        ? getAvater(props.item.avatar)
+                        : userImag
+                    }
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      objectFit: "cover",
+                    }}
+                  />
                 </div>
                 <div className="profile-info-wrapper-name">
                   <h1>{props.item["user.name"]}</h1>
-                  <p>{props.item["user.username"] ? "@" + props.item["user.username"] : null}</p>
+                  <p>
+                    {props.item["user.username"]
+                      ? "@" + props.item["user.username"]
+                      : null}
+                  </p>
                 </div>
               </div>
               <div className="profile-info-wrapper-date">

@@ -21,12 +21,14 @@ const errorMessages = {
 
   phoneNumber: {
     "string.empty": 'حقل "رقم الهاتف" لا يجب أن يكون فارغًا.',
-    "string.pattern.base": 'حقل "رقم الهاتف" يجب أن يكون بتنسيق صحيح (09xxxxxxxx).',
+    "string.pattern.base":
+      'حقل "رقم الهاتف" يجب أن يكون بتنسيق صحيح (09xxxxxxxx).',
     "any.required": 'حقل "رقم الهاتف" مطلوب.',
   },
   username: {
     "string.empty": 'حقل "اسم المستخدم" لا يجب أن يكون فارغًا.',
-    "string.pattern.base": 'حقل "اسم المستخدم" يجب أن يحتوي على أحرف وأرقام فقط.',
+    "string.pattern.base":
+      'حقل "اسم المستخدم" يجب أن يحتوي على أحرف وأرقام فقط.',
     "string.min": 'حقل "اسم المستخدم" يجب أن يحتوي على الأقل 3 أحرف.',
     "string.max": 'حقل "اسم المستخدم" يجب أن يحتوي على الأكثر 30 حرفًا.',
     "any.required": 'حقل "اسم المستخدم" مطلوب.',
@@ -61,7 +63,8 @@ const userSchema = {
     .max(50)
     .trim()
     .custom((value, helpers) => {
-      if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
+      if (filterAr.check(value) || filterEn.check(value))
+        return helpers.message(message);
       else return value;
     })
     .messages(errorMessages.name),
@@ -73,7 +76,8 @@ const userSchema = {
         .max(30)
         .required()
         .custom((value, helpers) => {
-          if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
+          if (filterAr.check(value) || filterEn.check(value))
+            return helpers.message(message);
           else return value;
         })
         .message(errorMessages.category)
@@ -85,7 +89,11 @@ const userSchema = {
     .required()
     .pattern(/^(09)(\d{8})$/)
     .messages(errorMessages.phoneNumber),
-  birthday: Joi.date().required().max(moment()).min(moment("1930-01-01")).messages(errorMessages.birthday),
+  birthday: Joi.date()
+    .required()
+    .max(moment())
+    .min(moment("1930-01-01"))
+    .messages(errorMessages.birthday),
 
   username: Joi.string()
     .trim()
@@ -100,7 +108,8 @@ const userSchema = {
     .min(8)
     .max(50)
     .custom((value, helpers) => {
-      if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
+      if (filterAr.check(value) || filterEn.check(value))
+        return helpers.message(message);
       else return value;
     })
     .messages(errorMessages.password),

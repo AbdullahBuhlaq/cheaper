@@ -13,14 +13,24 @@ async function registerUser(user, toast, navigate, setDuringAdd) {
       body: JSON.stringify({
         ...user,
         tokenDevice,
-        mac: "web",
+        mac_key: "web",
       }),
     };
     setDuringAdd(true);
-    const response = await fetch(`${import.meta.env.VITE_URL}/auth/signup`, infoRequestOptions);
+    const response = await fetch(
+      `${import.meta.env.VITE_URL}/auth/signup`,
+      infoRequestOptions
+    );
     const data = await response.json();
     if (data.success) {
-      secureLocalStorage.setItem("userInformation", JSON.stringify({ ...data.data, ...userInitialPermissions, typeUser: "مستخدم" }));
+      secureLocalStorage.setItem(
+        "userInformation",
+        JSON.stringify({
+          ...data.data,
+          ...userInitialPermissions,
+          typeUser: "مستخدم",
+        })
+      );
       toast.success("أهلا وسهلا!", {
         position: toast.POSITION.TOP_CENTER,
       });

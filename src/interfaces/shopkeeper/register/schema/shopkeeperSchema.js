@@ -20,17 +20,20 @@ const errorMessages = {
   },
   email: {
     "string.empty": 'حقل "البريد الإلكتروني" لا يجب أن يكون فارغًا.',
-    "string.pattern.base": 'حقل "البريد الإلكتروني" يجب أن يكون بتنسيق صحيح (example@gmail.com).',
+    "string.pattern.base":
+      'حقل "البريد الإلكتروني" يجب أن يكون بتنسيق صحيح (example@gmail.com).',
     "any.required": 'حقل "البريد الإلكتروني" مطلوب.',
   },
   phoneNumber: {
     "string.empty": 'حقل "رقم الهاتف" لا يجب أن يكون فارغًا.',
-    "string.pattern.base": 'حقل "رقم الهاتف" يجب أن يكون بتنسيق صحيح (09xxxxxxxx).',
+    "string.pattern.base":
+      'حقل "رقم الهاتف" يجب أن يكون بتنسيق صحيح (09xxxxxxxx).',
     "any.required": 'حقل "رقم الهاتف" مطلوب.',
   },
   username: {
     "string.empty": 'حقل "اسم المستخدم" لا يجب أن يكون فارغًا.',
-    "string.pattern.base": 'حقل "اسم المستخدم" يجب أن يحتوي على أحرف وأرقام فقط.',
+    "string.pattern.base":
+      'حقل "اسم المستخدم" يجب أن يحتوي على أحرف وأرقام فقط.',
     "string.min": 'حقل "اسم المستخدم" يجب أن يحتوي على الأقل 3 أحرف.',
     "string.max": 'حقل "اسم المستخدم" يجب أن يحتوي على الأكثر 30 حرفًا.',
     "any.required": 'حقل "اسم المستخدم" مطلوب.',
@@ -100,7 +103,8 @@ const shopkeeperSchema = {
     .max(50)
     .trim()
     .custom((value, helpers) => {
-      if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
+      if (filterAr.check(value) || filterEn.check(value))
+        return helpers.message(message);
       else return value;
     })
     .messages({ ...messages, ...errorMessages.name }),
@@ -137,7 +141,8 @@ const shopkeeperSchema = {
     .min(8)
     .max(50)
     .custom((value, helpers) => {
-      if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
+      if (filterAr.check(value) || filterEn.check(value))
+        return helpers.message(message);
       else return value;
     })
     .messages({ ...messages, ...errorMessages.password }),
@@ -149,7 +154,8 @@ const shopkeeperSchema = {
     .messages({ ...messages, ...errorMessages.locationText })
 
     .custom((value, helpers) => {
-      if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
+      if (filterAr.check(value) || filterEn.check(value))
+        return helpers.message(message);
       else return value;
     }),
   nameStore: Joi.string()
@@ -159,7 +165,8 @@ const shopkeeperSchema = {
     .trim()
     .messages({ ...messages, ...errorMessages.name })
     .custom((value, helpers) => {
-      if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
+      if (filterAr.check(value) || filterEn.check(value))
+        return helpers.message(message);
       else return value;
     }),
 
@@ -171,20 +178,24 @@ const shopkeeperSchema = {
     .messages({ ...messages, ...errorMessages.latitude }),
 
   fromHour: Joi.string()
-    .pattern(/^(([0-9]{1})|([0-1]{1}[0-9]{1})|([2]{1}[0-3]{1}))(([:]{1})?)(([0-5]{1}[0-9]?)?)$/)
+    .pattern(
+      /^(([0-9]{1})|([0-1]{1}[0-9]{1})|([2]{1}[0-3]{1}))(([:]{1})?)(([0-5]{1}[0-9]?)?)$/
+    )
     .required(),
   toHour: Joi.string()
-    .pattern(/^(([0-9]{1})|([0-1]{1}[0-9]{1})|([2]{1}[0-3]{1}))(([:]{1})?)(([0-5]{1}[0-9]?)?)$/)
+    .pattern(
+      /^(([0-9]{1})|([0-1]{1}[0-9]{1})|([2]{1}[0-3]{1}))(([:]{1})?)(([0-5]{1}[0-9]?)?)$/
+    )
     .required(),
 
   category: Joi.string()
-    .min(2)
     .max(50)
     .required()
     .messages({ ...messages, ...errorMessages.category })
 
     .custom((value, helpers) => {
-      if (filterAr.check(value) || filterEn.check(value)) return helpers.message(message);
+      if (filterAr.check(value) || filterEn.check(value))
+        return helpers.message(message);
       else return value;
     }),
 };

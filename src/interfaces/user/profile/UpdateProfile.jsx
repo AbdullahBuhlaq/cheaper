@@ -47,7 +47,16 @@ function UpdateProfile(props) {
   const [image, setImage] = useState(false);
 
   function updateUser() {
-    updateUserFunc(user, image, props.userInformation, props.profile, props.setProfile, props.toast, setDuringAdd, props.setEdit);
+    updateUserFunc(
+      user,
+      image,
+      props.userInformation,
+      props.profile,
+      props.setProfile,
+      props.toast,
+      setDuringAdd,
+      props.setEdit
+    );
   }
 
   try {
@@ -55,15 +64,94 @@ function UpdateProfile(props) {
       <>
         <form>
           <div className="row">
-            <Input placeholder={""} label={"الاسم"} type={"text"} name={"name"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={userSchema} />
-            <Select label={"الجنس"} placeholder={"اختر الجنس..."} list={selectOptions.gender} name={"gender"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={userSchema} />
-            <Input placeholder={""} label={"اسم المستخدم"} type={"text"} name={"username"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={userSchema} />
-            <Input placeholder={""} label={"تاريخ الميلاد"} type={"date"} name={"birthday"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={userSchema} />
-            <SelectMultipleFromDB label={"أصناف المحلات المفضلة"} placeholder={"اختر تصنيف المحل..."} list={props.categories} showKey={"name"} valueKey={"name"} name={"category"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={userSchema} />
-            <Select label={"الصورة الشخصية"} placeholder={""} list={selectOptions.imageStatus} name={"imageStatus"} onChange={handleSave} state={user} setState={setUser} errors={userErrors} setErrors={setUserErrors} schema={userSchema} noChoose={true} />
-            {user.imageStatus == "edit" ? <ImageInput setImage={setImage} /> : null}
+            <Input
+              placeholder={""}
+              label={"الاسم"}
+              type={"text"}
+              name={"name"}
+              onChange={handleSave}
+              state={user}
+              setState={setUser}
+              errors={userErrors}
+              setErrors={setUserErrors}
+              schema={userSchema}
+            />
+            <Select
+              label={"الجنس"}
+              placeholder={"اختر الجنس..."}
+              list={selectOptions.gender}
+              name={"gender"}
+              onChange={handleSave}
+              state={user}
+              setState={setUser}
+              errors={userErrors}
+              setErrors={setUserErrors}
+              schema={userSchema}
+            />
+            <Input
+              placeholder={""}
+              label={"اسم المستخدم"}
+              type={"text"}
+              name={"username"}
+              onChange={handleSave}
+              state={user}
+              setState={setUser}
+              errors={userErrors}
+              setErrors={setUserErrors}
+              schema={userSchema}
+            />
+            <Input
+              placeholder={""}
+              label={"تاريخ الميلاد"}
+              type={"date"}
+              name={"birthday"}
+              onChange={handleSave}
+              state={user}
+              setState={setUser}
+              errors={userErrors}
+              setErrors={setUserErrors}
+              schema={userSchema}
+            />
+            <SelectMultipleFromDB
+              label={"أصناف المحلات المفضلة"}
+              placeholder={"اختر تصنيف المحل..."}
+              list={props.categories}
+              showKey={"name"}
+              valueKey={"id"}
+              name={"category"}
+              onChange={handleSave}
+              state={user}
+              setState={setUser}
+              errors={userErrors}
+              setErrors={setUserErrors}
+              schema={userSchema}
+            />
+            <Select
+              label={"الصورة الشخصية"}
+              placeholder={""}
+              list={selectOptions.imageStatus}
+              name={"imageStatus"}
+              onChange={handleSave}
+              state={user}
+              setState={setUser}
+              errors={userErrors}
+              setErrors={setUserErrors}
+              schema={userSchema}
+              noChoose={true}
+            />
+            {user.imageStatus == "edit" ? (
+              <ImageInput setImage={setImage} />
+            ) : null}
           </div>
-          <Button action={updateUser} text={"إرسال"} disabled={duringAdd} joiObject={joiUser} state={user} setStateErrors={setUserErrors} toast={props.toast} />
+          <Button
+            action={updateUser}
+            text={"إرسال"}
+            disabled={duringAdd}
+            joiObject={joiUser}
+            state={user}
+            setStateErrors={setUserErrors}
+            toast={props.toast}
+          />
         </form>
       </>
     );
