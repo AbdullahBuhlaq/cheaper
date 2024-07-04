@@ -1,9 +1,25 @@
 import requestOptions from "../../../../../constants/requestOptions";
 import refreshToken from "../../../../../functions/refreshToken";
 
-async function getStoreInformation(setProfile, packsChart, setPacksChart, userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast) {
+async function getStoreInformation(
+  setProfile,
+  packsChart,
+  setPacksChart,
+  userInformation,
+  setUserInformation,
+  refreshStatus,
+  setRefreshStatus,
+  toast
+) {
   try {
-    let response = await fetch(`${import.meta.env.VITE_URL}/store`, { ...requestOptions, method: "get", headers: { ...requestOptions.headers, authorization: userInformation.token } });
+    let response = await fetch(`${import.meta.env.VITE_URL}/store`, {
+      ...requestOptions,
+      method: "get",
+      headers: {
+        ...requestOptions.headers,
+        authorization: userInformation.token,
+      },
+    });
     let data = await response.json();
     if (data.success) {
       let ser1 = [],
@@ -38,7 +54,8 @@ async function getStoreInformation(setProfile, packsChart, setPacksChart, userIn
                 return {
                   xaxis: {
                     min: opt.xaxis.min < 1 ? 1 : opt.xaxis.min,
-                    max: opt.xaxis.max > cats.length ? cats.length : opt.xaxis.max,
+                    max:
+                      opt.xaxis.max > cats.length ? cats.length : opt.xaxis.max,
                   },
                 };
               },
@@ -63,12 +80,27 @@ async function getStoreInformation(setProfile, packsChart, setPacksChart, userIn
       });
       setProfile({ ...data.data, packs: finalPacks });
     } else {
-      if (data.error == "jwt expired") {
-        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await getStoreInformation(setProfile, packsChart, setPacksChart, { ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, toast);
+      if (data.message == "jwt expired") {
+        const status = await refreshToken(
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
+        await getStoreInformation(
+          setProfile,
+          packsChart,
+          setPacksChart,
+          { ...userInformation, ...status },
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
       } else {
-        console.log(data.error);
-        toast.error(data.error, {
+        console.log(data.message);
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }

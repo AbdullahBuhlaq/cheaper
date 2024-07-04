@@ -1,13 +1,27 @@
 import requestOptions from "../../../constants/requestOptions";
 import refreshToken from "../../../functions/refreshToken";
 
-async function changeEmailFunc(changeEmail, setDuringAdd, setProfile, setEdit, toast, profile, userInformation, setUserInformation, refreshStatus, setRefreshStatus) {
+async function changeEmailFunc(
+  changeEmail,
+  setDuringAdd,
+  setProfile,
+  setEdit,
+  toast,
+  profile,
+  userInformation,
+  setUserInformation,
+  refreshStatus,
+  setRefreshStatus
+) {
   try {
     const newData = changeEmail;
 
     const infoRequestOptions = {
       ...requestOptions,
-      headers: { ...requestOptions.headers, authorization: userInformation.token },
+      headers: {
+        ...requestOptions.headers,
+        authorization: userInformation.token,
+      },
       method: "put",
       body: JSON.stringify({
         ...changeEmail,
@@ -15,21 +29,48 @@ async function changeEmailFunc(changeEmail, setDuringAdd, setProfile, setEdit, t
     };
 
     setDuringAdd(true);
-    const response = await fetch(`${import.meta.env.VITE_URL}/account/ch-email`, infoRequestOptions);
+    const response = await fetch(
+      `${import.meta.env.VITE_URL}/account/ch-email`,
+      infoRequestOptions
+    );
     const data = await response.json();
     if (data.success) {
-      setProfile({ ...profile, email: newData.newEmail, settings: { ...profile.settings, verify: { ...profile.settings.verify, email: false } } });
+      setProfile({
+        ...profile,
+        email: newData.newEmail,
+        settings: {
+          ...profile.settings,
+          verify: { ...profile.settings.verify, email: false },
+        },
+      });
       setEdit(false);
       toast.success("تم التعديل بنجاح.", {
         position: toast.POSITION.TOP_CENTER,
       });
     } else {
-      if (data.error == "jwt expired") {
-        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await changeEmailFunc(changeEmail, setDuringAdd, setProfile, setEdit, toast, profile, { ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus);
+      if (data.message == "jwt expired") {
+        const status = await refreshToken(
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
+        await changeEmailFunc(
+          changeEmail,
+          setDuringAdd,
+          setProfile,
+          setEdit,
+          toast,
+          profile,
+          { ...userInformation, ...status },
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus
+        );
       } else {
-        console.log(data.error);
-        toast.error(data.error, {
+        console.log(data.message);
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }

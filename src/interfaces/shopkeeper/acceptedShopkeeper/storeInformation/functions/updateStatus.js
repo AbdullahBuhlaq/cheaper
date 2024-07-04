@@ -1,7 +1,18 @@
 import axios from "axios";
 import refreshToken from "../../../../../functions/refreshToken";
 
-async function updateStatus(setDuringAdd, image, userInformation, setUserInformation, refreshStatus, setRefreshStatus, setProfile, profile, setEdit, toast) {
+async function updateStatus(
+  setDuringAdd,
+  image,
+  userInformation,
+  setUserInformation,
+  refreshStatus,
+  setRefreshStatus,
+  setProfile,
+  profile,
+  setEdit,
+  toast
+) {
   try {
     const url = `${import.meta.env.VITE_URL}/store/upload-story`;
 
@@ -22,21 +33,38 @@ async function updateStatus(setDuringAdd, image, userInformation, setUserInforma
         position: toast.POSITION.TOP_CENTER,
       });
     } else {
-      console.log(data.error);
-      toast.error(data.error, {
+      console.log(data.message);
+      toast.error(data.message, {
         position: toast.POSITION.TOP_CENTER,
       });
     }
     setDuringAdd(false);
   } catch (err) {
     if (err.name == "AxiosError") {
-      if (err.response.data.error == "jwt expired") {
-        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await updateStatus(setDuringAdd, image, { ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, setProfile, profile, setEdit, toast);
+      if (err.response.data.message == "jwt expired") {
+        const status = await refreshToken(
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
+        await updateStatus(
+          setDuringAdd,
+          image,
+          { ...userInformation, ...status },
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          setProfile,
+          profile,
+          setEdit,
+          toast
+        );
       } else {
         setDuringAdd(false);
-        console.log(err.response.data.error);
-        toast.error(err.response.data.error, {
+        console.log(err.response.data.message);
+        toast.error(err.response.data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }

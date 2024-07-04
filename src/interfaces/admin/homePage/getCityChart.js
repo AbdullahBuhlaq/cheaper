@@ -2,9 +2,27 @@ import requestOptions from "../../../constants/requestOptions";
 import selectOptions from "../../../constants/selectOptions";
 import refreshToken from "../../../functions/refreshToken";
 
-export default async function getCityChart(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast, setHomeCityChart, homeCityChart) {
+export default async function getCityChart(
+  userInformation,
+  setUserInformation,
+  refreshStatus,
+  setRefreshStatus,
+  toast,
+  setHomeCityChart,
+  homeCityChart
+) {
   try {
-    let response = await fetch(`${import.meta.env.VITE_URL}/admin/home/cityChart`, { ...requestOptions, method: "get", headers: { ...requestOptions.headers, authorization: userInformation.token } });
+    let response = await fetch(
+      `${import.meta.env.VITE_URL}/admin/home/cityChart`,
+      {
+        ...requestOptions,
+        method: "get",
+        headers: {
+          ...requestOptions.headers,
+          authorization: userInformation.token,
+        },
+      }
+    );
     let data = await response.json();
     if (data.success) {
       let finalData = [];
@@ -52,12 +70,26 @@ export default async function getCityChart(userInformation, setUserInformation, 
         },
       });
     } else {
-      if (data.error == "jwt expired") {
-        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await getCityChart({ ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, toast, setHomeCityChart, homeCityChart);
+      if (data.message == "jwt expired") {
+        const status = await refreshToken(
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
+        await getCityChart(
+          { ...userInformation, ...status },
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast,
+          setHomeCityChart,
+          homeCityChart
+        );
       } else {
-        console.log(data.error);
-        toast.error(data.error, {
+        console.log(data.message);
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }

@@ -1,7 +1,18 @@
 import requestOptions from "../../../../constants/requestOptions";
 import refreshToken from "../../../../functions/refreshToken";
 
-async function editConfig(config, setDuringAdd, userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast, setConfigs, setCurrentEdit, configs) {
+async function editConfig(
+  config,
+  setDuringAdd,
+  userInformation,
+  setUserInformation,
+  refreshStatus,
+  setRefreshStatus,
+  toast,
+  setConfigs,
+  setCurrentEdit,
+  configs
+) {
   try {
     const newData = config;
     await Promise.all(
@@ -12,13 +23,19 @@ async function editConfig(config, setDuringAdd, userInformation, setUserInformat
     const infoRequestOptions = {
       ...requestOptions,
       method: "put",
-      headers: { ...requestOptions.headers, authorization: userInformation.token },
+      headers: {
+        ...requestOptions.headers,
+        authorization: userInformation.token,
+      },
       body: JSON.stringify({
         ...newData,
       }),
     };
     setDuringAdd(true);
-    const response = await fetch(`${import.meta.env.VITE_URL}/admin/config/update`, infoRequestOptions);
+    const response = await fetch(
+      `${import.meta.env.VITE_URL}/admin/config/update`,
+      infoRequestOptions
+    );
     const data = await response.json();
     if (data.success) {
       setConfigs({ ...configs, ...newData });
@@ -27,12 +44,29 @@ async function editConfig(config, setDuringAdd, userInformation, setUserInformat
         position: toast.POSITION.TOP_CENTER,
       });
     } else {
-      if (data.error == "jwt expired") {
-        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await editConfig(config, setDuringAdd, { ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, toast, setConfigs, setCurrentEdit, configs);
+      if (data.message == "jwt expired") {
+        const status = await refreshToken(
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
+        await editConfig(
+          config,
+          setDuringAdd,
+          { ...userInformation, ...status },
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast,
+          setConfigs,
+          setCurrentEdit,
+          configs
+        );
       } else {
-        console.log(data.error);
-        toast.error(data.error, {
+        console.log(data.message);
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }

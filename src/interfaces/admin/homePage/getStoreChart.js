@@ -1,9 +1,27 @@
 import requestOptions from "../../../constants/requestOptions";
 import refreshToken from "../../../functions/refreshToken";
 
-export default async function getStoreChart(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast, setHomeStoreChart, homeStoreChart) {
+export default async function getStoreChart(
+  userInformation,
+  setUserInformation,
+  refreshStatus,
+  setRefreshStatus,
+  toast,
+  setHomeStoreChart,
+  homeStoreChart
+) {
   try {
-    let response = await fetch(`${import.meta.env.VITE_URL}/admin/home/storeChart`, { ...requestOptions, method: "get", headers: { ...requestOptions.headers, authorization: userInformation.token } });
+    let response = await fetch(
+      `${import.meta.env.VITE_URL}/admin/home/storeChart`,
+      {
+        ...requestOptions,
+        method: "get",
+        headers: {
+          ...requestOptions.headers,
+          authorization: userInformation.token,
+        },
+      }
+    );
     let data = await response.json();
     if (data.success) {
       let chartDataPaid = [];
@@ -40,7 +58,10 @@ export default async function getStoreChart(userInformation, setUserInformation,
                 return {
                   xaxis: {
                     min: opt.xaxis.min < 1 ? 1 : opt.xaxis.min,
-                    max: opt.xaxis.max > chartDataFree.length ? chartDataFree.length : opt.xaxis.max,
+                    max:
+                      opt.xaxis.max > chartDataFree.length
+                        ? chartDataFree.length
+                        : opt.xaxis.max,
                   },
                 };
               },
@@ -54,12 +75,26 @@ export default async function getStoreChart(userInformation, setUserInformation,
         },
       }));
     } else {
-      if (data.error == "jwt expired") {
-        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await getStoreChart({ ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, toast, setHomeStoreChart, homeStoreChart);
+      if (data.message == "jwt expired") {
+        const status = await refreshToken(
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
+        await getStoreChart(
+          { ...userInformation, ...status },
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast,
+          setHomeStoreChart,
+          homeStoreChart
+        );
       } else {
-        console.log(data.error);
-        toast.error(data.error, {
+        console.log(data.message);
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }

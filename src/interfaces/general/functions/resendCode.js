@@ -1,11 +1,21 @@
 import requestOptions from "../../../constants/requestOptions";
 import refreshToken from "../../../functions/refreshToken";
 
-async function resendCode(profile, toast, userInformation, setUserInformation, refreshStatus, setRefreshStatus) {
+async function resendCode(
+  profile,
+  toast,
+  userInformation,
+  setUserInformation,
+  refreshStatus,
+  setRefreshStatus
+) {
   try {
     const infoRequestOptions = {
       ...requestOptions,
-      headers: { ...requestOptions.headers, authorization: userInformation.token },
+      headers: {
+        ...requestOptions.headers,
+        authorization: userInformation.token,
+      },
       method: "put",
       body: JSON.stringify({
         newEmail: profile.userInformation.email,
@@ -14,7 +24,10 @@ async function resendCode(profile, toast, userInformation, setUserInformation, r
 
     console.log(profile.userInformation.email);
 
-    const response = await fetch(`${import.meta.env.VITE_URL}/account/resend`, infoRequestOptions);
+    const response = await fetch(
+      `${import.meta.env.VITE_URL}/account/resend`,
+      infoRequestOptions
+    );
     const data = await response.json();
     console.log(data);
     if (data.success) {
@@ -24,12 +37,25 @@ async function resendCode(profile, toast, userInformation, setUserInformation, r
         position: toast.POSITION.TOP_CENTER,
       });
     } else {
-      if (data.error == "jwt expired") {
-        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await resendCode(profile, toast, { ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus);
+      if (data.message == "jwt expired") {
+        const status = await refreshToken(
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
+        await resendCode(
+          profile,
+          toast,
+          { ...userInformation, ...status },
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus
+        );
       } else {
-        console.log(data.error);
-        toast.error(data.error, {
+        console.log(data.message);
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }

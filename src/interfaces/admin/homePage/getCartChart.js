@@ -1,9 +1,27 @@
 import requestOptions from "../../../constants/requestOptions";
 import refreshToken from "../../../functions/refreshToken";
 
-export default async function getCartChart(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast, setHomeCartChart, homeCartChart) {
+export default async function getCartChart(
+  userInformation,
+  setUserInformation,
+  refreshStatus,
+  setRefreshStatus,
+  toast,
+  setHomeCartChart,
+  homeCartChart
+) {
   try {
-    let response = await fetch(`${import.meta.env.VITE_URL}/admin/home/cartChart`, { ...requestOptions, method: "get", headers: { ...requestOptions.headers, authorization: userInformation.token } });
+    let response = await fetch(
+      `${import.meta.env.VITE_URL}/admin/home/cartChart`,
+      {
+        ...requestOptions,
+        method: "get",
+        headers: {
+          ...requestOptions.headers,
+          authorization: userInformation.token,
+        },
+      }
+    );
     let data = await response.json();
     if (data.success) {
       let ser1 = [],
@@ -51,7 +69,8 @@ export default async function getCartChart(userInformation, setUserInformation, 
                 return {
                   xaxis: {
                     min: opt.xaxis.min < 1 ? 1 : opt.xaxis.min,
-                    max: opt.xaxis.max > ser1.length ? ser1.length : opt.xaxis.max,
+                    max:
+                      opt.xaxis.max > ser1.length ? ser1.length : opt.xaxis.max,
                   },
                 };
               },
@@ -66,12 +85,26 @@ export default async function getCartChart(userInformation, setUserInformation, 
         },
       });
     } else {
-      if (data.error == "jwt expired") {
-        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await getCartChart({ ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, toast, setHomeCartChart, homeCartChart);
+      if (data.message == "jwt expired") {
+        const status = await refreshToken(
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
+        await getCartChart(
+          { ...userInformation, ...status },
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast,
+          setHomeCartChart,
+          homeCartChart
+        );
       } else {
-        console.log(data.error);
-        toast.error(data.error, {
+        console.log(data.message);
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }

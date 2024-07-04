@@ -36,8 +36,8 @@ async function registerUser(user, toast, navigate, setDuringAdd) {
       });
       navigate("/main");
     } else {
-      console.log(data.error);
-      toast.error(data.error, {
+      console.log(data.message);
+      toast.error(data.message, {
         position: toast.POSITION.TOP_CENTER,
       });
     }

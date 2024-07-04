@@ -1,18 +1,35 @@
 import requestOptions from "../../../../constants/requestOptions";
 import refreshToken from "../../../../functions/refreshToken";
 
-async function addPack(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast, packs, setPacks, pack, setDuringAdd, setAddNew) {
+async function addPack(
+  userInformation,
+  setUserInformation,
+  refreshStatus,
+  setRefreshStatus,
+  toast,
+  packs,
+  setPacks,
+  pack,
+  setDuringAdd,
+  setAddNew
+) {
   try {
     const newData = pack;
     const infoRequestOptions = {
       ...requestOptions,
-      headers: { ...requestOptions.headers, authorization: userInformation.token },
+      headers: {
+        ...requestOptions.headers,
+        authorization: userInformation.token,
+      },
       body: JSON.stringify({
         ...pack,
       }),
     };
     setDuringAdd(true);
-    const response = await fetch(`${import.meta.env.VITE_URL}/admin/packs/create`, infoRequestOptions);
+    const response = await fetch(
+      `${import.meta.env.VITE_URL}/admin/packs/create`,
+      infoRequestOptions
+    );
     const data = await response.json();
     if (data.success) {
       setPacks({ ...packs, [data.data]: { id: data.data, ...newData } });
@@ -21,12 +38,29 @@ async function addPack(userInformation, setUserInformation, refreshStatus, setRe
       });
       setAddNew(false);
     } else {
-      if (data.error == "jwt expired") {
-        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await addPack({ ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, toast, packs, setPacks, pack, setDuringAdd, setAddNew);
+      if (data.message == "jwt expired") {
+        const status = await refreshToken(
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
+        await addPack(
+          { ...userInformation, ...status },
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast,
+          packs,
+          setPacks,
+          pack,
+          setDuringAdd,
+          setAddNew
+        );
       } else {
-        console.log(data.error);
-        toast.error(data.error, {
+        console.log(data.message);
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }

@@ -63,7 +63,7 @@ export default async function getStoreUsers(
         });
       }
     } else {
-      if (data.error == "jwt expired") {
+      if (data.message == "jwt expired") {
         const status = await refreshToken(
           userInformation,
           setUserInformation,
@@ -84,8 +84,8 @@ export default async function getStoreUsers(
         );
       } else {
         setUsersPage({ ...usersPage, loadingNow: false, OnlyClick: true });
-        console.log(data.error);
-        toast.error(data.error, {
+        console.log(data.message);
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }

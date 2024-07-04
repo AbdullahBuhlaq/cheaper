@@ -19,21 +19,34 @@ function Navbar(props) {
   async function logout(userInformation) {
     try {
       setDuringLogout(true);
-      let response = await fetch(`${import.meta.env.VITE_URL}/auth/logout`, { ...requestOptions, method: "get", headers: { ...requestOptions.headers, authorization: userInformation.token } });
+      let response = await fetch(`${import.meta.env.VITE_URL}/auth/logout`, {
+        ...requestOptions,
+        method: "get",
+        headers: {
+          ...requestOptions.headers,
+          authorization: userInformation.token,
+        },
+      });
       let data = await response.json();
       if (data.success) {
         secureLocalStorage.removeItem("userInformation");
         setDuringLogout(false);
         props.navigate("/login");
       } else {
-        if (data.error == "jwt expired") {
-          const status = await refreshToken(userInformation, props.setUserInformation, props.refreshStatus, props.setRefreshStatus, props.toast);
+        if (data.message == "jwt expired") {
+          const status = await refreshToken(
+            userInformation,
+            props.setUserInformation,
+            props.refreshStatus,
+            props.setRefreshStatus,
+            props.toast
+          );
           await logout({ ...userInformation, ...status });
         } else {
           setDuringLogout(false);
 
-          console.log(data.error);
-          props.toast.error(data.error, {
+          console.log(data.message);
+          props.toast.error(data.message, {
             position: props.toast.POSITION.TOP_CENTER,
           });
         }
@@ -66,13 +79,33 @@ function Navbar(props) {
   try {
     return (
       <>
-        {showNotifications ? <div style={{ width: "100vw", zIndex: 1, right: "0", height: "100vh", top: 0, backgroundColor: "transparent", position: "absolute" }} onClick={() => setShowNotifications(false)}></div> : null}
+        {showNotifications ? (
+          <div
+            style={{
+              width: "100vw",
+              zIndex: 1,
+              right: "0",
+              height: "100vh",
+              top: 0,
+              backgroundColor: "transparent",
+              position: "absolute",
+            }}
+            onClick={() => setShowNotifications(false)}
+          ></div>
+        ) : null}
 
-        <div className="left-area" style={{ overflow: "visible" }} id="nav" ref={ref}>
+        <div
+          className="left-area"
+          style={{ overflow: "visible" }}
+          id="nav"
+          ref={ref}
+        >
           <div
             className={"btn-close-left"}
             onClick={() => {
-              document.getElementsByClassName("left-area")[0].classList.remove("show");
+              document
+                .getElementsByClassName("left-area")[0]
+                .classList.remove("show");
             }}
           >
             <FaCircleXmark />
@@ -84,29 +117,62 @@ function Navbar(props) {
             className="item-link"
             id="pageLink"
             onClick={(event) => {
-              secureLocalStorage.setItem("mode", !secureLocalStorage.getItem("mode"));
+              secureLocalStorage.setItem(
+                "mode",
+                !secureLocalStorage.getItem("mode")
+              );
               event.preventDefault();
               document.body.classList.toggle("dark");
               document.documentElement.classList.toggle("dark");
             }}
           >
             <button className="mode-switch active">
-              <svg className="sun" fill="none" stroke="#fbb046" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
+              <svg
+                className="sun"
+                fill="none"
+                stroke="#fbb046"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
                 <defs></defs>
                 <circle cx="12" cy="12" r="5"></circle>
                 <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
               </svg>
-              <svg className="moon" fill="none" stroke="#ffffff" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
+              <svg
+                className="moon"
+                fill="none"
+                stroke="#ffffff"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
                 <defs></defs>
                 <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
               </svg>
             </button>
           </a>
 
-          <a href="#" className="item-link" style={{ color: "#FFD700", fontSize: "25px", zIndex: "30", marginBottom: "25px" }}>
+          <a
+            href="#"
+            className="item-link"
+            style={{
+              color: "#FFD700",
+              fontSize: "25px",
+              zIndex: "30",
+              marginBottom: "25px",
+            }}
+          >
             {props.tabs.length ? (
               <>
-                <div className={"menu-item highlight" + (showNotifications ? " show" : "")} style={{ zIndex: "30" }}>
+                <div
+                  className={
+                    "menu-item highlight" + (showNotifications ? " show" : "")
+                  }
+                  style={{ zIndex: "30" }}
+                >
                   <div
                     className="menu-text"
                     style={{ zIndex: "30" }}
@@ -116,15 +182,49 @@ function Navbar(props) {
                     }}
                   >
                     <TbBellRinging />
-                    {props.thereIsNotifications <= 0 ? null : <span style={{ position: "absolute", top: 0, right: 0, width: "10px", height: "10px", backgroundColor: "red", borderRadius: "50%", display: "flex", justifyContent: "center", alignItems: "center", fontSize: "10px", color: "white", overflow: "hidden" }}>{props.thereIsNotifications != -1 ? props.thereIsNotifications : null}</span>}
+                    {props.thereIsNotifications <= 0 ? null : (
+                      <span
+                        style={{
+                          position: "absolute",
+                          top: 0,
+                          right: 0,
+                          width: "10px",
+                          height: "10px",
+                          backgroundColor: "red",
+                          borderRadius: "50%",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          fontSize: "10px",
+                          color: "white",
+                          overflow: "hidden",
+                        }}
+                      >
+                        {props.thereIsNotifications != -1
+                          ? props.thereIsNotifications
+                          : null}
+                      </span>
+                    )}
                   </div>
 
-                  <div className={"sub-menu double" + (showNotifications ? " show" : "")} style={{ zIndex: "30" }}>
+                  <div
+                    className={
+                      "sub-menu double" + (showNotifications ? " show" : "")
+                    }
+                    style={{ zIndex: "30" }}
+                  >
                     <div className="notifications-last-update">
                       {props.notifications != -1
-                        ? Object.keys(props.notifications).map((item, index) => {
-                            return <NotificationItem key={index} item={props.notifications[item]} />;
-                          })
+                        ? Object.keys(props.notifications).map(
+                            (item, index) => {
+                              return (
+                                <NotificationItem
+                                  key={index}
+                                  item={props.notifications[item]}
+                                />
+                              );
+                            }
+                          )
                         : null}
                       <LoadMoreNotifications
                         userInformation={props.userInformation}
@@ -138,7 +238,10 @@ function Navbar(props) {
                         setNotificationsPage={props.setNotificationsPage}
                       />
 
-                      {!props.pendingSendNotifications && checkPermissions(props.userInformation, ["admin.notification.send"]) ? (
+                      {!props.pendingSendNotifications &&
+                      checkPermissions(props.userInformation, [
+                        "admin.notification.send",
+                      ]) ? (
                         <div className="notifications-last-update-bottom-container">
                           <button
                             onClick={() => {
@@ -160,20 +263,41 @@ function Navbar(props) {
             if (tabIndex == 0) index = 0;
             if (currentHeight / 100 >= index + 1) {
               index = index + 1;
-              return <Tab key={tabIndex} tab={tab} currentTab={props.currentTab} setCurrentTab={props.setCurrentTab} />;
+              return (
+                <Tab
+                  key={tabIndex}
+                  tab={tab}
+                  currentTab={props.currentTab}
+                  setCurrentTab={props.setCurrentTab}
+                />
+              );
             }
           })}
           {props.tabs.map((tab, tabIndex) => {
-            if (currentHeight / 100 >= index + 1 && (checkShow(props.userInformation, [tab.value]) || tab.value == "profile")) {
+            if (
+              currentHeight / 100 >= index + 1 &&
+              (checkShow(props.userInformation, [tab.value]) ||
+                tab.value == "profile")
+            ) {
               index = index + 1;
-              return <Tab key={tabIndex} tab={tab} currentTab={props.currentTab} setCurrentTab={props.setCurrentTab} />;
+              return (
+                <Tab
+                  key={tabIndex}
+                  tab={tab}
+                  currentTab={props.currentTab}
+                  setCurrentTab={props.setCurrentTab}
+                />
+              );
             } else {
               overflow = true;
             }
           })}
           {overflow ? (
             <>
-              <div className={"menu-item highlight" + (showMore ? " show" : "")} style={{ zIndex: "30" }}>
+              <div
+                className={"menu-item highlight" + (showMore ? " show" : "")}
+                style={{ zIndex: "30" }}
+              >
                 <div
                   className="menu-text"
                   style={{ zIndex: "30", cursor: "pointer" }}
@@ -183,18 +307,46 @@ function Navbar(props) {
                 >
                   <BiSolidLeftArrow />
                 </div>
-                <div className={"sub-menu double" + (showMore ? " show" : "")} style={{ zIndex: "30", height: "320px", top: "-242px", overflow: "auto", minWidth: "initial", textAlign: "center" }}>
+                <div
+                  className={"sub-menu double" + (showMore ? " show" : "")}
+                  style={{
+                    zIndex: "30",
+                    height: "320px",
+                    top: "-242px",
+                    overflow: "auto",
+                    minWidth: "initial",
+                    textAlign: "center",
+                  }}
+                >
                   <div className="notifications-last-update">
                     {generalTabs.map((tab, tabIndex) => {
                       index = index - 1;
                       if (index < 0) {
-                        return <Tab key={tabIndex} tab={tab} currentTab={props.currentTab} setCurrentTab={props.setCurrentTab} />;
+                        return (
+                          <Tab
+                            key={tabIndex}
+                            tab={tab}
+                            currentTab={props.currentTab}
+                            setCurrentTab={props.setCurrentTab}
+                          />
+                        );
                       }
                     })}
                     {props.tabs.map((tab, tabIndex) => {
-                      if (checkShow(props.userInformation, [tab.value]) || tab.value == "profile") {
+                      if (
+                        checkShow(props.userInformation, [tab.value]) ||
+                        tab.value == "profile"
+                      ) {
                         index = index - 1;
-                        if (index < 0) return <Tab key={tabIndex} tab={tab} currentTab={props.currentTab} setCurrentTab={props.setCurrentTab} />;
+                        if (index < 0)
+                          return (
+                            <Tab
+                              key={tabIndex}
+                              tab={tab}
+                              currentTab={props.currentTab}
+                              setCurrentTab={props.setCurrentTab}
+                            />
+                          );
                       }
                     })}
                   </div>
@@ -203,18 +355,46 @@ function Navbar(props) {
             </>
           ) : null}
           {props.tabs.length ? (
-            <button className="btn-logout" onClick={() => logout(props.userInformation)}>
+            <button
+              className="btn-logout"
+              onClick={() => logout(props.userInformation)}
+            >
               {duringLogout ? (
-                <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 2, ease: "linear" }} style={{ width: "20px", height: "20px", borderRadius: "50%", border: "2px solid #777", borderTopColor: "transparent" }}></motion.div>
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
+                  style={{
+                    width: "20px",
+                    height: "20px",
+                    borderRadius: "50%",
+                    border: "2px solid #777",
+                    borderTopColor: "transparent",
+                  }}
+                ></motion.div>
               ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="feather feather-log-out" viewBox="0 0 24 24">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="22"
+                  height="22"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  className="feather feather-log-out"
+                  viewBox="0 0 24 24"
+                >
                   <defs></defs>
                   <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"></path>
                 </svg>
               )}
             </button>
           ) : (
-            <button className="btn-logout" style={{ color: "green", fontSize: "30px", cursor: "pointer" }} onClick={() => props.navigate("/login")}>
+            <button
+              className="btn-logout"
+              style={{ color: "green", fontSize: "30px", cursor: "pointer" }}
+              onClick={() => props.navigate("/login")}
+            >
               <BiLogIn />
             </button>
           )}

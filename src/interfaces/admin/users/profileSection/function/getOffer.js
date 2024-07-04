@@ -1,9 +1,30 @@
 import requestOptions from "../../../../../constants/requestOptions";
 import refreshToken from "../../../../../functions/refreshToken";
 
-export default async function getOffer(userInformation, setUserInformation, refreshStatus, setRefreshStatus, id, userId, setStoreInfo, toast) {
+export default async function getOffer(
+  userInformation,
+  setUserInformation,
+  refreshStatus,
+  setRefreshStatus,
+  id,
+  userId,
+  setStoreInfo,
+  toast
+) {
   try {
-    let response = await fetch(`${import.meta.env.VITE_URL}/admin/users/info-storeOffer?userId=${userId}&id=${id}`, { ...requestOptions, method: "get", headers: { ...requestOptions.headers, authorization: userInformation.token } });
+    let response = await fetch(
+      `${
+        import.meta.env.VITE_URL
+      }/admin/users/info-storeOffer?userId=${userId}&id=${id}`,
+      {
+        ...requestOptions,
+        method: "get",
+        headers: {
+          ...requestOptions.headers,
+          authorization: userInformation.token,
+        },
+      }
+    );
     let data = await response.json();
 
     // const data = {
@@ -31,12 +52,27 @@ export default async function getOffer(userInformation, setUserInformation, refr
     if (data.success) {
       setStoreInfo({ ...data.data });
     } else {
-      if (data.error == "jwt expired") {
-        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await getOffer({ ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, id, userId, setStoreInfo, toast);
+      if (data.message == "jwt expired") {
+        const status = await refreshToken(
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
+        await getOffer(
+          { ...userInformation, ...status },
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          id,
+          userId,
+          setStoreInfo,
+          toast
+        );
       } else {
-        console.log(data.error);
-        toast.error(data.error, {
+        console.log(data.message);
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }

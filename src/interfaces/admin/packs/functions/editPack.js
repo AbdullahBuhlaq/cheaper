@@ -1,20 +1,38 @@
 import requestOptions from "../../../../constants/requestOptions";
 import refreshToken from "../../../../functions/refreshToken";
 
-async function editPack(pack, currentEdit, setDuringAdd, userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast, setPacks, setCurrentEdit, packs) {
+async function editPack(
+  pack,
+  currentEdit,
+  setDuringAdd,
+  userInformation,
+  setUserInformation,
+  refreshStatus,
+  setRefreshStatus,
+  toast,
+  setPacks,
+  setCurrentEdit,
+  packs
+) {
   try {
     const newData = pack;
     const id = currentEdit.id;
     const infoRequestOptions = {
       ...requestOptions,
       method: "put",
-      headers: { ...requestOptions.headers, authorization: userInformation.token },
+      headers: {
+        ...requestOptions.headers,
+        authorization: userInformation.token,
+      },
       body: JSON.stringify({
         ...pack,
       }),
     };
     setDuringAdd(true);
-    const response = await fetch(`${import.meta.env.VITE_URL}/admin/packs/update/${id}`, infoRequestOptions);
+    const response = await fetch(
+      `${import.meta.env.VITE_URL}/admin/packs/update/${id}`,
+      infoRequestOptions
+    );
     const data = await response.json();
     // const data = { success: true };
     if (data.success) {
@@ -24,12 +42,30 @@ async function editPack(pack, currentEdit, setDuringAdd, userInformation, setUse
         position: toast.POSITION.TOP_CENTER,
       });
     } else {
-      if (data.error == "jwt expired") {
-        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await editPack(pack, currentEdit, setDuringAdd, { ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, toast, setPacks, setCurrentEdit, packs);
+      if (data.message == "jwt expired") {
+        const status = await refreshToken(
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
+        await editPack(
+          pack,
+          currentEdit,
+          setDuringAdd,
+          { ...userInformation, ...status },
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast,
+          setPacks,
+          setCurrentEdit,
+          packs
+        );
       } else {
-        console.log(data.error);
-        toast.error(data.error, {
+        console.log(data.message);
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }

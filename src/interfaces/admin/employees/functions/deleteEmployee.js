@@ -1,9 +1,28 @@
 import requestOptions from "../../../../constants/requestOptions";
 import refreshToken from "../../../../functions/refreshToken";
 
-async function deleteEmployeeFunc(id, userInformation, setUserInformation, refreshStatus, setRefreshStatus, employees, setEmployees, toast) {
+async function deleteEmployeeFunc(
+  id,
+  userInformation,
+  setUserInformation,
+  refreshStatus,
+  setRefreshStatus,
+  employees,
+  setEmployees,
+  toast
+) {
   try {
-    const response = await fetch(`${import.meta.env.VITE_URL}/admin/employee/delete/${id}`, { ...requestOptions, headers: { ...requestOptions.headers, authorization: userInformation.token }, method: "delete" });
+    const response = await fetch(
+      `${import.meta.env.VITE_URL}/admin/employee/delete/${id}`,
+      {
+        ...requestOptions,
+        headers: {
+          ...requestOptions.headers,
+          authorization: userInformation.token,
+        },
+        method: "delete",
+      }
+    );
     const data = await response.json();
     if (data.success) {
       delete employees[id];
@@ -12,12 +31,27 @@ async function deleteEmployeeFunc(id, userInformation, setUserInformation, refre
         position: toast.POSITION.TOP_CENTER,
       });
     } else {
-      if (data.error == "jwt expired") {
-        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await deleteEmployeeFunc(id, { ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, employees, setEmployees, toast);
+      if (data.message == "jwt expired") {
+        const status = await refreshToken(
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
+        await deleteEmployeeFunc(
+          id,
+          { ...userInformation, ...status },
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          employees,
+          setEmployees,
+          toast
+        );
       } else {
-        console.log(data.error);
-        toast.error(data.error, {
+        console.log(data.message);
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }

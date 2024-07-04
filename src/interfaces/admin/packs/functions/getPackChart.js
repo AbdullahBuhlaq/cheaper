@@ -1,9 +1,27 @@
 import requestOptions from "../../../../constants/requestOptions";
 import refreshToken from "../../../../functions/refreshToken";
 
-async function getPackChart(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast, setPacksChart, packsChart) {
+async function getPackChart(
+  userInformation,
+  setUserInformation,
+  refreshStatus,
+  setRefreshStatus,
+  toast,
+  setPacksChart,
+  packsChart
+) {
   try {
-    let response = await fetch(`${import.meta.env.VITE_URL}/admin/packs/chartPack`, { ...requestOptions, method: "get", headers: { ...requestOptions.headers, authorization: userInformation.token } });
+    let response = await fetch(
+      `${import.meta.env.VITE_URL}/admin/packs/chartPack`,
+      {
+        ...requestOptions,
+        method: "get",
+        headers: {
+          ...requestOptions.headers,
+          authorization: userInformation.token,
+        },
+      }
+    );
     let data = await response.json();
 
     if (data.success) {
@@ -60,7 +78,10 @@ async function getPackChart(userInformation, setUserInformation, refreshStatus, 
                 return {
                   xaxis: {
                     min: opt.xaxis.min < 1 ? 1 : opt.xaxis.min,
-                    max: opt.xaxis.max > datesArr.length ? datesArr.length : opt.xaxis.max,
+                    max:
+                      opt.xaxis.max > datesArr.length
+                        ? datesArr.length
+                        : opt.xaxis.max,
                   },
                 };
               },
@@ -75,12 +96,26 @@ async function getPackChart(userInformation, setUserInformation, refreshStatus, 
         },
       });
     } else {
-      if (data.error == "jwt expired") {
-        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await getPackChart({ ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, toast, setPacksChart, packsChart);
+      if (data.message == "jwt expired") {
+        const status = await refreshToken(
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
+        await getPackChart(
+          { ...userInformation, ...status },
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast,
+          setPacksChart,
+          packsChart
+        );
       } else {
-        console.log(data.error);
-        toast.error(data.error, {
+        console.log(data.message);
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }

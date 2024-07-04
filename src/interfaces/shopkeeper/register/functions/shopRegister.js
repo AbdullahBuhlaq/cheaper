@@ -41,8 +41,8 @@ async function shopRegister(shopkeeper, toast, navigate, setDuringAdd, city) {
       );
       navigate("/main");
     } else {
-      console.log(data.error);
-      toast.error(data.error, {
+      console.log(data.message);
+      toast.error(data.message, {
         position: toast.POSITION.TOP_CENTER,
       });
     }

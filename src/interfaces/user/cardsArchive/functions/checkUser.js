@@ -1,6 +1,12 @@
 import requestOptions from "../../../../constants/requestOptions";
 
-async function checkUser(setDuringAdd, toast, userName, setUsers, setLastSearch) {
+async function checkUser(
+  setDuringAdd,
+  toast,
+  userName,
+  setUsers,
+  setLastSearch
+) {
   try {
     const name = userName;
     const infoRequestOptions = {
@@ -9,14 +15,17 @@ async function checkUser(setDuringAdd, toast, userName, setUsers, setLastSearch)
     };
     setDuringAdd(true);
 
-    const response = await fetch(`${import.meta.env.VITE_URL}/dev/check-username?username=${name}`, infoRequestOptions);
+    const response = await fetch(
+      `${import.meta.env.VITE_URL}/dev/check-username?username=${name}`,
+      infoRequestOptions
+    );
     const data = await response.json();
     if (data.success) {
       setUsers([...data.data]);
       setLastSearch(name);
     } else {
-      console.log(data.error);
-      toast.error(data.error, {
+      console.log(data.message);
+      toast.error(data.message, {
         position: toast.POSITION.TOP_CENTER,
       });
     }

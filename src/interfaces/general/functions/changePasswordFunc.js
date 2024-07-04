@@ -1,13 +1,27 @@
 import requestOptions from "../../../constants/requestOptions";
 import refreshToken from "../../../functions/refreshToken";
 
-async function changePasswordFunc(changePassword, setDuringAdd, setProfile, profile, setEdit, toast, userInformation, setUserInformation, refreshStatus, setRefreshStatus) {
+async function changePasswordFunc(
+  changePassword,
+  setDuringAdd,
+  setProfile,
+  profile,
+  setEdit,
+  toast,
+  userInformation,
+  setUserInformation,
+  refreshStatus,
+  setRefreshStatus
+) {
   try {
     const newData = changePassword;
 
     const infoRequestOptions = {
       ...requestOptions,
-      headers: { ...requestOptions.headers, authorization: userInformation.token },
+      headers: {
+        ...requestOptions.headers,
+        authorization: userInformation.token,
+      },
       method: "put",
       body: JSON.stringify({
         ...changePassword,
@@ -15,7 +29,10 @@ async function changePasswordFunc(changePassword, setDuringAdd, setProfile, prof
     };
 
     setDuringAdd(true);
-    const response = await fetch(`${import.meta.env.VITE_URL}/account/ch-pass`, infoRequestOptions);
+    const response = await fetch(
+      `${import.meta.env.VITE_URL}/account/ch-pass`,
+      infoRequestOptions
+    );
     const data = await response.json();
     if (data.success) {
       setProfile({ ...profile, password: newData.newPassword });
@@ -24,12 +41,29 @@ async function changePasswordFunc(changePassword, setDuringAdd, setProfile, prof
         position: toast.POSITION.TOP_CENTER,
       });
     } else {
-      if (data.error == "jwt expired") {
-        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await changePasswordFunc(changePassword, setDuringAdd, setProfile, profile, setEdit, toast, { ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus);
+      if (data.message == "jwt expired") {
+        const status = await refreshToken(
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
+        await changePasswordFunc(
+          changePassword,
+          setDuringAdd,
+          setProfile,
+          profile,
+          setEdit,
+          toast,
+          { ...userInformation, ...status },
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus
+        );
       } else {
-        console.log(data.error);
-        toast.error(data.error, {
+        console.log(data.message);
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }

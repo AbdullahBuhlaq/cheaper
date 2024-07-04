@@ -1,7 +1,21 @@
 import requestOptions from "../../../../constants/requestOptions";
 import refreshToken from "../../../../functions/refreshToken";
 
-async function acceptManyStores(setDuringAdd, selected, setSelected, userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast, acceptedStores, setAcceptedStores, pendingStores, setPendingStores, setCurrentEdit) {
+async function acceptManyStores(
+  setDuringAdd,
+  selected,
+  setSelected,
+  userInformation,
+  setUserInformation,
+  refreshStatus,
+  setRefreshStatus,
+  toast,
+  acceptedStores,
+  setAcceptedStores,
+  pendingStores,
+  setPendingStores,
+  setCurrentEdit
+) {
   try {
     setDuringAdd(true);
     let url = `${import.meta.env.VITE_URL}/admin/stores/accept?`;
@@ -10,7 +24,14 @@ async function acceptManyStores(setDuringAdd, selected, setSelected, userInforma
         url = url + `${index > 0 ? "&" : ""}ids[]=${+item.id}`;
       })
     );
-    let response = await fetch(url, { ...requestOptions, method: "put", headers: { ...requestOptions.headers, authorization: userInformation.token } });
+    let response = await fetch(url, {
+      ...requestOptions,
+      method: "put",
+      headers: {
+        ...requestOptions.headers,
+        authorization: userInformation.token,
+      },
+    });
     let data = await response.json();
     // let data = { success: true };
     if (data.success) {
@@ -29,13 +50,33 @@ async function acceptManyStores(setDuringAdd, selected, setSelected, userInforma
         position: toast.POSITION.TOP_CENTER,
       });
     } else {
-      if (data.error == "jwt expired") {
-        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await acceptManyStores(setDuringAdd, selected, setSelected, { ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, toast, acceptedStores, setAcceptedStores, pendingStores, setPendingStores, setCurrentEdit);
+      if (data.message == "jwt expired") {
+        const status = await refreshToken(
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
+        await acceptManyStores(
+          setDuringAdd,
+          selected,
+          setSelected,
+          { ...userInformation, ...status },
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast,
+          acceptedStores,
+          setAcceptedStores,
+          pendingStores,
+          setPendingStores,
+          setCurrentEdit
+        );
       } else {
         setDuringAdd(false);
-        console.log(data.error);
-        toast.error(data.error, {
+        console.log(data.message);
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }

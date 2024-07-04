@@ -1,7 +1,20 @@
 import axios from "axios";
 import refreshToken from "../../../../../functions/refreshToken";
 
-async function updateUser(user, currentEdit, setDuringAdd, image, userInformation, setUserInformation, refreshStatus, setRefreshStatus, userProfile, setUserProfile, toast, setCurrentEdit) {
+async function updateUser(
+  user,
+  currentEdit,
+  setDuringAdd,
+  image,
+  userInformation,
+  setUserInformation,
+  refreshStatus,
+  setRefreshStatus,
+  userProfile,
+  setUserProfile,
+  toast,
+  setCurrentEdit
+) {
   try {
     const newData = user;
     const id = currentEdit.id;
@@ -36,27 +49,57 @@ async function updateUser(user, currentEdit, setDuringAdd, image, userInformatio
           finalCats = [...finalCats, { name: cat, emoji: "" }];
         })
       );
-      setUserProfile({ ...userProfile, category: finalCats, information: { ...userProfile.information, ...newData, avatar: newData.imageStatus == "same" ? userProfile.information.avatar : data.data } });
+      setUserProfile({
+        ...userProfile,
+        category: finalCats,
+        information: {
+          ...userProfile.information,
+          ...newData,
+          avatar:
+            newData.imageStatus == "same"
+              ? userProfile.information.avatar
+              : data.data,
+        },
+      });
       setCurrentEdit(false);
       toast.success("تم تعديل المستخدم", {
         position: toast.POSITION.TOP_CENTER,
       });
     } else {
-      console.log(data.error);
-      toast.error(data.error, {
+      console.log(data.message);
+      toast.error(data.message, {
         position: toast.POSITION.TOP_CENTER,
       });
     }
     setDuringAdd(false);
   } catch (err) {
     if (err.name == "AxiosError") {
-      if (err.response.data.error == "jwt expired") {
-        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await updateUser(user, currentEdit, setDuringAdd, image, { ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, userProfile, setUserProfile, toast, setCurrentEdit);
+      if (err.response.data.message == "jwt expired") {
+        const status = await refreshToken(
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
+        await updateUser(
+          user,
+          currentEdit,
+          setDuringAdd,
+          image,
+          { ...userInformation, ...status },
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          userProfile,
+          setUserProfile,
+          toast,
+          setCurrentEdit
+        );
       } else {
         setDuringAdd(false);
-        console.log(err.response.data.error);
-        toast.error(err.response.data.error, {
+        console.log(err.response.data.message);
+        toast.error(err.response.data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }

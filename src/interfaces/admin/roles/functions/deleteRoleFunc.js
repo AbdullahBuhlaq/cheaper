@@ -1,9 +1,31 @@
 import requestOptions from "../../../../constants/requestOptions";
 import refreshToken from "../../../../functions/refreshToken";
 
-async function deleteRoleFunc(id, userInformation, setUserInformation, refreshStatus, setRefreshStatus, roles, employees, setEmployees, setRoles, setCurrentEdit, toast) {
+async function deleteRoleFunc(
+  id,
+  userInformation,
+  setUserInformation,
+  refreshStatus,
+  setRefreshStatus,
+  roles,
+  employees,
+  setEmployees,
+  setRoles,
+  setCurrentEdit,
+  toast
+) {
   try {
-    const response = await fetch(`${import.meta.env.VITE_URL}/admin/role/delete/${id}`, { ...requestOptions, headers: { ...requestOptions.headers, authorization: userInformation.token }, method: "delete" });
+    const response = await fetch(
+      `${import.meta.env.VITE_URL}/admin/role/delete/${id}`,
+      {
+        ...requestOptions,
+        headers: {
+          ...requestOptions.headers,
+          authorization: userInformation.token,
+        },
+        method: "delete",
+      }
+    );
     const data = await response.json();
     // const data = { success: true };
     if (data.success) {
@@ -22,12 +44,30 @@ async function deleteRoleFunc(id, userInformation, setUserInformation, refreshSt
         position: toast.POSITION.TOP_CENTER,
       });
     } else {
-      if (data.error == "jwt expired") {
-        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await deleteRoleFunc(id, { ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, roles, employees, setEmployees, setRoles, setCurrentEdit, toast);
+      if (data.message == "jwt expired") {
+        const status = await refreshToken(
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
+        await deleteRoleFunc(
+          id,
+          { ...userInformation, ...status },
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          roles,
+          employees,
+          setEmployees,
+          setRoles,
+          setCurrentEdit,
+          toast
+        );
       } else {
-        console.log(data.error);
-        toast.error(data.error, {
+        console.log(data.message);
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }

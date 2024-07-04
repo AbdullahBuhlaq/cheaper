@@ -1,9 +1,30 @@
 import requestOptions from "../../../../../constants/requestOptions";
 import refreshToken from "../../../../../functions/refreshToken";
 
-async function deleteStatusFunc(setDuringAdd, image, userInformation, setUserInformation, refreshStatus, setRefreshStatus, setStoreInformation, storeInformation, setEdit, toast) {
+async function deleteStatusFunc(
+  setDuringAdd,
+  image,
+  userInformation,
+  setUserInformation,
+  refreshStatus,
+  setRefreshStatus,
+  setStoreInformation,
+  storeInformation,
+  setEdit,
+  toast
+) {
   try {
-    let response = await fetch(`${import.meta.env.VITE_URL}/store/delete-story/${image}`, { ...requestOptions, method: "delete", headers: { ...requestOptions.headers, authorization: userInformation.token } });
+    let response = await fetch(
+      `${import.meta.env.VITE_URL}/store/delete-story/${image}`,
+      {
+        ...requestOptions,
+        method: "delete",
+        headers: {
+          ...requestOptions.headers,
+          authorization: userInformation.token,
+        },
+      }
+    );
     let data = await response.json();
     if (data.success) {
       let newSotry = [];
@@ -17,12 +38,29 @@ async function deleteStatusFunc(setDuringAdd, image, userInformation, setUserInf
         position: toast.POSITION.TOP_CENTER,
       });
     } else {
-      if (data.error == "jwt expired") {
-        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await deleteStatusFunc(setDuringAdd, image, { ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, setStoreInformation, storeInformation, setEdit, toast);
+      if (data.message == "jwt expired") {
+        const status = await refreshToken(
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
+        await deleteStatusFunc(
+          setDuringAdd,
+          image,
+          { ...userInformation, ...status },
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          setStoreInformation,
+          storeInformation,
+          setEdit,
+          toast
+        );
       } else {
-        console.log(data.error);
-        toast.error(data.error, {
+        console.log(data.message);
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }

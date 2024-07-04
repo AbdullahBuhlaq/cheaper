@@ -1,16 +1,37 @@
 import requestOptions from "../../../../constants/requestOptions";
 import refreshToken from "../../../../functions/refreshToken";
 
-async function sendGift(setCurrentOffer, userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast, setCurrentGift, offer, username, offers, setOffers, setEdit) {
+async function sendGift(
+  setCurrentOffer,
+  userInformation,
+  setUserInformation,
+  refreshStatus,
+  setRefreshStatus,
+  toast,
+  setCurrentGift,
+  offer,
+  username,
+  offers,
+  setOffers,
+  setEdit
+) {
   try {
     setCurrentGift(username);
     const infoRequestOptions = {
       ...requestOptions,
       method: "PUT",
-      headers: { ...requestOptions.headers, authorization: userInformation.token },
+      headers: {
+        ...requestOptions.headers,
+        authorization: userInformation.token,
+      },
     };
 
-    const response = await fetch(`${import.meta.env.VITE_URL}/user/gift?offerId=${offer.offerUserId}&username=${username}`, infoRequestOptions);
+    const response = await fetch(
+      `${import.meta.env.VITE_URL}/user/gift?offerId=${
+        offer.offerUserId
+      }&username=${username}`,
+      infoRequestOptions
+    );
     const data = await response.json();
     if (data.success) {
       setEdit(false);
@@ -21,12 +42,31 @@ async function sendGift(setCurrentOffer, userInformation, setUserInformation, re
         position: toast.POSITION.TOP_CENTER,
       });
     } else {
-      if (data.error == "jwt expired") {
-        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await sendGift(setCurrentOffer, { ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, toast, setCurrentGift, offer, username, offers, setOffers, setEdit);
+      if (data.message == "jwt expired") {
+        const status = await refreshToken(
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
+        await sendGift(
+          setCurrentOffer,
+          { ...userInformation, ...status },
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast,
+          setCurrentGift,
+          offer,
+          username,
+          offers,
+          setOffers,
+          setEdit
+        );
       } else {
-        console.log(data.error);
-        toast.error(data.error, {
+        console.log(data.message);
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }

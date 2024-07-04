@@ -1,18 +1,39 @@
 import requestOptions from "../../../../constants/requestOptions";
 import refreshToken from "../../../../functions/refreshToken";
 
-export default async function addBlock(block, userInformation, setUserInformation, refreshStatus, setRefreshStatus, setDuringAdd, blocks, setBlocks, setCurrentEdit, toast) {
+export default async function addBlock(
+  block,
+  userInformation,
+  setUserInformation,
+  refreshStatus,
+  setRefreshStatus,
+  setDuringAdd,
+  blocks,
+  setBlocks,
+  setCurrentEdit,
+  toast
+) {
   try {
-    const newData = { reason: block.reason, duration: block.duration, restrictions: { action: block.action, show: block.show } };
+    const newData = {
+      reason: block.reason,
+      duration: block.duration,
+      restrictions: { action: block.action, show: block.show },
+    };
     const infoRequestOptions = {
       ...requestOptions,
-      headers: { ...requestOptions.headers, authorization: userInformation.token },
+      headers: {
+        ...requestOptions.headers,
+        authorization: userInformation.token,
+      },
       body: JSON.stringify({
         ...newData,
       }),
     };
     setDuringAdd(true);
-    const response = await fetch(`${import.meta.env.VITE_URL}/admin/block/create`, infoRequestOptions);
+    const response = await fetch(
+      `${import.meta.env.VITE_URL}/admin/block/create`,
+      infoRequestOptions
+    );
     const data = await response.json();
     if (data.success) {
       setBlocks({ ...blocks, [data.data]: { id: data.data, ...newData } });
@@ -21,12 +42,29 @@ export default async function addBlock(block, userInformation, setUserInformatio
         position: toast.POSITION.TOP_CENTER,
       });
     } else {
-      if (data.error == "jwt expired") {
-        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await addBlock(block, { ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, setDuringAdd, blocks, setBlocks, setCurrentEdit, toast);
+      if (data.message == "jwt expired") {
+        const status = await refreshToken(
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
+        await addBlock(
+          block,
+          { ...userInformation, ...status },
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          setDuringAdd,
+          blocks,
+          setBlocks,
+          setCurrentEdit,
+          toast
+        );
       } else {
-        console.log(data.error);
-        toast.error(data.error, {
+        console.log(data.message);
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }

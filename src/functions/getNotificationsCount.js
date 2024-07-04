@@ -29,7 +29,7 @@ async function getNotificationsCount(
     if (data.success) {
       setThereIsNotifications(data.data.count);
     } else {
-      if (data.error == "jwt expired") {
+      if (data.message == "jwt expired") {
         const status = await refreshToken(
           userInformation,
           setUserInformation,
@@ -50,8 +50,8 @@ async function getNotificationsCount(
           setNotificationsPage
         );
       } else {
-        console.log(data.error);
-        toast.error(data.error, {
+        console.log(data.message);
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }

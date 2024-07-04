@@ -1,9 +1,37 @@
 import requestOptions from "../../../../constants/requestOptions";
 import refreshToken from "../../../../functions/refreshToken";
 
-async function getOffer(isGift, setIsGift, setRun, setOffer, setStatus, setOpen, city, location, homeInfo, setHomeInfo, userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast) {
+async function getOffer(
+  isGift,
+  setIsGift,
+  setRun,
+  setOffer,
+  setStatus,
+  setOpen,
+  city,
+  location,
+  homeInfo,
+  setHomeInfo,
+  userInformation,
+  setUserInformation,
+  refreshStatus,
+  setRefreshStatus,
+  toast
+) {
   try {
-    let response = await fetch(`${import.meta.env.VITE_URL}/user/open-box?longitude=${location.location.coords.longitude}&latitude=${location.location.coords.latitude}&type=free`, { ...requestOptions, method: "get", headers: { ...requestOptions.headers, authorization: userInformation.token } });
+    let response = await fetch(
+      `${import.meta.env.VITE_URL}/user/open-box?longitude=${
+        location.location.coords.longitude
+      }&latitude=${location.location.coords.latitude}&type=free`,
+      {
+        ...requestOptions,
+        method: "get",
+        headers: {
+          ...requestOptions.headers,
+          authorization: userInformation.token,
+        },
+      }
+    );
     let data = await response.json();
     // let data = {
     //   success: true,
@@ -29,7 +57,17 @@ async function getOffer(isGift, setIsGift, setRun, setOffer, setStatus, setOpen,
     // };
     if (data.success) {
       setOffer({ ...data.data });
-      setHomeInfo({ ...homeInfo, stillToGetGift: isGift ? homeInfo.stillToGetGift : homeInfo.stillToGetGift - 1, countYourGift: isGift ? homeInfo.countYourGift - 1 : homeInfo.countYourGift, freeBoxToday: homeInfo.freeBoxToday - 1, free: { ...homeInfo.free, notTaken: homeInfo.free.notTaken + 1 } });
+      setHomeInfo({
+        ...homeInfo,
+        stillToGetGift: isGift
+          ? homeInfo.stillToGetGift
+          : homeInfo.stillToGetGift - 1,
+        countYourGift: isGift
+          ? homeInfo.countYourGift - 1
+          : homeInfo.countYourGift,
+        freeBoxToday: homeInfo.freeBoxToday - 1,
+        free: { ...homeInfo.free, notTaken: homeInfo.free.notTaken + 1 },
+      });
       setStatus("done");
       setRun(true);
       setIsGift(false);
@@ -37,13 +75,35 @@ async function getOffer(isGift, setIsGift, setRun, setOffer, setStatus, setOpen,
         position: toast.POSITION.TOP_CENTER,
       });
     } else {
-      if (data.error == "jwt expired") {
-        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await getOffer(isGift, setIsGift, setRun, setOffer, setStatus, setOpen, city, location, homeInfo, setHomeInfo, userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
+      if (data.message == "jwt expired") {
+        const status = await refreshToken(
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
+        await getOffer(
+          isGift,
+          setIsGift,
+          setRun,
+          setOffer,
+          setStatus,
+          setOpen,
+          city,
+          location,
+          homeInfo,
+          setHomeInfo,
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
       } else {
         setOpen(false);
-        console.log(data.error);
-        toast.error(data.error, {
+        console.log(data.message);
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }

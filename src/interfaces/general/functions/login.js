@@ -19,17 +19,32 @@ async function login(user, toast, setDuringAdd, navigate) {
         tokenDevice,
       }),
     };
-    const response = await fetch(`${import.meta.env.VITE_URL}/auth/login`, infoRequestOptions);
+    const response = await fetch(
+      `${import.meta.env.VITE_URL}/auth/login`,
+      infoRequestOptions
+    );
     const data = await response.json();
     if (data.success) {
-      secureLocalStorage.setItem("userInformation", JSON.stringify({ ...data.data, allPermission: jsonParse(data.data.allPermission), typeUser: jsonParse(data.data.allPermission)["action"][0][0] == "u" ? "مستخدم" : jsonParse(data.data.allPermission)["action"][0][0] == "a" ? "مدير" : data.data.typeUser }));
+      secureLocalStorage.setItem(
+        "userInformation",
+        JSON.stringify({
+          ...data.data,
+          allPermission: jsonParse(data.data.allPermission),
+          typeUser:
+            jsonParse(data.data.allPermission)["action"][0][0] == "u"
+              ? "مستخدم"
+              : jsonParse(data.data.allPermission)["action"][0][0] == "a"
+              ? "مدير"
+              : data.data.typeUser,
+        })
+      );
       toast.success("أهلا وسهلا!", {
         position: toast.POSITION.TOP_CENTER,
       });
       navigate("/main");
     } else {
-      console.log(data.error);
-      toast.error(data.error, {
+      console.log(data.message);
+      toast.error(data.message, {
         position: toast.POSITION.TOP_CENTER,
       });
     }

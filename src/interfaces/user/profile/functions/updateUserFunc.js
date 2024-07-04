@@ -1,7 +1,16 @@
 import axios from "axios";
 import refreshToken from "../../../../functions/refreshToken";
 
-async function updateUserFunc(user, image, userInformation, profile, setProfile, toast, setDuringAdd, setEdit) {
+async function updateUserFunc(
+  user,
+  image,
+  userInformation,
+  profile,
+  setProfile,
+  toast,
+  setDuringAdd,
+  setEdit
+) {
   try {
     const newData = user;
     const url = `${import.meta.env.VITE_URL}/account/update`;
@@ -36,27 +45,52 @@ async function updateUserFunc(user, image, userInformation, profile, setProfile,
         })
       );
       delete newData.category;
-      setProfile({ ...profile, userInformation: { ...newData, avatar: newData.imageStatus == "same" ? profile.userInformation.avatar : data.data }, category: finalCats });
+      setProfile({
+        ...profile,
+        userInformation: {
+          ...newData,
+          avatar:
+            newData.imageStatus == "same"
+              ? profile.userInformation.avatar
+              : data.data,
+        },
+        category: finalCats,
+      });
       setEdit(false);
       toast.success("تم التعديل بنجاح", {
         position: toast.POSITION.TOP_CENTER,
       });
     } else {
-      console.log(data.error);
-      toast.error(data.error, {
+      console.log(data.message);
+      toast.error(data.message, {
         position: toast.POSITION.TOP_CENTER,
       });
     }
     setDuringAdd(false);
   } catch (err) {
     if (err.name == "AxiosError") {
-      if (err.response.data.error == "jwt expired") {
-        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await updateUserFunc(user, image, { ...userInformation, ...status }, profile, setProfile, toast, setDuringAdd, setEdit);
+      if (err.response.data.message == "jwt expired") {
+        const status = await refreshToken(
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
+        await updateUserFunc(
+          user,
+          image,
+          { ...userInformation, ...status },
+          profile,
+          setProfile,
+          toast,
+          setDuringAdd,
+          setEdit
+        );
       } else {
         setDuringAdd(false);
-        console.log(err.response.data.error);
-        toast.error(err.response.data.error, {
+        console.log(err.response.data.message);
+        toast.error(err.response.data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }

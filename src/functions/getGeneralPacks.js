@@ -2,7 +2,10 @@ import requestOptions from "../constants/requestOptions";
 
 async function getGeneralPacks(setPacks, toast) {
   try {
-    let response = await fetch(`${import.meta.env.VITE_URL}/dev/all-packs`, { ...requestOptions, method: "get" });
+    let response = await fetch(`${import.meta.env.VITE_URL}/dev/all-packs`, {
+      ...requestOptions,
+      method: "get",
+    });
     let data = await response.json();
     if (data.success) {
       let final = {};
@@ -13,8 +16,8 @@ async function getGeneralPacks(setPacks, toast) {
       );
       setPacks({ ...final });
     } else {
-      console.log(data.error);
-      toast.error(data.error, {
+      console.log(data.message);
+      toast.error(data.message, {
         position: toast.POSITION.TOP_CENTER,
       });
     }

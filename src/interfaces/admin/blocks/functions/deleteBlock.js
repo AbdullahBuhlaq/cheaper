@@ -1,9 +1,29 @@
 import requestOptions from "../../../../constants/requestOptions";
 import refreshToken from "../../../../functions/refreshToken";
 
-export default async function deleteBlock(id, userInformation, setUserInformation, refreshStatus, setRefreshStatus, blocks, setBlocks, setCurrentEdit, toast) {
+export default async function deleteBlock(
+  id,
+  userInformation,
+  setUserInformation,
+  refreshStatus,
+  setRefreshStatus,
+  blocks,
+  setBlocks,
+  setCurrentEdit,
+  toast
+) {
   try {
-    const response = await fetch(`${import.meta.env.VITE_URL}/admin/block/delete/${id}`, { ...requestOptions, headers: { ...requestOptions.headers, authorization: userInformation.token }, method: "delete" });
+    const response = await fetch(
+      `${import.meta.env.VITE_URL}/admin/block/delete/${id}`,
+      {
+        ...requestOptions,
+        headers: {
+          ...requestOptions.headers,
+          authorization: userInformation.token,
+        },
+        method: "delete",
+      }
+    );
     const data = await response.json();
     // const data = { success: true };
     if (data.success) {
@@ -14,12 +34,28 @@ export default async function deleteBlock(id, userInformation, setUserInformatio
         position: toast.POSITION.TOP_CENTER,
       });
     } else {
-      if (data.error == "jwt expired") {
-        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await deleteBlock(id, { ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, blocks, setBlocks, setCurrentEdit, toast);
+      if (data.message == "jwt expired") {
+        const status = await refreshToken(
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
+        await deleteBlock(
+          id,
+          { ...userInformation, ...status },
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          blocks,
+          setBlocks,
+          setCurrentEdit,
+          toast
+        );
       } else {
-        console.log(data.error);
-        toast.error(data.error, {
+        console.log(data.message);
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }

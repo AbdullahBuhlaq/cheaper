@@ -1,9 +1,31 @@
 import requestOptions from "../../../../constants/requestOptions";
 import refreshToken from "../../../../functions/refreshToken";
 
-async function acceptStore(id, userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast, acceptedStores, setAcceptedStores, pendingStores, setPendingStores, setCurrentEdit) {
+async function acceptStore(
+  id,
+  userInformation,
+  setUserInformation,
+  refreshStatus,
+  setRefreshStatus,
+  toast,
+  acceptedStores,
+  setAcceptedStores,
+  pendingStores,
+  setPendingStores,
+  setCurrentEdit
+) {
   try {
-    let response = await fetch(`${import.meta.env.VITE_URL}/admin/stores/accept?ids[]=${+id}`, { ...requestOptions, method: "put", headers: { ...requestOptions.headers, authorization: userInformation.token } });
+    let response = await fetch(
+      `${import.meta.env.VITE_URL}/admin/stores/accept?ids[]=${+id}`,
+      {
+        ...requestOptions,
+        method: "put",
+        headers: {
+          ...requestOptions.headers,
+          authorization: userInformation.token,
+        },
+      }
+    );
     let data = await response.json();
     // let data = { success: true };
     if (data.success) {
@@ -15,12 +37,30 @@ async function acceptStore(id, userInformation, setUserInformation, refreshStatu
         position: toast.POSITION.TOP_CENTER,
       });
     } else {
-      if (data.error == "jwt expired") {
-        const status = await refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast);
-        await acceptStore(id, { ...userInformation, ...status }, setUserInformation, refreshStatus, setRefreshStatus, toast, acceptedStores, setAcceptedStores, pendingStores, setPendingStores, setCurrentEdit);
+      if (data.message == "jwt expired") {
+        const status = await refreshToken(
+          userInformation,
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast
+        );
+        await acceptStore(
+          id,
+          { ...userInformation, ...status },
+          setUserInformation,
+          refreshStatus,
+          setRefreshStatus,
+          toast,
+          acceptedStores,
+          setAcceptedStores,
+          pendingStores,
+          setPendingStores,
+          setCurrentEdit
+        );
       } else {
-        console.log(data.error);
-        toast.error(data.error, {
+        console.log(data.message);
+        toast.error(data.message, {
           position: toast.POSITION.TOP_CENTER,
         });
       }
