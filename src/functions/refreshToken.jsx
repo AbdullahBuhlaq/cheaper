@@ -5,7 +5,13 @@ import jsonParse from "./jsonParse";
 let status = "done";
 let refPromise = null;
 
-async function refreshToken(userInformation, setUserInformation, refreshStatus, setRefreshStatus, toast) {
+async function refreshToken(
+  userInformation,
+  setUserInformation,
+  refreshStatus,
+  setRefreshStatus,
+  toast
+) {
   try {
     if (status == "wait") {
       const res = await refPromise;
@@ -22,22 +28,53 @@ async function refreshToken(userInformation, setUserInformation, refreshStatus, 
       }),
     };
 
-    refPromise = fetch(`${import.meta.env.VITE_URL}/auth/refreshToken`, infoRequestOptions);
+    refPromise = fetch(
+      `${import.meta.env.VITE_URL}/auth/refreshToken`,
+      infoRequestOptions
+    );
     let response = await refPromise;
     const data = await response.clone().json();
 
     if (data.success) {
-      setUserInformation({ ...userInformation, ...data.data, allPermission: jsonParse(data.data.allPermission), typeUser: jsonParse(data.data.allPermission)["action"][0][0] == "u" ? "مستخدم" : jsonParse(data.data.allPermission)["action"][0][0] == "a" ? "مدير" : data.data.typeUser });
-      secureLocalStorage.setItem("userInformation", JSON.stringify({ ...userInformation, ...data.data, allPermission: jsonParse(data.data.allPermission), typeUser: jsonParse(data.data.allPermission)["action"][0][0] == "u" ? "مستخدم" : jsonParse(data.data.allPermission)["action"][0][0] == "a" ? "مدير" : data.data.typeUser }));
+      setUserInformation({
+        ...userInformation,
+        ...data.data,
+        allPermission: jsonParse(data.data.allPermission),
+        typeUser:
+          jsonParse(data.data.allPermission)["action"][0][0] == "u"
+            ? "مستخدم"
+            : jsonParse(data.data.allPermission)["action"][0][0] == "a"
+            ? "مدير"
+            : data.data.typeUser,
+      });
+      secureLocalStorage.setItem(
+        "userInformation",
+        JSON.stringify({
+          ...userInformation,
+          ...data.data,
+          allPermission: jsonParse(data.data.allPermission),
+          typeUser:
+            jsonParse(data.data.allPermission)["action"][0][0] == "u"
+              ? "مستخدم"
+              : jsonParse(data.data.allPermission)["action"][0][0] == "a"
+              ? "مدير"
+              : data.data.typeUser,
+        })
+      );
       status = "done";
       refPromise = null;
-      let newType = jsonParse(data.data.allPermission)["action"][0][0] == "u" ? "مستخدم" : jsonParse(data.data.allPermission)["action"][0][0] == "a" ? "مدير" : data.data.typeUser;
-      if (userInformation.typeUser != newType) window.location.replace(`${import.meta.env.VITE_LOCAL_URL}/main`);
+      let newType =
+        jsonParse(data.data.allPermission)["action"][0][0] == "u"
+          ? "مستخدم"
+          : jsonParse(data.data.allPermission)["action"][0][0] == "a"
+          ? "مدير"
+          : data.data.typeUser;
+      if (userInformation.typeUser != newType)
+        window.location.replace(`${window.location.origin}/main`);
       return data.data;
     } else {
       secureLocalStorage.removeItem("userInformation");
-
-      window.location.replace(`${import.meta.env.VITE_LOCAL_URL}/login`);
+      window.location.replace(`${window.location.origin}/login`);
     }
   } catch (err) {
     console.log(err);
