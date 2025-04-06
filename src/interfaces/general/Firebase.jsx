@@ -12,7 +12,10 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_MEASUREMENT_ID,
 };
 
-const app = initializeApp(firebaseConfig, import.meta.env.VITE_FIREBASE_INIT_KEY);
+const app = initializeApp(
+  firebaseConfig,
+  "cheapernetlify0094" + Date.now().toString()
+);
 
 const messaging = getMessaging(app);
 

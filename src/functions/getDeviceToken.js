@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getMessaging, getToken, onMessage } from "firebase/messaging";
+import { getMessaging, getToken } from "firebase/messaging";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_API_KEY,
@@ -18,20 +18,27 @@ const messaging = getMessaging(app);
 async function getDeviceToken(toast) {
   try {
     let token = "";
-    await getToken(messaging, { vapidKey: import.meta.env.VITE_VAPID_KEY }).then((currentToken) => {
+    await getToken(messaging, {
+      vapidKey: import.meta.env.VITE_VAPID_KEY,
+    }).then((currentToken) => {
       if (currentToken) {
         token = currentToken;
       } else {
-        console.log("لا يمكن إرسال طلب التسجيل, يرجى إعطاء السماحية لقراءة رقم الجهاز من أجل استلام الإشعارات.");
-        toast.error("لا يمكن إرسال طلب التسجيل, يرجى إعطاء السماحية لقراءة رقم الجهاز من أجل استلام الإشعارات.", {
-          position: toast.POSITION.TOP_CENTER,
-        });
+        console.log(
+          "لا يمكن إرسال طلب التسجيل, يرجى إعطاء السماحية لقراءة رقم الجهاز من أجل استلام الإشعارات."
+        );
+        toast.error(
+          "لا يمكن إرسال طلب التسجيل, يرجى إعطاء السماحية لقراءة رقم الجهاز من أجل استلام الإشعارات.",
+          {
+            position: toast.POSITION.TOP_CENTER,
+          }
+        );
       }
     });
     return token;
   } catch (err) {
     console.log(err);
-    toast.error(err, {
+    toast.error("يرجى إعطاء صلاحية استلام الإشعارات", {
       position: toast.POSITION.TOP_CENTER,
     });
   }
